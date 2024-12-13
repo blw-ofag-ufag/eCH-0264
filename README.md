@@ -1,5 +1,8 @@
 # eCH-0264: Agrardaten -- Bodenindikatoren
 
+**The devlopment of this standard is currently on hold!**
+
+
 This is the repository for technical artefacts related to this specification.
 Primarily, this repo contains:
 
