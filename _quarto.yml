@@ -1,0 +1,13 @@
+project:
+  output-dir: out
+  render:
+    - docs/index.qmd
+
+format:
+  html: default
+  gfm: 
+    toc: true
+    number-sections: true
+  docx:
+    toc: true
+    reference-doc: https://s.zazuko.com/MHXTkQ
