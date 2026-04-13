@@ -40,6 +40,8 @@ Diese Bestimmungen gelten ausschliesslich für die von eCH erarbeiteten Standard
 
 # Änderungen gegenüber der Vorversion {.appendix}
 
+Die vollständigen Änderungen sämtlicher Versionen sind in [CHANGELOG.md](CHANGELOG.md) erfasst.
+
 # Tabellenverzeichnis {.appendix}
 
 # Abhängigkeiten {.appendix}
