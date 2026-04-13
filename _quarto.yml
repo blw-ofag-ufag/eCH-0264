@@ -11,10 +11,13 @@ website:
 bibliography: references.bib
 
 format:
-  html: default
+  html:
+    toc: true
+    number-sections: true
   gfm: 
     toc: true
     number-sections: true
   docx:
     toc: true
     reference-doc: https://s.zazuko.com/MHXTkQ
+  typst: default
