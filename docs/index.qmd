@@ -36,6 +36,32 @@ Diese Bestimmungen gelten ausschliesslich für die von eCH erarbeiteten Standard
 
 # Arbeitsgruppenmitglieder {.appendix}
 
+Folgende Personen sind Mitglieder in der Arbeitsgruppe «Kontrolldaten» der eCH-Fachgruppe AgriFood 
+
+- Marc Beringer - Bundesamt für Landwirtschaft BLW 
+- Christian Wilda - Bundesamt für Landwirtschaft BLW
+- Damian Oswald - Bundesamt für Landwirtschaft BLW 
+- Lea Stauber - Bundesamt für Landwirtschaft BLW 
+- Egon Bruestle - Modan Software AG
+- Sabine Grob - Agriquali Schweizer Bauernverband
+- Daniel Moos - bio.inspecta AG
+- Sara Schaerrer - Bundesamt für Lebensmittelsicherheit und Veterinärwesen 
+- Daniel Meyer - Bundesamt für Landwirtschaft BLW 
+- Simon Hasler - Bundesamt für Landwirtschaft BLW 
+- Claudia Blumenstein - Bundesamt für Landwirtschaft BLW 
+- Rahel Schelbert - Bundesamt für Landwirtschaft BLW 
+- Meike Wollenberg Martínez - Mutterkuh Schweiz
+- Peter Althaus - IP-Suisse
+- Sara Gomez - Bio-Suisse
+- Monika Schober - Agrosolution AG
+- Roman Steiger - Kontrolldienst KUT
+- Matthias Baumann - Bundesamt für Landwirtschaft BLW 
+- Jonas Eyer - Schweizer Bauernverband SBV
+- Daniel Bretscher - Agroscope
+- Florian Frauchiger - Vereinigung der Schweizer Kantonstierärztinnen und Tierärzte VSKT
+- Christoph Keller - Amt für Veterinärwesen Kanton Bern
+- Lorenz Escher - Koordinationsgruppe Integrierte Produktion KIP
+
 # Abkürzungen {.appendix}
 
 # Änderungen gegenüber der Vorversion {.appendix}
