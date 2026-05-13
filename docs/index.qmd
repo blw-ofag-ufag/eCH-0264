@@ -1,17 +1,17 @@
 ---
 title: eCH-0264 Landwirtschaftliche Kontrolldaten
 abstract: |
-    Dieser Standard soll dabei helfen, Begriffe und Daten im öffentlich-rechtlichen und privatrechtlichen Bereich des landwirtschaftlichen Kontrollwesens zu harmonisieren, so dass Kontrolldaten besser ausgetauscht beziehungsweise wiederverwendet werden können 
+    Dieser Standard soll dabei helfen, Begriffe und Daten im öffentlich-rechtlichen und privatrechtlichen Bereich des landwirtschaftlichen Kontrollwesens zu harmonisieren, so dass Kontrolldaten besser ausgetauscht beziehungsweise wiederverwendet werden können.
 lang: de
 ---
 
 # Einleitung
 
-Der Aktionsplan Kontrollen auf Landwirtschaftsbetrieben hat ein klares übergeordnetes Ziel: Die administrative Belastung der Landwirtinnen und Landwirte durch Kontrollen soll sinken, konkret auf maximal eine Grund- oder Standardkontrolle pro Jahr und Betrieb [@blw2025aktionsplan]  Dies ist ein sehr ambitioniertes Ziel und kann nur gelingen, wenn sämtliche Doppelspurigkeiten zwischen öffentlich-rechtlichen Kontrollen (Bund/Kantone) und privatrechtlichen Kontrollen (Labels wie Bio Suisse, IP-Suisse, SwissGAP) eliminiert werden 
+Der Aktionsplan Kontrollen auf Landwirtschaftsbetrieben hat ein klares übergeordnetes Ziel: Die administrative Belastung der Landwirtinnen und Landwirte durch Kontrollen soll sinken, konkret auf maximal eine Grund- oder Standardkontrolle pro Jahr und Betrieb [@blw2025aktionsplan]. Dies ist ein sehr ambitioniertes Ziel und kann nur gelingen, wenn sämtliche Doppelspurigkeiten zwischen öffentlich-rechtlichen Kontrollen (Bund/Kantone) und privatrechtlichen Kontrollen (Labels wie Bio Suisse, IP-Suisse, SwissGAP) eliminiert werden.
 
-Damit eine Organisation auf eine eigene Kontrolle verzichten kann, muss sie die Kontrollergebnisse einer anderen Organisation anerkennen und nutzen können  Das funktioniert heute nicht reibungslos, weil die verschiedenen Akteure unterschiedliche "Sprachen" sprechen – sowohl fachlich (Begrifflichkeiten) als auch technisch (Datenstrukturen) 
+Damit eine Organisation auf eine eigene Kontrolle verzichten kann, muss sie die Kontrollergebnisse einer anderen Organisation anerkennen und nutzen können. Das funktioniert heute nicht reibungslos, weil die verschiedenen Akteure unterschiedliche "Sprachen" sprechen – sowohl fachlich (Begrifflichkeiten) als auch technisch (Datenstrukturen).
 
-Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten kümmert sich primär um die semantische und technische Interoperabilität von Daten im Kontext landwirtschaftlicher Kontrollen  Sie erarbeitet das Wörterbuch (Glossar), die Grammatik (Business-Objekte) konkrete Anwendungen (Use-Cases) sowie eine Struktur für die langfristige Pflege (Governance)  Dadurch soll der Datenaustausch zwischen den Systemen von Bund, Kantonen und Labels künftig über agridata ch ermöglicht werden  Weiter soll für alle Akteure – insbesondere für Landwirtinnen und Landwirte – transparent sein, was Gegenstand bestimmter Kontrollen ist und was die Anforderungen verschiedener Gesetze, Programme oder Labels sind ​ Die Verhandlungen zur Umsetzung von konkreten Datenflüssen sind nicht Aufgabe der Arbeitsgruppe Kontrolldaten 
+Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten kümmert sich primär um die semantische und technische Interoperabilität von Daten im Kontext landwirtschaftlicher Kontrollen. Sie erarbeitet das Wörterbuch (Glossar), die Grammatik (Business-Objekte) konkrete Anwendungen (Use-Cases) sowie eine Struktur für die langfristige Pflege (Governance). Dadurch soll der Datenaustausch zwischen den Systemen von Bund, Kantonen und Labels künftig über agridata.ch ermöglicht werden. Weiter soll für alle Akteure – insbesondere für Landwirtinnen und Landwirte – transparent sein, was Gegenstand bestimmter Kontrollen ist und was die Anforderungen verschiedener Gesetze, Programme oder Labels sind.​ Die Verhandlungen zur Umsetzung von konkreten Datenflüssen sind nicht Aufgabe der Arbeitsgruppe Kontrolldaten.
 
 ## Status
 
@@ -21,20 +21,20 @@ Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten kümmert sich primär um
 
 # Urheberrechte
 
-Wer eCH-Standards erarbeitet, behält das geistige Eigentum an diesen  Allerdings verpflichten sich die Erarbeitenden, ihr betreffendes geistiges Eigentum oder ihre Rechte an geistigem Eigentum anderer, sofern möglich, den jeweiligen Fachgruppen und dem Verein eCH kostenlos zur uneingeschränkten Nutzung und Weiterentwicklung im Rahmen des Vereinszweckes zur Verfügung zu stellen 
+Wer eCH-Standards erarbeitet, behält das geistige Eigentum an diesen. Allerdings verpflichten sich die Erarbeitenden, ihr betreffendes geistiges Eigentum oder ihre Rechte an geistigem Eigentum anderer, sofern möglich, den jeweiligen Fachgruppen und dem Verein eCH kostenlos zur uneingeschränkten Nutzung und Weiterentwicklung im Rahmen des Vereinszweckes zur Verfügung zu stellen.
 
-Die von den Fachgruppen erarbeiteten Standards können unter Nennung der jeweiligen urhebenden Person von eCH unentgeltlich und uneingeschränkt genutzt, weiterverbreitet und weiterentwickelt werden 
+Die von den Fachgruppen erarbeiteten Standards können unter Nennung der jeweiligen urhebenden Person von eCH unentgeltlich und uneingeschränkt genutzt, weiterverbreitet und weiterentwickelt werden.
 
-eCH-Standards sind vollständig dokumentiert und frei von lizenz- und/oder patentrechtlichen Einschränkungen  Die dazugehörige Dokumentation kann unentgeltlich bezogen werden 
+eCH-Standards sind vollständig dokumentiert und frei von lizenz- und/oder patentrechtlichen Einschränkungen. Die dazugehörige Dokumentation kann unentgeltlich bezogen werden.
 
-Diese Bestimmungen gelten ausschliesslich für die von eCH erarbeiteten Standards, nicht jedoch für Standards oder Produkte Dritter, auf welche in den eCH-Standards Bezug genommen wird  Die Stan-dards enthalten die entsprechenden Hinweise auf die Rechte Dritter 
+Diese Bestimmungen gelten ausschliesslich für die von eCH erarbeiteten Standards, nicht jedoch für Standards oder Produkte Dritter, auf welche in den eCH-Standards Bezug genommen wird. Die Stan-dards enthalten die entsprechenden Hinweise auf die Rechte Dritter.
 
-# Referenzen und Bibliographie { appendix}
+# Referenzen und Bibliographie {.appendix}
 
 ::: {#refs}
 :::
 
-# Arbeitsgruppenmitglieder { appendix}
+# Arbeitsgruppenmitglieder {.appendix}
 
 Folgende Personen sind Mitglieder in der Arbeitsgruppe «Kontrolldaten» der eCH-Fachgruppe AgriFood 
 
@@ -62,17 +62,16 @@ Folgende Personen sind Mitglieder in der Arbeitsgruppe «Kontrolldaten» der eCH
 - Christoph Keller - Amt für Veterinärwesen Kanton Bern
 - Lorenz Escher - Koordinationsgruppe Integrierte Produktion KIP
 
+# Abkürzungen {.appendix}
 
-# Abkürzungen { appendix}
+# Änderungen gegenüber der Vorversion {.appendix}
 
-# Änderungen gegenüber der Vorversion { appendix}
+Die vollständigen Änderungen sämtlicher Versionen sind in [CHANGELOG.md](CHANGELOG.md) erfasst.
 
-Die vollständigen Änderungen sämtlicher Versionen sind in [CHANGELOG md](CHANGELOG md) erfasst 
+# Tabellenverzeichnis {.appendix}
 
-# Tabellenverzeichnis { appendix}
+# Abhängigkeiten {.appendix}
 
-# Abhängigkeiten { appendix}
+# Sicherheitsüberlegungen {.appendix}
 
-# Sicherheitsüberlegungen { appendix}
-
-Bei der Umsetzung und Anwendung dieses Standards sind die allgemein gültigen gesetzlichen Grundlagen, insbesondere das Bundesgesetz über den Datenschutz (DSG) sowie das Bundesgesetz über die Informationssicherheit (ISG) zu beachten 
+Bei der Umsetzung und Anwendung dieses Standards sind die allgemein gültigen gesetzlichen Grundlagen, insbesondere das Bundesgesetz über den Datenschutz (DSG) sowie das Bundesgesetz über die Informationssicherheit (ISG) zu beachten.
