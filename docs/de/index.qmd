@@ -1,7 +1,8 @@
 ---
-title: eCH-1234 Quarto-Dokument als Vorlage
-abstract: Kurze Zusammenfassung des Zwecks dieses Dokuments
-date: today
+title: eCH-0264 Landwirtschaftliche Kontrolldaten
+abstract: 
+    Die Wiederverwendung von Daten aus landwirtschaftlichen Kontrollen ist heutzutage limitiert. Gründe dafür sind sowohl Datenflüsse von den kantonalen Agrarinformationsystemen (KAIS) die das System Acontrol des Bundesamtes für Landwirtschaft (BLW) speisen, als auch das Datenmodell von Acontrol selbst, welches die Organisation von Kontrolldaten im System vorgibt. Dieses eCH-Hilfsmittel beschreibt den angestrebten Zustand bezüglich der Speicherung von Resultaten landwirtschaftlicher Kontrollen im System Acontrol. Es soll im Rahmen der Erneuerung von Actontrol ab dem Jahr 2028 als Grundlage für einen Schnittstellenstandard dienen.
+date: last-modified
 date-format: long
 lang: de
 ---
@@ -12,25 +13,13 @@ Im vorliegenden Dokument wird bei der Bezeichnung von Personen eine geschlechtsn
 
 # Einleitung
 
-## Status
+Die Wiederverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Enährungssektors (AES).
 
-Genehmigt: Dieses Dokument wurde vom Fach-Ausschuss verabschiedet. Es entfaltet normative Kraft für den definierten Anwendungsbereich im festgelegten Geltungsbereich.
+## Landwirtschaftliche Kontrollen
 
-## Geltungsbereich
+## Erhebung von landwirtschaftlichen Kontrolldaten
 
-Die Angaben in diesem Kapitel sollen dem Leser einen raschen Überblick geben, wofür dieser Standard gedacht ist. Hinweise zu folgenden Sachverhalten können dabei hilfreich sein.
-
-## Wir können Untertitel haben
-
-Und etwas Text schreiben.
-
-### Auch Unter-Unterüberschriften
-
-Und noch mehr Text schreiben. Vielleicht sogar mit einem schönen Bild.
-
-![Fügen Sie immer etwas Text hinzu, um zu beschreiben, was das Bild zeigt.](https://fastly.picsum.photos/id/653/536/354.jpg?hmac=3InR8I5KmwbdkPHehlM8BMPd_BDHG_RWZkxt_IkeQGY){#fig-example}
-
-Bei der Darstellung von Diagrammen sollte versucht werden, diese direkt in Mermaid JS zu erstellen; dies macht zukünftige Änderungen oder Übersetzungen sehr einfach.
+## Wiederverwendung von landwirtschaftlichen Kontrolldaten
 
 # Technische Hinweise
 
