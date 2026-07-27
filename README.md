@@ -2,9 +2,11 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/blw-ofag-ufag/semantic-web-template.svg)](https://github.com/blw-ofag-ufag/semantic-web-template/commits)
 [![GitHub issues](https://img.shields.io/github/issues/blw-ofag-ufag/semantic-web-template.svg)](https://github.com/blw-ofag-ufag/semantic-web-template/issues)
 
-# Semantic web project template
+# eCH-0264 Agricultural Inspection Data (Working Draft v1.0)
 
-For demonstrative purposes, this template repository includes a full semantic web pipeline, including
+This eCH-Document describes the target state for the storage of swiss agricultural inspection data in the system Acontrol to improve re-useability of these data. The current state of how agricultural inspection data are stored is introduced to highlight existing issues with re-usability of these data and a target state is documented to guide the building of the next version of Acontrol.
+
+This repository includes a full semantic web pipeline, including
  
 1. manual data curation (data files in `src/rdf/data`),
 2. data integration from a relational database (using python, specifically `src/python/pipeline/...`),
@@ -15,10 +17,8 @@ For demonstrative purposes, this template repository includes a full semantic we
 7. uploading of the final graph to LINDAS
 8. a documentation building pipeline using Quarto
 
-Specifically, this demo project creates a graph of around 120k triples from the Chinook database, makes some inferences, processes and validates the graph.
-
-> [!IMPORTANT]
-> After using this template repository for a project, you probably want to delete/overwrite any of the aforementioned turtle/sparql/python files.
+> [!WARNING]
+> This repository contains turtle/sparql/python files for testing purposes, they will be replaced by the actual agricultural inspection data model. For now, this repository serves as a version control tool for the text draft of the eCH-0264 document.
 
 ## Development Tools
 
