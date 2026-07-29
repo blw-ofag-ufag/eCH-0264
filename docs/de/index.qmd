@@ -13,36 +13,47 @@ Im vorliegenden Dokument wird bei der Bezeichnung von Personen eine geschlechtsn
 
 # Einleitung
 
-Die Wiederverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Ernährungssektors (AES). Im Bereich des landwirtschaftlichen Kontrollwesens werden jährlich grosse Mengen an Daten erhoben, welche ein erhebliches Potenzial für die Unterstützung weiterer Kontroll- und Zertifizierungsprozesse bergen.
+Die Wiederverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Ernährungssektors (AES). 
+Im Bereich des landwirtschaftlichen Kontrollwesens werden jährlich grosse Mengen an Daten erhoben, welche ein erhebliches Potenzial für die Unterstützung weiterer Kontroll- und Zertifizierungsprozesse bergen.
 
-Landwirtschaftliche Betriebe, welche Direktzahlungen des Bundes beziehen möchten, müssen die Anforderungen des Ökologischen Leistungsnachweises (ÖLN) erfüllen und können sich zusätzlich für verschiedene freiwillige Direktzahlungsprogramme anmelden. Mit der Weiterentwicklung der Agrarpolitik ist die Anzahl dieser Programme und damit auch die Anzahl der zu überprüfenden Anforderungen kontinuierlich gestiegen.
+Landwirtschaftliche Betriebe, welche Direktzahlungen des Bundes beziehen möchten, müssen die Anforderungen des Ökologischen Leistungsnachweises (ÖLN) erfüllen und können sich zusätzlich für verschiedene freiwillige Direktzahlungsprogramme anmelden. 
+Mit der Weiterentwicklung der Agrarpolitik ist die Anzahl dieser Programme und damit auch die Anzahl der zu überprüfenden Anforderungen kontinuierlich gestiegen.
 
-Die Überprüfung der Anforderungen erfolgt im Rahmen regelmässiger Kontrollen. Dabei beurteilen Kontrollpersonen vor Ort, ob die gesetzlichen und programmbezogenen Vorgaben eingehalten werden, zum Beispiel bezüglich Tier- und Gewässerschutz (@WeisungenVKKL2026). Grundlage dafür bilden definierte Kontrollpunkte, welche als Leitlinie für die Durchführung der Kontrollen dienen. Die Kontrollen umfassen Betriebsbegehungen, die Einsicht in betriebliche Aufzeichnungen sowie Fachgespräche mit den Bewirtschafterinnen und Bewirtschaftern. Festgestellte Mängel werden dokumentiert und den zuständigen Vollzugsbehörden zur weiteren Bearbeitung übermittelt. Je nach Schwere und Art der Beanstandungen können Kürzungen von Direktzahlungen oder weitere Massnahmen die Folge sein.
+Die Überprüfung der Anforderungen erfolgt im Rahmen regelmässiger Kontrollen. Dabei beurteilen Kontrollpersonen vor Ort, ob die gesetzlichen und programmbezogenen Vorgaben eingehalten werden, zum Beispiel bezüglich Tier- und Gewässerschutz (@WeisungenVKKL2026). 
+Grundlage dafür bilden definierte Kontrollpunkte, welche als Leitlinie für die Durchführung der Kontrollen dienen. 
+Die Kontrollen umfassen Betriebsbegehungen, die Einsicht in betriebliche Aufzeichnungen sowie Fachgespräche mit den Bewirtschafterinnen und Bewirtschaftern. 
+Festgestellte Mängel werden dokumentiert und den zuständigen Vollzugsbehörden zur weiteren Bearbeitung übermittelt. 
+Je nach Schwere und Art der Beanstandungen können Kürzungen von Direktzahlungen oder weitere Massnahmen die Folge sein.
 
-Neben den Anforderungen des Direktzahlungsrechts werden im Rahmen derselben Kontrollen teilweise auch weitere öffentlich-rechtliche Vorgaben überprüft. Dazu gehören insbesondere Kontrollen im Bereich des Tierschutzes sowie weiterer Fachbereiche wie Gewässerschutz oder Tierwohlprogramme.
+Neben den Anforderungen des Direktzahlungsrechts werden im Rahmen derselben Kontrollen teilweise auch weitere öffentlich-rechtliche Vorgaben überprüft. 
+Dazu gehören insbesondere Kontrollen im Bereich des Tierschutzes sowie weiterer Fachbereiche wie Gewässerschutz oder Tierwohlprogramme.
 
 ## Entwicklung des Kontrollwesens
 
-Mit der zunehmenden Anzahl von Direktzahlungsprogrammen und den damit verbundenen Kontrollanforderungen stieg auch der Aufwand für die Kontrollorganisationen. Die regelmässig durchzuführenden Grundkontrollen beanspruchten einen Grossteil der verfügbaren Ressourcen, wodurch nur begrenzte Kapazitäten für zusätzliche risikobasierte oder anlassbezogene Kontrollen zur Verfügung standen.
+Mit der zunehmenden Anzahl von Direktzahlungsprogrammen und den damit verbundenen Kontrollanforderungen stieg auch der Aufwand für die Kontrollorganisationen. 
+Die regelmässig durchzuführenden Grundkontrollen beanspruchten einen Grossteil der verfügbaren Ressourcen, wodurch nur begrenzte Kapazitäten für zusätzliche risikobasierte oder anlassbezogene Kontrollen zur Verfügung standen.
 
-Gleichzeitig entstanden neue Anforderungen an die Koordination zwischen verschiedenen Kontrollorganisationen. Öffentlich-rechtliche Vollzugsstellen, private Kontrollstellen und Label-Organisationen erheben teilweise ähnliche Informationen oder überprüfen vergleichbare Anforderungen. Dies führt zu Mehrfachkontrollen und einem erhöhten administrativen Aufwand sowohl für die Kontrollorganisationen als auch für die Landwirtschaftsbetriebe.
+Gleichzeitig entstanden neue Anforderungen an die Koordination zwischen verschiedenen Kontrollorganisationen. 
+Öffentlich-rechtliche Vollzugsstellen, private Kontrollstellen und Label-Organisationen erheben teilweise ähnliche Informationen oder überprüfen vergleichbare Anforderungen. 
+Dies führt zu Mehrfachkontrollen und einem erhöhten administrativen Aufwand sowohl für die Kontrollorganisationen als auch für die Landwirtschaftsbetriebe.
 
 Vor diesem Hintergrund gewinnen Konzepte wie risikobasierte Kontrollen, die bessere Koordination von Kontrolltätigkeiten und die Wiederverwendung bereits erhobener Daten zunehmend an Bedeutung.
 
 ## Potenzial der Wiederverwendung von Kontrolldaten
 
-Bereits erhobene Kontrolldaten sollen künftig mehrfach genutzt werden können, sofern die rechtlichen, organisatorischen und technischen Voraussetzungen erfüllt sind. Durch die Wiederverwendung bestehender Kontrollinformationen können Doppelspurigkeiten reduziert und die Effizienz des Kontrollwesens verbessert werden.
+Bereits erhobene Kontrolldaten sollen künftig mehrfach genutzt werden können, sofern die rechtlichen, organisatorischen und technischen Voraussetzungen erfüllt sind. 
+Durch die Wiederverwendung bestehender Kontrollinformationen können Doppelspurigkeiten reduziert und die Effizienz des Kontrollwesens verbessert werden.
 
-Ein besonderes Potenzial besteht bei der Nutzung öffentlich-rechtlicher Kontrolldaten zur Unterstützung privatrechtlicher Kontrollen von Label- und Branchenorganisationen wie Bio Suisse, IP-Suisse oder Mutterkuh Schweiz. Viele der von diesen Organisationen überprüften Anforderungen überschneiden sich mit bereits durchgeführten Kontrollen im Bereich des Direktzahlungsrechts, des Tierschutzes oder weiterer öffentlich-rechtlicher Vorgaben.
+Ein besonderes Potenzial besteht bei der Nutzung öffentlich-rechtlicher Kontrolldaten zur Unterstützung privatrechtlicher Kontrollen von Label-Organisationen wie Bio Suisse, IP-Suisse oder Mutterkuh Schweiz. 
+Auflagen von Labels beinhalten die Erfüllung von öffentlich-rechtlichen Auflagen aus den Bereichen der Direktzahlungen (z.B. Erfüllung des Ökologischen Leistungsnachweises), des Tierschutzes oder weiterer öffentlich-rechtlicher Vorgaben.
 
-Die Wiederverwendung von Kontrolldaten kann dazu beitragen, bestehende Kontrollen besser aufeinander abzustimmen, den Aufwand für Bewirtschafterinnen und Bewirtschafter zu reduzieren und die vorhandenen Ressourcen gezielter einzusetzen. Gleichzeitig eröffnet sie neue Möglichkeiten für risikobasierte Kontrollansätze, indem vorhandene Informationen systematisch für die Planung und Priorisierung von Kontrollen genutzt werden können.
+Die Wiederverwendung von Kontrolldaten kann dazu beitragen, bestehende Kontrollen besser aufeinander abzustimmen und den Aufwand für Bewirtschafterinnen und Bewirtschafter zu reduzieren. Gleichzeitig eröffnet sie neue Möglichkeiten für risikobasierte Kontrollansätze, indem vorhandene Informationen systematisch für die Planung und Priorisierung von Kontrollen genutzt werden können.
 
 ## Zielsetzung des Dokuments
 
 Dieses Dokument beschreibt die fachlichen Anforderungen an ein zukünftiges Datenmodell für das landwirtschaftliche Kontrollwesen und den Datenaustausch zwischen den beteiligten Akteuren. Im Zentrum stehen dabei:
 
 * die Erhebung und Verwaltung landwirtschaftlicher Kontrolldaten;
-* die Unterstützung öffentlich-rechtlicher Kontrollen in den Bereichen Direktzahlungen, Tierschutz und weiteren Fachbereichen;
 * die Wiederverwendung von Kontrolldaten zur Unterstützung privatrechtlicher Kontrollen von Label-Organisationen;
 * die Förderung risikobasierter Kontrollansätze;
 * die Verbesserung der Interoperabilität zwischen den beteiligten Informationssystemen und Organisationen.
