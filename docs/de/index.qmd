@@ -28,14 +28,14 @@ Je nach Schwere und Art der Beanstandungen können Kürzungen von Direktzahlunge
 Neben den Anforderungen des Direktzahlungsrechts werden im Rahmen derselben Kontrollen teilweise auch weitere öffentlich-rechtliche Vorgaben überprüft. 
 Dazu gehören insbesondere Kontrollen im Bereich des Tierschutzes sowie weiterer Fachbereiche wie Gewässerschutz oder Tierwohlprogramme.
 
-## Entwicklung des Kontrollwesens
+## Landwirtschaftliches Kontrollwesen
 
-Mit der zunehmenden Anzahl von Direktzahlungsprogrammen und den damit verbundenen Kontrollanforderungen stieg auch der Aufwand für die Kontrollorganisationen. 
+Mit der zunehmenden Anzahl von Direktzahlungsprogrammen und den damit verbundenen Kontrollanforderungen stieg auch der administrative Aufwand für die Kontrollorganisationen. 
 Die regelmässig durchzuführenden Grundkontrollen beanspruchten einen Grossteil der verfügbaren Ressourcen, wodurch nur begrenzte Kapazitäten für zusätzliche risikobasierte oder anlassbezogene Kontrollen zur Verfügung standen.
 
 Gleichzeitig entstanden neue Anforderungen an die Koordination zwischen verschiedenen Kontrollorganisationen. 
-Öffentlich-rechtliche Vollzugsstellen, private Kontrollstellen und Label-Organisationen erheben teilweise ähnliche Informationen oder überprüfen vergleichbare Anforderungen. 
-Dies führt zu Mehrfachkontrollen und einem erhöhten administrativen Aufwand sowohl für die Kontrollorganisationen als auch für die Landwirtschaftsbetriebe.
+Öffentlich- und privat-rechtliche Kontrollstellen erheben teilweise ähnliche Informationen oder überprüfen vergleichbare Anforderungen, weil Kontrolldaten nicht in geeigneter Form (Aktualität, Datenformat) zur Wiederverwendung verfügbar sind.
+Dies führt zu Mehrfachkontrollen und einem erhöhten administrativen Aufwand sowohl für die Kontrollstellen als auch für die Landwirtschaftsbetriebe.
 
 Vor diesem Hintergrund gewinnen Konzepte wie risikobasierte Kontrollen, die bessere Koordination von Kontrolltätigkeiten und die Wiederverwendung bereits erhobener Daten zunehmend an Bedeutung.
 
