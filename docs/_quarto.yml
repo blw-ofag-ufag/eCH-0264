@@ -7,7 +7,7 @@ project:
     - en/index.qmd
 
 website:
-  repo-url: https://github.com/blw-ofag-ufag/semantic-web-template
+  repo-url: https://github.com/blw-ofag-ufag/eCH-0264
   repo-subdir: docs
   repo-actions: [source, issue]
   favicon: assets/favicon.svg
@@ -23,7 +23,7 @@ website:
           - text: Français
             href: /fr/index.html
       - icon: github
-        href: https://github.com/blw-ofag-ufag/semantic-web-template
+        href: https://github.com/blw-ofag-ufag/eCH-0264
       - icon: envelope
         href: mailto:agridata.ch@blw.admin.ch
 
