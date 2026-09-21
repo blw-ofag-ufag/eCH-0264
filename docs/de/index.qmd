@@ -1,7 +1,7 @@
 ---
 title: eCH-0264 Landwirtschaftliche Kontrolldaten
 abstract: 
-    Die Wiederverwendung von Daten aus landwirtschaftlichen Kontrollen ist heutzutage limitiert. Gründe dafür sind sowohl Datenflüsse von den kantonalen Agrarinformationsystemen (KAIS) die das System Acontrol des Bundesamtes für Landwirtschaft (BLW) speisen, als auch das Datenmodell von Acontrol selbst, welches die Organisation von Kontrolldaten im System vorgibt. Dieses eCH-Hilfsmittel beschreibt den angestrebten Zustand bezüglich der Speicherung von Resultaten landwirtschaftlicher Kontrollen im System Acontrol. Es soll im Rahmen der Erneuerung von Actontrol ab dem Jahr 2028 als Grundlage für einen Schnittstellenstandard dienen.
+    Die Weiterverwendung von Daten aus öffentlich-rechtlichen landwirtschaftlichen Kontrollen ist heutzutage limitiert. Bedarf an der Weiterverwendung dieser Kontrolldaten besteht insbesondere zum Zweck des Vollzuges im Kontrollwesen, der Unterstützung von privatrechtlichen Kontrollen und der Berichterstattung. Aktuell gibt es keine Anwendungsfälle die einen Austausch von öffentlich-rechtlichen und privatrechtlichen Kontrolldaten erfordern, weshalb der eCH-Standard “Landwirtschaftliche Kontrolldaten” die Optimierung des Bezugs von öffentlich-rechtlichen Kontrolldaten fokussiert. Die Form dieser Kontrolldaten im System Acontrol und deren Verfügbarkeit für Akteure im Schweizer Agrar- und Ernährungssektor entspricht nicht allen heutigen Bedürfnissen. Der eCH-Standard 0264 “Landwirtschaftliche Kontrolldaten” zeigt eine Analyse bestehender Lücken bei der Weiterverwendung von öffentlich-rechtlichen Kontrolldaten und Optionen für das Datenmodell einer Nachfolgelösung von Acontrol auf. Dieser eCH-Standard wird von der Arbeitsgruppe “Landwirtschaftliche Kontrolldaten” unter der Leitung des Bundesamtes für Landwirtschaft erarbeitet.
 date: last-modified
 date-format: long
 lang: de
@@ -11,54 +11,105 @@ lang: de
 
 Im vorliegenden Dokument wird bei der Bezeichnung von Personen eine geschlechtsneutrale Formulierung verwendet. Basis bildet der Leitfaden der Bundeskanzlei. Je nach Situation kommen Paarformen (Bürgerinnen und Bürger), geschlechtsabstrakte Formen (versicherte Person), geschlechtsneutrale Formen (Versicherte) oder Umschreibungen ohne Personenbezug zum Einsatz. Das generische Maskulin (Bürger) ist nicht zulässig. Vollformen werden in fortlaufenden Texten verwendet, also in Texten, die aus ausformulierten Sätzen bestehen. In verknappten Textpassagen, namentlich in Tabellen, können Kurzformen verwendet werden. Dabei wird die Kurzform mit Schrägstrich, aber ohne Auslassungsstrich verwendet (Referent/in). Genderstern und ähnliche Schreibweisen werden nicht verwendet.
 
+# Zielbild der Arbeitsgruppe Landwirtschaftliche Kontrolldaten
+
+Der [Aktionsplan Kontrollen auf Landwirtschaftsbetrieben](https://www.blw.admin.ch/dam/de/sd-web/HtCH-BMgy5II/Aktionsplan%20Kontrollen%20Landwirtschaft%20-%20DE%20-%20von%20allen%20Teilnehmern%20unterzeichnet%2C%2004.09.25.pdf) hat ein klares übergeordnetes Ziel: Die administrative Belastung der Landwirtinnen und Landwirte durch Kontrollen soll sinken, konkret auf maximal eine Grund- oder Standardkontrolle pro Jahr und Betrieb. Dies ist ein sehr ambitioniertes Ziel und kann nur gelingen, wenn sämtliche Doppelspurigkeiten zwischen öffentlich-rechtlichen Kontrollen (Bund/Kantone) und privatrechtlichen Kontrollen (Labels wie Bio Suisse, IP-Suisse, SwissGAP) eliminiert werden.
+
+Damit eine Organisation auf eine eigene Kontrolle verzichten kann, muss sie die Kontrollergebnisse einer anderen Organisation anerkennen und nutzen können. Das funktioniert heute nicht reibungslos, weil die verschiedenen Akteure unterschiedliche «Sprachen» sprechen – sowohl fachlich (Begrifflichkeiten) als auch technisch (Datenstrukturen).
+
+Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten kümmert sich primär um die semantische und technische Interoperabilität von Daten im Kontext landwirtschaftlicher Kontrollen. Sie erarbeitet das Wörterbuch (Glossar), die Grammatik (Business-Objekte) konkrete Anwendungen (Use-Cases) sowie eine Struktur für die langfristige Pflege (Governance). Dadurch soll der Datenaustausch zwischen den Systemen von Bund, Kantonen und Labels künftig über [agridata.ch](agridata.ch) ermöglicht werden. Weiter soll für alle Akteure – insbesondere für Landwirtinnen und Landwirte – transparent sein, was Gegenstand bestimmter Kontrollen ist und was die Anforderungen verschiedener Gesetze, Programme oder Labels sind.​ 
+
+Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten trägt Informationen zur Optimierung von Kontrolldaten zusammen und zeigt Optionen auf. Die Verhandlungen zur Umsetzung dieser Optionen sind nicht Aufgabe der Arbeitsgruppe Kontrolldaten.
+
 # Einleitung
 
-Die Wiederverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Ernährungssektors (AES). 
-Im Bereich des landwirtschaftlichen Kontrollwesens werden jährlich grosse Mengen an Daten erhoben, welche ein erhebliches Potenzial für die Unterstützung weiterer Kontroll- und Zertifizierungsprozesse bergen.
+Die Weiterverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Ernährungssektors (AES). Im landwirtschaftlichen Kontrollwesen werden Daten in Form von Resultaten und Eigenschaften von öffentlich-rechtlichen Kontrollen erhoben. Diese Daten dienen in erster Linie der Oberaufsicht über den rechtskonformen Vollzug in den Kantonen und werden für die Einschätzung von Bereichen für risikobasierte Kontrollen genutzt. Zudem dienen die Daten der Berichterstattung (Agrarbericht 2025 – Vollzug), der Unterstützung von privatrechtlichen Kontrollprozessen und der Weiterentwicklung der Schweizer Agrarpolitik.
 
-Landwirtschaftliche Betriebe, welche Direktzahlungen des Bundes beziehen möchten, müssen die Anforderungen des Ökologischen Leistungsnachweises (ÖLN) erfüllen und können sich zusätzlich für verschiedene freiwillige Direktzahlungsprogramme anmelden. 
-Mit der Weiterentwicklung der Agrarpolitik ist die Anzahl dieser Programme und damit auch die Anzahl der zu überprüfenden Anforderungen kontinuierlich gestiegen.
+## Landwirtschaftliche Kontrollen
 
-Die Überprüfung der Anforderungen erfolgt im Rahmen regelmässiger Kontrollen. Dabei beurteilen Kontrollpersonen vor Ort, ob die gesetzlichen und programmbezogenen Vorgaben eingehalten werden, zum Beispiel bezüglich Tier- und Gewässerschutz (@WeisungenVKKL2026). 
-Grundlage dafür bilden definierte Kontrollpunkte, welche als Leitlinie für die Durchführung der Kontrollen dienen. 
-Die Kontrollen umfassen Betriebsbegehungen, die Einsicht in betriebliche Aufzeichnungen sowie Fachgespräche mit den Bewirtschafterinnen und Bewirtschaftern. 
-Festgestellte Mängel werden dokumentiert und den zuständigen Vollzugsbehörden zur weiteren Bearbeitung übermittelt. 
-Je nach Schwere und Art der Beanstandungen können Kürzungen von Direktzahlungen oder weitere Massnahmen die Folge sein.
+Landwirtschaftliche Betriebe, welche Direktzahlungen des Bundes beziehen, müssen die Anforderungen des Ökologischen Leistungsnachweises (ÖLN) erfüllen und können sich für Direktzahlungsprogramme anmelden. Zusätzlich können sich Betriebe von Label-Organisationen für privatrechtlich geregelte Produktionspraktiken, die über die öffentlich-rechtlichen Anforderungen hinaus gehen, zertifizieren lassen. Zu solchen Produktionspraktiken gehören beispielsweise die biologische Landwirtschaft zertifiziert durch Bio-Suisse, die integrierte Produktion zertifiziert durch IP-Suisse und die biologisch-dynamische Landwirtschaft Demeter.
 
-Neben den Anforderungen des Direktzahlungsrechts werden im Rahmen derselben Kontrollen teilweise auch weitere öffentlich-rechtliche Vorgaben überprüft. 
-Dazu gehören insbesondere Kontrollen im Bereich des Tierschutzes sowie weiterer Fachbereiche wie Gewässerschutz oder Tierwohlprogramme.
+Die Überprüfung der gesetzlichen Anforderungen (z.B. Tierschutz, Gewässerschutz), des ÖLN und der Direktzahlungsprogramme, erfolgt heute im Rahmen von Grundkontrollen (alle 8 Jahre pro Betrieb) und risikobasierten Kontrollen. Die Kontrollen umfassen Betriebsbegehungen, die Einsicht in betriebliche Aufzeichnungen sowie Gespräche mit den Bewirtschafterinnen und Bewirtschaftern. Falls Mängel festgestellt werden, sind je nach deren Schwere und Art Kürzungen von Direktzahlungen und weitere Massnahmen die Folge.
 
-## Landwirtschaftliches Kontrollwesen
+## Datenflüsse von Kontrolldaten
+Kontrolldaten die bei öffentlich-rechtlichen Kontrollen erhoben werden fliessen im System Acontrol zusammen, bei diesen Datenflüssen gibt es kantonale Unterschiede. Aktuell sind noch keine Datenflüsse etabliert, bei denen privatrechtliche Kontrolldaten an Acontrol übermittelt werden.
 
-Mit der zunehmenden Anzahl von Direktzahlungsprogrammen und den damit verbundenen Kontrollanforderungen stieg auch der administrative Aufwand für die Kontrollorganisationen. 
-Die regelmässig durchzuführenden Grundkontrollen beanspruchten einen Grossteil der verfügbaren Ressourcen, wodurch nur begrenzte Kapazitäten für zusätzliche risikobasierte oder anlassbezogene Kontrollen zur Verfügung standen.
+- Kontrolldaten werden über eine mobile Applikation auf einem Tablet während der Kontrolle erfasst und von dort in das KAIS des entsprechenden Kantons übermittelt. In einem nächsten Schritt werden die Kontrolldaten vom KAIS an Acontrol übermittelt.
 
-Gleichzeitig entstanden neue Anforderungen an die Koordination zwischen verschiedenen Kontrollorganisationen. 
-Öffentlich- und privat-rechtliche Kontrollstellen erheben teilweise ähnliche Informationen oder überprüfen vergleichbare Anforderungen, weil Kontrolldaten nicht in geeigneter Form (Aktualität, Datenformat) zur Wiederverwendung verfügbar sind.
-Dies führt zu Mehrfachkontrollen und einem erhöhten administrativen Aufwand sowohl für die Kontrollstellen als auch für die Landwirtschaftsbetriebe.
+- Kontrolldaten werden von der mobilen Applikation direkt nach Acontrol übermittelt.
 
-Vor diesem Hintergrund gewinnen Konzepte wie risikobasierte Kontrollen, die bessere Koordination von Kontrolltätigkeiten und die Wiederverwendung bereits erhobener Daten zunehmend an Bedeutung.
+- Gibt es weitere Datenflüsse?
 
-## Potenzial der Wiederverwendung von Kontrolldaten
+## Hierarchie und Entstehung von Kontrollpunkten
 
-Bereits erhobene Kontrolldaten sollen künftig mehrfach genutzt werden können, sofern die rechtlichen, organisatorischen und technischen Voraussetzungen erfüllt sind. 
-Durch die Wiederverwendung bestehender Kontrollinformationen können Doppelspurigkeiten reduziert und die Effizienz des Kontrollwesens verbessert werden.
+Öffentlich-rechtliche Kontrollpunkte sind hierarchisch gegliedert.
 
-Ein besonderes Potenzial besteht bei der Nutzung öffentlich-rechtlicher Kontrolldaten zur Unterstützung privatrechtlicher Kontrollen von Label-Organisationen wie Bio Suisse, IP-Suisse oder Mutterkuh Schweiz. 
-Auflagen von Labels beinhalten die Erfüllung von öffentlich-rechtlichen Auflagen aus den Bereichen der Direktzahlungen (z.B. Erfüllung des Ökologischen Leistungsnachweises), des Tierschutzes oder weiterer öffentlich-rechtlicher Vorgaben.
+- Kontrollbereich (z.B. Lebensmittelsicherheit)
+    - Kontrollrubrik (z.B. Tierarzneimittel)
+        - Punktegruppe (optional und nicht in allen Kontrollrubriken enthalten; z.B. Schweinehaltung)
+            - Kontrollpunkt (z.B. Aufbewahrungs- und Lagerungsvorschriften eingehalten)
 
-Die Wiederverwendung von Kontrolldaten kann dazu beitragen, bestehende Kontrollen besser aufeinander abzustimmen und den Aufwand für Bewirtschafterinnen und Bewirtschafter zu reduzieren. Gleichzeitig eröffnet sie neue Möglichkeiten für risikobasierte Kontrollansätze, indem vorhandene Informationen systematisch für die Planung und Priorisierung von Kontrollen genutzt werden können.
+Kontrollpunkte werden angepasst wenn Änderungen auf Verordnungsebene, Bereinigungen von Fehlern, Wünsche von Kontrollstellen, oder Umstrukturierungen von Kontrollrubriken anfallen. Das Bundesamt für Landwirtschaft (BLW) erstellt dabei Kontrollrubriken und -Punkte des Direktzahlungssystems, während das Bundesamt für Lebensmittelsicherheit und Veterinärwesen (BLV) diese zu den Bereichen Tierschutz, Tiergesundheit und Lebensmittelsicherheit erarbeitet. Zusätzlich führt das BLW seit 2020 eine Kontrollrubrik “Gewässerschutz” mit 13 Kontrollpunkten für das Bundesamt für Umwelt (BAFU) in Acontrol.
 
-## Zielsetzung des Dokuments
+Das BLW sendet die Kontrollrubriken und -Punkte, gültig ab dem nächsten Jahr, den Kantonen und stellt sie der Öffentlichkeit (also auch den Label-Organisationen) über die Website des BLW zur Verfügung (siehe “Weiterführende Informationen” > “Dokumente” auf Acontrol). Jeweils im Herbst des aktuellen Jahres stehen die Rubriken und Punkte für das folgende Jahr zur Verfügung. 
 
-Dieses Dokument beschreibt die fachlichen Anforderungen an ein zukünftiges Datenmodell für das landwirtschaftliche Kontrollwesen und den Datenaustausch zwischen den beteiligten Akteuren. Im Zentrum stehen dabei:
+Zusätzlich zu den Kontrollpunkten des Bundes, erstellen die kantonalen Veterinär- und Landwirtschaftsämter für sie relevante, spezifische Kontrollpunkte. Die Veterinärämter erstellen ihre Kontrollpunkte direkt in Acontrol und Ergebnisse aus deren Kontrolle sind Teil der Kontrolldaten in Acontrol. Die Kontrollpunkte der Landwirtschaftsämter für kantons-spezifische Kontrollpunkte zu Vernetzungs- und Landschaftsqualitätsprojekten werden hingegen nicht an Acontrol übermittelt und sind nicht Teil der Kontrolldaten aus Acontrol.
 
-* die Erhebung und Verwaltung landwirtschaftlicher Kontrolldaten;
-* die Wiederverwendung von Kontrolldaten zur Unterstützung privatrechtlicher Kontrollen von Label-Organisationen;
-* die Förderung risikobasierter Kontrollansätze;
-* die Verbesserung der Interoperabilität zwischen den beteiligten Informationssystemen und Organisationen.
+Privatrechtliche Label-Organisationen benötigen demgegenüber die Möglichkeit, Kontrollpunkte, Richtlinien und Ausnahmeregelungen unterjährig anzupassen. Im Bio-Bereich können insbesondere Lockerungen, befristete Ausnahmen oder die Aufhebung einzelner Anforderungen während des Kontrolljahres wirksam werden. Neue oder verschärfte Anforderungen werden aus Gründen der Rechtssicherheit und Planbarkeit grundsätzlich nicht unterjährig eingeführt.
 
-Darauf aufbauend werden die bestehenden Herausforderungen analysiert und Anforderungen an ein zukünftiges Datenmodell sowie die notwendigen Datenaustauschmechanismen beschrieben.
+Dadurch bestehen im landwirtschaftlichen Kontrollwesen vier Quellen von Kontrollpunkten:
+
+- Bund (öffentlich-rechtlich)
+    - BLW, BLV, BAFU
+- Kantonale Veterinärämter (öffentlich-rechtlich)
+- Kantonale Landwirtschaftsämter (öffentlich-rechtlich)
+- Label-Organisationen (privatrechtlich)
+
+## Kontrolldaten
+
+Daten aus öffentlich-rechtlichen Kontrollen sind von allen Betrieben, welche ihre Einwilligung zur Weitergabe der Daten geben, über agridata.ch verfügbar. Für jeden Kontrollbereich können unter anderem Elemente wie Identifikatoren des Betriebs, Datum und Gründe für die Kontrolle, kontrollierte Punkte und Beschreibung der Mängel bezogen werden. Der Inhalt dieser Datenpakete ist auf agridata.ch dokumentiert. Das aktuelle Datenmodell und dessen XSD-Schema sind unter https://www.blw.admin.ch/de/anwendung-acontrol (Abschnitt “Daten importieren”) dokumentiert.
+
+> **Wichtig**
+Öffentlich-rechtliche Kontrolldaten aus dem System Acontrol des Bundesamtes für Landwirtschaft (BLW) enthalten keine Stammdaten von Betrieben und Personen. Kontrolldaten enthalten lediglich Identifikatoren von Betriebsstandorten und Personen welche als Fremdschlüssel für Stammdaten aus dem Agrarpolitischen Informationssystem (AGIS) dienen.
+
+## Weiterverwendung von Kontrolldaten
+
+Bereits heute werden Kontrolldaten aus öffentlich-rechtlichen Kontrollen für privatrechtliche Kontrollen genutzt um letztere zu vereinfachen. Die Auflagen von Label-Organisationen enthalten die Erfüllung von öffentlich-rechtlichen Auflagen (z.B. Erfüllung ÖLN) und zusätzliche Label-spezifische Kontrollpunkte.
+
+Die Weiterverwendung von Kontrolldaten für privatrechtliche Kontrollen benötigen die Zustimmung der Bewirtschafterinnen und Bewirtschafter. Diese Zustimmung wird üblicherweise bei der Anmeldung für ein Label eingeholt. Es gibt heute auch die Möglichkeit Daten aus Acontrol über [agridata.ch](agridata.ch) zu beziehen, wobei die Zustimmung bei den Landwirtinnen und Landwirten über diese Plattform eingeholt wird.
+
+## Anwendungsfälle (Use-Cases) für Kontrolldaten
+
+### Kontrollstelle “beef control” des Labels “Mutterkuh Schweiz”
+
+Die private Kontrollstelle “beef control” von Mutterkuh Schweiz stützt ihre Kontrollen auf die öffentlich-rechtlichen Kontrollen in den Bereichen ÖLN, Tierschutz, Tierwohl (BTS, RAUS, Weidebeitrag) und Graslandbasierte Milch- und Fleischwirtschaft (GMF) ab. Hierfür müssen die Bewirtschafterinnen und Bewirtschafter die letzten Kontrollberichte zu diesen Kontrollbereichen vorlegen (Papierform oder PDF). Alternativ geben sie die Kontrolldaten für Mutterkuh Schweiz aktuell via “Meine Agrardatenfreigabe” (MAF) (bzw. später [agridata.ch](agridata.ch)) frei. Relevant sind einerseits die Erfüllung der oben genannten Programme und andererseits sollen allfällige Mängel offengelegt werden. Für “Mutterkuh Schweiz” gibt es Toleranzbereiche bezüglich der Erfüllung von Programmen. Ein Programm gilt auch dann als erfüllt, wenn es Mängel gab. Der ÖLN ist beispielsweise erst nicht mehr erfüllt, wenn 110 Sanktionspunkte erreicht sind. Die Kontrollstelle “beef control” beurteilt zudem für das Label “Mutterkuh Schweiz” relevante Beanstandungen. Für eine geringe Anzahl von Betrieben werden zudem Resultate von kontrollierten Nährstoffbilanzen benötigt.
+
+## Einschränkungen bei der Wiederverwendbarkeit von Kontrolldaten
+
+Die Wiederverwendbarkeit von öffentlich-rechtlichen Kontrolldaten entspricht nicht den aktuellen Bedürfnissen der Akteure im Schweizer Agrar- und Ernährungssektor. Dies liegt zum Teil an der Form der Daten, welche die Interpretation und somit den Informationsgehalt der Daten verringert, aber auch am Umfang der Daten die erhoben werden können. Während die Form der bereits erhobenen Daten durch ein neues Datenmodell optimierbar ist, kann die Datenerhebung selbst nur mit grossem Aufwand erweitert werden.
+
+### Fehlende einheitliche Definitionen von Begriffen
+
+Bezügerinnen und Bezüger von öffentlich-rechtliche Kontrolldaten haben Schwierigkeiten diese zu interpretieren, weil Begriffe in den Formulierungen der Kontrollpunkte nicht einheitlich definiert sind. Um die Weiterverwendung von Kontrolldaten zu verbessern muss semantische Interoperabilität gewährleistet sein. Das heisst, dass Datenanbietende und Datenbeziehende das gleiche Verständnis eines Begriffs haben können. Dies wird ermöglicht indem alle Akteure des Kontrollwesens Begriffsdefinitionen aus dem gleichen Glossar, also einer “Single Source of Truth”, nutzen. Begriffsdefinitionen aus diesem Glossar sind auch die Grundlage für die Geschäftsobjekte des überarbeiteten Datenmodells der Nachfolgelösung von Acontrol.
+
+### Historische Kontrolldaten nur limitiert verfügbar
+
+Kontrolldaten die über agridata.ch bezogen werden können, umfassen maximal die letzten vier Jahre vor dem Zeitpunkt des Bezugs. Bei einem Wechsel der Bewirtschafterin, oder des Bewirtschafters, stehen Kontrolldaten ab dem Zeitpunkt des Wechsels, oder maximal der letzten vier Jahre zur Verfügung. 
+
+### Begrenzter Informationsgehalt der Kontrollergebnisse 
+
+In Acontrol können nur die Kontrollergebnisse “Mangel”, “nicht zutreffend” (NZ) und “nicht kontrolliert” (NK) erfasst werden. Wenn kein Ergebnis erfasst wurde, geht das System davon aus, dass “kein Mangel festgestellt” wurde. Das Ergebnis “kontrolliert und kein Mangel” wird also bei einer öffentlich-rechtlichen Kontrolle nicht erfasst. Damit soll der Aufwand bei Kontrollen vermindert werden. Vergisst eine Kontrollperson aber “NZ” oder “NK” zu setzen, entsteht das “Chüngeli-Problem”. In den Daten entsteht dann der Eindruck als wären mehr Kontrollen durchgeführt worden, als effektiv durchgeführt wurden. Die Auswertungen dieser Kontrollen sind dann unbrauchbar, da nicht mehr entschlüsselt werden kann, welche Punkte tatsächlich kontrolliert wurden.
+
+> **Das Chüngeliproblem**
+> Aufgrund der aktuellen Logik der Datenverarbeitung von Acontrol werden auch irreführende Kontrollergebnisse von Betrieben gesammelt. Diese Problematik ist als “Chüngeli-Problem” bekannt. Acontrol kennt die Kontrollrubriken (Sammlung von Kontrollpunkten) nur als Ganzes. Kontrollpunkte können nicht unabhängig von der übergeordneten Kontrollrubrik von den Kantonen geliefert werden. Wenn die Kantone die Kontrollen mit einzelnen Kontrollpunkten planen und nur diese liefern, ergänzt Acontrol automatisch das Datenfeld “Ergebnis” für die anderen Kontrollpunkte in dieser Rubrik mit dem Eintrag “Ohne Mangel”. So führt die Datenbank Ergebnisse zu Kontrollpunkten, für welche die Betriebe nicht kontrolliert wurden (z.B. Ausbildung, Bewilligungen und Meldepflicht bei Straussen auf Betrieben welche nur Hühner führen).
+
+# Fachglossar Kontrollwesen
+
+Für das landwirtschaftliche Kontrollwesen relevante Begriffe und deren Definitionen sind im Fachglossar Kontrollwesen aufgeführt. Dieses Glossar dient als “Single Source of Truth” für Definitionen von Begriffen und deren Beziehungen zueinander. So soll die semantische Interoperabilität zwischen den Akteuren und Systemen des landwirtschaftlichen Kontrollwesens hergestellt und die Interpretation von Kontrolldaten optimiert werden. Das Fachglossar Kontrollwesen wird vom BLW gepflegt und kann basierend auf Bedürfnissen des Sektors erweitert und angepasst werden.
+
+# Datenmodell “Landwirtschaftliche Kontrolldaten”
+
+Das Datenmodell “Landwirtschaftliche Kontrolldaten” dient der Spezifikation von Kontrolldaten im Schweizer Agrar- und Ernährungssektor”. Es stellt die Nachfolgelösung des Datenmodells Acontrol dar und zeigt Optionen zur Organisation und Form von relevanten Daten des Kontrollwesens.
 
 # Technische Hinweise
 
