@@ -38,6 +38,6 @@ format:
     number-sections: true
   docx:
     toc: true
-    reference-doc: https://s.zazuko.com/MHXTkQ
+    #reference-doc: https://s.zazuko.com/MHXTkQ
     link-citations: true
   typst: default
