@@ -1,0 +1,564 @@
+# ==============================================================================
+# CODE LISTS OF eCH-0264
+# ------------------------------------------------------------------------------
+# Every code list is a skos:ConceptScheme. Its values are instances of a
+# dedicated subclass of skos:Concept (see src/rdf/ontology/model.owl.ttl) and
+# are validated by the shapes in src/rdf/shapes/model.shacl.ttl.
+#
+# Lists marked as "Entwurf" in their description are proposals of the working
+# group and still need to be aligned with the Acontrol Merkmalskatalog.
+# ==============================================================================
+
+# Project-specific namespaces/qnames
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
+@prefix domain:          <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-domain/> .
+@prefix result:          <https://agriculture.ld.admin.ch/eCH-0264/1/result-value/> .
+@prefix reason:          <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-reason/> .
+@prefix modality:        <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-modality/> .
+@prefix method:          <https://agriculture.ld.admin.ch/eCH-0264/1/assessment-method/> .
+@prefix legalnature:     <https://agriculture.ld.admin.ch/eCH-0264/1/legal-nature/> .
+@prefix inspstatus:      <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-status/> .
+@prefix measuretype:     <https://agriculture.ld.admin.ch/eCH-0264/1/measure-type/> .
+@prefix conformity:      <https://agriculture.ld.admin.ch/eCH-0264/1/conformity-status/> .
+@prefix certstatus:      <https://agriculture.ld.admin.ch/eCH-0264/1/certificate-status/> .
+
+# Globally used namespaces/qnames
+@prefix schema:          <http://schema.org/> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
+
+# ==============================================================================
+# KONTROLLBEREICH (INSPECTION DOMAIN)
+# Source: Acontrol data products on agridata.ch (codes and names DE/FR/IT)
+# ==============================================================================
+
+domain:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Kontrollbereiche"@de,
+        "Inspection domains"@en ;
+    schema:description "Oberste Gliederungsebene der öffentlich-rechtlichen Kontrollpunkte. Die Codes entsprechen den Kontrollbereichen von Acontrol, nach denen auch die Acontrol-Datenprodukte auf agridata.ch gegliedert sind."@de .
+
+domain:FoodSafetyPlantPrimaryProduction a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "01" ;
+    schema:name "Lebensmittelsicherheit (pflanzliche Primärproduktion)"@de,
+        "Sécurité alimentaire (production primaire végétale)"@fr,
+        "Sicurezza alimentare (produzione primaria vegetale)"@it ;
+    skos:scopeNote "Der Code 01 wird in Acontrol für die pflanzliche und die tierische Primärproduktion verwendet. Die beiden Bereiche werden deshalb über ihre IRI unterschieden."@de .
+
+domain:FoodSafetyAnimalPrimaryProduction a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "01" ;
+    schema:name "Lebensmittelsicherheit (tierische Primärproduktion)"@de,
+        "Sécurité alimentaire (production primaire animale)"@fr,
+        "Sicurezza alimentare (produzione primaria animale)"@it ;
+    skos:scopeNote "Der Code 01 wird in Acontrol für die pflanzliche und die tierische Primärproduktion verwendet. Die beiden Bereiche werden deshalb über ihre IRI unterschieden."@de .
+
+domain:AnimalHealth a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "02" ;
+    schema:name "Tiergesundheit"@de,
+        "Santé animale"@fr,
+        "Salute degli animali"@it .
+
+domain:AnimalWelfareProtection a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "03" ;
+    schema:name "Tierschutz"@de,
+        "Protection des animaux"@fr,
+        "Protezione degli animali"@it .
+
+domain:Environment a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "04" ;
+    schema:name "Umwelt"@de ;
+    skos:scopeNote "In der Liste der auf agridata.ch angebotenen Acontrol-Datenprodukte (Stand 2026) nicht enthalten."@de .
+
+domain:GeneralContributionRequirements a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "05" ;
+    schema:name "Allgemeine Beitragsvoraussetzungen – Ganzjahres- und Sömmerungsbetriebe"@de,
+        "Conditions générales pour l'obtention des contributions – exploitations à l'année et exploitations d'estivage"@fr,
+        "Condizioni generali per i contributi – aziende gestite tutto l'anno e d'estivazione"@it .
+
+domain:StructuralData a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "06" ;
+    schema:name "Strukturdaten – Ganzjahresbetriebe (DZV und EKBV)"@de,
+        "Données sur les structures – exploitations à l'année"@fr,
+        "Dati strutturali – aziende gestite tutto l'anno"@it .
+
+domain:ProofOfEcologicalPerformance a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "07" ;
+    schema:name "Ökologischer Leistungsnachweis ÖLN"@de,
+        "Prestations écologiques requises"@fr,
+        "Prova che le esigenze ecologiche sono rispettate"@it ;
+    skos:scopeNote "Gemäss Datenproduktbeschreibung ohne Tierschutz, der im Kontrollbereich 03 geführt wird."@de .
+
+domain:BiodiversityPromotionAreas a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "08" ;
+    schema:name "Biodiversitätsförderflächen"@de,
+        "Surfaces de promotion de la biodiversité"@fr,
+        "Superfici per la promozione della biodiversità"@it .
+
+domain:OrganicFarming a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "09" ;
+    schema:name "Biologische Landwirtschaft"@de,
+        "Agriculture biologique"@fr,
+        "Agricoltura biologica"@it .
+
+domain:ExtensiveProduction a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "10" ;
+    schema:name "Extensive Produktion"@de ;
+    skos:scopeNote "In der Liste der auf agridata.ch angebotenen Acontrol-Datenprodukte (Stand 2026) nicht enthalten."@de .
+
+domain:GrasslandBasedProduction a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "11" ;
+    schema:name "Graslandbasierte Milch- und Fleischproduktion"@de,
+        "Production de lait et de viande basée sur les herbages"@fr,
+        "Produzione di latte e carne basata sulla superficie inerbita"@it .
+
+domain:AnimalWelfare a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "12" ;
+    schema:name "Tierwohl"@de,
+        "Bien-être des animaux"@fr,
+        "Benessere degli animali"@it .
+
+domain:ResourceEfficiency a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "13" ;
+    schema:name "Ressourceneffizienzbeiträge"@de,
+        "Efficience des ressources"@fr,
+        "Efficienza delle risorse"@it .
+
+domain:Summering a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "14" ;
+    schema:name "Sömmerung"@de,
+        "Estivage"@fr,
+        "Estivazione"@it .
+
+domain:InSitu a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "15" ;
+    schema:name "In-situ"@de,
+        "In situ"@fr,
+        "In situ"@it .
+
+domain:PlantProtectionProductWaiver a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "16" ;
+    schema:name "Verzicht auf Pflanzenschutzmittel"@de,
+        "Non-recours aux produits phytosanitaires"@fr,
+        "Rinuncia a prodotti fitosanitari"@it .
+
+domain:SoilFertility a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "18" ;
+    schema:name "Bodenfruchtbarkeit"@de,
+        "Fertilité du sol"@fr,
+        "Fertilità del suolo"@it .
+
+domain:ClimateMeasures a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "19" ;
+    schema:name "Klimamassnahmen"@de,
+        "Mesures en faveur du climat"@fr,
+        "Misure per il clima"@it .
+
+domain:WaterProtection a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "20" ;
+    schema:name "Gewässerschutz"@de ;
+    skos:scopeNote "Kontrollbereich des Bundesamts für Umwelt (BAFU), der vom BLW in Acontrol geführt wird."@de .
+
+domain:AirPollutionControl a eCH-0264:InspectionDomain ;
+    skos:inScheme domain:ConceptScheme ;
+    skos:topConceptOf domain:ConceptScheme ;
+    schema:identifier "30" ;
+    schema:name "Luftreinhaltung"@de ;
+    skos:scopeNote "Kontrollbereich des Bundesamts für Umwelt (BAFU). In der Liste der auf agridata.ch angebotenen Acontrol-Datenprodukte (Stand 2026) nicht enthalten."@de .
+
+# ==============================================================================
+# KONTROLLERGEBNIS (RESULT VALUE)
+# ==============================================================================
+
+result:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Werte eines Kontrollergebnisses"@de,
+        "Result values"@en ;
+    schema:description "Abschliessende Liste der Werte, die ein Kontrollergebnis zu einem Kontrollpunkt annehmen kann. Im Gegensatz zu Acontrol wird auch das Ergebnis «Erfüllt» ausdrücklich übermittelt; ein fehlendes Ergebnis darf nicht als «Erfüllt» interpretiert werden."@de .
+
+result:Compliant a eCH-0264:ResultValue ;
+    skos:inScheme result:ConceptScheme ;
+    skos:topConceptOf result:ConceptScheme ;
+    schema:identifier "E" ;
+    schema:name "Erfüllt"@de,
+        "Compliant"@en ;
+    schema:description "Der Kontrollpunkt wurde kontrolliert und es wurde kein Mangel festgestellt."@de .
+
+result:Deficiency a eCH-0264:ResultValue ;
+    skos:inScheme result:ConceptScheme ;
+    skos:topConceptOf result:ConceptScheme ;
+    schema:identifier "M" ;
+    schema:name "Mangel"@de,
+        "Deficiency"@en ;
+    schema:description "Der Kontrollpunkt wurde kontrolliert und es wurde mindestens ein Mangel festgestellt."@de .
+
+result:NotApplicable a eCH-0264:ResultValue ;
+    skos:inScheme result:ConceptScheme ;
+    skos:topConceptOf result:ConceptScheme ;
+    schema:identifier "NZ" ;
+    schema:name "Nicht zutreffend"@de,
+        "Not applicable"@en ;
+    schema:description "Der Kontrollpunkt ist für das Kontrollobjekt nicht anwendbar, zum Beispiel weil die betreffende Tierkategorie nicht gehalten wird."@de .
+
+result:NotInspected a eCH-0264:ResultValue ;
+    skos:inScheme result:ConceptScheme ;
+    skos:topConceptOf result:ConceptScheme ;
+    schema:identifier "NK" ;
+    schema:name "Nicht kontrolliert"@de,
+        "Not inspected"@en ;
+    schema:description "Der Kontrollpunkt ist anwendbar, wurde bei dieser Kontrolle aber nicht geprüft."@de .
+
+# ==============================================================================
+# KONTROLLGRUND (INSPECTION REASON)
+# ==============================================================================
+
+reason:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Kontrollgründe"@de,
+        "Inspection reasons"@en ;
+    schema:description "Entwurf. Anlässe, aus denen Kontrollpunkte einer Kontrollrubrik kontrolliert werden. Die Liste folgt der Kontrollsystematik der VKKL (Grundkontrollen nach Art. 2 und 3, risikobasierte Kontrollen nach Art. 4 und 5) und ist mit den Werten des Merkmals «Kontrollgrund» im Merkmalskatalog Acontrol abzugleichen."@de .
+
+reason:BasicInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:topConceptOf reason:ConceptScheme ;
+    schema:name "Grundkontrolle"@de,
+        "Basic inspection"@en ;
+    schema:description "Kontrolle, mit der überprüft wird, ob die Anforderungen auf dem ganzen Betrieb eingehalten werden, und die in einer Mindesthäufigkeit durchzuführen ist (Art. 2 und 3 VKKL)."@de .
+
+reason:RiskBasedInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:topConceptOf reason:ConceptScheme ;
+    schema:name "Risikobasierte Kontrolle"@de,
+        "Risk-based inspection"@en ;
+    schema:description "Kontrolle, die zusätzlich zu den Grundkontrollen aufgrund der Kriterien nach Art. 4 VKKL durchgeführt wird."@de .
+
+reason:FollowUpInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:broader reason:RiskBasedInspection ;
+    schema:name "Nachkontrolle"@de,
+        "Follow-up inspection"@en ;
+    schema:description "Risikobasierte Kontrolle aufgrund von Mängeln bei früheren Kontrollen (Art. 4 Abs. 1 Bst. a VKKL)."@de .
+
+reason:SuspicionInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:broader reason:RiskBasedInspection ;
+    schema:name "Kontrolle bei begründetem Verdacht"@de,
+        "Inspection based on reasonable suspicion"@en ;
+    schema:description "Risikobasierte Kontrolle aufgrund eines begründeten Verdachts auf Nichteinhaltung von Vorschriften (Art. 4 Abs. 1 Bst. b VKKL), zum Beispiel nach Meldungen Dritter."@de .
+
+reason:RegistrationInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:broader reason:RiskBasedInspection ;
+    schema:name "Kontrolle nach Neu- oder Wiederanmeldung"@de,
+        "Inspection after (re-)registration"@en ;
+    schema:description "Risikobasierte Kontrolle im ersten Beitragsjahr nach einer Neuanmeldung für eine Direktzahlungsart oder einer Wiederanmeldung nach einem Unterbruch (Art. 5 Abs. 4 VKKL)."@de .
+
+reason:RiskAreaInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:broader reason:RiskBasedInspection ;
+    schema:name "Kontrolle in einem Risikobereich"@de,
+        "Inspection in a risk area"@en ;
+    schema:description "Risikobasierte Kontrolle in einem jährlich festgelegten Bereich mit höheren Risiken für Mängel (Art. 4 Abs. 1 Bst. d VKKL)."@de .
+
+reason:ChangeInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:broader reason:RiskBasedInspection ;
+    schema:name "Kontrolle nach wesentlicher Betriebsänderung"@de,
+        "Inspection after substantial change"@en ;
+    schema:description "Risikobasierte Kontrolle aufgrund wesentlicher Änderungen auf dem Betrieb (Art. 4 Abs. 1 Bst. c VKKL)."@de .
+
+reason:CertificationInspection a eCH-0264:InspectionReason ;
+    skos:inScheme reason:ConceptScheme ;
+    skos:topConceptOf reason:ConceptScheme ;
+    schema:name "Zertifizierungskontrolle"@de,
+        "Certification inspection"@en ;
+    schema:description "Kontrolle, deren Ergebnisse einer Zertifizierungsstelle als Grundlage für den Entscheid über ein Zertifikat dienen."@de .
+
+# ==============================================================================
+# KONTROLLART (INSPECTION MODALITY)
+# ==============================================================================
+
+modality:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Kontrollarten"@de,
+        "Inspection modalities"@en ;
+    schema:description "Entwurf. Unterscheidet Kontrollen nach dem Ort, an dem sie durchgeführt werden. Ob eine Kontrolle angemeldet war, wird mit einem eigenen Merkmal erfasst, damit zwei unabhängige Eigenschaften nicht in einer Codeliste vermischt werden."@de .
+
+modality:OnSite a eCH-0264:InspectionModality ;
+    skos:inScheme modality:ConceptScheme ;
+    skos:topConceptOf modality:ConceptScheme ;
+    schema:name "Vor-Ort-Kontrolle"@de,
+        "On-site inspection"@en ;
+    schema:description "Kontrolle, bei der die Kontrollperson das Kontrollobjekt aufsucht."@de .
+
+modality:Office a eCH-0264:InspectionModality ;
+    skos:inScheme modality:ConceptScheme ;
+    skos:topConceptOf modality:ConceptScheme ;
+    schema:name "Bürokontrolle"@de,
+        "Office-based inspection"@en ;
+    schema:description "Kontrolle, die ohne Besuch des Kontrollobjekts anhand von Unterlagen und Daten durchgeführt wird."@de .
+
+# ==============================================================================
+# ERHEBUNGSMETHODE (ASSESSMENT METHOD)
+# ==============================================================================
+
+method:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Erhebungsmethoden"@de,
+        "Assessment methods"@en ;
+    schema:description "Entwurf. Verfahren, mit denen ein Kontrollergebnis ermittelt wird. Die Angabe erlaubt Datenbezügerinnen und Datenbezügern zu beurteilen, wie ein Kontrollergebnis entstanden ist."@de .
+
+method:Inspection a eCH-0264:AssessmentMethod ;
+    skos:inScheme method:ConceptScheme ;
+    skos:topConceptOf method:ConceptScheme ;
+    schema:name "Betriebsbegehung"@de,
+        "Site walk-through"@en ;
+    schema:description "Erhebung durch Augenschein der Kontrollperson auf dem Kontrollobjekt."@de .
+
+method:DocumentReview a eCH-0264:AssessmentMethod ;
+    skos:inScheme method:ConceptScheme ;
+    skos:topConceptOf method:ConceptScheme ;
+    schema:name "Dokumentenprüfung"@de,
+        "Document review"@en ;
+    schema:description "Erhebung durch Einsicht in betriebliche Aufzeichnungen und Belege."@de .
+
+method:Interview a eCH-0264:AssessmentMethod ;
+    skos:inScheme method:ConceptScheme ;
+    skos:topConceptOf method:ConceptScheme ;
+    schema:name "Befragung"@de,
+        "Interview"@en ;
+    schema:description "Erhebung durch ein Gespräch mit der Bewirtschafterin oder dem Bewirtschafter."@de .
+
+method:RemoteSensing a eCH-0264:AssessmentMethod ;
+    skos:inScheme method:ConceptScheme ;
+    skos:topConceptOf method:ConceptScheme ;
+    schema:name "Fernerkundung"@de,
+        "Remote sensing"@en ;
+    schema:description "Erhebung anhand von Satelliten-, Luft- oder Drohnenbildern."@de .
+
+method:SelfDeclaration a eCH-0264:AssessmentMethod ;
+    skos:inScheme method:ConceptScheme ;
+    skos:topConceptOf method:ConceptScheme ;
+    schema:name "Selbstdeklaration"@de,
+        "Self-declaration"@en ;
+    schema:description "Erhebung anhand einer Angabe der Bewirtschafterin oder des Bewirtschafters, zum Beispiel einer Selbstcheckliste."@de .
+
+method:AutomatedDataCheck a eCH-0264:AssessmentMethod ;
+    skos:inScheme method:ConceptScheme ;
+    skos:topConceptOf method:ConceptScheme ;
+    schema:name "Automatisierte Datenprüfung"@de,
+        "Automated data check"@en ;
+    schema:description "Erhebung durch einen maschinellen Abgleich mit vorhandenen digitalen Daten, zum Beispiel aus AGIS oder Geodaten."@de .
+
+# ==============================================================================
+# RECHTSNATUR (LEGAL NATURE)
+# ==============================================================================
+
+legalnature:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Rechtsnatur"@de,
+        "Legal nature"@en ;
+    schema:description "Unterscheidet, ob ein Regelwerk, eine Kontrolle oder eine Massnahme auf öffentlichem Recht oder auf privatrechtlichen Verträgen beruht."@de .
+
+legalnature:PublicLaw a eCH-0264:LegalNature ;
+    skos:inScheme legalnature:ConceptScheme ;
+    skos:topConceptOf legalnature:ConceptScheme ;
+    schema:name "Öffentlich-rechtlich"@de,
+        "Public law"@en ;
+    schema:description "Beruht auf Gesetzen und Verordnungen von Bund oder Kantonen."@de .
+
+legalnature:PrivateLaw a eCH-0264:LegalNature ;
+    skos:inScheme legalnature:ConceptScheme ;
+    skos:topConceptOf legalnature:ConceptScheme ;
+    schema:name "Privatrechtlich"@de,
+        "Private law"@en ;
+    schema:description "Beruht auf Verträgen und Richtlinien privatrechtlicher Organisationen, zum Beispiel von Label-Organisationen."@de .
+
+# ==============================================================================
+# STATUS DER KONTROLLE (INSPECTION STATUS)
+# Source: status dimension of the Acontrol data products (agridata.ch)
+# ==============================================================================
+
+inspstatus:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Status einer Kontrolle"@de,
+        "Inspection status"@en ;
+    schema:description "Bearbeitungsstand einer Kontrolle. Die Werte ausser «Ergebnisse erfasst» entsprechen der Dimension «Status der Kontrolle» der Acontrol-Datenprodukte."@de .
+
+inspstatus:Recorded a eCH-0264:InspectionStatus ;
+    skos:inScheme inspstatus:ConceptScheme ;
+    skos:topConceptOf inspstatus:ConceptScheme ;
+    schema:name "Ergebnisse erfasst"@de,
+        "Results recorded"@en ;
+    schema:description "Die Kontrollergebnisse sind erfasst, aber noch nicht freigegeben."@de ;
+    skos:scopeNote "Vorschlag der Arbeitsgruppe, damit Kontrollergebnisse vor der Freigabe als provisorisch gekennzeichnet ausgetauscht werden können."@de .
+
+inspstatus:ResultsReleased a eCH-0264:InspectionStatus ;
+    skos:inScheme inspstatus:ConceptScheme ;
+    skos:topConceptOf inspstatus:ConceptScheme ;
+    schema:name "Ergebnisse freigegeben"@de,
+        "Results released"@en .
+
+inspstatus:MeasuresInProgress a eCH-0264:InspectionStatus ;
+    skos:inScheme inspstatus:ConceptScheme ;
+    skos:topConceptOf inspstatus:ConceptScheme ;
+    schema:name "Massnahmen in Arbeit"@de,
+        "Measures in progress"@en .
+
+inspstatus:MeasuresRecorded a eCH-0264:InspectionStatus ;
+    skos:inScheme inspstatus:ConceptScheme ;
+    skos:topConceptOf inspstatus:ConceptScheme ;
+    schema:name "Massnahmen erfasst"@de,
+        "Measures recorded"@en .
+
+inspstatus:DecisionsReleased a eCH-0264:InspectionStatus ;
+    skos:inScheme inspstatus:ConceptScheme ;
+    skos:topConceptOf inspstatus:ConceptScheme ;
+    schema:name "Entscheide freigegeben"@de,
+        "Decisions released"@en .
+
+inspstatus:Appeal a eCH-0264:InspectionStatus ;
+    skos:inScheme inspstatus:ConceptScheme ;
+    skos:topConceptOf inspstatus:ConceptScheme ;
+    schema:name "Rekurs"@de,
+        "Appeal"@en ;
+    schema:description "Gegen einen Entscheid, der auf der Kontrolle beruht, ist ein Rechtsmittel hängig."@de .
+
+# ==============================================================================
+# ART DER MASSNAHME (MEASURE TYPE)
+# ==============================================================================
+
+measuretype:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Arten von Massnahmen"@de,
+        "Measure types"@en ;
+    schema:description "Entwurf. Grobe Einteilung der Massnahmen, die aufgrund von Mängeln angeordnet werden. Die detaillierte Bewertung eines Mangels bleibt Sache der zuständigen Organisation."@de .
+
+measuretype:DirectPaymentReduction a eCH-0264:MeasureType ;
+    skos:inScheme measuretype:ConceptScheme ;
+    skos:topConceptOf measuretype:ConceptScheme ;
+    schema:name "Kürzung von Direktzahlungen"@de,
+        "Direct payment reduction"@en .
+
+measuretype:Warning a eCH-0264:MeasureType ;
+    skos:inScheme measuretype:ConceptScheme ;
+    skos:topConceptOf measuretype:ConceptScheme ;
+    schema:name "Verwarnung"@de,
+        "Warning"@en .
+
+measuretype:RectificationOrder a eCH-0264:MeasureType ;
+    skos:inScheme measuretype:ConceptScheme ;
+    skos:topConceptOf measuretype:ConceptScheme ;
+    schema:name "Auflage zur Mängelbehebung"@de,
+        "Order to rectify"@en .
+
+measuretype:FollowUpInspectionOrder a eCH-0264:MeasureType ;
+    skos:inScheme measuretype:ConceptScheme ;
+    skos:topConceptOf measuretype:ConceptScheme ;
+    schema:name "Anordnung einer Nachkontrolle"@de,
+        "Follow-up inspection order"@en .
+
+measuretype:LabelSanction a eCH-0264:MeasureType ;
+    skos:inScheme measuretype:ConceptScheme ;
+    skos:topConceptOf measuretype:ConceptScheme ;
+    schema:name "Label-Sanktion"@de,
+        "Label sanction"@en ;
+    schema:description "Privatrechtliche Massnahme gemäss dem Sanktionsreglement einer Label-Organisation, zum Beispiel eine Suspendierung oder Aberkennung."@de .
+
+measuretype:OtherMeasure a eCH-0264:MeasureType ;
+    skos:inScheme measuretype:ConceptScheme ;
+    skos:topConceptOf measuretype:ConceptScheme ;
+    schema:name "Übrige Massnahme"@de,
+        "Other measure"@en .
+
+# ==============================================================================
+# PROGRAMMERFÜLLUNG (CONFORMITY STATUS)
+# ==============================================================================
+
+conformity:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Status der Programmerfüllung"@de,
+        "Conformity status"@en ;
+    schema:description "Gesamtbeurteilung, ob ein Betrieb die Anforderungen eines Programms in einem Zeitraum erfüllt."@de .
+
+conformity:Fulfilled a eCH-0264:ConformityStatus ;
+    skos:inScheme conformity:ConceptScheme ;
+    skos:topConceptOf conformity:ConceptScheme ;
+    schema:name "Erfüllt"@de,
+        "Fulfilled"@en ;
+    skos:scopeNote "Ein Programm kann auch dann erfüllt sein, wenn bei Kontrollen einzelne Mängel festgestellt wurden."@de .
+
+conformity:NotFulfilled a eCH-0264:ConformityStatus ;
+    skos:inScheme conformity:ConceptScheme ;
+    skos:topConceptOf conformity:ConceptScheme ;
+    schema:name "Nicht erfüllt"@de,
+        "Not fulfilled"@en .
+
+conformity:Pending a eCH-0264:ConformityStatus ;
+    skos:inScheme conformity:ConceptScheme ;
+    skos:topConceptOf conformity:ConceptScheme ;
+    schema:name "Offen"@de,
+        "Pending"@en ;
+    schema:description "Die Beurteilung ist noch nicht abgeschlossen, zum Beispiel weil Massnahmen in Arbeit sind."@de .
+
+# ==============================================================================
+# STATUS EINES ZERTIFIKATS (CERTIFICATE STATUS)
+# ==============================================================================
+
+certstatus:ConceptScheme a skos:ConceptScheme ;
+    schema:name "Status eines Zertifikats"@de,
+        "Certificate status"@en ;
+    schema:description "Entwurf. Gültigkeitsstatus eines Zertifikats."@de .
+
+certstatus:Valid a eCH-0264:CertificateStatus ;
+    skos:inScheme certstatus:ConceptScheme ;
+    skos:topConceptOf certstatus:ConceptScheme ;
+    schema:name "Gültig"@de,
+        "Valid"@en .
+
+certstatus:Suspended a eCH-0264:CertificateStatus ;
+    skos:inScheme certstatus:ConceptScheme ;
+    skos:topConceptOf certstatus:ConceptScheme ;
+    schema:name "Suspendiert"@de,
+        "Suspended"@en .
+
+certstatus:Withdrawn a eCH-0264:CertificateStatus ;
+    skos:inScheme certstatus:ConceptScheme ;
+    skos:topConceptOf certstatus:ConceptScheme ;
+    schema:name "Entzogen"@de,
+        "Withdrawn"@en .
+
+certstatus:Expired a eCH-0264:CertificateStatus ;
+    skos:inScheme certstatus:ConceptScheme ;
+    skos:topConceptOf certstatus:ConceptScheme ;
+    schema:name "Abgelaufen"@de,
+        "Expired"@en .

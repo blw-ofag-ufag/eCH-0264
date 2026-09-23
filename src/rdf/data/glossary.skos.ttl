@@ -1,0 +1,1109 @@
+# ==============================================================================
+# PREFIXES
+# ==============================================================================
+
+# Project-specific namespaces/qnames
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
+@prefix term:            <https://agriculture.ld.admin.ch/eCH-0264/1/term/> .
+@prefix collection:      <https://agriculture.ld.admin.ch/eCH-0264/1/collection/> .
+
+# Globally used namespaces/qnames
+@prefix schema:          <http://schema.org/> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
+
+# ==============================================================================
+# GLOSSARY METADATA
+# ==============================================================================
+
+eCH-0264:glossary a skos:ConceptScheme ;
+    schema:name "Fachglossar Kontrollwesen"@de ;
+    schema:description "Das Fachglossar Kontrollwesen definiert die Begriffe des landwirtschaftlichen Kontrollwesens der Schweiz, die für den Austausch und die Wiederverwendung von Kontrolldaten zwischen Bund, Kantonen, Kontrollstellen und Label-Organisationen benötigt werden. Es dient als Single Source of Truth für die semantische Interoperabilität und als Grundlage des logischen Datenmodells von eCH-0264. Definitionen mit Quellenangabe wurden sinngemäss aus der genannten Quelle übernommen."@de ;
+    schema:version "0.1.0" ;
+    schema:dateModified "2026-09-23"^^xsd:date .
+
+# ==============================================================================
+# AKTEURE UND ROLLEN
+# ==============================================================================
+
+term:organisation a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Organisation"@de ;
+    schema:description "Behörde, Unternehmen oder Verein, das im landwirtschaftlichen Kontrollwesen eine oder mehrere Rollen einnimmt, zum Beispiel als Herausgeberin von Kontrollpunkten, Auftraggeberin, Kontrollstelle, Zertifizierungsstelle, Datenanbieterin oder Datenbezügerin."@de ;
+    skos:scopeNote "Die Rolle ergibt sich aus der Beziehung zu anderen Objekten und nicht aus einem festen Typ; dieselbe Organisation kann mehrere Rollen haben."@de .
+
+term:bewirtschafter a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Bewirtschafterin oder Bewirtschafter"@de ;
+    schema:alternateName "Betriebsleiterin"@de, "Betriebsleiter"@de, "Bewirtschafter/in"@de ;
+    schema:description "Natürliche oder juristische Person oder Personengesellschaft, die einen Betrieb auf eigene Rechnung und Gefahr führt und damit das Geschäftsrisiko trägt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1999/13/de#art_2> ;
+    skos:related term:betrieb, term:datenproduzent .
+
+term:bewirtschafterwechsel a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:bewirtschafter ;
+    schema:name "Bewirtschafterwechsel"@de ;
+    schema:alternateName "Betriebsleiterwechsel"@de ;
+    schema:description "Übergang der Bewirtschaftung eines Betriebs von einer Bewirtschafterin oder einem Bewirtschafter auf eine andere Person."@de ;
+    skos:scopeNote "Kontrollergebnisse werden immer zusammen mit der zum Kontrollzeitpunkt verantwortlichen Person ausgetauscht, damit eine neue Bewirtschafterin oder ein neuer Bewirtschafter nicht mit Mängeln der Vorgängerin oder des Vorgängers konfrontiert wird."@de ;
+    schema:citation "Use-Case der Koordinationsgruppe Integrierte Produktion (KIP), AG Kontrolldaten 2026" .
+
+term:kontrollstelle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Kontrollstelle"@de,
+        "Organisation de contrôle"@fr,
+        "Ente di controllo"@it ;
+    schema:alternateName "Kontrollorganisation"@de ;
+    schema:description "Organisation, die im Auftrag einer kantonalen Vollzugsbehörde oder einer Label-Organisation Kontrollen durchführt."@de ;
+    skos:scopeNote "Privatrechtliche Kontrollstellen, die öffentlich-rechtliche Kontrollen durchführen, regeln die Zusammenarbeit mit der kantonalen Vollzugsbehörde in einem schriftlichen Vertrag und müssen in der Regel nach SN EN ISO/IEC 17020 akkreditiert sein (Art. 7 VKKL). Ein Betrieb kann für verschiedene Bereiche mehrere Kontrollstellen haben."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_7> ;
+    skos:related term:akkreditierung, term:kontrollperson, term:zertifizierungsstelle .
+
+term:zertifizierungsstelle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Zertifizierungsstelle"@de ;
+    schema:description "Organisation, die auf Grundlage von Kontrollergebnissen entscheidet, ob ein Zertifikat erteilt, aufrechterhalten, suspendiert oder entzogen wird."@de ;
+    skos:scopeNote "Kontroll- und Zertifizierungsstelle können dieselbe Organisation sein, zum Beispiel im Bio-Bereich."@de ;
+    skos:related term:zertifikat .
+
+term:kontrollperson a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrollperson"@de ;
+    schema:alternateName "Kontrolleurin"@de, "Kontrolleur"@de ;
+    schema:description "Natürliche Person, die im Auftrag einer Kontrollstelle Kontrollen durchführt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_7> ;
+    skos:related term:kontrollstelle, term:qualifikation .
+
+term:qualifikation a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Qualifikation"@de ;
+    schema:description "Nachgewiesene Befähigung einer Kontrollperson, Kontrollen in einem bestimmten Bereich durchzuführen."@de ;
+    skos:scopeNote "Die Qualifikation beeinflusst, ob eine andere Organisation ein Kontrollergebnis anerkennen kann, zum Beispiel bei Tierschutzkontrollen der Nachweis als amtliche Fachassistentin oder amtlicher Fachassistent. Verzeichnisse führen im öffentlichen Bereich das BLV und im privaten Bereich zum Beispiel SwissGAP oder Agrosolution."@de ;
+    schema:citation "AG Kontrolldaten, Sitzung vom 12.05.2026" ;
+    skos:related term:kontrollperson .
+
+term:amtliche-fachassistenz a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:qualifikation ;
+    schema:name "Amtliche Fachassistentin oder amtlicher Fachassistent"@de ;
+    schema:description "Qualifikation für Personen, die im öffentlichen Veterinärwesen in einem bestimmten Fachbereich, zum Beispiel Tierschutz, amtliche Kontrollen durchführen."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2011/803/de> .
+
+term:kantonale-vollzugsbehoerde a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Kantonale Vollzugsbehörde"@de ;
+    schema:alternateName "Kantonale Vollzugsstelle"@de ;
+    schema:description "Kantonale Verwaltungseinheit, die für den Vollzug bestimmter Verordnungen zuständig ist und dafür Kontrollen in Auftrag gibt und deren Ergebnisse verwertet, zum Beispiel ein Landwirtschaftsamt oder ein Veterinäramt."@de ;
+    skos:scopeNote "Im Material wird zwischen «grünen» Kontrollen der Landwirtschaftsämter und «blauen» Kontrollen der Veterinärämter unterschieden."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_7> ;
+    skos:related term:kontrollkoordinationsstelle .
+
+term:kontrollkoordinationsstelle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Kontrollkoordinationsstelle"@de ;
+    schema:description "Vom Kanton bezeichnete Stelle, welche die Grundkontrollen auf den Betrieben koordiniert und den Kontrollstellen vor Beginn einer Kontrollperiode mitteilt, auf welchen Betrieben sie welche Bereiche wann und ob angemeldet oder unangemeldet zu kontrollieren haben."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_8> ;
+    skos:related term:kantonale-vollzugsbehoerde, term:kontrollkoordination .
+
+term:label-organisation a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Label-Organisation"@de ;
+    schema:alternateName "Labelorganisation"@de, "Labelinhaberin"@de ;
+    schema:description "Privatrechtliche Organisation, die in Richtlinien Anforderungen an Produktionspraktiken festlegt, die über die öffentlich-rechtlichen Anforderungen hinausgehen, und deren Einhaltung durch Kontrollen und Zertifizierung prüfen lässt."@de ;
+    skos:scopeNote "Beispiele sind Bio Suisse, IP-Suisse, Demeter und Mutterkuh Schweiz. Viele Label-Richtlinien setzen die Erfüllung öffentlich-rechtlicher Programme wie des ÖLN voraus."@de ;
+    skos:related term:richtlinie, term:programm .
+
+term:herausgeberin a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Herausgeberin von Kontrollpunkten"@de ;
+    schema:description "Organisation, die Kontrollpunkte festlegt, veröffentlicht und für deren Inhalt verantwortlich ist."@de ;
+    skos:scopeNote "Im Kontrollwesen gibt es vier Quellen von Kontrollpunkten: den Bund (BLW, BLV, BAFU), die kantonalen Veterinärämter, die kantonalen Landwirtschaftsämter und die Label-Organisationen."@de ;
+    skos:related term:kontrollpunkt .
+
+term:blw a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Bundesamt für Landwirtschaft"@de ;
+    schema:alternateName "BLW"@de ;
+    schema:description "Bundesamt, das die Kontrollrubriken und Kontrollpunkte des Direktzahlungssystems festlegt, den Vollzug der VKKL überwacht und das System Acontrol betreibt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_9> .
+
+term:blv a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Bundesamt für Lebensmittelsicherheit und Veterinärwesen"@de ;
+    schema:alternateName "BLV"@de ;
+    schema:description "Bundesamt, das die Kontrollrubriken und Kontrollpunkte für die Bereiche Tierschutz, Tiergesundheit und Lebensmittelsicherheit in der Primärproduktion festlegt."@de .
+
+term:bafu a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:organisation ;
+    schema:name "Bundesamt für Umwelt"@de ;
+    schema:alternateName "BAFU"@de ;
+    schema:description "Bundesamt, für das das BLW seit 2020 eine Kontrollrubrik zum Gewässerschutz in Acontrol führt."@de .
+
+# ==============================================================================
+# KONTROLLOBJEKTE UND IDENTIFIKATOREN
+# ==============================================================================
+
+term:kontrollobjekt a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrollobjekt"@de ;
+    schema:description "Betrieb, Produktionsstätte oder Tierhaltung, auf die sich eine Kontrolle bezieht."@de ;
+    skos:scopeNote "Welches Kontrollobjekt massgeblich ist, hängt vom Kontrollbereich ab: Direktzahlungskontrollen beziehen sich meist auf den Betrieb, Tiergesundheitskontrollen auf die Tierhaltung."@de ;
+    skos:related term:kontrolle .
+
+term:betrieb a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollobjekt ;
+    schema:name "Betrieb"@de ;
+    schema:alternateName "Landwirtschaftsbetrieb"@de, "Ganzjahresbetrieb"@de ;
+    schema:description "Landwirtschaftliches Unternehmen, das Pflanzenbau, Nutztierhaltung oder beide Betriebszweige betreibt, eine oder mehrere Produktionsstätten umfasst, rechtlich, wirtschaftlich, organisatorisch und finanziell selbständig ist, ein eigenes Betriebsergebnis ausweist und während des ganzen Jahres bewirtschaftet wird."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1999/13/de#art_6> ;
+    skos:related term:produktionsstaette, term:bewirtschafter .
+
+term:soemmerungsbetrieb a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollobjekt ;
+    schema:name "Sömmerungsbetrieb"@de ;
+    schema:description "Landwirtschaftliches Unternehmen, das der Sömmerung von Tieren dient, von den Betrieben der Bestösser örtlich getrennt ist, Sömmerungsweiden sowie die dafür nötigen Gebäude oder Einrichtungen aufweist und während der Sömmerung bewirtschaftet wird."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1999/13/de#art_9> ;
+    skos:related term:betrieb, term:kontrolleinheit .
+
+term:produktionsstaette a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollobjekt ;
+    schema:name "Produktionsstätte"@de ;
+    schema:description "Einheit von Land, Gebäuden und Einrichtungen, die räumlich als solche erkennbar und von anderen Produktionsstätten getrennt ist, auf der eine oder mehrere Personen tätig sind und die eine oder mehrere Tierhaltungen umfasst."@de ;
+    skos:scopeNote "Hat ein Betrieb Produktionsstätten in mehreren Kantonen, kontrollieren die kantonalen Vollzugsstellen in der Regel nur die Produktionsstätte im eigenen Kanton. Kontrollergebnisse müssen deshalb der Produktionsstätte zugeordnet werden können."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1999/13/de#art_6> ;
+    skos:related term:betrieb, term:tierhaltung, term:bur-nummer .
+
+term:tierhaltung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollobjekt ;
+    schema:name "Tierhaltung"@de ;
+    schema:description "Stallungen und Einrichtungen, ohne Weideunterstände oder Weidstadel, zum regelmässigen Halten von Tieren auf einer Produktionsstätte oder auf einem Sömmerungs- oder Gemeinschaftsweidebetrieb."@de ;
+    skos:scopeNote "Tierhaltungen sind in der Tierverkehrsdatenbank mit einer TVD-Nummer registriert. Liegt eine Produktionsstätte in mehreren Kantonen, besteht in der Regel pro Standortkanton eine Tierhaltung."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1999/13/de#art_11> ;
+    skos:related term:produktionsstaette, term:tvd-nummer .
+
+term:teilbetrieb a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollobjekt ;
+    schema:name "Teilbetrieb"@de ;
+    schema:description "Organisatorisch abgegrenzter Teil eines Betriebs, der für eine Kontrolle, eine Programmteilnahme oder eine Zertifizierung gesondert betrachtet wird."@de ;
+    skos:scopeNote "Der Begriff wird im Kontrollwesen uneinheitlich verwendet. Für den Datenaustausch werden stattdessen die rechtlich definierten Begriffe Produktionsstätte und Tierhaltung verwendet."@de ;
+    skos:related term:produktionsstaette, term:tierhaltung .
+
+term:kontrolleinheit a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollobjekt ;
+    schema:name "Kontrolleinheit"@de ;
+    schema:alternateName "Kontrollierte Einheit"@de ;
+    schema:description "Gesamtheit der Kontrollobjekte, die bei einer Kontrolle gemeinsam kontrolliert werden."@de ;
+    skos:scopeNote "Beispiel: Bio Suisse betrachtet einen Heimbetrieb und einen privaten Sömmerungsbetrieb als gemeinsame Kontrolleinheit. Im Datenmodell wird eine Kontrolleinheit als Liste der Kontrollobjekte einer Kontrolle abgebildet."@de ;
+    schema:citation "Biospezifische Hinweise und Anforderungen für die AG Kontrolldaten (Bio Suisse, bio.inspecta), 03.06.2026" .
+
+term:identifikator a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Identifikator"@de ;
+    schema:alternateName "Identifikationsnummer"@de ;
+    schema:description "Zeichenfolge, die ein Objekt innerhalb eines bestimmten Registers oder Systems eindeutig bezeichnet."@de ;
+    skos:scopeNote "Kontrolldaten enthalten keine Stammdaten von Betrieben und Personen, sondern nur Identifikatoren, die auf die Stammdaten in AGIS, im kantonalen Agrarinformationssystem, im Betriebs- und Unternehmensregister oder in der Tierverkehrsdatenbank verweisen."@de .
+
+term:uid a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "Unternehmens-Identifikationsnummer"@de,
+        "Numéro d'identification des entreprises"@fr,
+        "Numero d'identificazione delle imprese"@it ;
+    schema:alternateName "UID"@de, "IDE"@fr, "IDI"@it ;
+    schema:description "Vom Bundesamt für Statistik vergebene, eindeutige Identifikationsnummer eines Unternehmens in der Schweiz im Format CHE-123.456.789."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:bur-nummer a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "BUR-Nummer"@de,
+        "No REE"@fr,
+        "N RIS"@it ;
+    schema:alternateName "Nummer im Betriebs- und Unternehmensregister"@de ;
+    schema:description "Identifikationsnummer eines Betriebs oder einer Produktionsstätte im Betriebs- und Unternehmensregister (BUR) des Bundesamts für Statistik."@de ;
+    schema:citation "Glossar agridata.ch" ;
+    skos:related term:uid .
+
+term:kt-id-b a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "Kantonale Betriebsidentifikationsnummer"@de ;
+    schema:alternateName "KT_ID_B"@de ;
+    schema:description "Identifikationsnummer eines Betriebs im kantonalen Agrarinformationssystem."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:kt-id-p a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "Kantonale Personenidentifikationsnummer"@de ;
+    schema:alternateName "KT_ID_P"@de ;
+    schema:description "Identifikationsnummer einer Person im kantonalen Agrarinformationssystem."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:agis-id-b a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "AGIS-Betriebsidentifikationsnummer"@de ;
+    schema:alternateName "AGIS_ID_B"@de ;
+    schema:description "Identifikationsnummer eines Betriebs im Agrarpolitischen Informationssystem AGIS."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:agis-id-p a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "AGIS-Personenidentifikationsnummer"@de ;
+    schema:alternateName "AGIS_ID_P"@de ;
+    schema:description "Identifikationsnummer einer Person im Agrarpolitischen Informationssystem AGIS."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:tvd-nummer a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:identifikator ;
+    schema:name "TVD-Nummer"@de,
+        "Numéro BDTA"@fr ;
+    schema:alternateName "TVD ID"@de, "ID BDTA"@fr ;
+    schema:description "Identifikationsnummer einer Tierhaltung in der Tierverkehrsdatenbank."@de ;
+    skos:scopeNote "Einige Label-Organisationen identifizieren ihre Mitglieder heute nur über die TVD-Nummer. Nicht bei jeder Tierhaltung ist eine TVD-Nummer hinterlegt."@de ;
+    schema:citation "Glossar agridata.ch" ;
+    skos:related term:tierhaltung .
+
+# ==============================================================================
+# REGELWERKE, PROGRAMME UND ANFORDERUNGEN
+# ==============================================================================
+
+term:regelwerk a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Regelwerk"@de ;
+    schema:description "Schriftlich festgelegte Sammlung von Anforderungen, die von einer Organisation in einer bestimmten Fassung erlassen wird, zum Beispiel ein Gesetz, eine Verordnung, eine Weisung, eine Richtlinie oder ein Reglement."@de ;
+    skos:scopeNote "Regelwerke werden mit ihrer Fassung referenziert, damit nachvollziehbar ist, welche Anforderungen zum Kontrollzeitpunkt galten."@de ;
+    skos:related term:anforderung, term:rechtsnatur .
+
+term:richtlinie a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Richtlinie"@de ;
+    schema:alternateName "Label-Richtlinie"@de, "Reglement"@de ;
+    schema:description "Privatrechtliches Regelwerk einer Label-Organisation, das die Anforderungen für die Verwendung eines Labels festlegt."@de ;
+    skos:scopeNote "Label-Organisationen können Richtlinien unterjährig anpassen, insbesondere durch Lockerungen, befristete Ausnahmen oder die Aufhebung einzelner Anforderungen. Neue oder verschärfte Anforderungen werden in der Regel nicht unterjährig eingeführt."@de ;
+    skos:related term:label-organisation .
+
+term:anforderung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Anforderung"@de ;
+    schema:alternateName "Auflage"@de, "Vorgabe"@de ;
+    schema:description "Einzelne verbindliche Vorgabe aus einem Regelwerk, die auf einem Kontrollobjekt einzuhalten ist."@de ;
+    skos:scopeNote "«Wir kontrollieren nicht Betriebe, wir kontrollieren Anforderungen» (Kick-off AG Kontrolldaten, 09.02.2026). Anforderungen sind feiner als Kontrollpunkte und erlauben es, Kontrollpunkte verschiedener Herausgeberinnen zu vergleichen."@de ;
+    skos:related term:kontrollpunkt, term:regelwerk, term:sammel-kontrollpunkt .
+
+term:programm a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Programm"@de ;
+    schema:description "Gesamtheit von Anforderungen, für deren Einhaltung ein Betrieb Beiträge erhält oder ein Label verwenden darf und an der er sich durch Anmeldung beteiligt."@de ;
+    skos:related term:label-organisation .
+
+term:direktzahlungsprogramm a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:programm ;
+    schema:name "Direktzahlungsprogramm"@de ;
+    schema:alternateName "Direktzahlungsart"@de ;
+    schema:description "Öffentlich-rechtliches Programm nach der Direktzahlungsverordnung, für dessen Erfüllung ein Betrieb Direktzahlungen erhält, zum Beispiel Tierwohlbeiträge oder Biodiversitätsbeiträge."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:label-programm a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:programm ;
+    schema:name "Label-Programm"@de ;
+    schema:description "Privatrechtliches Programm einer Label-Organisation, dessen Erfüllung zur Verwendung eines Labels berechtigt."@de ;
+    skos:scopeNote "Label-Programme können gestaffelt sein: So setzt zum Beispiel Demeter die Erfüllung aller Anforderungen von Bio Suisse voraus."@de ;
+    skos:related term:label-organisation .
+
+term:oeln a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:programm ;
+    schema:name "Ökologischer Leistungsnachweis"@de ;
+    schema:alternateName "ÖLN"@de ;
+    schema:description "Gesamtheit der ökologischen Anforderungen, die ein Betrieb als Voraussetzung für den Bezug von Direktzahlungen erfüllen muss."@de ;
+    skos:scopeNote "Der ÖLN gilt nicht bereits bei einem einzelnen Mangel als nicht erfüllt; massgeblich ist die Bewertung der Mängel nach dem anwendbaren Regelwerk."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de#art_11> .
+
+term:bts a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:direktzahlungsprogramm ;
+    schema:name "Besonders tierfreundliche Stallhaltungssysteme"@de ;
+    schema:alternateName "BTS"@de ;
+    schema:description "Direktzahlungsprogramm des Tierwohls, das Beiträge für die Haltung von Nutztieren in besonders tierfreundlichen Stallhaltungssystemen ausrichtet."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:raus a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:direktzahlungsprogramm ;
+    schema:name "Regelmässiger Auslauf im Freien"@de ;
+    schema:alternateName "RAUS"@de ;
+    schema:description "Direktzahlungsprogramm des Tierwohls, das Beiträge für den regelmässigen Auslauf von Nutztieren im Freien ausrichtet."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:gmf a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:direktzahlungsprogramm ;
+    schema:name "Graslandbasierte Milch- und Fleischproduktion"@de ;
+    schema:alternateName "GMF"@de ;
+    schema:description "Direktzahlungsprogramm, das Beiträge für eine Milch- und Fleischproduktion ausrichtet, die überwiegend auf Wiesen- und Weidefutter beruht."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:bff a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:direktzahlungsprogramm ;
+    schema:name "Biodiversitätsförderfläche"@de ;
+    schema:alternateName "BFF"@de ;
+    schema:description "Landwirtschaftlich genutzte Fläche, die nach den Anforderungen der Direktzahlungsverordnung zur Förderung der Biodiversität bewirtschaftet wird und für die Biodiversitätsbeiträge ausgerichtet werden."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:programmteilnahme a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:programm ;
+    schema:name "Programmteilnahme"@de ;
+    schema:alternateName "Programmanmeldung"@de ;
+    schema:description "Beteiligung eines Betriebs an einem Programm während eines bestimmten Zeitraums aufgrund einer Anmeldung."@de ;
+    skos:scopeNote "Kontrollstellen müssen wissen, an welchen Programmen ein Betrieb teilnimmt, um die zutreffenden Kontrollpunkte zu bestimmen."@de ;
+    skos:related term:programmerfuellung .
+
+term:vkkl a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Verordnung über die Koordination der Kontrollen auf Landwirtschaftsbetrieben"@de ;
+    schema:alternateName "VKKL"@de, "SR 910.15"@de ;
+    schema:description "Verordnung des Bundes, welche die allgemeinen Anforderungen an Grundkontrollen und risikobasierte Kontrollen, an Kontrollstellen und an die Koordination der Kontrollen auf Landwirtschaftsbetrieben regelt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de> .
+
+term:dzv a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Direktzahlungsverordnung"@de ;
+    schema:alternateName "DZV"@de, "SR 910.13"@de ;
+    schema:description "Verordnung des Bundes, welche die Direktzahlungen an die Landwirtschaft, den ökologischen Leistungsnachweis sowie die Kürzungen von Direktzahlungen bei Mängeln regelt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:lbv a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Landwirtschaftliche Begriffsverordnung"@de ;
+    schema:alternateName "LBV"@de, "SR 910.91"@de ;
+    schema:description "Verordnung des Bundes, die landwirtschaftliche Begriffe wie Bewirtschafter, Betrieb, Produktionsstätte und Tierhaltung rechtlich definiert."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1999/13/de> .
+
+term:bio-verordnung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Bio-Verordnung"@de ;
+    schema:alternateName "SR 910.18"@de ;
+    schema:description "Verordnung des Bundes über die biologische Landwirtschaft und die Kennzeichnung biologisch produzierter Erzeugnisse und Lebensmittel."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/1997/2498_2498_2498/de> .
+
+term:mnkpv a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Verordnung über den mehrjährigen nationalen Kontrollplan für die Lebensmittelkette und die Gebrauchsgegenstände"@de ;
+    schema:alternateName "MNKPV"@de, "SR 817.032"@de ;
+    schema:description "Verordnung des Bundes, welche die Kontrollen entlang der Lebensmittelkette einschliesslich der Primärproduktion regelt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2020/459/de> .
+
+term:islv a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:regelwerk ;
+    schema:name "Verordnung über Informationssysteme im Bereich der Landwirtschaft"@de ;
+    schema:alternateName "ISLV"@de, "SR 919.117.71"@de ;
+    schema:description "Verordnung des Bundes, welche die Informationssysteme der Landwirtschaft, darunter Acontrol, sowie die Weitergabe der darin enthaltenen Daten regelt."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/733/de> .
+
+# ==============================================================================
+# KONTROLLPUNKTE
+# ==============================================================================
+
+term:kontrollbereich a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrollbereich"@de,
+        "Domaine de contrôle"@fr,
+        "Ambito di controllo"@it ;
+    schema:description "Oberste Gliederungsebene der öffentlich-rechtlichen Kontrollpunkte, die ein Rechtsgebiet oder eine Gruppe von Programmen umfasst, zum Beispiel Lebensmittelsicherheit oder Tierwohl."@de ;
+    skos:scopeNote "Die Kontrollbereiche sind nummeriert (zum Beispiel 07 Ökologischer Leistungsnachweis) und bestimmen die Gliederung der Acontrol-Datenprodukte auf agridata.ch. Die Werte sind in der Codeliste «Kontrollbereiche» festgelegt."@de ;
+    schema:citation <https://www.blw.admin.ch/de/anwendung-acontrol> .
+
+term:kontrollrubrik a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollbereich ;
+    schema:name "Kontrollrubrik"@de,
+        "Rubrique"@fr,
+        "Rubrica"@it ;
+    schema:alternateName "Rubrik"@de ;
+    schema:description "Thematische Sammlung von Kontrollpunkten innerhalb eines Kontrollbereichs, zum Beispiel «Tierarzneimittel» im Kontrollbereich Lebensmittelsicherheit."@de ;
+    skos:scopeNote "Das BLW veröffentlicht die öffentlich-rechtlichen Kontrollrubriken und Kontrollpunkte jeweils im Herbst mit Gültigkeit ab dem 1. Januar des Folgejahres. Kantonale Veterinärämter erstellen zusätzliche kantonsspezifische Rubriken direkt in Acontrol."@de ;
+    schema:citation <https://www.blw.admin.ch/de/anwendung-acontrol> .
+
+term:punktegruppe a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollrubrik ;
+    schema:name "Punktegruppe"@de,
+        "Groupe de points"@fr,
+        "Gruppo di punti"@it ;
+    schema:description "Optionale Gliederungsebene innerhalb einer Kontrollrubrik, die zusammengehörende Kontrollpunkte bündelt, zum Beispiel «Schweinehaltung»."@de .
+
+term:kontrollpunkt a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollrubrik ;
+    schema:name "Kontrollpunkt"@de,
+        "Point de contrôle"@fr,
+        "Punto di controllo"@it ;
+    schema:alternateName "Prüfpunkt"@de, "Checkpunkt"@de ;
+    schema:description "Prüfgegenstand einer Kontrolle, der eine oder mehrere Anforderungen umfasst und für den bei einer Kontrolle genau ein Kontrollergebnis festgehalten wird."@de ;
+    skos:scopeNote "Ein Kontrollpunkt hat einen stabilen Identifikator und liegt in Fassungen mit Gültigkeitszeitraum vor. Das BLW und das BAFU können Listen mit Punkten und Beurteilungskriterien für Grundkontrollen und risikobasierte Kontrollen erstellen (Art. 9 Abs. 2 VKKL)."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_9> ;
+    skos:related term:anforderung, term:herausgeberin, term:kontrollergebnis .
+
+term:fokuskontrollpunkt a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollpunkt ;
+    schema:name "Fokuskontrollpunkt"@de ;
+    schema:alternateName "FKP"@de ;
+    schema:description "Kontrollpunkt, der bei einer Grundkontrolle zwingend geprüft werden muss."@de ;
+    skos:scopeNote "Übrige Kontrollpunkte dürfen bei einer Grundkontrolle ebenfalls geprüft werden. Heute müssen nicht geprüfte Kontrollpunkte, die keine Fokuskontrollpunkte sind, nicht als «nicht kontrolliert» gekennzeichnet werden; der Standard verlangt dies für den Datenaustausch."@de ;
+    schema:citation "Austausch mit dem Fachbereich Direktzahlungsgrundlagen (FBDG), BLW, 2026" .
+
+term:sammel-kontrollpunkt a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollpunkt ;
+    schema:name "Sammel-Kontrollpunkt"@de ;
+    schema:description "Kontrollpunkt, der mehrere voneinander unabhängige Anforderungen zu einem einzigen Kontrollergebnis zusammenfasst."@de ;
+    skos:scopeNote "Beispiel: «BFF-Auflagen eingehalten» umfasst unter anderem das Abführen des Schnittguts sowie das Verbot von Mulchen und Steinbrechern. Für Label-Organisationen ist bei Sammel-Kontrollpunkten schwer erkennbar, ob ihre spezifischen Anforderungen geprüft wurden."@de ;
+    schema:citation "BLW-Workshop eCH-Standard Kontrolldaten, 14.10.2025" ;
+    skos:related term:anforderung .
+
+term:kantonaler-kontrollpunkt a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollpunkt ;
+    schema:name "Kantonsspezifischer Kontrollpunkt"@de ;
+    schema:description "Kontrollpunkt, den eine kantonale Vollzugsbehörde zusätzlich zu den Kontrollpunkten des Bundes festlegt."@de ;
+    skos:scopeNote "Kantonsspezifische Kontrollpunkte der Veterinärämter werden in Acontrol geführt; jene der Landwirtschaftsämter, zum Beispiel zu Vernetzungs- und Landschaftsqualitätsprojekten, werden heute nicht an Acontrol übermittelt."@de .
+
+term:moeglicher-mangel a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollpunkt ;
+    schema:name "Möglicher Mangel"@de ;
+    schema:alternateName "Mangeltyp"@de ;
+    schema:description "Im Voraus festgelegte, typische Abweichung zu einem Kontrollpunkt, auf die bei der Erfassung eines Mangels verwiesen werden kann."@de ;
+    skos:scopeNote "Im Import-Schema von Acontrol ist zu jedem möglichen Mangel optional eine vorgeschlagene Massnahme hinterlegt."@de ;
+    skos:related term:mangel, term:massnahme .
+
+term:gueltigkeitszeitraum a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Gültigkeitszeitraum"@de ;
+    schema:description "Zeitspanne zwischen einem Anfangs- und einem Enddatum, während der eine bestimmte Fassung eines Regelwerks, einer Kontrollrubrik, eines Kontrollpunkts oder eines Zertifikats anzuwenden ist."@de ;
+    skos:scopeNote "Öffentlich-rechtliche Kontrollpunkte gelten in der Regel ein Kalenderjahr. Unterjährige Änderungen, etwa von Label-Organisationen, werden als neue Fassung mit eigenem Gültigkeitszeitraum abgebildet, sodass jedes Kontrollergebnis eindeutig einer Fassung zugeordnet bleibt."@de .
+
+term:kontrollpunkt-entsprechung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollpunkt ;
+    schema:name "Entsprechung von Kontrollpunkten"@de ;
+    schema:alternateName "Kontrollpunkt-Mapping"@de ;
+    schema:description "Beziehung zwischen zwei Kontrollpunkten verschiedener Herausgeberinnen, die angibt, ob sie dieselben, weitergehende oder engere Anforderungen prüfen."@de ;
+    skos:scopeNote "Entsprechungen sind die Voraussetzung dafür, dass eine Organisation ein Kontrollergebnis einer anderen Organisation anerkennen und auf eine eigene Kontrolle verzichten kann. Sie werden wie in eCH-0265 mit den SKOS-Beziehungen exactMatch, closeMatch, broadMatch und narrowMatch ausgedrückt."@de ;
+    skos:related term:anforderung .
+
+# ==============================================================================
+# KONTROLLE UND KONTROLLERGEBNIS
+# ==============================================================================
+
+term:kontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrolle"@de,
+        "Contrôle"@fr,
+        "Controllo"@it ;
+    schema:alternateName "Inspektion"@de, "Betriebskontrolle"@de ;
+    schema:description "Überprüfung der Einhaltung von Anforderungen auf einem oder mehreren Kontrollobjekten durch eine Kontrollstelle an einem bestimmten Datum."@de ;
+    skos:scopeNote "Eine Kontrolle kann Betriebsbegehungen, die Einsicht in betriebliche Aufzeichnungen und Gespräche mit der Bewirtschafterin oder dem Bewirtschafter umfassen."@de ;
+    skos:related term:kontrollobjekt, term:kontrollstelle .
+
+term:oeffentlich-rechtliche-kontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Öffentlich-rechtliche Kontrolle"@de ;
+    schema:alternateName "Amtliche Kontrolle"@de ;
+    schema:description "Kontrolle, die im Auftrag einer Behörde gestützt auf Bundesrecht oder kantonales Recht durchgeführt wird."@de ;
+    skos:scopeNote "Rund ein Viertel der Bio-Kontrollen erfolgt im öffentlich-rechtlichen Auftrag."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de> ;
+    skos:related term:privatrechtliche-kontrolle, term:rechtsnatur .
+
+term:privatrechtliche-kontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Privatrechtliche Kontrolle"@de ;
+    schema:alternateName "Labelkontrolle"@de ;
+    schema:description "Kontrolle, die im Auftrag einer privatrechtlichen Organisation gestützt auf einen Vertrag und deren Richtlinien durchgeführt wird."@de ;
+    skos:related term:label-organisation, term:rechtsnatur .
+
+term:grundkontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Grundkontrolle"@de ;
+    schema:description "Kontrolle, mit der überprüft wird, ob die Anforderungen auf dem ganzen Betrieb eingehalten werden, und die in einer vorgeschriebenen Mindesthäufigkeit durchgeführt wird, in der Regel mindestens einmal innerhalb von acht Jahren."@de ;
+    skos:scopeNote "Die Kantone können jedes Jahr bei höchstens 10 Prozent der Betriebe gestützt auf eine eigene Risikoeinschätzung auf eine Grundkontrolle verzichten."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_3> ;
+    skos:related term:kontrollgrund .
+
+term:risikobasierte-kontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Risikobasierte Kontrolle"@de ;
+    schema:description "Kontrolle, die zusätzlich zu den Grundkontrollen aufgrund von Mängeln bei früheren Kontrollen, eines begründeten Verdachts, wesentlicher Änderungen auf dem Betrieb oder jährlich festgelegter Risikobereiche durchgeführt wird."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_4> ;
+    skos:related term:kontrollgrund .
+
+term:nachkontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:risikobasierte-kontrolle ;
+    schema:name "Nachkontrolle"@de ;
+    schema:description "Risikobasierte Kontrolle, die aufgrund von Mängeln bei einer früheren Kontrolle durchgeführt wird."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_5> .
+
+term:kontrollgrund a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrollgrund"@de,
+        "Motif de contrôle"@fr,
+        "Motivo del controllo"@it ;
+    schema:description "Anlass, aus dem die Kontrollpunkte einer Kontrollrubrik bei einer Kontrolle geprüft werden, nämlich eine Grundkontrolle, eine der Arten risikobasierter Kontrollen oder eine Zertifizierungskontrolle."@de ;
+    skos:scopeNote "In Acontrol kann seit der Einführung des risikobasierten Kontrollsystems 2020 ein Kontrollgrund pro Kontrollrubrik angegeben werden. Der Kontrollgrund ist von der Kontrollart zu unterscheiden."@de ;
+    skos:related term:kontrollart, term:kontrollumfang .
+
+term:kontrollart a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrollart"@de,
+        "Type de contrôle"@fr,
+        "Tipo di controllo"@it ;
+    schema:description "Merkmal einer Kontrolle, das angibt, wo sie durchgeführt wird, nämlich als Vor-Ort-Kontrolle auf dem Kontrollobjekt oder als Bürokontrolle."@de ;
+    skos:scopeNote "Im Material wird «Kontrollart» teilweise auch für Werte wie Grundkontrolle oder Nachkontrolle verwendet. Diese Werte sind Kontrollgründe. Ob eine Kontrolle angemeldet war, wird als eigenes Merkmal erfasst. Die Zuordnung zum Merkmal «Kontrollart» der Acontrol-Datenprodukte ist mit dem BLW abzustimmen."@de ;
+    skos:related term:kontrollgrund, term:unangemeldete-kontrolle .
+
+term:buerokontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollart ;
+    schema:name "Bürokontrolle"@de ;
+    schema:alternateName "Administrative Kontrolle"@de ;
+    schema:description "Kontrolle, die ohne Besuch des Kontrollobjekts anhand von Unterlagen und digital verfügbaren Daten durchgeführt wird."@de ;
+    skos:scopeNote "Bürokontrollen gewinnen an Bedeutung, zum Beispiel für Label-Organisationen, die öffentlich-rechtliche Kontrolldaten beziehen, und im Veterinärwesen."@de .
+
+term:vor-ort-kontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollart ;
+    schema:name "Vor-Ort-Kontrolle"@de ;
+    schema:description "Kontrolle, bei der die Kontrollperson das Kontrollobjekt aufsucht."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_3> .
+
+term:unangemeldete-kontrolle a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Unangemeldete Kontrolle"@de ;
+    schema:description "Kontrolle, die der Bewirtschafterin oder dem Bewirtschafter nicht im Voraus angekündigt wird."@de ;
+    skos:scopeNote "Mindestens 40 Prozent der jährlichen Grund- und risikobasierten Kontrollen für die Tierwohlbeiträge sind in jedem Kanton unangemeldet durchzuführen."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_3> .
+
+term:kontrollumfang a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Kontrollumfang"@de ;
+    schema:description "Teil einer Kontrolle, der die aus einem bestimmten Kontrollgrund geprüfte Kontrollrubrik und die Ergebnisse zu deren Kontrollpunkten umfasst."@de ;
+    skos:scopeNote "Der Kontrollumfang legt ausdrücklich fest, welche Kontrollpunkte geprüft wurden. Damit wird das «Chüngeli-Problem» vermieden."@de ;
+    skos:related term:kontrollgrund, term:chuengeli-problem .
+
+term:kontrolldatum a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Kontrolldatum"@de,
+        "Date de contrôle"@fr,
+        "Data di controllo"@it ;
+    schema:description "Datum, an dem eine Kontrolle durchgeführt wurde."@de ;
+    skos:scopeNote "Das Kontrolldatum bestimmt, welche Fassung der Kontrollpunkte und Regelwerke massgeblich war."@de .
+
+term:kontrollperiode a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Kontrollperiode"@de ;
+    schema:description "Zeitraum, für den die Kontrollkoordinationsstelle den Kontrollstellen die durchzuführenden Kontrollen zuteilt, in der Regel ein Kalenderjahr."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_8> .
+
+term:kontrollkoordination a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Kontrollkoordination"@de ;
+    schema:description "Abstimmung der Kontrollen verschiedener Vollzugsbehörden und Kontrollstellen, sodass ein Betrieb in der Regel nicht mehr als einmal pro Kalenderjahr kontrolliert wird."@de ;
+    skos:scopeNote "Die Koordination von Kontrollen ist Gegenstand der Begleitgruppe Landwirtschaftliche Kontrollen (BG LaKo) und nicht der AG Kontrolldaten. Standardisierte Kontrolldaten sind aber eine Voraussetzung für die Koordination."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_3> ;
+    skos:related term:kontrollkoordinationsstelle, term:bg-lako .
+
+term:kontrollergebnis a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrollergebnis"@de,
+        "Résultat du contrôle"@fr,
+        "Risultato del controllo"@it ;
+    schema:alternateName "Kontrollresultat"@de, "Testpunkt-Resultat"@de ;
+    schema:description "Feststellung zu einem Kontrollpunkt bei einer Kontrolle, die einen der Werte «Erfüllt», «Mangel», «Nicht zutreffend» oder «Nicht kontrolliert» annimmt."@de ;
+    skos:scopeNote "In Acontrol werden heute nur «Mangel», «nicht zutreffend» und «nicht kontrolliert» erfasst; ein fehlendes Ergebnis gilt als «ohne Mangel». Der Standard verlangt, dass auch «Erfüllt» ausdrücklich übermittelt wird."@de ;
+    skos:related term:kontrollpunkt, term:mangel .
+
+term:nicht-zutreffend a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollergebnis ;
+    schema:name "Nicht zutreffend"@de ;
+    schema:alternateName "NZ"@de ;
+    schema:description "Wert eines Kontrollergebnisses, der angibt, dass der Kontrollpunkt auf das Kontrollobjekt nicht anwendbar ist, zum Beispiel weil die betreffende Tierkategorie nicht gehalten wird."@de .
+
+term:nicht-kontrolliert a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollergebnis ;
+    schema:name "Nicht kontrolliert"@de ;
+    schema:alternateName "NK"@de ;
+    schema:description "Wert eines Kontrollergebnisses, der angibt, dass ein anwendbarer Kontrollpunkt bei der Kontrolle nicht geprüft wurde."@de .
+
+term:rubrikergebnis a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollergebnis ;
+    schema:name "Ergebnis Rubrik"@de,
+        "Résultat rubrique"@fr,
+        "Risultato rubrica"@it ;
+    schema:alternateName "Rubrikergebnis"@de ;
+    schema:description "Zusammenfassendes Kontrollergebnis über alle geprüften Kontrollpunkte einer Kontrollrubrik bei einer Kontrolle."@de .
+
+term:chuengeli-problem a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrollergebnis ;
+    schema:name "Chüngeli-Problem"@de ;
+    schema:description "Verfälschung von Kontrolldaten, die entsteht, wenn ein System Kontrollpunkten, für die kein Ergebnis übermittelt wurde, automatisch das Ergebnis «ohne Mangel» zuweist."@de ;
+    skos:scopeNote "Acontrol kennt Kontrollrubriken nur als Ganzes. Liefert ein Kanton nur einzelne Kontrollpunkte einer Rubrik, ergänzt Acontrol die übrigen mit «ohne Mangel». So entstehen zum Beispiel Ergebnisse zur Haltung von Straussen auf Betrieben, die nur Hühner halten. Der Standard verhindert dies, indem jedes Kontrollergebnis ausdrücklich erfasst werden muss."@de ;
+    schema:citation "BLW-Workshop eCH-Standard Kontrolldaten, 14.10.2025" .
+
+term:erhebungsmethode a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Erhebungsmethode"@de ;
+    schema:alternateName "Kontrollmethode"@de ;
+    schema:description "Verfahren, mit dem ein Kontrollergebnis ermittelt wird, nämlich Betriebsbegehung, Dokumentenprüfung, Befragung, Fernerkundung, Selbstdeklaration oder automatisierte Datenprüfung."@de ;
+    skos:scopeNote "Die VKKL erlaubt verschiedene Kontrollmethoden. Künftig können Kontrollergebnisse auch aus satellitengestützten Verfahren oder Selbstkontrollen stammen; für die Anerkennung durch Dritte muss erkennbar sein, wie ein Ergebnis entstanden ist."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_2> ;
+    skos:related term:nachweis .
+
+term:selbstdeklaration a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:erhebungsmethode ;
+    schema:name "Selbstdeklaration"@de ;
+    schema:alternateName "Selbstkontrolle"@de, "Selbstcheckliste"@de ;
+    schema:description "Erhebungsmethode, bei der die Bewirtschafterin oder der Bewirtschafter selbst Angaben zur Einhaltung von Anforderungen macht, die von einer Kontrollstelle geprüft werden können."@de .
+
+term:nachweis a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Nachweis"@de ;
+    schema:alternateName "Beleg"@de, "Mediendaten"@de ;
+    schema:description "Datei, die eine Kontrolle, ein Kontrollergebnis oder einen Mangel belegt, zum Beispiel ein Foto, ein Dokument oder ein Satellitenbild."@de ;
+    skos:scopeNote "Die Speicherung von Mediendaten zu Kontrollergebnissen ist eine Anforderung an die Nachfolgelösung von Acontrol, die bisher nicht umgesetzt ist."@de ;
+    schema:citation "AG Kontrolldaten, Sitzung vom 08.09.2026" .
+
+term:kontrollbericht a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:nachweis ;
+    schema:name "Kontrollbericht"@de ;
+    schema:alternateName "Kontrollprotokoll"@de ;
+    schema:description "Dokument, das die Kontrollergebnisse und festgestellten Mängel einer Kontrolle für die Bewirtschafterin oder den Bewirtschafter und die Auftraggeberin zusammenfasst."@de ;
+    skos:scopeNote "Heute legen Bewirtschafterinnen und Bewirtschafter Kontrollberichte auf Papier oder als PDF vor, damit Label-Organisationen öffentlich-rechtliche Kontrollen berücksichtigen können. Strukturierte Kontrolldaten sollen dies ersetzen."@de .
+
+term:kontrollstatus a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolle ;
+    schema:name "Status der Kontrolle"@de ;
+    schema:alternateName "Kontrollstatus"@de ;
+    schema:description "Bearbeitungsstand einer Kontrolle von der Erfassung der Ergebnisse über die Freigabe und die Massnahmen bis zu einem allfälligen Rekurs."@de ;
+    skos:scopeNote "Die Acontrol-Datenprodukte unterscheiden die Status «Ergebnisse freigegeben», «Massnahmen in Arbeit», «Massnahmen erfasst», «Entscheide freigegeben» und «Rekurs»."@de .
+
+term:kontrolldaten a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kontrolldaten"@de ;
+    schema:description "Daten, die bei der Planung, Durchführung und Auswertung von Kontrollen entstehen, nämlich Kontrollgrunddaten, Kontrollergebnisse, Mängel und Massnahmen."@de ;
+    skos:related term:acontrol .
+
+term:kontrollgrunddaten a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolldaten ;
+    schema:name "Kontrollgrunddaten"@de ;
+    schema:description "Kontrolldaten, die eine Kontrolle beschreiben, ohne deren Ergebnisse zu enthalten, zum Beispiel der Identifikator des Kontrollobjekts, das Kontrolldatum, die Kontrollstelle und der Kontrollgrund."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/733/de> .
+
+# ==============================================================================
+# MÄNGEL, MASSNAHMEN UND ZERTIFIZIERUNG
+# ==============================================================================
+
+term:mangel a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Mangel"@de,
+        "Manquement"@fr,
+        "Lacuna"@it ;
+    schema:alternateName "Beanstandung"@de, "Abweichung"@de, "Nichtkonformität"@de ;
+    schema:description "Bei einer Kontrolle festgestellte Nichteinhaltung einer oder mehrerer Anforderungen eines Kontrollpunkts."@de ;
+    skos:scopeNote "Ein Mangel beschreibt den festgestellten Sachverhalt. Wie schwer ein Mangel wiegt und welche Massnahme folgt, beurteilt jede zuständige Organisation nach ihrem Regelwerk. Eine blosse Datenabweichung ist nicht automatisch ein Mangel."@de ;
+    skos:related term:kontrollergebnis, term:massnahme, term:moeglicher-mangel .
+
+term:meldepflicht a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:mangel ;
+    schema:name "Meldepflicht bei Mängeln"@de ;
+    schema:description "Pflicht einer Kontrollperson oder Kontrollstelle, einen festgestellten Verstoss der zuständigen Vollzugsbehörde zu melden, auch wenn der Verstoss nicht Gegenstand ihres Kontrollauftrags war."@de ;
+    skos:scopeNote "Stellt eine Bio-Kontrollstelle bei einer öffentlich-rechtlichen Kontrolle einen Mangel fest, meldet sie ihn heute teilweise per E-Mail an die zuständigen Kantone, weil die Schnittstelle zu Acontrol nicht alle nötigen Angaben abbildet."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_7> .
+
+term:massnahme a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Massnahme"@de ;
+    schema:alternateName "Sanktion"@de ;
+    schema:description "Folge, die eine zuständige Organisation aufgrund eines oder mehrerer Mängel anordnet, zum Beispiel eine Kürzung von Direktzahlungen, eine Verwarnung, eine Auflage zur Mängelbehebung, eine Nachkontrolle oder eine Label-Sanktion."@de ;
+    skos:scopeNote "Die Acontrol-Datenprodukte enthalten heute keine Massnahmen. Verfügungen mit Sanktionen können besonders schützenswerte Personendaten sein und werden deshalb getrennt von den Kontrollergebnissen und nur mit eigener Einwilligung ausgetauscht."@de ;
+    skos:related term:mangel .
+
+term:kuerzung-direktzahlungen a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:massnahme ;
+    schema:name "Kürzung von Direktzahlungen"@de ;
+    schema:alternateName "DZ-Kürzung"@de ;
+    schema:description "Öffentlich-rechtliche Massnahme, bei der die Direktzahlungen eines Betriebs aufgrund von Mängeln nach den Bestimmungen der Direktzahlungsverordnung reduziert werden."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+term:sanktionspunkte a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:massnahme ;
+    schema:name "Sanktionspunkte"@de ;
+    schema:alternateName "Punkte"@de ;
+    schema:description "Masszahl, mit der ein Regelwerk die Schwere eines Mangels bewertet und deren Summe über Art und Umfang einer Massnahme entscheidet."@de ;
+    skos:scopeNote "Beispiel aus dem Material: Der ÖLN gilt erst ab 110 Sanktionspunkten als nicht mehr erfüllt. Diese Angabe ist gegen das geltende Regelwerk zu prüfen."@de ;
+    schema:citation "Use-Case beef control (Mutterkuh Schweiz), AG Kontrolldaten 2026" .
+
+term:programmerfuellung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:programm ;
+    schema:name "Programmerfüllung"@de ;
+    schema:description "Gesamtbeurteilung, ob ein Betrieb die Anforderungen eines Programms während eines Zeitraums erfüllt."@de ;
+    skos:scopeNote "Ein Programm kann auch dann erfüllt sein, wenn bei Kontrollen einzelne Mängel festgestellt wurden. Für viele Label-Organisationen genügt die Programmerfüllung, um auf eine eigene Kontrolle zu verzichten."@de ;
+    schema:citation "Use-Case beef control (Mutterkuh Schweiz), AG Kontrolldaten 2026" ;
+    skos:related term:programmteilnahme, term:zertifikat .
+
+term:zertifizierung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Zertifizierung"@de ;
+    schema:description "Verfahren, in dem eine Zertifizierungsstelle auf Grundlage von Kontrollergebnissen bestätigt, dass ein Kontrollobjekt die Anforderungen eines Programms erfüllt."@de ;
+    skos:related term:zertifizierungsstelle .
+
+term:zertifikat a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:zertifizierung ;
+    schema:name "Zertifikat"@de ;
+    schema:alternateName "Zertifizierungsbestätigung"@de ;
+    schema:description "Bestätigung einer Zertifizierungsstelle, dass ein Kontrollobjekt die Anforderungen eines Programms während eines Gültigkeitszeitraums erfüllt."@de ;
+    skos:scopeNote "Heute müssen Bewirtschafterinnen und Bewirtschafter bei Labelkontrollen Zertifikate etwa zum ÖLN, zu BTS oder zu GMF aus ihren Unterlagen heraussuchen und vorlegen."@de .
+
+term:akkreditierung a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Akkreditierung"@de ;
+    schema:description "Formelle Anerkennung der fachlichen Kompetenz einer Kontroll- oder Zertifizierungsstelle, Kontrollen nach einer bestimmten Norm durchzuführen."@de ;
+    skos:scopeNote "Privatrechtliche Kontrollstellen, die öffentlich-rechtliche Kontrollen durchführen, müssen mit wenigen Ausnahmen nach der Norm SN EN ISO/IEC 17020 akkreditiert sein."@de ;
+    schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_7> ;
+    skos:related term:kontrollstelle .
+
+term:rechtsnatur a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Rechtsnatur"@de ;
+    schema:description "Eigenschaft eines Regelwerks, einer Kontrolle, eines Programms oder einer Massnahme, die angibt, ob sie auf öffentlichem Recht oder auf privatrechtlichen Verträgen beruht."@de ;
+    skos:scopeNote "Die Rechtsnatur ist für den Datenaustausch entscheidend, weil öffentlich-rechtliche Feststellungen privatrechtliche Folgen haben können und umgekehrt, und weil unterschiedliche Regeln für die Weitergabe der Daten gelten."@de ;
+    skos:related term:oeffentlich-rechtliche-kontrolle, term:privatrechtliche-kontrolle .
+
+# ==============================================================================
+# DATENAUSTAUSCH UND SYSTEME
+# ==============================================================================
+
+term:interoperabilitaet a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Interoperabilität"@de ;
+    schema:description "Fähigkeit von Organisationen und Systemen, Daten auszutauschen und diese Daten ohne zusätzliche Absprachen weiterzuverwenden."@de .
+
+term:semantische-interoperabilitaet a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:interoperabilitaet ;
+    schema:name "Semantische Interoperabilität"@de ;
+    schema:description "Interoperabilität, bei der Datenanbieter und Datenbezüger ausgetauschten Daten dieselbe Bedeutung beimessen, weil sie Begriffe aus demselben Glossar verwenden."@de ;
+    skos:scopeNote "Die semantische Interoperabilität ist das vorrangige Ziel der AG Kontrolldaten; das Fachglossar Kontrollwesen ist ihr Grundbaustein."@de .
+
+term:technische-interoperabilitaet a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:interoperabilitaet ;
+    schema:name "Technische Interoperabilität"@de ;
+    schema:description "Interoperabilität, bei der Systeme Daten über gemeinsame Datenstrukturen, Formate und Schnittstellen maschinell austauschen."@de .
+
+term:rechtliche-interoperabilitaet a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:interoperabilitaet ;
+    schema:name "Rechtliche Interoperabilität"@de ;
+    schema:description "Interoperabilität, bei der Organisationen aufgrund der Rechtsgrundlagen und Einwilligungen Daten untereinander austauschen dürfen."@de ;
+    skos:scopeNote "Die rechtliche Interoperabilität ist Voraussetzung für jeden Datenaustausch, aber nicht Gegenstand dieses Standards."@de .
+
+term:stammdaten a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolldaten ;
+    schema:name "Stammdaten"@de ;
+    schema:alternateName "Masterdaten"@de, "Referenzdaten"@de ;
+    schema:description "Kontrolldaten, die über viele Kontrollen hinweg unverändert gelten und auf die Bewegungsdaten verweisen, zum Beispiel Kontrollpunkte, Kontrollrubriken, Kontrollstellen und Codelisten."@de ;
+    skos:related term:bewegungsdaten, term:codeliste .
+
+term:bewegungsdaten a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:kontrolldaten ;
+    schema:name "Bewegungsdaten"@de ;
+    schema:alternateName "Transaktionsdaten"@de ;
+    schema:description "Kontrolldaten, die bei einer einzelnen Kontrolle entstehen, zum Beispiel Kontrollergebnisse, Mängel und Massnahmen."@de ;
+    skos:related term:stammdaten .
+
+term:codeliste a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Codeliste"@de ;
+    schema:alternateName "Werteliste"@de ;
+    schema:description "Abschliessende Liste der zulässigen Werte eines Merkmals, in der jeder Wert einen eindeutigen Code und eine Definition hat."@de ;
+    skos:scopeNote "Codelisten ersetzen Freitext und machen Kontrolldaten maschinell auswertbar. In diesem Standard sind Codelisten als SKOS-Konzeptschemata umgesetzt."@de .
+
+term:acontrol a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Acontrol"@de ;
+    schema:description "Informationssystem des Bundes, in dem die Daten der öffentlich-rechtlichen Kontrollen in der landwirtschaftlichen Primärproduktion zusammengeführt werden."@de ;
+    skos:scopeNote "Acontrol wird gemeinsam von BLW und BLV genutzt, seit 2009 betrieben und ab 2028 durch eine Nachfolgelösung abgelöst. Die Kantone liefern die Kontrolldaten aus ihren Systemen gemäss XSD-Schema und Merkmalskatalog."@de ;
+    schema:citation <https://www.blw.admin.ch/de/anwendung-acontrol> ;
+    skos:related term:kais .
+
+term:merkmalskatalog a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:acontrol ;
+    schema:name "Merkmalskatalog Acontrol"@de ;
+    schema:description "Technische Vorgabe, die zusammen mit dem XSD-Schema und der Masterliste der Kontrollpunkte die Merkmale und Wertebereiche für den Datenimport in Acontrol festlegt."@de ;
+    schema:citation <https://www.blw.admin.ch/de/anwendung-acontrol> .
+
+term:acmobile a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:acontrol ;
+    schema:name "ACmobile"@de ;
+    schema:description "Mobile Anwendung zur Erfassung von Kontrollergebnissen auf dem Tablet, deren Checklisten auf den Kontrollrubriken von Acontrol beruhen."@de ;
+    schema:citation <https://www.blw.admin.ch/de/anwendung-acmobile> .
+
+term:agis a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Agrarpolitisches Informationssystem"@de ;
+    schema:alternateName "AGIS"@de ;
+    schema:description "Informationssystem des Bundes, in dem die Kantone die Struktur- und Direktzahlungsdaten der Betriebe, Personen, Flächen und Tiere zusammenführen."@de ;
+    skos:scopeNote "AGIS führt die Stammdaten, auf die Kontrolldaten mit Identifikatoren verweisen. Im Glossar von agridata.ch wird AGIS als «Fachsystem der Kantone» bezeichnet; AGIS ist jedoch ein System des Bundes, das Daten aus den kantonalen Systemen erhält."@de ;
+    skos:related term:kais, term:identifikator .
+
+term:kais a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Kantonales Agrarinformationssystem"@de ;
+    schema:alternateName "KAIS"@de ;
+    schema:description "Informationssystem eines Kantons, in dem Betriebs- und Strukturdaten erfasst und Kontrollergebnisse an Acontrol übermittelt werden, zum Beispiel GELAN, Acorda oder LAWIS."@de ;
+    skos:related term:agis, term:acontrol .
+
+term:agridata a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "agridata.ch"@de ;
+    schema:description "Nationaler Datenübertragungsdienst für den sicheren und standardisierten Austausch landwirtschaftlicher Daten mit Einverständnis der Datenproduzentinnen und Datenproduzenten."@de ;
+    skos:scopeNote "Über agridata.ch sind Acontrol-Datenprodukte pro Kontrollbereich verfügbar. Sie umfassen Kontrollen aus dem laufenden und den drei vorangehenden Kalenderjahren beziehungsweise seit dem letzten Bewirtschafterwechsel."@de ;
+    schema:citation <https://agridata.ch> ;
+    skos:related term:once-only .
+
+term:maf a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:agridata ;
+    schema:name "Meine Agrardatenfreigabe"@de ;
+    schema:alternateName "MAF"@de ;
+    schema:description "Vorgängersystem von agridata.ch für die Freigabe landwirtschaftlicher Daten an Dritte."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:datenprodukt a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:agridata ;
+    schema:name "Datenprodukt"@de,
+        "Produit de données"@fr,
+        "Prodotto di dati"@it ;
+    schema:description "Standardisiertes Paket von Daten, das eine Datenanbieterin über agridata.ch zum Bezug bereitstellt."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:datenanbieter a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:agridata ;
+    schema:name "Datenanbieterin oder Datenanbieter"@de,
+        "Fournisseur de données"@fr ;
+    schema:alternateName "Datenanbieter"@de ;
+    schema:description "Organisation oder System, das Daten über agridata.ch bereitstellt."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:datenbezueger a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:agridata ;
+    schema:name "Datenbezügerin oder Datenbezüger"@de,
+        "Utilisateur de données"@fr ;
+    schema:alternateName "Datenbezüger"@de ;
+    schema:description "Organisation, die Daten bei einer Datenanbieterin anfordert und nutzt, zum Beispiel eine Label-Organisation, die öffentlich-rechtliche Kontrolldaten bezieht."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:datenproduzent a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:agridata ;
+    schema:name "Datenproduzentin oder Datenproduzent"@de,
+        "Producteur de données"@fr ;
+    schema:alternateName "Datenproduzent"@de ;
+    schema:description "Bewirtschafterin, Bewirtschafter oder Betrieb, deren oder dessen Daten nur mit Einverständnis weitergegeben werden dürfen."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:einverstaendnis a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:agridata ;
+    schema:name "Einverständnis"@de,
+        "Accord"@fr ;
+    schema:alternateName "Einwilligung"@de, "Datenfreigabe"@de ;
+    schema:description "Zustimmung einer Datenproduzentin oder eines Datenproduzenten zur Weitergabe bestimmter Daten an eine Datenbezügerin."@de ;
+    skos:scopeNote "Ein Einverständnis hat den Status offen, zugestimmt, abgelehnt, zurückgezogen oder annulliert. Die Weitergabe von Kontrolldaten für privatrechtliche Kontrollen setzt ein Einverständnis voraus, das über agridata.ch oder im Vertrag mit einer Label-Organisation erteilt wird."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:once-only a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Once-Only-Prinzip"@de ;
+    schema:description "Grundsatz, nach dem Daten nur einmal erfasst werden müssen und danach mehrfach genutzt werden können."@de ;
+    skos:scopeNote "Für das Kontrollwesen bedeutet dies, dass eine Anforderung nur einmal kontrolliert werden muss und das Ergebnis von allen berechtigten Organisationen anerkannt werden kann."@de ;
+    schema:citation "Glossar agridata.ch" .
+
+term:agricheck a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Agricheck"@de ;
+    schema:description "Webanwendung des BLW, mit der Bewirtschafterinnen und Bewirtschafter die öffentlich-rechtlichen und privatrechtlichen Kontrollpunkte abfragen können."@de ;
+    skos:scopeNote "Agricheck setzt eine Massnahme des Aktionsplans Kontrollen auf Landwirtschaftsbetrieben um und übernimmt die hierarchische Gliederung der Kontrollpunkte aus Acontrol."@de ;
+    schema:citation <https://blw-ofag-ufag.github.io/agricheck/> ;
+    skos:related term:kontrollpunkt .
+
+term:aktionsplan-kontrollen a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:topConceptOf eCH-0264:glossary ;
+    schema:name "Aktionsplan Kontrollen auf Landwirtschaftsbetrieben"@de ;
+    schema:description "Von Bund, Kantonen und privatrechtlichen Organisationen am 4. September 2025 unterzeichneter Plan mit Massnahmen, um die Zahl der Grund- oder Standardkontrollen auf höchstens eine pro Jahr und Betrieb zu senken und öffentlich-rechtliche und privatrechtliche Kontrollen zu optimieren."@de ;
+    skos:scopeNote "Eine Massnahme des Aktionsplans ist die Erarbeitung eines Datenstandards für Kontrolldaten durch die eCH-Fachgruppe AgriFood."@de ;
+    schema:citation <https://www.blw.admin.ch/dam/de/sd-web/HtCH-BMgy5II/Aktionsplan%20Kontrollen%20Landwirtschaft%20-%20DE%20-%20von%20allen%20Teilnehmern%20unterzeichnet%2C%2004.09.25.pdf> ;
+    skos:related term:kontrollkoordination .
+
+term:bg-lako a skos:Concept ;
+    skos:inScheme eCH-0264:glossary ;
+    skos:broader term:aktionsplan-kontrollen ;
+    schema:name "Begleitgruppe Landwirtschaftliche Kontrollen"@de ;
+    schema:alternateName "BG LaKo"@de ;
+    schema:description "Von BLW und Schweizer Bauernverband gemeinsam geleitetes Gremium, das den Austausch zwischen den Akteuren des landwirtschaftlichen Kontrollwesens etabliert und die Umsetzung des Aktionsplans Kontrollen begleitet."@de ;
+    skos:scopeNote "Die BG LaKo befasst sich mit Kontrollfrequenz, Kontrollkoordination, Kontrollpunkten und Kontrollergebnissen; die AG Kontrolldaten mit Kontrolldaten und deren Austausch."@de .
+
+# ==============================================================================
+# THEMATIC COLLECTIONS
+# ==============================================================================
+
+collection:akteure a skos:Collection ;
+    schema:name "Akteure und Rollen"@de ;
+    schema:description "Organisationen und Personen des landwirtschaftlichen Kontrollwesens."@de ;
+    skos:member term:organisation, term:bewirtschafter, term:bewirtschafterwechsel, term:kontrollstelle,
+        term:zertifizierungsstelle, term:kontrollperson, term:qualifikation, term:amtliche-fachassistenz,
+        term:kantonale-vollzugsbehoerde, term:kontrollkoordinationsstelle, term:label-organisation,
+        term:herausgeberin, term:blw, term:blv, term:bafu, term:akkreditierung, term:bg-lako .
+
+collection:kontrollobjekte a skos:Collection ;
+    schema:name "Kontrollobjekte und Identifikatoren"@de ;
+    schema:description "Einheiten, auf die sich Kontrollen beziehen, und die Identifikatoren, mit denen sie bezeichnet werden."@de ;
+    skos:member term:kontrollobjekt, term:betrieb, term:soemmerungsbetrieb, term:produktionsstaette,
+        term:tierhaltung, term:teilbetrieb, term:kontrolleinheit, term:identifikator, term:uid,
+        term:bur-nummer, term:kt-id-b, term:kt-id-p, term:agis-id-b, term:agis-id-p, term:tvd-nummer .
+
+collection:grundlagen a skos:Collection ;
+    schema:name "Regelwerke, Programme und Anforderungen"@de ;
+    schema:description "Rechtliche und privatrechtliche Grundlagen, aus denen sich die Anforderungen an die Betriebe ergeben."@de ;
+    skos:member term:regelwerk, term:richtlinie, term:anforderung, term:programm, term:direktzahlungsprogramm,
+        term:label-programm, term:oeln, term:bts, term:raus, term:gmf, term:bff, term:programmteilnahme,
+        term:vkkl, term:dzv, term:lbv, term:bio-verordnung, term:mnkpv, term:islv, term:rechtsnatur,
+        term:aktionsplan-kontrollen .
+
+collection:kontrollpunkte a skos:Collection ;
+    schema:name "Kontrollpunkte"@de ;
+    schema:description "Gliederung und Eigenschaften der Kontrollpunkte als Stammdaten des Kontrollwesens."@de ;
+    skos:member term:kontrollbereich, term:kontrollrubrik, term:punktegruppe, term:kontrollpunkt,
+        term:fokuskontrollpunkt, term:sammel-kontrollpunkt, term:kantonaler-kontrollpunkt,
+        term:moeglicher-mangel, term:gueltigkeitszeitraum, term:kontrollpunkt-entsprechung, term:herausgeberin .
+
+collection:kontrolle a skos:Collection ;
+    schema:name "Kontrolle und Kontrollergebnis"@de ;
+    schema:description "Durchführung von Kontrollen und Erfassung ihrer Ergebnisse."@de ;
+    skos:member term:kontrolle, term:oeffentlich-rechtliche-kontrolle, term:privatrechtliche-kontrolle,
+        term:grundkontrolle, term:risikobasierte-kontrolle, term:nachkontrolle, term:kontrollgrund,
+        term:kontrollart, term:buerokontrolle, term:vor-ort-kontrolle, term:unangemeldete-kontrolle,
+        term:kontrollumfang, term:kontrolldatum, term:kontrollperiode, term:kontrollkoordination,
+        term:kontrollergebnis, term:nicht-zutreffend, term:nicht-kontrolliert, term:rubrikergebnis,
+        term:chuengeli-problem, term:erhebungsmethode, term:selbstdeklaration, term:nachweis,
+        term:kontrollbericht, term:kontrollstatus .
+
+collection:vollzug a skos:Collection ;
+    schema:name "Mängel, Massnahmen und Zertifizierung"@de ;
+    schema:description "Folgen von Kontrollergebnissen im öffentlich-rechtlichen und im privatrechtlichen Bereich."@de ;
+    skos:member term:mangel, term:meldepflicht, term:massnahme, term:kuerzung-direktzahlungen,
+        term:sanktionspunkte, term:programmerfuellung, term:zertifizierung, term:zertifikat .
+
+collection:datenaustausch a skos:Collection ;
+    schema:name "Datenaustausch und Systeme"@de ;
+    schema:description "Begriffe rund um Kontrolldaten, deren Austausch und die beteiligten Informationssysteme."@de ;
+    skos:member term:kontrolldaten, term:kontrollgrunddaten, term:stammdaten, term:bewegungsdaten,
+        term:codeliste, term:interoperabilitaet, term:semantische-interoperabilitaet,
+        term:technische-interoperabilitaet, term:rechtliche-interoperabilitaet, term:acontrol,
+        term:merkmalskatalog, term:acmobile, term:agis, term:kais, term:agridata, term:maf,
+        term:datenprodukt, term:datenanbieter, term:datenbezueger, term:datenproduzent,
+        term:einverstaendnis, term:once-only, term:agricheck .

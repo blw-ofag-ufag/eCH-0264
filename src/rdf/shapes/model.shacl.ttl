@@ -1,340 +1,1736 @@
 # ==============================================================================
-# PREFIXES USED FOR THIS PROJECT
+# PREFIXES
 # ==============================================================================
 
 # Project-specific namespaces/qnames
-@prefix :                <http://example.org/> .
-@prefix address:         <http://example.org/address/> .
-@prefix album:           <http://example.org/album/> .
-@prefix artist:          <http://example.org/artist/> .
-@prefix customer:        <http://example.org/customer/> .
-@prefix employee:        <http://example.org/employee/> .
-@prefix genre:           <http://example.org/genre/> .
-@prefix invline:         <http://example.org/invoiceline/> .
-@prefix invoice:         <http://example.org/invoice/> .
-@prefix media:           <http://example.org/mediatype/> .
-@prefix playlist:        <http://example.org/playlist/> .
-@prefix track:           <http://example.org/tracks/> .
-@prefix person:          <http://example.org/person/> .
-
-# LINDAS-specific namespaces/qnames
-@prefix org:             <https://register.ld.admin.ch/opendataswiss/org/> .
-@prefix cube:            <https://cube.link/> .
-@prefix meta:            <https://cube.link/meta/> .
-@prefix status:          <https://ld.admin.ch/vocabulary/CreativeWorkStatus/> .
-@prefix theme:           <https://register.ld.admin.ch/opendataswiss/category/> .
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
+@prefix result:          <https://agriculture.ld.admin.ch/eCH-0264/1/result-value/> .
 
 # Globally used namespaces/qnames
-@prefix adms:            <https://www.w3.org/ns/adms#> .
-@prefix dcat:            <http://www.w3.org/ns/dcat#> .
 @prefix dcterms:         <http://purl.org/dc/terms/> .
-@prefix doap:            <http://usefulinc.com/ns/doap#> .
-@prefix frequency:       <https://publications.europa.eu/resource/authority/frequency/> .
 @prefix owl:             <http://www.w3.org/2002/07/owl#> .
-@prefix qudt:            <http://qudt.org/schema/qudt/> .
 @prefix rdf:             <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:            <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema:          <http://schema.org/> .
 @prefix sh:              <http://www.w3.org/ns/shacl#> .
-@prefix unit:            <http://qudt.org/vocab/unit/> .
-@prefix vcard:           <http://www.w3.org/2006/vcard/ns#> .
-@prefix void:            <http://rdfs.org/ns/void#> .
-@prefix wikidata:        <http://www.wikidata.org/entity/> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
 
 # ==============================================================================
-# SHACL DATA MODEL METADATA
+# DOCUMENT METADATA
+# ------------------------------------------------------------------------------
+# The metadata of this document is described as it is required by SHACL PLAY!
+# Visit https://shacl-play.sparna.fr/play/doc for more on this.
 # ==============================================================================
 
-: a owl:Ontology ;
-    rdfs:label "Chinook Data Model"@en ;
-    rdfs:comment "This SHACL data model describes and validates the integrated Chinook dataset and custom person data."@en ;
+eCH-0264: a owl:Ontology ;
+    dcterms:creator "Marc Beringer, Damian Oswald, Lea Stauber, Christian Wilda" ;
+    dcterms:title "eCH-0264 Logisches Datenmodell Landwirtschaftliche Kontrolldaten"@de,
+        "eCH-0264 Logical Data Model Agricultural Inspection Data"@en ;
+    dcterms:created "2026-09-23"^^xsd:date ;
+    dcterms:modified "2026-09-23"^^xsd:date ;
     sh:declare [
-        sh:prefix "schema" ;
-        sh:namespace "http://schema.org/"^^xsd:anyURI ;
-    ],
-    [
-        sh:prefix "" ;
-        sh:namespace "http://example.org/"^^xsd:anyURI ;
+        sh:prefix "eCH-0264" ;
+        sh:namespace "https://agriculture.ld.admin.ch/eCH-0264/1/"^^xsd:anyURI ;
     ] .
 
-:PersonShape a sh:NodeShape ;
-    rdfs:label "Person"@en ;
-    rdfs:comment "Any person (employee, customer, or custom person) present in the dataset."@en ;
-    sh:targetClass schema:Person ;
+# ==============================================================================
+# ORGANISATION
+# ==============================================================================
+
+eCH-0264:Organization a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Organisation"@de,
+        "Organization"@en ;
+    rdfs:comment "Behörde, Label-Organisation, Kontrollstelle oder andere Organisation, die im Kontrollwesen eine Rolle einnimmt, zum Beispiel als Herausgeberin von Kontrollpunkten, als Auftraggeberin einer Kontrolle oder als Empfängerin einer Mängelmeldung."@de ;
     sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [
+    # Properties of the subclass eCH-0264:InspectionBody are validated there.
+    sh:ignoredProperties ( rdf:type schema:identifier eCH-0264:accreditation ) ;
+    sh:property
+    [
         sh:order 1 ;
-        sh:name "Given Name"@en ;
-        sh:path schema:givenName ;
-        sh:datatype xsd:string ;
+        sh:path schema:name ;
+        sh:name "Name"@de,
+            "Name"@en ;
+        sh:description "Offizielle Bezeichnung der Organisation."@de ;
         sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every person must have a given name." ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
     ],
     [
         sh:order 2 ;
-        sh:name "Family Name"@en ;
-        sh:path schema:familyName ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every person must have a family name." ;
+        sh:path schema:alternateName ;
+        sh:name "Abkürzung"@de,
+            "Abbreviation"@en ;
+        sh:description "Gebräuchliche Abkürzung der Organisation, zum Beispiel «BLW»."@de ;
+        sh:nodeKind sh:Literal ;
     ],
     [
         sh:order 3 ;
-        sh:name "Email Address"@en ;
-        sh:path schema:email ;
+        sh:path eCH-0264:uid ;
+        sh:name "UID"@de,
+            "UID"@en ;
+        sh:description "Unternehmens-Identifikationsnummer der Organisation im Format CHE-123.456.789."@de ;
+        sh:maxCount 1 ;
         sh:datatype xsd:string ;
-        sh:pattern "^.+@.+\\..+$" ;
-        sh:severity sh:Warning ;
-        sh:message "If an email is provided, it must follow a standard email format." ;
+        sh:pattern "^CHE-[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}$" ;
     ],
     [
         sh:order 4 ;
-        sh:name "Birth date"@en ;
-        sh:path schema:birthDate ;
-        sh:datatype xsd:date ;
-        sh:severity sh:Warning ;
-        sh:message "A person should have a valid birth date." ;
+        sh:path eCH-0264:legalNature ;
+        sh:name "Rechtsnatur"@de,
+            "Legal nature"@en ;
+        sh:description "Gibt an, ob die Organisation öffentlich-rechtliche oder privatrechtliche Aufgaben im Kontrollwesen wahrnimmt."@de ;
+        sh:class eCH-0264:LegalNature ;
+        sh:nodeKind sh:IRI ;
     ],
     [
         sh:order 5 ;
-        sh:path schema:address ;
-        sh:class schema:PostalAddress ;
+        sh:path eCH-0264:canton ;
+        sh:name "Kanton"@de,
+            "Canton"@en ;
+        sh:description "Kantonskürzel, falls es sich um eine kantonale Stelle handelt."@de ;
+        sh:maxCount 1 ;
+        sh:in ( "AG" "AI" "AR" "BE" "BL" "BS" "FR" "GE" "GL" "GR" "JU" "LU" "NE" "NW" "OW" "SG" "SH" "SO" "SZ" "TG" "TI" "UR" "VD" "VS" "ZG" "ZH" ) ;
+    ] .
+
+# ==============================================================================
+# KONTROLLSTELLE
+# ==============================================================================
+
+eCH-0264:InspectionBody a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrollstelle"@de,
+        "Inspection body"@en ;
+    rdfs:comment "Organisation, die im Auftrag einer Behörde oder einer Label-Organisation Kontrollen durchführt. Die Kontrollstellen werden als Stammdaten an einer Stelle geführt, statt wie heute in mehreren Systemen redundant."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type eCH-0264:legalNature eCH-0264:canton schema:alternateName ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:name ;
+        sh:name "Name"@de,
+            "Name"@en ;
+        sh:description "Offizielle Bezeichnung der Kontrollstelle."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path schema:identifier ;
+        sh:name "Code der Kontrollstelle"@de,
+            "Inspection body code"@en ;
+        sh:description "Eindeutiger Code der Kontrollstelle, wie er in den Stammdaten geführt wird."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:uid ;
+        sh:name "UID"@de,
+            "UID"@en ;
+        sh:description "Unternehmens-Identifikationsnummer der Kontrollstelle."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^CHE-[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}$" ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:accreditation ;
+        sh:name "Akkreditierung"@de,
+            "Accreditation"@en ;
+        sh:description "Angabe zur Akkreditierung der Kontrollstelle, zum Beispiel die Akkreditierungsnummer und die Norm."@de ;
+        sh:datatype xsd:string ;
+    ] .
+
+# ==============================================================================
+# REGELWERK
+# ==============================================================================
+
+eCH-0264:Regulation a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Regelwerk"@de,
+        "Regulation"@en ;
+    rdfs:comment "Eine bestimmte Fassung eines Erlasses, einer Richtlinie oder eines Reglements, in der Anforderungen festgelegt sind. Jede Fassung ist ein eigenes Objekt, damit Kontrollpunkte und Kontrollergebnisse auf die zum Kontrollzeitpunkt gültigen Anforderungen verweisen können."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:name ;
+        sh:name "Titel"@de,
+            "Title"@en ;
+        sh:description "Titel des Regelwerks."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path schema:alternateName ;
+        sh:name "Abkürzung"@de,
+            "Abbreviation"@en ;
+        sh:description "Abkürzung des Regelwerks, zum Beispiel «VKKL»."@de ;
+        sh:nodeKind sh:Literal ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path schema:identifier ;
+        sh:name "Referenznummer"@de,
+            "Reference number"@en ;
+        sh:description "Nummer in der Systematischen Rechtssammlung (SR) oder Referenz der Label-Organisation."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path schema:version ;
+        sh:name "Fassung"@de,
+            "Version"@en ;
+        sh:description "Bezeichnung der Fassung, zum Beispiel das Datum des Inkrafttretens oder eine Versionsnummer."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:legalNature ;
+        sh:name "Rechtsnatur"@de,
+            "Legal nature"@en ;
+        sh:description "Gibt an, ob das Regelwerk öffentlich-rechtlich (Gesetz, Verordnung, Weisung) oder privatrechtlich (Richtlinie, Reglement) ist."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:LegalNature ;
+        sh:nodeKind sh:IRI ;
     ],
     [
         sh:order 6 ;
-        sh:path schema:worksFor ;
-        sh:or (
-            [ sh:class schema:Person ]
-            [ sh:class schema:Organization ]
-        ) ;
-        sh:message "An employee can report to another person." ;
+        sh:path eCH-0264:publisher ;
+        sh:name "Herausgeberin"@de,
+            "Publisher"@en ;
+        sh:description "Organisation, die das Regelwerk erlässt."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
     ],
     [
-        sh:name "Job title"@en ;
         sh:order 7 ;
-        sh:path schema:jobTitle ;
-        sh:maxCount 1 ;
-    ],
-    [
-        sh:name "knows"@en ;
-        sh:order 8 ;
-        sh:path schema:knows ;
-        sh:class schema:Person ;
-    ] ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        dcterms:description "An employee cannot report to themselves."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:worksFor $this .
-            }
-        """
-    ] .
-
-:TrackShape a sh:NodeShape ;
-    rdfs:label "Music Recording"@en ;
-    sh:targetClass schema:MusicRecording ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
-        sh:path schema:name ;
-        sh:datatype xsd:string ;
+        sh:path schema:validFrom ;
+        sh:name "Gültig ab"@de,
+            "Valid from"@en ;
+        sh:description "Datum, ab dem die Fassung gilt."@de ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:message "Every track must have a name." ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals schema:validThrough ;
+    ],
+    [
+        sh:order 8 ;
+        sh:path schema:validThrough ;
+        sh:name "Gültig bis"@de,
+            "Valid through"@en ;
+        sh:description "Letzter Tag, an dem die Fassung gilt. Fehlt die Angabe, gilt die Fassung bis auf Weiteres."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ],
+    [
+        sh:order 9 ;
+        sh:path schema:url ;
+        sh:name "Fundstelle"@de,
+            "Location"@en ;
+        sh:description "Öffentlich zugängliche Adresse des Regelwerks, zum Beispiel auf fedlex.admin.ch."@de ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 10 ;
+        sh:path eCH-0264:replaces ;
+        sh:name "Ersetzt"@de,
+            "Replaces"@en ;
+        sh:description "Vorhergehende Fassung desselben Regelwerks."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Regulation ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# ==============================================================================
+# ANFORDERUNG
+# ==============================================================================
+
+eCH-0264:Requirement a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Anforderung"@de,
+        "Requirement"@en ;
+    rdfs:comment "Einzelne verbindliche Vorgabe aus einem Regelwerk, die auf einem Kontrollobjekt einzuhalten ist. Anforderungen sind optional: Sie erlauben es, Sammel-Kontrollpunkte aufzuschlüsseln und Kontrollpunkte verschiedener Herausgeberinnen zu vergleichen, ohne dass die Checklisten der Kontrollpersonen länger werden."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:name ;
+        sh:name "Bezeichnung"@de,
+            "Name"@en ;
+        sh:description "Kurze, eindeutige Bezeichnung der Anforderung, formuliert aus Sicht der Bewirtschafterin oder des Bewirtschafters."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
     ],
     [
         sh:order 2 ;
-        sh:name "In Album"@en ;
-        sh:path schema:inAlbum ;
-        sh:class schema:MusicAlbum ;
-        sh:message "A track can only belong to a valid schema:MusicAlbum." ;
+        sh:path schema:description ;
+        sh:name "Beschreibung"@de,
+            "Description"@en ;
+        sh:description "Vollständiger Wortlaut oder Umschreibung der Anforderung."@de ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
     ],
     [
         sh:order 3 ;
-        sh:path schema:author ;
+        sh:path eCH-0264:legalBasis ;
+        sh:name "Rechtsgrundlage"@de,
+            "Legal basis"@en ;
+        sh:description "Fassung des Regelwerks, in dem die Anforderung festgelegt ist."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:Regulation ;
+        sh:nodeKind sh:IRI ;
     ],
     [
         sh:order 4 ;
-        sh:name "Genre"@en ;
-        sh:path schema:genre ;
-        sh:class :Genre ;
+        sh:path eCH-0264:legalReference ;
+        sh:name "Fundstelle im Regelwerk"@de,
+            "Legal reference"@en ;
+        sh:description "Artikel, Absatz oder Ziffer im Regelwerk, zum Beispiel «Art. 5 Abs. 2»."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+# ==============================================================================
+# PROGRAMM
+# ==============================================================================
+
+eCH-0264:Program a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Programm"@de,
+        "Program"@en ;
+    rdfs:comment "Gesamtheit von Anforderungen, für deren Einhaltung ein Betrieb Beiträge erhält oder ein Label verwenden darf, zum Beispiel der ÖLN, ein Direktzahlungsprogramm wie RAUS oder ein Label-Programm."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:name ;
+        sh:name "Name"@de,
+            "Name"@en ;
+        sh:description "Bezeichnung des Programms."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path schema:alternateName ;
+        sh:name "Abkürzung"@de,
+            "Abbreviation"@en ;
+        sh:description "Gebräuchliche Abkürzung des Programms, zum Beispiel «RAUS»."@de ;
+        sh:nodeKind sh:Literal ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:legalNature ;
+        sh:name "Rechtsnatur"@de,
+            "Legal nature"@en ;
+        sh:description "Gibt an, ob es sich um ein öffentlich-rechtliches oder ein privatrechtliches Programm handelt."@de ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        sh:class eCH-0264:LegalNature ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:owner ;
+        sh:name "Programmträgerin"@de,
+            "Program owner"@en ;
+        sh:description "Organisation, die das Programm verantwortet."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
     ],
     [
         sh:order 5 ;
-        sh:name "Duration"@en ;
-        sh:path schema:duration ;
-        sh:class schema:QuantitativeValue ;
-        sh:message "Track duration must be expressed as a schema:QuantitativeValue." ;
-    ],
-    [
-        sh:order 6 ;
-        sh:path schema:contentSize ;
-        sh:class schema:QuantitativeValue ;
+        sh:path eCH-0264:legalBasis ;
+        sh:name "Rechtsgrundlage"@de,
+            "Legal basis"@en ;
+        sh:description "Regelwerke, in denen die Anforderungen des Programms festgelegt sind."@de ;
+        sh:class eCH-0264:Regulation ;
+        sh:nodeKind sh:IRI ;
     ] .
 
-:MusicAlbumShape a sh:NodeShape ;
-    rdfs:label "Music album"@en ;
-    sh:targetClass schema:MusicAlbum ;
-    sh:property [
+# ==============================================================================
+# KONTROLLRUBRIK
+# ==============================================================================
+
+eCH-0264:InspectionRubric a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrollrubrik"@de,
+        "Inspection rubric"@en ;
+    rdfs:comment "Thematische Sammlung von Kontrollpunkten innerhalb eines Kontrollbereichs, zum Beispiel «Tierarzneimittel» im Kontrollbereich Lebensmittelsicherheit."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
         sh:order 1 ;
-        sh:name "Name"@en ;
-        sh:path schema:name ;
-        sh:datatype xsd:string ;
+        sh:path schema:identifier ;
+        sh:name "ID Rubrik"@de,
+            "Rubric ID"@en ;
+        sh:description "Stabiler Identifikator der Kontrollrubrik, der über alle Fassungen gleich bleibt."@de ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:message "Every album must have a name." ;
+        sh:datatype xsd:string ;
     ],
     [
         sh:order 2 ;
-        sh:name "Artist"@en ;
-        sh:description "Person or music group who created the album."@en ;
-        sh:path schema:byArtist ;
-        sh:or (
-            [ sh:class schema:Person ]
-            [ sh:class schema:MusicGroup ]
-        ) ;
-    ] .
-
-:OrganisationShape a sh:NodeShape ;
-    rdfs:label "Organisation"@en ;
-    sh:targetClass schema:Organisation ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
         sh:path schema:name ;
-        sh:datatype xsd:string ;
+        sh:name "Rubrik Kurzname"@de,
+            "Rubric short name"@en ;
+        sh:description "Kurzname der Kontrollrubrik, idealerweise in allen Amtssprachen."@de ;
         sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every organisation must have a name." ;
-    ] .
-
-:InvoiceShape a sh:NodeShape ;
-    rdfs:label "Invoice"@en ;
-    sh:targetClass schema:Invoice ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Customer"@en ;
-        sh:path schema:customer ;
-        sh:class schema:Person ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "An invoice must be linked to exactly one customer." ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "Total Payment Due"@en ;
-        sh:path schema:totalPaymentDue ;
-        sh:class schema:QuantitativeValue ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "An invoice must define a total payment due as a schema:QuantitativeValue." ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:languageIn ( "de" "fr" "it" "rm" "en" ) ;
+        sh:uniqueLang true ;
     ],
     [
         sh:order 3 ;
-        sh:name "Has Part"@en ;
-        sh:path schema:hasPart ;
-        sh:class schema:OrderItem ;
+        sh:path eCH-0264:inspectionDomain ;
+        sh:name "Kontrollbereich"@de,
+            "Inspection domain"@en ;
+        sh:description "Kontrollbereich, dem die Rubrik zugeordnet ist."@de ;
         sh:minCount 1 ;
-        sh:message "An invoice must have at least one line item (OrderItem)." ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionDomain ;
+        sh:nodeKind sh:IRI ;
     ],
     [
         sh:order 4 ;
-        sh:path schema:dateCreated ;
+        sh:path eCH-0264:publisher ;
+        sh:name "Herausgeberin"@de,
+            "Publisher"@en ;
+        sh:description "Organisation, welche die Rubrik festlegt, zum Beispiel BLW, BLV, BAFU, ein kantonales Amt oder eine Label-Organisation."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path schema:validFrom ;
+        sh:name "Gültig ab"@de,
+            "Valid from"@en ;
+        sh:description "Datum, ab dem die Rubrik verwendet werden darf."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
         sh:datatype xsd:date ;
-    ] ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        dcterms:description "Invoice total payment due must exactly match the sum of its lines (within 0.05 tolerance)."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:totalPaymentDue/schema:value ?invoiceTotal .
-                {
-                    SELECT $this (SUM(?price * ?qty) AS ?calculatedTotal)
-                    WHERE {
-                        $this schema:hasPart ?line .
-                        ?line schema:price/schema:value ?price .
-                        ?line schema:orderQuantity/schema:value ?qty .
-                    }
-                    GROUP BY $this
-                }
-                FILTER(ABS(?invoiceTotal - ?calculatedTotal) > 0.05)
-            }
-        """
+        sh:lessThanOrEquals schema:validThrough ;
     ],
     [
-        a sh:SPARQLConstraint ;
-        dcterms:description "An invoice cannot be dated before the year 2000."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:dateCreated ?date .
-                FILTER(?date < "2000-01-01"^^xsd:date)
-            }
-        """
+        sh:order 6 ;
+        sh:path schema:validThrough ;
+        sh:name "Gültig bis"@de,
+            "Valid through"@en ;
+        sh:description "Letzter Tag, an dem die Rubrik verwendet werden darf."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
     ] .
 
-:QuantitativeValueShape a sh:NodeShape ;
-    rdfs:label "Quantitative Value"@en ;
-    sh:targetClass schema:QuantitativeValue ;
+# ==============================================================================
+# PUNKTEGRUPPE
+# ==============================================================================
+
+eCH-0264:PointGroup a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Punktegruppe"@de,
+        "Point group"@en ;
+    rdfs:comment "Optionale Gliederungsebene zwischen Kontrollrubrik und Kontrollpunkt, zum Beispiel «Schweinehaltung»."@de ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [
+    sh:property
+    [
         sh:order 1 ;
-        sh:name "Value"@en ;
-        sh:path schema:value ;
+        sh:path schema:identifier ;
+        sh:name "ID Punktegruppe"@de,
+            "Point group ID"@en ;
+        sh:description "Stabiler Identifikator der Punktegruppe."@de ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:message "A quantitative value must have exactly one numeric value." ;
+        sh:datatype xsd:string ;
     ],
     [
         sh:order 2 ;
-        sh:name "Unit Code"@en ;
-        sh:path schema:unitCode ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "A quantitative value must specify its unit via a unitCode URI." ;
-    ] .
-
-:GenreShape a sh:NodeShape ;
-    rdfs:label "Genre"@en ;
-    sh:targetClass :Genre ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
         sh:path schema:name ;
+        sh:name "Punktegruppe Kurzname"@de,
+            "Point group short name"@en ;
+        sh:description "Kurzname der Punktegruppe."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:rubric ;
+        sh:name "Kontrollrubrik"@de,
+            "Inspection rubric"@en ;
+        sh:description "Kontrollrubrik, zu der die Punktegruppe gehört."@de ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionRubric ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# ==============================================================================
+# KONTROLLPUNKT
+# ==============================================================================
+
+eCH-0264:ControlPoint a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrollpunkt"@de,
+        "Control point"@en ;
+    rdfs:comment "Eine Fassung eines Kontrollpunkts. Ein Kontrollpunkt ist der Prüfgegenstand, für den bei einer Kontrolle ein Kontrollergebnis festgehalten wird. Jede inhaltliche Änderung erzeugt eine neue Fassung mit eigenem Gültigkeitszeitraum und Verweis auf die ersetzte Fassung; so können Label-Organisationen Kontrollpunkte unterjährig anpassen, und jedes Kontrollergebnis verweist trotzdem eindeutig auf die geprüfte Fassung."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type skos:exactMatch skos:closeMatch skos:broadMatch skos:narrowMatch ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:identifier ;
+        sh:name "ID Kontrollpunkt"@de,
+            "Control point ID"@en ;
+        sh:description "Stabiler Identifikator des Kontrollpunkts, der über alle Fassungen gleich bleibt."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
     ],
     [
         sh:order 2 ;
-        sh:name "Part of"@en ;
-        sh:path schema:partOf ;
+        sh:path schema:version ;
+        sh:name "Fassung"@de,
+            "Version"@en ;
+        sh:description "Bezeichnung der Fassung des Kontrollpunkts."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path schema:name ;
+        sh:name "Kontrollpunkt Kurzname"@de,
+            "Control point short name"@en ;
+        sh:description "Kompakte Bezeichnung des Kontrollpunkts, wie sie in Checklisten verwendet wird."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:languageIn ( "de" "fr" "it" "rm" "en" ) ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path schema:description ;
+        sh:name "Prüfinhalt"@de,
+            "Inspection content"@en ;
+        sh:description "Beschreibung, was bei diesem Kontrollpunkt genau geprüft wird. Die Beschreibung verwendet die Begriffe des Fachglossars und ist Pflicht, damit Datenbezügerinnen und Datenbezüger ein Kontrollergebnis ohne Rückfrage interpretieren können."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:rubric ;
+        sh:name "Kontrollrubrik"@de,
+            "Inspection rubric"@en ;
+        sh:description "Kontrollrubrik, zu welcher der Kontrollpunkt gehört."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionRubric ;
         sh:nodeKind sh:IRI ;
-        sh:class :Genre ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path eCH-0264:pointGroup ;
+        sh:name "Punktegruppe"@de,
+            "Point group"@en ;
+        sh:description "Punktegruppe, zu welcher der Kontrollpunkt gehört, falls die Rubrik Punktegruppen verwendet."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:PointGroup ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 7 ;
+        sh:path eCH-0264:publisher ;
+        sh:name "Herausgeberin"@de,
+            "Publisher"@en ;
+        sh:description "Organisation, die den Kontrollpunkt festlegt und verantwortet."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 8 ;
+        sh:path eCH-0264:legalNature ;
+        sh:name "Rechtsnatur"@de,
+            "Legal nature"@en ;
+        sh:description "Gibt an, ob der Kontrollpunkt öffentlich-rechtlich oder privatrechtlich ist."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:LegalNature ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 9 ;
+        sh:path eCH-0264:legalBasis ;
+        sh:name "Rechtsgrundlage"@de,
+            "Legal basis"@en ;
+        sh:description "Fassungen der Regelwerke, auf denen der Kontrollpunkt beruht."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:Regulation ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 10 ;
+        sh:path eCH-0264:coveredRequirement ;
+        sh:name "Abgedeckte Anforderung"@de,
+            "Covered requirement"@en ;
+        sh:description "Anforderungen, deren Einhaltung mit diesem Kontrollpunkt geprüft wird. Bei Sammel-Kontrollpunkten werden hier alle zusammengefassten Anforderungen aufgeführt."@de ;
+        sh:class eCH-0264:Requirement ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 11 ;
+        sh:path eCH-0264:focusControlPoint ;
+        sh:name "Fokuskontrollpunkt"@de,
+            "Focus control point"@en ;
+        sh:description "Wahr, wenn der Kontrollpunkt bei einer Grundkontrolle zwingend zu prüfen ist."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+    ],
+    [
+        sh:order 12 ;
+        sh:path schema:validFrom ;
+        sh:name "Gültig ab"@de,
+            "Valid from"@en ;
+        sh:description "Datum, ab dem diese Fassung des Kontrollpunkts angewendet wird."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals schema:validThrough ;
+    ],
+    [
+        sh:order 13 ;
+        sh:path schema:validThrough ;
+        sh:name "Gültig bis"@de,
+            "Valid through"@en ;
+        sh:description "Letzter Tag, an dem diese Fassung des Kontrollpunkts angewendet wird."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ],
+    [
+        sh:order 14 ;
+        sh:path eCH-0264:replaces ;
+        sh:name "Ersetzt"@de,
+            "Replaces"@en ;
+        sh:description "Vorhergehende Fassung desselben Kontrollpunkts."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:ControlPoint ;
+        sh:nodeKind sh:IRI ;
     ] ;
     sh:sparql [
         a sh:SPARQLConstraint ;
-        dcterms:description "A genre cannot be a part of itself, either directly or transitively."@en ;
-        sh:prefixes : ;
+        sh:message "Die ersetzte Fassung eines Kontrollpunkts muss denselben stabilen Identifikator haben."@de ;
+        sh:prefixes eCH-0264: ;
         sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:partOf+ $this .
+            SELECT $this WHERE {
+                $this eCH-0264:replaces ?previous ;
+                    <http://schema.org/identifier> ?id .
+                ?previous <http://schema.org/identifier> ?previousId .
+                FILTER (?id != ?previousId)
             }
-        """
+        """ ;
     ] .
+
+# ==============================================================================
+# MÖGLICHER MANGEL
+# ==============================================================================
+
+eCH-0264:PossibleDeficiency a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Möglicher Mangel"@de,
+        "Possible deficiency"@en ;
+    rdfs:comment "Im Voraus festgelegte, typische Abweichung zu einem Kontrollpunkt. Mögliche Mängel sind Stammdaten und erlauben es, festgestellte Mängel einheitlich statt nur als Freitext zu erfassen."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:identifier ;
+        sh:name "ID möglicher Mangel"@de,
+            "Possible deficiency ID"@en ;
+        sh:description "Stabiler Identifikator des möglichen Mangels."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path schema:name ;
+        sh:name "Bezeichnung"@de,
+            "Name"@en ;
+        sh:description "Bezeichnung des möglichen Mangels."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:controlPoint ;
+        sh:name "Kontrollpunkt"@de,
+            "Control point"@en ;
+        sh:description "Kontrollpunkt, zu dem der mögliche Mangel gehört."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:ControlPoint ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:suggestedMeasureType ;
+        sh:name "Vorgeschlagene Massnahme"@de,
+            "Suggested measure"@en ;
+        sh:description "Art der Massnahme, die bei diesem Mangel üblicherweise angeordnet wird."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:MeasureType ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# ==============================================================================
+# BETRIEB
+# ==============================================================================
+
+eCH-0264:Farm a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Betrieb"@de,
+        "Farm"@en ;
+    rdfs:comment "Landwirtschaftliches Unternehmen als Kontrollobjekt. Kontrolldaten enthalten keine Stammdaten des Betriebs, sondern nur Identifikatoren, die auf die Stammdaten in AGIS oder im Betriebs- und Unternehmensregister verweisen."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:or (
+        [ sh:property [ sh:path eCH-0264:uid ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path eCH-0264:burNumber ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path eCH-0264:cantonalFarmId ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path eCH-0264:agisFarmId ; sh:minCount 1 ] ]
+    ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:uid ;
+        sh:name "UID"@de,
+            "UID"@en ;
+        sh:description "Unternehmens-Identifikationsnummer des Betriebs."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^CHE-[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}$" ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:burNumber ;
+        sh:name "BUR-Nummer"@de,
+            "BUR number"@en ;
+        sh:description "Nummer des Betriebs im Betriebs- und Unternehmensregister."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:cantonalFarmId ;
+        sh:name "Kantonale Betriebsnummer (KT_ID_B)"@de,
+            "Cantonal farm ID (KT_ID_B)"@en ;
+        sh:description "Identifikationsnummer des Betriebs im kantonalen Agrarinformationssystem."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:agisFarmId ;
+        sh:name "AGIS-Betriebsnummer (AGIS_ID_B)"@de,
+            "AGIS farm ID (AGIS_ID_B)"@en ;
+        sh:description "Identifikationsnummer des Betriebs in AGIS."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:canton ;
+        sh:name "Kanton"@de,
+            "Canton"@en ;
+        sh:description "Kanton, in dem der Betrieb seinen Sitz hat."@de ;
+        sh:maxCount 1 ;
+        sh:in ( "AG" "AI" "AR" "BE" "BL" "BS" "FR" "GE" "GL" "GR" "JU" "LU" "NE" "NW" "OW" "SG" "SH" "SO" "SZ" "TG" "TI" "UR" "VD" "VS" "ZG" "ZH" ) ;
+    ] .
+
+# ==============================================================================
+# PRODUKTIONSSTÄTTE
+# ==============================================================================
+
+eCH-0264:ProductionSite a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Produktionsstätte"@de,
+        "Production site"@en ;
+    rdfs:comment "Räumlich abgegrenzte Einheit eines Betriebs. Produktionsstätten werden eigens modelliert, weil ein Betrieb Produktionsstätten in mehreren Kantonen haben kann, die von unterschiedlichen kantonalen Stellen kontrolliert werden."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:burNumber ;
+        sh:name "BUR-Nummer"@de,
+            "BUR number"@en ;
+        sh:description "Nummer der Produktionsstätte im Betriebs- und Unternehmensregister."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:farm ;
+        sh:name "Betrieb"@de,
+            "Farm"@en ;
+        sh:description "Betrieb, zu dem die Produktionsstätte gehört."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Farm ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:canton ;
+        sh:name "Kanton"@de,
+            "Canton"@en ;
+        sh:description "Kanton, in dem die Produktionsstätte liegt."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "AG" "AI" "AR" "BE" "BL" "BS" "FR" "GE" "GL" "GR" "JU" "LU" "NE" "NW" "OW" "SG" "SH" "SO" "SZ" "TG" "TI" "UR" "VD" "VS" "ZG" "ZH" ) ;
+    ] .
+
+# ==============================================================================
+# TIERHALTUNG
+# ==============================================================================
+
+eCH-0264:AnimalHolding a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Tierhaltung"@de,
+        "Animal holding"@en ;
+    rdfs:comment "Einheit, in der Tiere gehalten werden und die in der Tierverkehrsdatenbank registriert ist. Tierhaltungen sind vor allem für Kontrollen in den Bereichen Tiergesundheit und Tierschutz das massgebliche Kontrollobjekt."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:tvdNumber ;
+        sh:name "TVD-Nummer"@de,
+            "TVD number"@en ;
+        sh:description "Nummer der Tierhaltung in der Tierverkehrsdatenbank."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:farm ;
+        sh:name "Betrieb"@de,
+            "Farm"@en ;
+        sh:description "Betrieb, zu dem die Tierhaltung gehört. Die Angabe ist Pflicht, damit Datenbezügerinnen und Datenbezüger, die nur mit der TVD-Nummer arbeiten, Kontrollergebnisse einem Betrieb zuordnen können."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Farm ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# ==============================================================================
+# BEWIRTSCHAFTERIN ODER BEWIRTSCHAFTER
+# ==============================================================================
+
+eCH-0264:FarmManager a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Bewirtschafterin oder Bewirtschafter"@de,
+        "Farm manager"@en ;
+    rdfs:comment "Person, die einen Betrieb auf eigene Rechnung und Gefahr führt. Kontrolldaten enthalten nur Identifikatoren der Person; die Personendaten selbst bleiben in AGIS oder im kantonalen Agrarinformationssystem."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:or (
+        [ sh:property [ sh:path eCH-0264:cantonalPersonId ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path eCH-0264:agisPersonId ; sh:minCount 1 ] ]
+    ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:cantonalPersonId ;
+        sh:name "Kantonale Personennummer (KT_ID_P)"@de,
+            "Cantonal person ID (KT_ID_P)"@en ;
+        sh:description "Identifikationsnummer der Person im kantonalen Agrarinformationssystem."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:agisPersonId ;
+        sh:name "AGIS-Personennummer (AGIS_ID_P)"@de,
+            "AGIS person ID (AGIS_ID_P)"@en ;
+        sh:description "Identifikationsnummer der Person in AGIS."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+# ==============================================================================
+# KONTROLLPERSON UND QUALIFIKATION
+# ==============================================================================
+
+eCH-0264:Inspector a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrollperson"@de,
+        "Inspector"@en ;
+    rdfs:comment "Person, die im Auftrag einer Kontrollstelle eine Kontrolle durchführt. Für den Datenaustausch sind die Qualifikationen der Kontrollperson massgeblich, nicht ihre Identität; der Identifikator kann deshalb pseudonym sein."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:identifier ;
+        sh:name "Identifikator"@de,
+            "Identifier"@en ;
+        sh:description "Identifikator der Kontrollperson innerhalb ihrer Kontrollstelle."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:employer ;
+        sh:name "Kontrollstelle"@de,
+            "Inspection body"@en ;
+        sh:description "Kontrollstelle, für welche die Kontrollperson tätig ist."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:InspectionBody ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:qualification ;
+        sh:name "Qualifikation"@de,
+            "Qualification"@en ;
+        sh:description "Qualifikationen der Kontrollperson, die für die Anerkennung ihrer Kontrollergebnisse durch andere Organisationen relevant sind."@de ;
+        sh:class eCH-0264:Qualification ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+eCH-0264:Qualification a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Qualifikation"@de,
+        "Qualification"@en ;
+    rdfs:comment "Nachgewiesene Befähigung einer Kontrollperson, bestimmte Kontrollen durchzuführen, zum Beispiel als amtliche Fachassistentin oder amtlicher Fachassistent Tierschutz."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:name ;
+        sh:name "Bezeichnung"@de,
+            "Name"@en ;
+        sh:description "Bezeichnung der Qualifikation."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:issuer ;
+        sh:name "Ausstellerin"@de,
+            "Issuer"@en ;
+        sh:description "Organisation, welche die Qualifikation erteilt oder das entsprechende Verzeichnis führt."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path schema:validThrough ;
+        sh:name "Gültig bis"@de,
+            "Valid through"@en ;
+        sh:description "Letzter Tag, an dem die Qualifikation gültig ist."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ] .
+
+# ==============================================================================
+# KONTROLLE
+# ==============================================================================
+
+eCH-0264:Inspection a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrolle"@de,
+        "Inspection"@en ;
+    rdfs:comment "Überprüfung der Einhaltung von Anforderungen auf einem oder mehreren Kontrollobjekten durch eine Kontrollstelle an einem bestimmten Datum. Die Kontrolle hält fest, welche Bewirtschafterin oder welcher Bewirtschafter zum Kontrollzeitpunkt verantwortlich war, damit Kontrollergebnisse bei einem Bewirtschafterwechsel korrekt zugeordnet werden."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:identifier ;
+        sh:name "ID Kontrolle"@de,
+            "Inspection ID"@en ;
+        sh:description "Eindeutiger Identifikator der Kontrolle."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:inspectionDate ;
+        sh:name "Kontrolldatum"@de,
+            "Inspection date"@en ;
+        sh:description "Datum, an dem die Kontrolle durchgeführt wurde."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:inspectionObject ;
+        sh:name "Kontrollobjekt"@de,
+            "Inspection object"@en ;
+        sh:description "Betriebe, Produktionsstätten oder Tierhaltungen, die gemeinsam kontrolliert wurden (Kontrolleinheit)."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:InspectionObject ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:farmManager ;
+        sh:name "Verantwortliche Bewirtschafterin oder verantwortlicher Bewirtschafter"@de,
+            "Responsible farm manager"@en ;
+        sh:description "Person, die das Kontrollobjekt zum Kontrollzeitpunkt bewirtschaftet hat."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:FarmManager ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:inspectionBody ;
+        sh:name "Kontrollstelle"@de,
+            "Inspection body"@en ;
+        sh:description "Kontrollstelle, welche die Kontrolle durchgeführt hat."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionBody ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path eCH-0264:inspector ;
+        sh:name "Kontrollperson"@de,
+            "Inspector"@en ;
+        sh:description "Personen, welche die Kontrolle durchgeführt haben."@de ;
+        sh:class eCH-0264:Inspector ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 7 ;
+        sh:path eCH-0264:commissionedBy ;
+        sh:name "Auftraggeberin"@de,
+            "Commissioned by"@en ;
+        sh:description "Behörde oder Label-Organisation, in deren Auftrag die Kontrolle durchgeführt wurde."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 8 ;
+        sh:path eCH-0264:legalNature ;
+        sh:name "Rechtsnatur des Auftrags"@de,
+            "Legal nature of the mandate"@en ;
+        sh:description "Gibt an, ob die Kontrolle im öffentlich-rechtlichen oder im privatrechtlichen Auftrag durchgeführt wurde."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:LegalNature ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 9 ;
+        sh:path eCH-0264:inspectionModality ;
+        sh:name "Kontrollart"@de,
+            "Inspection modality"@en ;
+        sh:description "Gibt an, ob die Kontrolle vor Ort oder im Büro durchgeführt wurde."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionModality ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 10 ;
+        sh:path eCH-0264:announced ;
+        sh:name "Angemeldet"@de,
+            "Announced"@en ;
+        sh:description "Wahr, wenn die Kontrolle der Bewirtschafterin oder dem Bewirtschafter im Voraus angekündigt wurde."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+    ],
+    [
+        sh:order 11 ;
+        sh:path eCH-0264:inspectionStatus ;
+        sh:name "Status der Kontrolle"@de,
+            "Inspection status"@en ;
+        sh:description "Bearbeitungsstand der Kontrolle. Datenbezügerinnen und Datenbezüger können damit auch provisorische Ergebnisse als solche erkennen."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionStatus ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 12 ;
+        sh:path eCH-0264:inspectionScope ;
+        sh:name "Kontrollumfang"@de,
+            "Inspection scope"@en ;
+        sh:description "Die bei dieser Kontrolle geprüften Kontrollrubriken mit dem jeweiligen Kontrollgrund und den Ergebnissen."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:InspectionScope ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 13 ;
+        sh:path eCH-0264:evidence ;
+        sh:name "Nachweis"@de,
+            "Evidence"@en ;
+        sh:description "Dokumente oder Mediendaten, welche die Kontrolle als Ganzes belegen, zum Beispiel ein unterzeichneter Kontrollbericht."@de ;
+        sh:class eCH-0264:Evidence ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 14 ;
+        sh:path schema:dateModified ;
+        sh:name "Letzte Änderung"@de,
+            "Last modified"@en ;
+        sh:description "Zeitpunkt der letzten Änderung der Kontrolldaten, zum Beispiel nach einer Korrektur. Erlaubt Delta-Abfragen."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] .
+
+# ==============================================================================
+# KONTROLLUMFANG
+# ==============================================================================
+
+eCH-0264:InspectionScope a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrollumfang"@de,
+        "Inspection scope"@en ;
+    rdfs:comment "Teil einer Kontrolle, der eine Kontrollrubrik umfasst, die aus einem bestimmten Kontrollgrund geprüft wurde. Der Kontrollumfang enthält für jeden Kontrollpunkt der Rubrik, der zum Kontrollzeitpunkt gültig war, genau ein ausdrücklich erfasstes Kontrollergebnis. Damit ist jederzeit erkennbar, welche Kontrollpunkte tatsächlich kontrolliert wurden («Chüngeli-Problem»)."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:rubric ;
+        sh:name "Kontrollrubrik"@de,
+            "Inspection rubric"@en ;
+        sh:description "Die geprüfte Kontrollrubrik."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionRubric ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:inspectionReason ;
+        sh:name "Kontrollgrund"@de,
+            "Inspection reason"@en ;
+        sh:description "Anlass, aus dem die Kontrollrubrik geprüft wurde."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionReason ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:rubricResult ;
+        sh:name "Ergebnis Rubrik"@de,
+            "Rubric result"@en ;
+        sh:description "Zusammenfassendes Ergebnis über alle Kontrollpunkte des Kontrollumfangs."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:ResultValue ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:controlPointResult ;
+        sh:name "Kontrollergebnis"@de,
+            "Control point result"@en ;
+        sh:description "Ergebnisse zu den einzelnen Kontrollpunkten der Rubrik."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:ControlPointResult ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Alle Kontrollergebnisse eines Kontrollumfangs müssen Kontrollpunkte der geprüften Kontrollrubrik betreffen."@de ;
+        sh:prefixes eCH-0264: ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eCH-0264:rubric ?rubric ;
+                    eCH-0264:controlPointResult/eCH-0264:controlPoint ?point .
+                FILTER NOT EXISTS { ?point eCH-0264:rubric ?rubric . }
+            }
+        """ ;
+    ],
+    [
+        a sh:SPARQLConstraint ;
+        sh:message "Ein Kontrollpunkt darf innerhalb eines Kontrollumfangs höchstens ein Kontrollergebnis haben."@de ;
+        sh:prefixes eCH-0264: ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eCH-0264:controlPointResult ?r1, ?r2 .
+                ?r1 eCH-0264:controlPoint ?point .
+                ?r2 eCH-0264:controlPoint ?point .
+                FILTER (?r1 != ?r2)
+            }
+        """ ;
+    ] .
+
+# ==============================================================================
+# KONTROLLERGEBNIS
+# ==============================================================================
+
+eCH-0264:ControlPointResult a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Kontrollergebnis"@de,
+        "Control point result"@en ;
+    rdfs:comment "Feststellung zu einem Kontrollpunkt bei einer Kontrolle. Das Ergebnis ist immer ausdrücklich angegeben; es gibt keinen stillschweigenden Standardwert."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:controlPoint ;
+        sh:name "Kontrollpunkt"@de,
+            "Control point"@en ;
+        sh:description "Die zum Kontrollzeitpunkt gültige Fassung des geprüften Kontrollpunkts."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:ControlPoint ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:resultValue ;
+        sh:name "Wert des Kontrollergebnisses"@de,
+            "Result value"@en ;
+        sh:description "Erfüllt, Mangel, nicht zutreffend oder nicht kontrolliert."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:ResultValue ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:assessmentMethod ;
+        sh:name "Erhebungsmethode"@de,
+            "Assessment method"@en ;
+        sh:description "Verfahren, mit denen das Ergebnis ermittelt wurde."@de ;
+        sh:class eCH-0264:AssessmentMethod ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:deficiency ;
+        sh:name "Mangel"@de,
+            "Deficiency"@en ;
+        sh:description "Festgestellte Mängel. Nur bei einem Ergebnis «Mangel» zulässig und dann Pflicht."@de ;
+        sh:class eCH-0264:Deficiency ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:comment ;
+        sh:name "Bemerkung"@de,
+            "Comment"@en ;
+        sh:description "Ergänzende Bemerkung der Kontrollperson."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path eCH-0264:evidence ;
+        sh:name "Nachweis"@de,
+            "Evidence"@en ;
+        sh:description "Fotos, Dokumente oder Fernerkundungsdaten, die das Ergebnis belegen."@de ;
+        sh:class eCH-0264:Evidence ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Ein Kontrollergebnis mit dem Wert «Mangel» muss mindestens einen Mangel referenzieren, und nur ein solches darf Mängel referenzieren."@de ;
+        sh:prefixes eCH-0264: ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eCH-0264:resultValue ?value .
+                OPTIONAL { $this eCH-0264:deficiency ?deficiency . }
+                FILTER (
+                    (?value = <https://agriculture.ld.admin.ch/eCH-0264/1/result-value/Deficiency> && !BOUND(?deficiency)) ||
+                    (?value != <https://agriculture.ld.admin.ch/eCH-0264/1/result-value/Deficiency> && BOUND(?deficiency))
+                )
+            }
+        """ ;
+    ] .
+
+# ==============================================================================
+# MANGEL
+# ==============================================================================
+
+eCH-0264:Deficiency a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Mangel"@de,
+        "Deficiency"@en ;
+    rdfs:comment "Festgestellte Nichteinhaltung einer oder mehrerer Anforderungen eines Kontrollpunkts. Der Mangel beschreibt den Sachverhalt; die Bewertung und die daraus folgenden Massnahmen sind in eigenen Objekten abgelegt, weil sie organisationsspezifisch sind und strengeren Zugriffsregeln unterliegen."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:description ;
+        sh:name "Mangelbeschreibung"@de,
+            "Deficiency description"@en ;
+        sh:description "Beschreibung des festgestellten Sachverhalts."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:possibleDeficiency ;
+        sh:name "Möglicher Mangel"@de,
+            "Possible deficiency"@en ;
+        sh:description "Vordefinierter möglicher Mangel, dem der Sachverhalt entspricht."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:PossibleDeficiency ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:unmetRequirement ;
+        sh:name "Nicht eingehaltene Anforderung"@de,
+            "Unmet requirement"@en ;
+        sh:description "Anforderungen, die nicht eingehalten wurden. Die Angabe ist besonders bei Sammel-Kontrollpunkten hilfreich."@de ;
+        sh:class eCH-0264:Requirement ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:rectificationDeadline ;
+        sh:name "Behebungsfrist"@de,
+            "Rectification deadline"@en ;
+        sh:description "Datum, bis zu dem der Mangel zu beheben ist."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:reportedTo ;
+        sh:name "Gemeldet an"@de,
+            "Reported to"@en ;
+        sh:description "Vollzugsstellen, denen der Mangel im Rahmen einer Meldepflicht gemeldet wurde."@de ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path eCH-0264:evidence ;
+        sh:name "Nachweis"@de,
+            "Evidence"@en ;
+        sh:description "Fotos oder Dokumente, die den Mangel belegen."@de ;
+        sh:class eCH-0264:Evidence ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# ==============================================================================
+# MASSNAHME
+# ==============================================================================
+
+eCH-0264:Measure a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Massnahme"@de,
+        "Measure"@en ;
+    rdfs:comment "Folge, die eine zuständige Organisation aufgrund eines oder mehrerer Mängel anordnet. Massnahmen werden getrennt von den Kontrollergebnissen ausgetauscht, weil sie besonders schützenswerte Personendaten enthalten können und nur mit einer eigenen Einwilligung weitergegeben werden."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:measureType ;
+        sh:name "Art der Massnahme"@de,
+            "Measure type"@en ;
+        sh:description "Einteilung der Massnahme gemäss Codeliste."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:MeasureType ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:deficiency ;
+        sh:name "Mangel"@de,
+            "Deficiency"@en ;
+        sh:description "Mängel, aufgrund derer die Massnahme angeordnet wurde."@de ;
+        sh:minCount 1 ;
+        sh:class eCH-0264:Deficiency ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:decidedBy ;
+        sh:name "Entscheidende Stelle"@de,
+            "Decided by"@en ;
+        sh:description "Organisation, welche die Massnahme angeordnet hat."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:legalNature ;
+        sh:name "Rechtsnatur"@de,
+            "Legal nature"@en ;
+        sh:description "Gibt an, ob die Massnahme auf öffentlichem Recht oder auf einem privatrechtlichen Reglement beruht."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:LegalNature ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:decisionDate ;
+        sh:name "Entscheiddatum"@de,
+            "Decision date"@en ;
+        sh:description "Datum, an dem die Massnahme angeordnet wurde."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path eCH-0264:amount ;
+        sh:name "Betrag"@de,
+            "Amount"@en ;
+        sh:description "Betrag in Schweizer Franken, zum Beispiel bei einer Kürzung von Direktzahlungen."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+    ],
+    [
+        sh:order 7 ;
+        sh:path eCH-0264:penaltyPoints ;
+        sh:name "Sanktionspunkte"@de,
+            "Penalty points"@en ;
+        sh:description "Anzahl Punkte, mit denen der Mangel gemäss dem anwendbaren Regelwerk bewertet wurde."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+    ],
+    [
+        sh:order 8 ;
+        sh:path schema:description ;
+        sh:name "Beschreibung"@de,
+            "Description"@en ;
+        sh:description "Beschreibung der Massnahme."@de ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ] .
+
+# ==============================================================================
+# NACHWEIS
+# ==============================================================================
+
+eCH-0264:Evidence a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Nachweis"@de,
+        "Evidence"@en ;
+    rdfs:comment "Datei, die eine Kontrolle, ein Kontrollergebnis oder einen Mangel belegt, zum Beispiel ein Foto, ein Dokument oder ein Satellitenbild. Die Datei selbst wird nicht in die Kontrolldaten eingebettet, sondern über eine Adresse referenziert."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:contentUrl ;
+        sh:name "Adresse der Datei"@de,
+            "Content URL"@en ;
+        sh:description "Adresse, unter der die Datei für berechtigte Personen abrufbar ist."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:anyURI ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path schema:encodingFormat ;
+        sh:name "Dateiformat"@de,
+            "Encoding format"@en ;
+        sh:description "Medientyp der Datei, zum Beispiel «image/jpeg» oder «application/pdf»."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path schema:description ;
+        sh:name "Beschreibung"@de,
+            "Description"@en ;
+        sh:description "Kurze Beschreibung des Inhalts."@de ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ] .
+
+# ==============================================================================
+# PROGRAMMTEILNAHME
+# ==============================================================================
+
+eCH-0264:ProgramParticipation a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Programmteilnahme"@de,
+        "Program participation"@en ;
+    rdfs:comment "Teilnahme eines Betriebs an einem Programm während eines Zeitraums, zusammen mit der Beurteilung, ob das Programm erfüllt ist. Die Programmerfüllung beantwortet für viele Label-Organisationen die entscheidende Frage, ohne dass Mängel oder Massnahmen weitergegeben werden müssen."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path eCH-0264:farm ;
+        sh:name "Betrieb"@de,
+            "Farm"@en ;
+        sh:description "Teilnehmender Betrieb."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Farm ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:program ;
+        sh:name "Programm"@de,
+            "Program"@en ;
+        sh:description "Programm, an dem der Betrieb teilnimmt."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Program ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path schema:validFrom ;
+        sh:name "Teilnahme ab"@de,
+            "Participation from"@en ;
+        sh:description "Beginn der Teilnahme."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals schema:validThrough ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path schema:validThrough ;
+        sh:name "Teilnahme bis"@de,
+            "Participation through"@en ;
+        sh:description "Ende der Teilnahme."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:conformityStatus ;
+        sh:name "Programmerfüllung"@de,
+            "Conformity status"@en ;
+        sh:description "Gesamtbeurteilung, ob der Betrieb das Programm erfüllt."@de ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:ConformityStatus ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path eCH-0264:conformityAssessedOn ;
+        sh:name "Beurteilt am"@de,
+            "Assessed on"@en ;
+        sh:description "Datum der Beurteilung der Programmerfüllung."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ] .
+
+# ==============================================================================
+# ZERTIFIKAT
+# ==============================================================================
+
+eCH-0264:Certificate a sh:NodeShape, rdfs:Class ;
+    rdfs:label "Zertifikat"@de,
+        "Certificate"@en ;
+    rdfs:comment "Bestätigung einer Zertifizierungsstelle, dass ein Kontrollobjekt die Anforderungen eines Programms während eines Zeitraums erfüllt. Ein strukturiert ausgetauschtes Zertifikat ersetzt das Vorlegen von Papier- oder PDF-Bescheinigungen bei nachfolgenden Kontrollen."@de ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:identifier ;
+        sh:name "Zertifikatsnummer"@de,
+            "Certificate number"@en ;
+        sh:description "Nummer des Zertifikats bei der ausstellenden Stelle."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path eCH-0264:holder ;
+        sh:name "Inhaber"@de,
+            "Holder"@en ;
+        sh:description "Kontrollobjekt, für welches das Zertifikat gilt."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:InspectionObject ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path eCH-0264:program ;
+        sh:name "Programm"@de,
+            "Program"@en ;
+        sh:description "Programm, dessen Erfüllung bestätigt wird."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Program ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path eCH-0264:issuer ;
+        sh:name "Ausstellerin"@de,
+            "Issuer"@en ;
+        sh:description "Zertifizierungsstelle, die das Zertifikat ausgestellt hat."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:Organization ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path eCH-0264:certificateStatus ;
+        sh:name "Status"@de,
+            "Status"@en ;
+        sh:description "Gültigkeitsstatus des Zertifikats."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class eCH-0264:CertificateStatus ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path schema:validFrom ;
+        sh:name "Gültig ab"@de,
+            "Valid from"@en ;
+        sh:description "Beginn der Gültigkeit."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals schema:validThrough ;
+    ],
+    [
+        sh:order 7 ;
+        sh:path schema:validThrough ;
+        sh:name "Gültig bis"@de,
+            "Valid through"@en ;
+        sh:description "Ende der Gültigkeit."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ] .
+
+# ==============================================================================
+# CODE LIST ITEMS
+# ==============================================================================
+
+eCH-0264:CodeListItemShape a sh:NodeShape ;
+    rdfs:label "Codelisteneintrag"@de,
+        "Code list item"@en ;
+    rdfs:comment "Gemeinsame Anforderungen an alle Werte der Codelisten dieses Standards (Kontrollbereich, Wert des Kontrollergebnisses, Kontrollgrund, Kontrollart, Erhebungsmethode, Rechtsnatur, Status der Kontrolle, Art der Massnahme, Programmerfüllung und Status eines Zertifikats). Jeder Wert ist ein SKOS-Konzept in genau einem Konzeptschema."@de ;
+    # All code list classes are subclasses of eCH-0264:CodeListItem (see ontology)
+    sh:targetClass eCH-0264:CodeListItem ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+    [
+        sh:order 1 ;
+        sh:path schema:name ;
+        sh:name "Name"@de,
+            "Name"@en ;
+        sh:description "Bezeichnung des Werts. Sie beginnt mit einem Grossbuchstaben und ist mindestens auf Deutsch vorhanden."@de ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:languageIn ( "de" "fr" "it" "rm" "en" ) ;
+        sh:uniqueLang true ;
+        sh:pattern "^[A-ZÀ-ÖØ-Þ]" ;
+    ],
+    [
+        sh:order 2 ;
+        sh:path schema:identifier ;
+        sh:name "Code"@de,
+            "Code"@en ;
+        sh:description "Kurzcode des Werts, falls ein solcher in bestehenden Systemen verwendet wird."@de ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ],
+    [
+        sh:order 3 ;
+        sh:path schema:description ;
+        sh:name "Beschreibung"@de,
+            "Description"@en ;
+        sh:description "Definition des Werts."@de ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ],
+    [
+        sh:order 4 ;
+        sh:path skos:inScheme ;
+        sh:name "Codeliste"@de,
+            "Code list"@en ;
+        sh:description "Konzeptschema, zu dem der Wert gehört."@de ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class skos:ConceptScheme ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 5 ;
+        sh:path skos:topConceptOf ;
+        sh:name "Oberster Wert von"@de,
+            "Top concept of"@en ;
+        sh:description "Konzeptschema, in dem der Wert auf oberster Ebene steht."@de ;
+        sh:maxCount 1 ;
+        sh:class skos:ConceptScheme ;
+        sh:nodeKind sh:IRI ;
+        sh:disjoint skos:broader ;
+    ],
+    [
+        sh:order 6 ;
+        sh:path skos:broader ;
+        sh:name "Übergeordneter Wert"@de,
+            "Broader value"@en ;
+        sh:description "Übergeordneter Wert derselben Codeliste."@de ;
+        sh:maxCount 1 ;
+        sh:class skos:Concept ;
+        sh:nodeKind sh:IRI ;
+    ],
+    [
+        sh:order 7 ;
+        sh:path skos:scopeNote ;
+        sh:name "Anmerkung"@de,
+            "Scope note"@en ;
+        sh:description "Hinweis zur Verwendung des Werts."@de ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:or (
+        [ sh:property [ sh:path skos:topConceptOf ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path skos:broader ; sh:minCount 1 ] ]
+    ) .

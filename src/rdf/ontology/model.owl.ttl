@@ -1,13 +1,419 @@
-@prefix : <http://example.org/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix schema: <http://schema.org/> .
+# ==============================================================================
+# CORE ONTOLOGICAL DEFINITIONS
+# ------------------------------------------------------------------------------
+# The purpose of this document is mainly to
+# a) Enable OWL-based reasoning, i.e. automated data completion before
+#    publishing the data on LINDAS, and
+# b) giving classes and properties names/descriptions and linking them to the
+#    glossary (rdfs:isDefinedBy), which makes it easier to discover the graph
+#    structure for visitors on LINDAS.
+# ==============================================================================
 
-:Genre a owl:Class .
+# Project-specific namespaces/qnames
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
+@prefix term:            <https://agriculture.ld.admin.ch/eCH-0264/1/term/> .
 
-schema:genre a owl:ObjectProperty ;
-    rdfs:range :Genre .
+# Globally used namespaces/qnames
+@prefix dcterms:         <http://purl.org/dc/terms/> .
+@prefix owl:             <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:            <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:          <http://schema.org/> .
+@prefix sh:              <http://www.w3.org/ns/shacl#> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
 
-:Genre a owl:Class ;
-    rdfs:subClassOf schema:DefinedTerm .
+# ==============================================================================
+# ONTOLOGY METADATA
+# ==============================================================================
+
+eCH-0264: a owl:Ontology .
+
+# ==============================================================================
+# CLASSES: MASTER DATA (STAMMDATEN)
+# ==============================================================================
+
+eCH-0264:Organization a owl:Class ;
+    rdfs:isDefinedBy term:organisation .
+
+eCH-0264:InspectionBody a owl:Class ;
+    rdfs:subClassOf eCH-0264:Organization ;
+    rdfs:isDefinedBy term:kontrollstelle .
+
+eCH-0264:Regulation a owl:Class ;
+    rdfs:isDefinedBy term:regelwerk .
+
+eCH-0264:Requirement a owl:Class ;
+    rdfs:isDefinedBy term:anforderung .
+
+eCH-0264:Program a owl:Class ;
+    rdfs:isDefinedBy term:programm .
+
+eCH-0264:InspectionRubric a owl:Class ;
+    rdfs:isDefinedBy term:kontrollrubrik .
+
+eCH-0264:PointGroup a owl:Class ;
+    rdfs:isDefinedBy term:punktegruppe .
+
+eCH-0264:ControlPoint a owl:Class ;
+    rdfs:isDefinedBy term:kontrollpunkt .
+
+eCH-0264:PossibleDeficiency a owl:Class ;
+    rdfs:isDefinedBy term:moeglicher-mangel .
+
+eCH-0264:Qualification a owl:Class ;
+    rdfs:isDefinedBy term:qualifikation .
+
+# ==============================================================================
+# CLASSES: INSPECTED UNITS AND PERSONS
+# ==============================================================================
+
+eCH-0264:InspectionObject a owl:Class ;
+    rdfs:isDefinedBy term:kontrollobjekt .
+
+eCH-0264:Farm a owl:Class ;
+    rdfs:subClassOf eCH-0264:InspectionObject ;
+    rdfs:isDefinedBy term:betrieb .
+
+eCH-0264:ProductionSite a owl:Class ;
+    rdfs:subClassOf eCH-0264:InspectionObject ;
+    rdfs:isDefinedBy term:produktionsstaette .
+
+eCH-0264:AnimalHolding a owl:Class ;
+    rdfs:subClassOf eCH-0264:InspectionObject ;
+    rdfs:isDefinedBy term:tierhaltung .
+
+eCH-0264:FarmManager a owl:Class ;
+    rdfs:isDefinedBy term:bewirtschafter .
+
+eCH-0264:Inspector a owl:Class ;
+    rdfs:isDefinedBy term:kontrollperson .
+
+# ==============================================================================
+# CLASSES: TRANSACTION DATA (BEWEGUNGSDATEN)
+# ==============================================================================
+
+eCH-0264:Inspection a owl:Class ;
+    rdfs:isDefinedBy term:kontrolle .
+
+eCH-0264:InspectionScope a owl:Class ;
+    rdfs:isDefinedBy term:kontrollumfang .
+
+eCH-0264:ControlPointResult a owl:Class ;
+    rdfs:isDefinedBy term:kontrollergebnis .
+
+eCH-0264:Deficiency a owl:Class ;
+    rdfs:isDefinedBy term:mangel .
+
+eCH-0264:Measure a owl:Class ;
+    rdfs:isDefinedBy term:massnahme .
+
+eCH-0264:Evidence a owl:Class ;
+    rdfs:isDefinedBy term:nachweis .
+
+eCH-0264:ProgramParticipation a owl:Class ;
+    rdfs:isDefinedBy term:programmteilnahme .
+
+eCH-0264:Certificate a owl:Class ;
+    rdfs:isDefinedBy term:zertifikat .
+
+# ==============================================================================
+# CLASSES: CODE LISTS (SKOS CONCEPTS)
+# ==============================================================================
+
+eCH-0264:CodeListItem a owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:isDefinedBy term:codeliste .
+
+eCH-0264:InspectionDomain a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:kontrollbereich .
+
+eCH-0264:ResultValue a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:kontrollergebnis .
+
+eCH-0264:InspectionReason a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:kontrollgrund .
+
+eCH-0264:InspectionModality a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:kontrollart .
+
+eCH-0264:AssessmentMethod a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:erhebungsmethode .
+
+eCH-0264:LegalNature a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:rechtsnatur .
+
+eCH-0264:InspectionStatus a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:kontrollstatus .
+
+eCH-0264:MeasureType a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:massnahme .
+
+eCH-0264:ConformityStatus a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:programmerfuellung .
+
+eCH-0264:CertificateStatus a owl:Class ;
+    rdfs:subClassOf eCH-0264:CodeListItem ;
+    rdfs:isDefinedBy term:zertifikat .
+
+# ==============================================================================
+# DATATYPE PROPERTIES
+# ==============================================================================
+
+schema:name a owl:DatatypeProperty .
+
+schema:alternateName a owl:DatatypeProperty .
+
+schema:description a owl:DatatypeProperty .
+
+schema:identifier a owl:DatatypeProperty .
+
+schema:version a owl:DatatypeProperty .
+
+schema:validFrom a owl:DatatypeProperty .
+
+schema:validThrough a owl:DatatypeProperty .
+
+schema:dateModified a owl:DatatypeProperty .
+
+schema:encodingFormat a owl:DatatypeProperty .
+
+sh:name a owl:DatatypeProperty ;
+    rdfs:subPropertyOf schema:name .
+
+sh:description a owl:DatatypeProperty ;
+    rdfs:subPropertyOf schema:description .
+
+rdfs:label a owl:DatatypeProperty ;
+    rdfs:subPropertyOf schema:name .
+
+rdfs:comment a owl:DatatypeProperty ;
+    rdfs:subPropertyOf schema:description .
+
+dcterms:title a owl:DatatypeProperty ;
+    rdfs:subPropertyOf schema:name .
+
+eCH-0264:uid a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:uid .
+
+eCH-0264:burNumber a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:bur-nummer .
+
+eCH-0264:cantonalFarmId a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:kt-id-b .
+
+eCH-0264:agisFarmId a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:agis-id-b .
+
+eCH-0264:tvdNumber a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:tvd-nummer .
+
+eCH-0264:cantonalPersonId a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:kt-id-p .
+
+eCH-0264:agisPersonId a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:agis-id-p .
+
+eCH-0264:canton a owl:DatatypeProperty .
+
+eCH-0264:legalReference a owl:DatatypeProperty .
+
+eCH-0264:focusControlPoint a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:fokuskontrollpunkt .
+
+eCH-0264:inspectionDate a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:kontrolldatum .
+
+eCH-0264:announced a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:unangemeldete-kontrolle .
+
+eCH-0264:comment a owl:DatatypeProperty .
+
+eCH-0264:rectificationDeadline a owl:DatatypeProperty .
+
+eCH-0264:decisionDate a owl:DatatypeProperty .
+
+eCH-0264:amount a owl:DatatypeProperty .
+
+eCH-0264:penaltyPoints a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:sanktionspunkte .
+
+eCH-0264:conformityAssessedOn a owl:DatatypeProperty .
+
+eCH-0264:contentUrl a owl:DatatypeProperty .
+
+eCH-0264:accreditation a owl:DatatypeProperty ;
+    rdfs:isDefinedBy term:akkreditierung .
+
+# ==============================================================================
+# OBJECT PROPERTIES
+# ==============================================================================
+
+schema:hasPart a owl:ObjectProperty ;
+    owl:inverseOf schema:isPartOf .
+
+schema:isPartOf a owl:ObjectProperty ;
+    owl:inverseOf schema:hasPart .
+
+eCH-0264:legalNature a owl:ObjectProperty ;
+    rdfs:range eCH-0264:LegalNature ;
+    rdfs:isDefinedBy term:rechtsnatur .
+
+eCH-0264:publisher a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Organization ;
+    rdfs:isDefinedBy term:herausgeberin .
+
+eCH-0264:legalBasis a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Regulation .
+
+eCH-0264:inspectionDomain a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:InspectionRubric ;
+    rdfs:range eCH-0264:InspectionDomain .
+
+eCH-0264:rubric a owl:ObjectProperty ;
+    rdfs:range eCH-0264:InspectionRubric .
+
+eCH-0264:pointGroup a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:ControlPoint ;
+    rdfs:range eCH-0264:PointGroup .
+
+eCH-0264:coveredRequirement a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:ControlPoint ;
+    rdfs:range eCH-0264:Requirement .
+
+eCH-0264:replaces a owl:ObjectProperty .
+
+eCH-0264:controlPoint a owl:ObjectProperty ;
+    rdfs:range eCH-0264:ControlPoint .
+
+eCH-0264:suggestedMeasureType a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:PossibleDeficiency ;
+    rdfs:range eCH-0264:MeasureType .
+
+eCH-0264:farm a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Farm .
+
+eCH-0264:qualification a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspector ;
+    rdfs:range eCH-0264:Qualification .
+
+eCH-0264:issuer a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Organization .
+
+eCH-0264:employer a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspector ;
+    rdfs:range eCH-0264:InspectionBody .
+
+eCH-0264:inspectionBody a owl:ObjectProperty ;
+    rdfs:range eCH-0264:InspectionBody .
+
+eCH-0264:inspector a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspection ;
+    rdfs:range eCH-0264:Inspector .
+
+eCH-0264:inspectionObject a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspection ;
+    rdfs:range eCH-0264:InspectionObject .
+
+eCH-0264:farmManager a owl:ObjectProperty ;
+    rdfs:range eCH-0264:FarmManager .
+
+eCH-0264:commissionedBy a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspection ;
+    rdfs:range eCH-0264:Organization .
+
+eCH-0264:inspectionModality a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspection ;
+    rdfs:range eCH-0264:InspectionModality .
+
+eCH-0264:inspectionStatus a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspection ;
+    rdfs:range eCH-0264:InspectionStatus .
+
+eCH-0264:inspectionScope a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Inspection ;
+    rdfs:range eCH-0264:InspectionScope .
+
+eCH-0264:inspectionReason a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:InspectionScope ;
+    rdfs:range eCH-0264:InspectionReason .
+
+eCH-0264:rubricResult a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:InspectionScope ;
+    rdfs:range eCH-0264:ResultValue .
+
+eCH-0264:controlPointResult a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:InspectionScope ;
+    rdfs:range eCH-0264:ControlPointResult .
+
+eCH-0264:resultValue a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:ControlPointResult ;
+    rdfs:range eCH-0264:ResultValue .
+
+eCH-0264:assessmentMethod a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:ControlPointResult ;
+    rdfs:range eCH-0264:AssessmentMethod .
+
+eCH-0264:deficiency a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Deficiency .
+
+eCH-0264:possibleDeficiency a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Deficiency ;
+    rdfs:range eCH-0264:PossibleDeficiency .
+
+eCH-0264:unmetRequirement a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Deficiency ;
+    rdfs:range eCH-0264:Requirement .
+
+eCH-0264:reportedTo a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Deficiency ;
+    rdfs:range eCH-0264:Organization ;
+    rdfs:isDefinedBy term:meldepflicht .
+
+eCH-0264:evidence a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Evidence .
+
+eCH-0264:measureType a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Measure ;
+    rdfs:range eCH-0264:MeasureType .
+
+eCH-0264:decidedBy a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Measure ;
+    rdfs:range eCH-0264:Organization .
+
+eCH-0264:program a owl:ObjectProperty ;
+    rdfs:range eCH-0264:Program .
+
+eCH-0264:owner a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Program ;
+    rdfs:range eCH-0264:Organization .
+
+eCH-0264:conformityStatus a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:ProgramParticipation ;
+    rdfs:range eCH-0264:ConformityStatus .
+
+eCH-0264:holder a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Certificate ;
+    rdfs:range eCH-0264:InspectionObject .
+
+eCH-0264:certificateStatus a owl:ObjectProperty ;
+    rdfs:domain eCH-0264:Certificate ;
+    rdfs:range eCH-0264:CertificateStatus .
+
+# Correspondences between control points of different publishers are expressed
+# with SKOS mapping properties (as in eCH-0265 mapping tables).
+skos:exactMatch a owl:ObjectProperty .
+
+skos:closeMatch a owl:ObjectProperty .
+
+skos:broadMatch a owl:ObjectProperty .
+
+skos:narrowMatch a owl:ObjectProperty .

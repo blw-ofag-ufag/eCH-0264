@@ -6,8 +6,11 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
-  build-test-publish:
+  build-test-publish-deploy:
     runs-on: ubuntu-latest
     
     # force terminal tools to output colors in GitHub Actions
@@ -18,7 +21,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -30,20 +33,40 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install system fonts for Typst
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-urw-base35
+
       - name: Set up dependencies
         run: make setup
 
-      # 1. FOR PULL REQUESTS: Only run the tests
-      - name: Run pipeline and test
-        if: github.ref != 'refs/heads/main'
+      - name: Build processed RDF graph
+        run: make build
+
+      - name: Run tests
         run: make test
 
-      # 2. FOR MAIN BRANCH: Run tests AND publish
-      - name: Run pipeline, test, and publish
+      - name: Publish RDF graph to LINDAS
         if: github.ref == 'refs/heads/main'
         env:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
           GRAPH: ${{ secrets.GRAPH }}
           ENDPOINT: ${{ secrets.ENDPOINT }}
-        run: echo "run `make publish` if you *really* want to publish --- not necessary for a template"
+        run: make publish
+
+      - name: Build documentation page
+        if: github.ref == 'refs/heads/main'
+        run: make docs
+
+      - name: Deploy documentation page
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/docs/
+          publish_branch: gh-pages

@@ -1,0 +1,245 @@
+# ==============================================================================
+# FICTITIOUS EXAMPLE OF AN INSPECTION
+# ------------------------------------------------------------------------------
+# All identifiers, names and results in this file are invented and only
+# illustrate the logical data model. This file is used for the documentation
+# and validated by tests/test_example_data.py; it is not part of the published
+# RDF graph.
+# ==============================================================================
+
+# Project-specific namespaces/qnames
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
+@prefix example:         <https://agriculture.ld.admin.ch/eCH-0264/1/example/> .
+@prefix domain:          <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-domain/> .
+@prefix result:          <https://agriculture.ld.admin.ch/eCH-0264/1/result-value/> .
+@prefix reason:          <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-reason/> .
+@prefix modality:        <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-modality/> .
+@prefix method:          <https://agriculture.ld.admin.ch/eCH-0264/1/assessment-method/> .
+@prefix legalnature:     <https://agriculture.ld.admin.ch/eCH-0264/1/legal-nature/> .
+@prefix inspstatus:      <https://agriculture.ld.admin.ch/eCH-0264/1/inspection-status/> .
+@prefix measuretype:     <https://agriculture.ld.admin.ch/eCH-0264/1/measure-type/> .
+@prefix conformity:      <https://agriculture.ld.admin.ch/eCH-0264/1/conformity-status/> .
+
+# Globally used namespaces/qnames
+@prefix schema:          <http://schema.org/> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
+
+# ------------------------------------------------------------------------------
+# Master data: organisations, regulations, rubric and control points
+# ------------------------------------------------------------------------------
+
+example:BLW a eCH-0264:Organization ;
+    schema:name "Bundesamt für Landwirtschaft"@de ;
+    schema:alternateName "BLW" ;
+    eCH-0264:legalNature legalnature:PublicLaw .
+
+example:CantonalOffice a eCH-0264:Organization ;
+    schema:name "Landwirtschaftsamt des Beispielkantons"@de ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:canton "BE" .
+
+example:LabelOrganization a eCH-0264:Organization ;
+    schema:name "Beispiel-Label"@de ;
+    eCH-0264:legalNature legalnature:PrivateLaw .
+
+example:InspectionBody a eCH-0264:InspectionBody ;
+    schema:name "Beispiel-Kontrolldienst"@de ;
+    schema:identifier "KS-BEISPIEL-BE" ;
+    eCH-0264:accreditation "SN EN ISO/IEC 17020" .
+
+example:DZV-2026 a eCH-0264:Regulation ;
+    schema:name "Direktzahlungsverordnung"@de ;
+    schema:alternateName "DZV" ;
+    schema:identifier "SR 910.13" ;
+    schema:version "Fassung vom 1. Januar 2026" ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:publisher example:BLW ;
+    schema:validFrom "2026-01-01"^^xsd:date ;
+    schema:url <https://www.fedlex.admin.ch/eli/cc/2013/765/de> .
+
+example:LabelGuideline-2026 a eCH-0264:Regulation ;
+    schema:name "Richtlinie des Beispiel-Labels"@de ;
+    schema:version "2026.1" ;
+    eCH-0264:legalNature legalnature:PrivateLaw ;
+    eCH-0264:publisher example:LabelOrganization ;
+    schema:validFrom "2026-01-01"^^xsd:date .
+
+example:RequirementOutdoorAccess a eCH-0264:Requirement ;
+    schema:name "Den Milchkühen wird regelmässig Auslauf gewährt"@de ;
+    eCH-0264:legalBasis example:DZV-2026 .
+
+example:RubricRAUS a eCH-0264:InspectionRubric ;
+    schema:identifier "12.2" ;
+    schema:name "Beispiel-Rubrik RAUS Milchkühe"@de ;
+    eCH-0264:inspectionDomain domain:AnimalWelfare ;
+    eCH-0264:publisher example:BLW ;
+    schema:validFrom "2026-01-01"^^xsd:date ;
+    schema:validThrough "2026-12-31"^^xsd:date .
+
+example:ControlPointOutdoor-2026 a eCH-0264:ControlPoint ;
+    schema:identifier "12.2.1" ;
+    schema:version "2026" ;
+    schema:name "Auslauf gewährt"@de ;
+    schema:description "Geprüft wird anhand des Auslaufjournals, ob den Milchkühen im Kontrollzeitraum an der vorgeschriebenen Anzahl Tage Auslauf gewährt wurde."@de ;
+    eCH-0264:rubric example:RubricRAUS ;
+    eCH-0264:publisher example:BLW ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:legalBasis example:DZV-2026 ;
+    eCH-0264:coveredRequirement example:RequirementOutdoorAccess ;
+    eCH-0264:focusControlPoint true ;
+    schema:validFrom "2026-01-01"^^xsd:date ;
+    schema:validThrough "2026-12-31"^^xsd:date .
+
+example:ControlPointJournal-2026 a eCH-0264:ControlPoint ;
+    schema:identifier "12.2.2" ;
+    schema:version "2026" ;
+    schema:name "Auslaufjournal vollständig"@de ;
+    schema:description "Geprüft wird, ob das Auslaufjournal für alle Tiere der Kategorie lückenlos und zeitnah geführt ist."@de ;
+    eCH-0264:rubric example:RubricRAUS ;
+    eCH-0264:publisher example:BLW ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:legalBasis example:DZV-2026 ;
+    eCH-0264:focusControlPoint false ;
+    schema:validFrom "2026-01-01"^^xsd:date ;
+    schema:validThrough "2026-12-31"^^xsd:date .
+
+# A label may adapt a control point during the year: the new version keeps the
+# stable identifier, gets its own validity period and replaces the old version.
+example:LabelControlPointOutdoor-2026-2 a eCH-0264:ControlPoint ;
+    schema:identifier "L-4.1" ;
+    schema:version "2026.2" ;
+    schema:name "Auslauf gemäss RAUS"@de ;
+    schema:description "Die Anforderungen an den regelmässigen Auslauf gemäss RAUS sind erfüllt. Befristete Ausnahme für Betriebe in Sperrgebieten."@de ;
+    eCH-0264:rubric example:LabelRubric ;
+    eCH-0264:publisher example:LabelOrganization ;
+    eCH-0264:legalNature legalnature:PrivateLaw ;
+    eCH-0264:legalBasis example:LabelGuideline-2026 ;
+    eCH-0264:coveredRequirement example:RequirementOutdoorAccess ;
+    schema:validFrom "2026-07-01"^^xsd:date ;
+    eCH-0264:replaces example:LabelControlPointOutdoor-2026 ;
+    skos:exactMatch example:ControlPointOutdoor-2026 .
+
+example:LabelRubric a eCH-0264:InspectionRubric ;
+    schema:identifier "L-4" ;
+    schema:name "Beispiel-Label Tierhaltung"@de ;
+    eCH-0264:inspectionDomain domain:AnimalWelfare ;
+    eCH-0264:publisher example:LabelOrganization ;
+    schema:validFrom "2026-01-01"^^xsd:date .
+
+# The label accepts the public-law control point as equivalent to its own
+# control point and can therefore rely on the public-law result.
+example:LabelControlPointOutdoor-2026 a eCH-0264:ControlPoint ;
+    schema:identifier "L-4.1" ;
+    schema:version "2026.1" ;
+    schema:name "Auslauf gemäss RAUS"@de ;
+    schema:description "Die Anforderungen an den regelmässigen Auslauf gemäss RAUS sind erfüllt."@de ;
+    eCH-0264:rubric example:LabelRubric ;
+    eCH-0264:publisher example:LabelOrganization ;
+    eCH-0264:legalNature legalnature:PrivateLaw ;
+    eCH-0264:legalBasis example:LabelGuideline-2026 ;
+    eCH-0264:coveredRequirement example:RequirementOutdoorAccess ;
+    schema:validFrom "2026-01-01"^^xsd:date ;
+    schema:validThrough "2026-06-30"^^xsd:date ;
+    skos:exactMatch example:ControlPointOutdoor-2026 .
+
+example:PossibleDeficiencyJournal a eCH-0264:PossibleDeficiency ;
+    schema:identifier "12.2.2-01" ;
+    schema:name "Auslaufjournal unvollständig"@de ;
+    eCH-0264:controlPoint example:ControlPointJournal-2026 ;
+    eCH-0264:suggestedMeasureType measuretype:DirectPaymentReduction .
+
+example:ProgramRAUS a eCH-0264:Program ;
+    schema:name "Regelmässiger Auslauf im Freien"@de ;
+    schema:alternateName "RAUS" ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:owner example:BLW ;
+    eCH-0264:legalBasis example:DZV-2026 .
+
+example:QualificationAnimalWelfare a eCH-0264:Qualification ;
+    schema:name "Amtliche Fachassistenz Tierschutz"@de ;
+    eCH-0264:issuer example:CantonalOffice .
+
+# ------------------------------------------------------------------------------
+# Inspected units and persons (identifiers only, no master data)
+# ------------------------------------------------------------------------------
+
+example:Farm a eCH-0264:Farm ;
+    eCH-0264:burNumber "00000001" ;
+    eCH-0264:cantonalFarmId "BE-0001" ;
+    eCH-0264:canton "BE" .
+
+example:AnimalHolding a eCH-0264:AnimalHolding ;
+    eCH-0264:tvdNumber "0000001" ;
+    eCH-0264:farm example:Farm .
+
+example:FarmManager a eCH-0264:FarmManager ;
+    eCH-0264:cantonalPersonId "BE-P-0001" .
+
+example:Inspector a eCH-0264:Inspector ;
+    schema:identifier "K-17" ;
+    eCH-0264:employer example:InspectionBody ;
+    eCH-0264:qualification example:QualificationAnimalWelfare .
+
+# ------------------------------------------------------------------------------
+# Transaction data: one inspection with explicit results for all control points
+# ------------------------------------------------------------------------------
+
+example:Inspection a eCH-0264:Inspection ;
+    schema:identifier "2026-BE-000123" ;
+    eCH-0264:inspectionDate "2026-06-15"^^xsd:date ;
+    eCH-0264:inspectionObject example:Farm, example:AnimalHolding ;
+    eCH-0264:farmManager example:FarmManager ;
+    eCH-0264:inspectionBody example:InspectionBody ;
+    eCH-0264:inspector example:Inspector ;
+    eCH-0264:commissionedBy example:CantonalOffice ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:inspectionModality modality:OnSite ;
+    eCH-0264:announced false ;
+    eCH-0264:inspectionStatus inspstatus:MeasuresRecorded ;
+    eCH-0264:inspectionScope example:ScopeRAUS ;
+    schema:dateModified "2026-06-20T10:15:00"^^xsd:dateTime .
+
+example:ScopeRAUS a eCH-0264:InspectionScope ;
+    eCH-0264:rubric example:RubricRAUS ;
+    eCH-0264:inspectionReason reason:BasicInspection ;
+    eCH-0264:rubricResult result:Deficiency ;
+    eCH-0264:controlPointResult example:ResultOutdoor, example:ResultJournal .
+
+example:ResultOutdoor a eCH-0264:ControlPointResult ;
+    eCH-0264:controlPoint example:ControlPointOutdoor-2026 ;
+    eCH-0264:resultValue result:Compliant ;
+    eCH-0264:assessmentMethod method:DocumentReview, method:Inspection .
+
+example:ResultJournal a eCH-0264:ControlPointResult ;
+    eCH-0264:controlPoint example:ControlPointJournal-2026 ;
+    eCH-0264:resultValue result:Deficiency ;
+    eCH-0264:assessmentMethod method:DocumentReview ;
+    eCH-0264:deficiency example:DeficiencyJournal .
+
+example:DeficiencyJournal a eCH-0264:Deficiency ;
+    schema:description "Für die Monate April und Mai fehlen die Einträge im Auslaufjournal."@de ;
+    eCH-0264:possibleDeficiency example:PossibleDeficiencyJournal ;
+    eCH-0264:rectificationDeadline "2026-07-31"^^xsd:date ;
+    eCH-0264:evidence example:PhotoJournal .
+
+example:PhotoJournal a eCH-0264:Evidence ;
+    eCH-0264:contentUrl "https://example.org/nachweise/2026-BE-000123/journal.jpg"^^xsd:anyURI ;
+    schema:encodingFormat "image/jpeg" ;
+    schema:description "Foto der betroffenen Seiten des Auslaufjournals"@de .
+
+# Measures are exchanged separately and only with a dedicated consent.
+example:MeasureJournal a eCH-0264:Measure ;
+    eCH-0264:measureType measuretype:DirectPaymentReduction ;
+    eCH-0264:deficiency example:DeficiencyJournal ;
+    eCH-0264:decidedBy example:CantonalOffice ;
+    eCH-0264:legalNature legalnature:PublicLaw ;
+    eCH-0264:decisionDate "2026-06-20"^^xsd:date .
+
+# Despite the deficiency, the program is fulfilled.
+example:ParticipationRAUS a eCH-0264:ProgramParticipation ;
+    eCH-0264:farm example:Farm ;
+    eCH-0264:program example:ProgramRAUS ;
+    schema:validFrom "2026-01-01"^^xsd:date ;
+    eCH-0264:conformityStatus conformity:Fulfilled ;
+    eCH-0264:conformityAssessedOn "2026-06-20"^^xsd:date .
