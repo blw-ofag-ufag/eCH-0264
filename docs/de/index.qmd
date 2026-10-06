@@ -1,5 +1,5 @@
 ---
-title: eCH-0264 Landwirtschaftliche Kontrolldaten
+title: Landwirtschaftliche Kontrolldaten
 author: eCH Fachgruppe AgriFood
 abstract: |
   Die Weiterverwendung von Daten aus landwirtschaftlichen Kontrollen ist heute limitiert, weil die Akteure des Kontrollwesens unterschiedliche Begriffe und Datenstrukturen verwenden.
@@ -7,8 +7,6 @@ abstract: |
   Die Bedürfnisse von Bund, Kantonen, Kontrollstellen und Label-Organisationen werden aus konkreten Anwendungsfällen abgeleitet; widersprüchliche Bedürfnisse werden zugunsten der Interoperabilität aufgelöst.
   Das Datenmodell ist die Grundlage für die Nachfolgelösung von Acontrol und für den Bezug öffentlich-rechtlicher Kontrolldaten über agridata.ch.
   Glossar, Datenmodell und Codelisten sind als maschinenlesbare *Linked Data* verfügbar.
-date: last-modified
-date-format: long
 lang: de-CH
 keywords:
   - Landwirtschaft
@@ -19,7 +17,7 @@ license: CC BY 4.0
 citation: true
 ---
 
-# Hinweis {#sec-note .unnumbered}
+# Hinweis {#sec-note .unnumbered .unlisted}
 
 Im vorliegenden Dokument wird bei der Bezeichnung von Personen eine geschlechtsneutrale Formulierung verwendet.
 Basis bildet der Leitfaden der Bundeskanzlei.
@@ -36,6 +34,10 @@ Die Weiterverwendung von Daten ist ein zentraler Bestandteil der digitalen Trans
 Im landwirtschaftlichen Kontrollwesen werden Daten in Form von Resultaten und Eigenschaften von Kontrollen erhoben.
 Diese Daten dienen in erster Linie der Oberaufsicht über den rechtskonformen Vollzug in den Kantonen und der Festlegung risikobasierter Kontrollen.
 Zudem dienen sie der Berichterstattung, der Unterstützung privatrechtlicher Kontrollen und der Weiterentwicklung der Agrarpolitik.
+
+## Status {#sec-status}
+
+{{< ech status >}}
 
 ## Zielbild der Arbeitsgruppe {#sec-target-picture}
 
@@ -257,7 +259,7 @@ Das Glossar wird vom BLW gepflegt und kann aufgrund der Bedürfnisse des Sektors
 
 Das Glossar ist als eigene, verlinkbare Webseite im Stil der Bundesverwaltung verfügbar: [Fachglossar Kontrollwesen](../glossar/index.html).
 Jeder Begriff kann dort über seinen Namen gesucht, nach Themenbereich gefiltert und über einen Link der Form `glossar/index.html#kontrollpunkt` direkt referenziert werden [@swissdesignsystem].
-Die vollständige Liste der Begriffe findet sich zudem in @sec-appendix-c.
+Die vollständige Liste der Begriffe findet sich zudem in [Anhang C](#sec-appendix-c).
 
 ## Aufbau des Glossars {#sec-glossary-structure}
 
@@ -387,6 +389,12 @@ Das Beispiel wird automatisch gegen die SHACL-Shapes validiert.
 ``` turtle
 {{< include ../data/example.ttl >}}
 ```
+
+## Namespaces {#sec-namespaces}
+
+@tbl-namespaces listet die Präfixe und Namespaces, die in diesem Dokument verwendet werden. Ein Präfix steht stellvertretend für eine Namespace-IRI, den gemeinsamen Anfang der IRIs eines Vokabulars.
+
+{{< include namespaces.md >}}
 
 # Klassen {#sec-classes}
 
@@ -531,4 +539,8 @@ Der Standard ersetzt die frühere Kurzbeschreibung «Dieser Standard soll dabei 
 
 # Anhang E - Abbildungsverzeichnis {#sec-appendix-e .appendix .unnumbered}
 
+{{< ech figures >}}
+
 # Anhang F - Tabellenverzeichnis {#sec-appendix-f .appendix .unnumbered}
+
+{{< ech tables >}}

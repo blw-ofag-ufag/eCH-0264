@@ -213,10 +213,10 @@ $(DOCS_UML_PNG): $(SHAPES) | $(IMG_DIR) $(LOG_DIR) $(SHACL_PLAY_JAR) $(PLANTUML_
 	cp $(IMG_DIR)/uml.png $(DOCS_UML_PNG); \
 	printf "$(NC)"
 
-generate-shacl-docs: $(SHAPES) $(PREFIXES) src/python/utils/generate_shacl_docs.py | $(VENV)/.requirements-installed.stamp
+generate-shacl-docs: $(SHAPES) $(PREFIXES) $(PROCESSED_DATA) $(DOCS_DIR)/_ech.yml src/python/utils/generate_shacl_docs.py | $(VENV)/.requirements-installed.stamp
 	@printf "$(BOLD)[*] Generating SHACL documentation...$(NC)\n"
 	@printf "$(GREY)"; \
-	$(VENV_PYTHON) src/python/utils/generate_shacl_docs.py -i $(SHAPES) -d $(DOCS_DIR) -p $(PREFIXES) || { printf "$(NC)"; exit 1; }; \
+	$(VENV_PYTHON) src/python/utils/generate_shacl_docs.py -i $(SHAPES) -d $(DOCS_DIR) -p $(PREFIXES) -g $(PROCESSED_DATA) -c $(DOCS_DIR)/_ech.yml || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
 generate-glossary-docs: src/rdf/data/glossary.skos.ttl $(PREFIXES) src/python/utils/generate_glossary_docs.py | $(VENV)/.requirements-installed.stamp
@@ -298,4 +298,4 @@ publish: test delete
 
 clean:
 	@printf "$(BOLD)[*] Cleaning build artifacts...$(NC)\n"
-	@rm -rf $(BUILD_DIR) $(VENV) .quarto docs/.quarto tests/__pycache__ docs/index_files docs/*/entities.md docs/*/glossary.md docs/*/codelists.md
+	@rm -rf $(BUILD_DIR) $(VENV) .quarto docs/.quarto tests/__pycache__ docs/index_files docs/*/entities.md docs/*/glossary.md docs/*/codelists.md docs/*/namespaces.md
