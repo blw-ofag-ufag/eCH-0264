@@ -300,20 +300,6 @@ Damit das Glossar verlässlich bleibt, schlägt die Arbeitsgruppe folgende Gover
 - Klärung der rechtlichen Interoperabilität für den Austausch privatrechtlicher Kontrolldaten.
 - Übersetzung von Glossar und Dokumentation ins Französische und Italienische.
 
-# Sicherheitsaspekte {#sec-safety-consideration}
-
-Bei der Umsetzung dieses Standards sind die massgeblichen rechtlichen Grundlagen zu beachten, insbesondere das Bundesgesetz über den Datenschutz (DSG), das Informationssicherheitsgesetz (ISG) und die Verordnung über Informationssysteme im Bereich der Landwirtschaft [@islv].
-Kontrolldaten beziehen sich auf Bewirtschafterinnen und Bewirtschafter und sind damit Personendaten.
-Verfügungen mit Sanktionen können besonders schützenswerte Personendaten sein.
-Das künftige Datenmodell soll einen sparsamen Umgang mit diesen Daten unterstützen:
-
-- Kontrolldaten enthalten nur Identifikatoren und keine Stammdaten von Personen.
-- Kontrollpersonen können pseudonym identifiziert werden.
-- Kontrollergebnisse, Mängel und Massnahmen werden getrennt abgebildet, sodass sie mit unterschiedlichen Einwilligungen und Zugriffsrechten weitergegeben werden können.
-- Nachweise werden nicht eingebettet, sondern über eine Adresse referenziert, deren Zugriff geschützt werden kann.
-
-Die Weitergabe von Kontrolldaten an Dritte setzt ein Einverständnis der Bewirtschafterin oder des Bewirtschafters voraus, das über agridata.ch oder im Vertrag mit einer Label-Organisation erteilt wird.
-
 # Haftungsausschluss {#sec-disclaimer}
 
 eCH-Standards, die der Verein eCH dem Anwender kostenlos zur Verfügung stellt oder die auf eCH verweisen, haben nur den Status von Empfehlungen.
