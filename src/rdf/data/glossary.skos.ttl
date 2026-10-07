@@ -31,7 +31,7 @@ term:organisation a skos:Concept ;
     skos:topConceptOf eCH-0264:glossary ;
     schema:name "Organisation"@de ;
     schema:description "Behörde, Unternehmen oder Verein, das im landwirtschaftlichen Kontrollwesen eine oder mehrere Rollen einnimmt, zum Beispiel als Herausgeberin von Kontrollpunkten, Auftraggeberin, Kontrollstelle, Zertifizierungsstelle, Datenanbieterin oder Datenbezügerin."@de ;
-    skos:scopeNote "Die Rolle ergibt sich aus der Beziehung zu anderen Objekten und nicht aus einem festen Typ; dieselbe Organisation kann mehrere Rollen haben."@de .
+    skos:scopeNote "Dieselbe Organisation kann mehrere Rollen haben."@de .
 
 term:bewirtschafter a skos:Concept ;
     skos:inScheme eCH-0264:glossary ;
@@ -48,7 +48,7 @@ term:bewirtschafterwechsel a skos:Concept ;
     schema:name "Bewirtschafterwechsel"@de ;
     schema:alternateName "Betriebsleiterwechsel"@de ;
     schema:description "Übergang der Bewirtschaftung eines Betriebs von einer Bewirtschafterin oder einem Bewirtschafter auf eine andere Person."@de ;
-    skos:scopeNote "Kontrollergebnisse werden immer zusammen mit der zum Kontrollzeitpunkt verantwortlichen Person ausgetauscht, damit eine neue Bewirtschafterin oder ein neuer Bewirtschafter nicht mit Mängeln der Vorgängerin oder des Vorgängers konfrontiert wird."@de ;
+    skos:scopeNote "Kontrollergebnisse müssen der zum Kontrollzeitpunkt verantwortlichen Person zugeordnet werden können, damit eine neue Bewirtschafterin oder ein neuer Bewirtschafter nicht mit Mängeln der Vorgängerin oder des Vorgängers konfrontiert wird."@de ;
     schema:citation "Use-Case der Koordinationsgruppe Integrierte Produktion (KIP), AG Kontrolldaten 2026" .
 
 term:kontrollstelle a skos:Concept ;
@@ -451,7 +451,7 @@ term:kontrollbereich a skos:Concept ;
         "Domaine de contrôle"@fr,
         "Ambito di controllo"@it ;
     schema:description "Oberste Gliederungsebene der öffentlich-rechtlichen Kontrollpunkte, die ein Rechtsgebiet oder eine Gruppe von Programmen umfasst, zum Beispiel Lebensmittelsicherheit oder Tierwohl."@de ;
-    skos:scopeNote "Die Kontrollbereiche sind nummeriert (zum Beispiel 07 Ökologischer Leistungsnachweis) und bestimmen die Gliederung der Acontrol-Datenprodukte auf agridata.ch. Die Werte sind in der Codeliste «Kontrollbereiche» festgelegt."@de ;
+    skos:scopeNote "Die Kontrollbereiche sind nummeriert (zum Beispiel 07 Ökologischer Leistungsnachweis) und bestimmen die Gliederung der Acontrol-Datenprodukte auf agridata.ch."@de ;
     schema:citation <https://www.blw.admin.ch/de/anwendung-acontrol> .
 
 term:kontrollrubrik a skos:Concept ;
@@ -481,7 +481,7 @@ term:kontrollpunkt a skos:Concept ;
         "Punto di controllo"@it ;
     schema:alternateName "Prüfpunkt"@de, "Checkpunkt"@de ;
     schema:description "Prüfgegenstand einer Kontrolle, der eine oder mehrere Anforderungen umfasst und für den bei einer Kontrolle genau ein Kontrollergebnis festgehalten wird."@de ;
-    skos:scopeNote "Ein Kontrollpunkt hat einen stabilen Identifikator und liegt in Fassungen mit Gültigkeitszeitraum vor. Das BLW und das BAFU können Listen mit Punkten und Beurteilungskriterien für Grundkontrollen und risikobasierte Kontrollen erstellen (Art. 9 Abs. 2 VKKL)."@de ;
+    skos:scopeNote "Das BLW und das BAFU können Listen mit Punkten und Beurteilungskriterien für Grundkontrollen und risikobasierte Kontrollen erstellen (Art. 9 Abs. 2 VKKL)."@de ;
     schema:citation <https://www.fedlex.admin.ch/eli/cc/2018/673/de#art_9> ;
     skos:related term:anforderung, term:herausgeberin, term:kontrollergebnis .
 
@@ -491,7 +491,7 @@ term:fokuskontrollpunkt a skos:Concept ;
     schema:name "Fokuskontrollpunkt"@de ;
     schema:alternateName "FKP"@de ;
     schema:description "Kontrollpunkt, der bei einer Grundkontrolle zwingend geprüft werden muss."@de ;
-    skos:scopeNote "Übrige Kontrollpunkte dürfen bei einer Grundkontrolle ebenfalls geprüft werden. Heute müssen nicht geprüfte Kontrollpunkte, die keine Fokuskontrollpunkte sind, nicht als «nicht kontrolliert» gekennzeichnet werden; der Standard verlangt dies für den Datenaustausch."@de ;
+    skos:scopeNote "Übrige Kontrollpunkte dürfen bei einer Grundkontrolle ebenfalls geprüft werden. Heute müssen nicht geprüfte Kontrollpunkte, die keine Fokuskontrollpunkte sind, nicht als «nicht kontrolliert» gekennzeichnet werden. Dadurch ist für Datenbezügerinnen und Datenbezüger nicht erkennbar, welche Kontrollpunkte tatsächlich geprüft wurden."@de ;
     schema:citation "Austausch mit dem Fachbereich Direktzahlungsgrundlagen (FBDG), BLW, 2026" .
 
 term:sammel-kontrollpunkt a skos:Concept ;
@@ -524,7 +524,7 @@ term:gueltigkeitszeitraum a skos:Concept ;
     skos:topConceptOf eCH-0264:glossary ;
     schema:name "Gültigkeitszeitraum"@de ;
     schema:description "Zeitspanne zwischen einem Anfangs- und einem Enddatum, während der eine bestimmte Fassung eines Regelwerks, einer Kontrollrubrik, eines Kontrollpunkts oder eines Zertifikats anzuwenden ist."@de ;
-    skos:scopeNote "Öffentlich-rechtliche Kontrollpunkte gelten in der Regel ein Kalenderjahr. Unterjährige Änderungen, etwa von Label-Organisationen, werden als neue Fassung mit eigenem Gültigkeitszeitraum abgebildet, sodass jedes Kontrollergebnis eindeutig einer Fassung zugeordnet bleibt."@de .
+    skos:scopeNote "Öffentlich-rechtliche Kontrollpunkte gelten in der Regel ein Kalenderjahr. Bei unterjährigen Änderungen, etwa von Label-Organisationen, muss erkennbar bleiben, welche Fassung bei einer Kontrolle galt."@de .
 
 term:kontrollpunkt-entsprechung a skos:Concept ;
     skos:inScheme eCH-0264:glossary ;
@@ -532,7 +532,7 @@ term:kontrollpunkt-entsprechung a skos:Concept ;
     schema:name "Entsprechung von Kontrollpunkten"@de ;
     schema:alternateName "Kontrollpunkt-Mapping"@de ;
     schema:description "Beziehung zwischen zwei Kontrollpunkten verschiedener Herausgeberinnen, die angibt, ob sie dieselben, weitergehende oder engere Anforderungen prüfen."@de ;
-    skos:scopeNote "Entsprechungen sind die Voraussetzung dafür, dass eine Organisation ein Kontrollergebnis einer anderen Organisation anerkennen und auf eine eigene Kontrolle verzichten kann. Sie werden wie in eCH-0265 mit den SKOS-Beziehungen exactMatch, closeMatch, broadMatch und narrowMatch ausgedrückt."@de ;
+    skos:scopeNote "Entsprechungen sind die Voraussetzung dafür, dass eine Organisation ein Kontrollergebnis einer anderen Organisation anerkennen und auf eine eigene Kontrolle verzichten kann."@de ;
     skos:related term:anforderung .
 
 # ==============================================================================
@@ -609,7 +609,7 @@ term:kontrollart a skos:Concept ;
         "Type de contrôle"@fr,
         "Tipo di controllo"@it ;
     schema:description "Merkmal einer Kontrolle, das angibt, wo sie durchgeführt wird, nämlich als Vor-Ort-Kontrolle auf dem Kontrollobjekt oder als Bürokontrolle."@de ;
-    skos:scopeNote "Im Material wird «Kontrollart» teilweise auch für Werte wie Grundkontrolle oder Nachkontrolle verwendet. Diese Werte sind Kontrollgründe. Ob eine Kontrolle angemeldet war, wird als eigenes Merkmal erfasst. Die Zuordnung zum Merkmal «Kontrollart» der Acontrol-Datenprodukte ist mit dem BLW abzustimmen."@de ;
+    skos:scopeNote "Im Material wird «Kontrollart» teilweise auch für Werte wie Grundkontrolle oder Nachkontrolle verwendet. Diese Werte sind Kontrollgründe. Ob eine Kontrolle angemeldet war, ist davon unabhängig. Die Zuordnung zum Merkmal «Kontrollart» der Acontrol-Datenprodukte ist mit dem BLW abzustimmen."@de ;
     skos:related term:kontrollgrund, term:unangemeldete-kontrolle .
 
 term:buerokontrolle a skos:Concept ;
@@ -675,8 +675,8 @@ term:kontrollergebnis a skos:Concept ;
         "Résultat du contrôle"@fr,
         "Risultato del controllo"@it ;
     schema:alternateName "Kontrollresultat"@de, "Testpunkt-Resultat"@de ;
-    schema:description "Feststellung zu einem Kontrollpunkt bei einer Kontrolle, die einen der Werte «Erfüllt», «Mangel», «Nicht zutreffend» oder «Nicht kontrolliert» annimmt."@de ;
-    skos:scopeNote "In Acontrol werden heute nur «Mangel», «nicht zutreffend» und «nicht kontrolliert» erfasst; ein fehlendes Ergebnis gilt als «ohne Mangel». Der Standard verlangt, dass auch «Erfüllt» ausdrücklich übermittelt wird."@de ;
+    schema:description "Feststellung zu einem Kontrollpunkt bei einer Kontrolle, zum Beispiel «ohne Mangel», «Mangel», «nicht zutreffend» oder «nicht kontrolliert»."@de ;
+    skos:scopeNote "In Acontrol werden heute nur «Mangel», «nicht zutreffend» und «nicht kontrolliert» erfasst; ein fehlendes Ergebnis gilt als «ohne Mangel»."@de ;
     skos:related term:kontrollpunkt, term:mangel .
 
 term:nicht-zutreffend a skos:Concept ;
@@ -707,7 +707,7 @@ term:chuengeli-problem a skos:Concept ;
     skos:broader term:kontrollergebnis ;
     schema:name "Chüngeli-Problem"@de ;
     schema:description "Verfälschung von Kontrolldaten, die entsteht, wenn ein System Kontrollpunkten, für die kein Ergebnis übermittelt wurde, automatisch das Ergebnis «ohne Mangel» zuweist."@de ;
-    skos:scopeNote "Acontrol kennt Kontrollrubriken nur als Ganzes. Liefert ein Kanton nur einzelne Kontrollpunkte einer Rubrik, ergänzt Acontrol die übrigen mit «ohne Mangel». So entstehen zum Beispiel Ergebnisse zur Haltung von Straussen auf Betrieben, die nur Hühner halten. Der Standard verhindert dies, indem jedes Kontrollergebnis ausdrücklich erfasst werden muss."@de ;
+    skos:scopeNote "Acontrol kennt Kontrollrubriken nur als Ganzes. Liefert ein Kanton nur einzelne Kontrollpunkte einer Rubrik, ergänzt Acontrol die übrigen mit «ohne Mangel». So entstehen zum Beispiel Ergebnisse zur Haltung von Straussen auf Betrieben, die nur Hühner halten. Vermeiden lässt sich dies nur, wenn jedes Kontrollergebnis ausdrücklich erfasst wird."@de ;
     schema:citation "BLW-Workshop eCH-Standard Kontrolldaten, 14.10.2025" .
 
 term:erhebungsmethode a skos:Concept ;
@@ -795,7 +795,7 @@ term:massnahme a skos:Concept ;
     schema:name "Massnahme"@de ;
     schema:alternateName "Sanktion"@de ;
     schema:description "Folge, die eine zuständige Organisation aufgrund eines oder mehrerer Mängel anordnet, zum Beispiel eine Kürzung von Direktzahlungen, eine Verwarnung, eine Auflage zur Mängelbehebung, eine Nachkontrolle oder eine Label-Sanktion."@de ;
-    skos:scopeNote "Die Acontrol-Datenprodukte enthalten heute keine Massnahmen. Verfügungen mit Sanktionen können besonders schützenswerte Personendaten sein und werden deshalb getrennt von den Kontrollergebnissen und nur mit eigener Einwilligung ausgetauscht."@de ;
+    skos:scopeNote "Die Acontrol-Datenprodukte enthalten heute keine Massnahmen. Verfügungen mit Sanktionen können besonders schützenswerte Personendaten sein und erfordern deshalb beim Austausch besonderen Schutz."@de ;
     skos:related term:mangel .
 
 term:kuerzung-direktzahlungen a skos:Concept ;
@@ -908,7 +908,7 @@ term:codeliste a skos:Concept ;
     schema:name "Codeliste"@de ;
     schema:alternateName "Werteliste"@de ;
     schema:description "Abschliessende Liste der zulässigen Werte eines Merkmals, in der jeder Wert einen eindeutigen Code und eine Definition hat."@de ;
-    skos:scopeNote "Codelisten ersetzen Freitext und machen Kontrolldaten maschinell auswertbar. In diesem Standard sind Codelisten als SKOS-Konzeptschemata umgesetzt."@de .
+    skos:scopeNote "Codelisten ersetzen Freitext und machen Kontrolldaten maschinell auswertbar."@de .
 
 term:acontrol a skos:Concept ;
     skos:inScheme eCH-0264:glossary ;
