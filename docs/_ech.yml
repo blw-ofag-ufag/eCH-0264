@@ -1,10 +1,10 @@
 # eCH metadata shared by all language versions of the documentation.
 #
 # Values are language-neutral codes. They are translated into the labels of
-# the eCH title page by docs/assets/ech-metadata.lua, using the vocabulary in
-# docs/assets/ech-vocabulary.yml (which also lists the allowed codes).
+# the eCH title page by docs/assets/ech_metadata.lua, using the vocabulary in
+# docs/assets/ech_vocabulary.yml (which also lists the allowed codes).
 
-date: last-modified       # date of issue (Ausgabedatum)
+date: 2026-10-07          # date of issue (Ausgabedatum)
 date-format: iso
 
 ech:

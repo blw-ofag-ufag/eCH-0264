@@ -6,6 +6,7 @@
 BUILD_DIR        := build
 RDF_DIR          := $(BUILD_DIR)/rdf
 PYTHON_DIR       := src/python
+R_DIR            := src/r
 
 # Tools and binaries
 ROBOT_VERSION    := v1.9.5
@@ -17,6 +18,9 @@ VENV_PIP         := $(VENV_BIN)/pip
 PYSHACL          := $(VENV_BIN)/pyshacl
 PYTEST           := $(VENV_BIN)/pytest -p no:cacheprovider # suppress cache
 ROBOT            := java -jar $(VENV_BIN)/robot.jar
+RSCRIPT          ?= Rscript
+R_REQUIREMENTS   := $(wildcard $(R_DIR)/requirements.txt)
+R_STAMP          := $(if $(R_REQUIREMENTS),$(VENV)/.r-packages-installed.stamp)
 SHACL_PLAY_VERSION := 0.12.2
 SHACL_PLAY_JAR     := $(VENV_BIN)/shacl-play-app.jar
 PLANTUML_VERSION   := 1.2024.3
@@ -62,7 +66,7 @@ GREY             := \033[0;90m
 BOLD             := \033[1;37m
 NC               := \033[0m
 
-.PHONY: all help robot test docs clean check-python venv install-dependencies setup build delete publish stamp-metadata generate-shacl-docs generate-glossary-docs generate-glossary-site
+.PHONY: all help robot test docs clean check-python venv install-dependencies install-r-packages setup build delete publish stamp-metadata generate-shacl-docs generate-glossary-docs generate-glossary-site
 
 # Default target
 all: test docs ## Run the tests and build the documentation (default)
@@ -105,6 +109,15 @@ $(VENV)/.requirements-installed.stamp: $(PYTHON_DIR)/requirements.txt | $(VENV_P
 
 install-dependencies: $(VENV)/.requirements-installed.stamp
 
+# Install R packages (the stamp is only defined if src/r/requirements.txt exists)
+$(VENV)/.r-packages-installed.stamp: $(R_REQUIREMENTS) $(R_DIR)/utils/install_packages.R | $(VENV_PYTHON)
+	@command -v $(RSCRIPT) >/dev/null 2>&1 || \
+		(printf "$(RED)ERROR: R not found (Rscript). Install R or delete $(R_DIR)/ if the documentation does not use R.$(NC)\n"; exit 1)
+	@printf "$(GREY)"; $(RSCRIPT) $(R_DIR)/utils/install_packages.R $(R_REQUIREMENTS) || { printf "$(NC)"; exit 1; }; printf "$(NC)"
+	@touch $@
+
+install-r-packages: $(R_STAMP)
+
 # 4. Install robot
 $(VENV_BIN)/robot.jar: | $(VENV_PYTHON)
 	@printf "$(BOLD)[*] Downloading ROBOT ontology tool...$(NC)\n"
@@ -131,7 +144,7 @@ $(JAVA17): | $(VENV)
 	curl -sL https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz | tar -xz -C $(VENV_JAVA_DIR) || { printf "$(NC)"; exit 1; }; printf "$(NC)"
 
 # 8. Full setup
-setup: install-dependencies robot ## Create the virtual environment, install Python dependencies and ROBOT
+setup: install-dependencies install-r-packages robot ## Create the virtual environment, install Python and R dependencies and ROBOT
 	@printf "$(BOLD)[*] Setup complete.$(NC)\n"
 
 # ==============================================================================
@@ -250,7 +263,7 @@ generate-glossary-site: src/rdf/data/glossary.skos.ttl $(ONTO) $(SHAPES) $(PREFI
 	$(VENV_PYTHON) src/python/utils/generate_glossary_site.py -i src/rdf/data/glossary.skos.ttl -m $(ONTO) $(SHAPES) -p $(PREFIXES) -t $(GLOSSARY_TEMPLATE) -a $(DOCS_DIR)/assets/bund -o $(GLOSSARY_SITE_DIR) || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
-docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs ## Generate the glossary pages, render the documentation (website, PDF) and the glossary website
+docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(R_STAMP) ## Generate the glossary pages, render the documentation (website, PDF) and the glossary website
 	@printf "$(BOLD)[*] Rendering documentation with Quarto...$(NC)\n"
 	@printf "$(GREY)"; \
 	quarto render docs > $(QUARTO_LOG) 2>&1 || { printf "$(NC)\n$(RED)ERROR: Quarto rendering failed. See log below:$(NC)\n$(GREY)"; cat $(QUARTO_LOG); printf "$(NC)\n"; exit 1; }; \
@@ -314,6 +327,7 @@ publish: test stamp-metadata delete ## Test, then replace the graph on LINDAS wi
 # CLEANUP
 # ==============================================================================
 
-clean: ## Remove all build artifacts, the virtual environment and generated pages
+clean: ## Remove all build artifacts, caches, the virtual environment and generated pages
 	@printf "$(BOLD)[*] Cleaning build artifacts...$(NC)\n"
-	@rm -rf $(BUILD_DIR) $(VENV) .quarto docs/.quarto tests/__pycache__ docs/index_files docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md
+	@rm -rf $(BUILD_DIR) $(VENV) docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md
+	@find . -path ./.git -prune -o \( -name __pycache__ -o -name .pytest_cache -o -name .quarto -o -name '*_files' -o -name '*_cache' -o -name '*.quarto_ipynb' -o -name .Rhistory -o -name .RData \) -prune -exec rm -rf {} +
