@@ -48,8 +48,6 @@ IMG_DIR          := $(BUILD_DIR)/img
 UML_PUML         := $(IMG_DIR)/uml.puml
 DOCS_IMG_DIR     := $(DOCS_DIR)/assets/img
 DOCS_UML_PNG     := $(DOCS_IMG_DIR)/uml.png
-GLOSSARY_TEMPLATE := src/html/glossary.template.html
-GLOSSARY_SITE_DIR := $(BUILD_DIR)/docs/glossar
 
 # Logs
 LOG_DIR          := $(BUILD_DIR)/log
@@ -66,7 +64,7 @@ GREY             := \033[0;90m
 BOLD             := \033[1;37m
 NC               := \033[0m
 
-.PHONY: all help robot test docs clean check-python venv install-dependencies install-r-packages setup build delete publish stamp-metadata generate-shacl-docs generate-glossary-docs generate-glossary-site
+.PHONY: all help robot test docs clean check-python venv install-dependencies install-r-packages setup build delete publish stamp-metadata generate-shacl-docs generate-glossary-docs
 
 # Default target
 all: test docs ## Run the tests and build the documentation (default)
@@ -255,20 +253,11 @@ generate-glossary-docs: src/rdf/data/glossary.skos.ttl $(PREFIXES) src/python/ut
 	$(VENV_PYTHON) src/python/utils/generate_glossary_docs.py -i src/rdf/data/glossary.skos.ttl -d $(DOCS_DIR) -p $(PREFIXES) || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
-# The glossary website is written into the Quarto output directory after
-# rendering, so that it is deployed together with the documentation.
-generate-glossary-site: src/rdf/data/glossary.skos.ttl $(ONTO) $(SHAPES) $(PREFIXES) $(GLOSSARY_TEMPLATE) src/python/utils/generate_glossary_site.py | $(VENV)/.requirements-installed.stamp ## Generate the glossary website (after rendering)
-	@printf "$(BOLD)[*] Generating glossary website...$(NC)\n"
-	@printf "$(GREY)"; \
-	$(VENV_PYTHON) src/python/utils/generate_glossary_site.py -i src/rdf/data/glossary.skos.ttl -m $(ONTO) $(SHAPES) -p $(PREFIXES) -t $(GLOSSARY_TEMPLATE) -a $(DOCS_DIR)/assets/bund -o $(GLOSSARY_SITE_DIR) || { printf "$(NC)"; exit 1; }; \
-	printf "$(NC)"
-
-docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(R_STAMP) ## Generate the glossary pages, render the documentation (website, PDF) and the glossary website
+docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(R_STAMP) ## Generate the glossary pages and render the documentation (website, PDF)
 	@printf "$(BOLD)[*] Rendering documentation with Quarto...$(NC)\n"
 	@printf "$(GREY)"; \
 	quarto render docs > $(QUARTO_LOG) 2>&1 || { printf "$(NC)\n$(RED)ERROR: Quarto rendering failed. See log below:$(NC)\n$(GREY)"; cat $(QUARTO_LOG); printf "$(NC)\n"; exit 1; }; \
 	printf "$(NC)"
-	@$(MAKE) --no-print-directory generate-glossary-site
 
 # ==============================================================================
 # TESTS

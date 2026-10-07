@@ -229,9 +229,7 @@ Das Fachglossar Kontrollwesen definiert die für das landwirtschaftliche Kontrol
 Es dient als *Single Source of Truth* für Begriffsdefinitionen und bildet die Grundlage für das künftige logische Datenmodell.
 Das Glossar wird vom BLW gepflegt und kann aufgrund der Bedürfnisse des Sektors erweitert und angepasst werden.
 
-Das Glossar ist als eigene, verlinkbare Webseite im Stil der Bundesverwaltung verfügbar: [Fachglossar Kontrollwesen](../glossar/index.html).
-Jeder Begriff kann dort über seinen Namen gesucht, nach Themenbereich gefiltert und über einen Link der Form `glossar/index.html#kontrollpunkt` direkt referenziert werden [@swissdesignsystem].
-Die vollständige Liste der Begriffe findet sich zudem in [Anhang C](#sec-appendix-c).
+Die vollständige Liste der Begriffe findet sich in [Anhang C](#sec-appendix-c).
 
 ## Aufbau des Glossars {#sec-glossary-structure}
 

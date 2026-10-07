@@ -5,7 +5,7 @@
 
 This repository contains the eCH standard eCH-0264 «Landwirtschaftliche Kontrolldaten» (agricultural inspection data). It establishes the semantic and technical interoperability of inspection data between the federal administration, the cantons, inspection bodies and label organisations in Switzerland:
 
-- **Fachglossar Kontrollwesen** – a glossary of the Swiss agricultural inspection system as a SKOS concept scheme (`src/rdf/data/glossary.skos.ttl`). It is published as a linkable website in the style of the [design system of the Swiss federal administration](https://swiss.github.io/designsystem/) (`glossar/` on GitHub Pages).
+- **Fachglossar Kontrollwesen** – a glossary of the Swiss agricultural inspection system as a SKOS concept scheme (`src/rdf/data/glossary.skos.ttl`). It is included in the documentation (Anhang C).
 - **Documentation** – the eCH document written in Quarto (`docs/de/index.qmd`), including the use cases and the needs of the stakeholders.
 
 The logical data model and the code lists are developed step by step with the working group and will follow in a later version. A first draft is kept on the branch `feature/datenmodell`; the SHACL shapes will be added to `src/rdf/shapes/model.shacl.ttl`.
@@ -19,7 +19,7 @@ The repository is based on the [semantic web template](https://github.com/blw-of
 5. SHACL-based graph data validation (using `src/rdf/shapes/model.shacl.ttl`)
 6. a customizable Pytest test suite, including glossary integrity checks,
 7. uploading of the final graph to LINDAS
-8. a documentation building pipeline using Quarto, followed by the generation of the glossary website (`src/python/utils/generate_glossary_site.py`)
+8. a documentation building pipeline using Quarto
 
 ## Development Tools
 

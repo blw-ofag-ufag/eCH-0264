@@ -13,11 +13,6 @@ website:
     title: false
     logo: assets/ech.svg
     logo-alt: eCH
-    left:
-      - text: Dokumentation
-        href: de/index.qmd
-      - text: Fachglossar
-        href: glossar/index.html
     right:
       - icon: github
         href: https://github.com/blw-ofag-ufag/eCH-0264
@@ -31,7 +26,7 @@ website:
   announcement:
     icon: info-circle
     dismissable: true
-    content: Diese Seite beinhaltet einen *Working Draft* und kann sich dadurch laufend verändern. Das Fachglossar ist auch als eigene Seite verfügbar.
+    content: Diese Seite beinhaltet einen *Working Draft* und kann sich dadurch laufend verändern.
     type: warning
 
 # Code chunks show only their output; use `#| echo: true` to show the code.
