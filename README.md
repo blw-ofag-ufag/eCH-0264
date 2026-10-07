@@ -10,7 +10,7 @@ This repository contains the eCH standard eCH-0264 «Landwirtschaftliche Kontrol
 
 The logical data model and the code lists are developed step by step with the working group and will follow in a later version. A first draft is kept on the branch `feature/datenmodell`; the SHACL shapes will be added to `src/rdf/shapes/model.shacl.ttl`.
 
-The repository is based on the [semantic web template](https://github.com/blw-ofag-ufag/semantic-web-template) and follows the structure of [eCH-0265](https://github.com/blw-ofag-ufag/eCH-0265). It includes a full semantic web pipeline, including
+The repository is based on the [semantic web template](https://github.com/blw-ofag-ufag/semantic-web-template) and follows the structure of [eCH-0265](https://github.com/blw-ofag-ufag/eCH-0265). It includes a full semantic web pipeline (`make help` lists all targets), including
 
 1. manual data curation (data files in `src/rdf/data`),
 2. data integration from a relational database (using python, specifically `src/python/pipeline/...`),

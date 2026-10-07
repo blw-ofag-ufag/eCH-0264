@@ -57,6 +57,16 @@
 
   // Page: A4 with 2 cm left and 1.5 cm right margin; header and footer are
   // separated from the body by a thin rule.
+  // Documents not yet published (status before "approved"): a red
+  // "PRE-RELEASE" ribbon across the top right corner of the title page.
+  let unpublished = meta("unpublished", default: false)
+  set page(foreground: context if unpublished and counter(page).get().first() == 1 {
+    place(top + right, dx: 4.6cm, dy: 1.85cm, rotate(45deg, origin: center, block(
+      width: 14cm, fill: rgb("#D00D28"), inset: (y: 10pt),
+      align(center, text(fill: white, weight: "bold", size: 12pt)[PRE-RELEASE]),
+    )))
+  })
+
   set page(
     margin: (top: 3.1cm, bottom: 3.2cm, left: 2cm, right: 1.5cm),
     header-ascent: 0.5cm,
@@ -69,7 +79,10 @@
         align: bottom,
         image("../assets/ech.svg", height: 1.14cm),
         meta("tagline", default: "E-Government Standards"),
-        [#meta("page-prefix", default: "Page") #counter(page).display() #meta("page-infix", default: "of") #counter(page).final().first()],
+        // the ribbon of unpublished documents covers this corner on the title page
+        if unpublished and counter(page).get().first() == 1 { [] } else {
+          [#meta("page-prefix", default: "Page") #counter(page).display() #meta("page-infix", default: "of") #counter(page).final().first()]
+        },
       )
       v(0.3cm)
       line(length: 100%, stroke: 0.5pt)
@@ -191,6 +204,11 @@
     *#it.supplement #it.counter.display(it.numbering):* #it.body
   ]
   show footnote.entry: set text(size: 10pt)
+
+  // Figures float like in LaTeX: the text flows on and the figure goes to
+  // the top or bottom of the page, or to the next page if it does not fit.
+  // Tables (kind "quarto-float-tbl") stay inline.
+  show figure.where(kind: "quarto-float-fig"): set figure(placement: auto)
 
   // Tables: bold header row, zebra stripes, rules above and below. Quarto
   // wraps tables in figures, which must be made breakable for long tables.
