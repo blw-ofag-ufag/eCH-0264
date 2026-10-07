@@ -352,31 +352,31 @@ Folgende Personen wirken in der Arbeitsgruppe Landwirtschaftliche Kontrolldaten 
 
 | Name | Organisation |
 |:--|:--|
-| Marc Beringer | Bundesamt für Landwirtschaft BLW |
-| Christian Wilda | Bundesamt für Landwirtschaft BLW |
-| Damian Oswald | Bundesamt für Landwirtschaft BLW |
-| Lea Stauber | Bundesamt für Landwirtschaft BLW |
+| Peter Althaus | IP-Suisse |
 | Matthias Baumann | Bundesamt für Landwirtschaft BLW |
+| Marc Beringer | Bundesamt für Landwirtschaft BLW |
 | Claudia Blumenstein | Bundesamt für Landwirtschaft BLW |
-| Simon Hasler | Bundesamt für Landwirtschaft BLW |
-| Daniel Meyer | Bundesamt für Landwirtschaft BLW |
-| Rahel Schelbert | Bundesamt für Landwirtschaft BLW |
-| Sara Schärrer | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
-| Fiorella Tettamanti | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
-| Yuval Tempelman | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
 | Daniel Bretscher | Agroscope |
 | Egon Brüstle | Modan AG |
-| Sabine Grob | Agriquali Schweizer Bauernverband |
-| Daniel Moos | bio.inspecta AG |
-| Meike Wollenberg Martínez | Mutterkuh Schweiz |
-| Peter Althaus | IP-Suisse |
-| Sara Gomez | Bio Suisse |
-| Monika Schober | Agrosolution AG |
-| Roman Steiger | Kontrolldienst KUT |
+| Lorenz Escher | Koordinationsgruppe Integrierte Produktion KIP |
 | Jonas Eyer | Schweizer Bauernverband SBV |
 | Florian Frauchiger | Vereinigung der Schweizer Kantonstierärztinnen und Kantonstierärzte VSKT |
+| Sara Gomez | Bio Suisse |
+| Sabine Grob | Agriquali Schweizer Bauernverband |
+| Simon Hasler | Bundesamt für Landwirtschaft BLW |
 | Christoph Keller | Vereinigung der Schweizer Kantonstierärztinnen und Kantonstierärzte VSKT |
-| Lorenz Escher | Koordinationsgruppe Integrierte Produktion KIP |
+| Daniel Meyer | Bundesamt für Landwirtschaft BLW |
+| Daniel Moos | bio.inspecta AG |
+| Damian Oswald | Bundesamt für Landwirtschaft BLW |
+| Sara Schärrer | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
+| Rahel Schelbert | Bundesamt für Landwirtschaft BLW |
+| Monika Schober | Agrosolution AG |
+| Lea Stauber | Bundesamt für Landwirtschaft BLW |
+| Roman Steiger | Kontrolldienst KUT |
+| Yuval Tempelman | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
+| Fiorella Tettamanti | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
+| Christian Wilda | Bundesamt für Landwirtschaft BLW |
+| Meike Wollenberg Martínez | Mutterkuh Schweiz |
 | Marie Zufferey | Kanton Wallis |
 
 : Mitglieder der Arbeitsgruppe Landwirtschaftliche Kontrolldaten {#tbl-authors tbl-colwidths="[40,60]"}
