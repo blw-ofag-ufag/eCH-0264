@@ -18,7 +18,7 @@
 
 eCH-0264:glossary a skos:ConceptScheme ;
     schema:name "Fachglossar Kontrollwesen"@de ;
-    schema:description "Das Fachglossar Kontrollwesen definiert die Begriffe des landwirtschaftlichen Kontrollwesens der Schweiz, die für den Austausch und die Wiederverwendung von Kontrolldaten zwischen Bund, Kantonen, Kontrollstellen und Label-Organisationen benötigt werden. Es dient als Single Source of Truth für die semantische Interoperabilität und als Grundlage des logischen Datenmodells von eCH-0264. Definitionen mit Quellenangabe wurden sinngemäss aus der genannten Quelle übernommen."@de ;
+    schema:description "Das Fachglossar Kontrollwesen definiert die Begriffe des landwirtschaftlichen Kontrollwesens der Schweiz, die für den Austausch und die Wiederverwendung von Kontrolldaten zwischen Bund, Kantonen, Kontrollstellen und Label-Organisationen benötigt werden. Es dient als Single Source of Truth für die semantische Interoperabilität und als Grundlage für das künftige logische Datenmodell von eCH-0264. Definitionen mit Quellenangabe wurden sinngemäss aus der genannten Quelle übernommen."@de ;
     schema:version "0.1.0" ;
     schema:dateModified "2026-09-23"^^xsd:date .
 
@@ -214,7 +214,7 @@ term:kontrolleinheit a skos:Concept ;
     schema:name "Kontrolleinheit"@de ;
     schema:alternateName "Kontrollierte Einheit"@de ;
     schema:description "Gesamtheit der Kontrollobjekte, die bei einer Kontrolle gemeinsam kontrolliert werden."@de ;
-    skos:scopeNote "Beispiel: Bio Suisse betrachtet einen Heimbetrieb und einen privaten Sömmerungsbetrieb als gemeinsame Kontrolleinheit. Im Datenmodell wird eine Kontrolleinheit als Liste der Kontrollobjekte einer Kontrolle abgebildet."@de ;
+    skos:scopeNote "Beispiel: Bio Suisse betrachtet einen Heimbetrieb und einen privaten Sömmerungsbetrieb als gemeinsame Kontrolleinheit. Eine Kontrolleinheit kann damit mehrere Kontrollobjekte umfassen."@de ;
     schema:citation "Biospezifische Hinweise und Anforderungen für die AG Kontrolldaten (Bio Suisse, bio.inspecta), 03.06.2026" .
 
 term:identifikator a skos:Concept ;

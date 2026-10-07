@@ -6,18 +6,18 @@
 This repository contains the eCH standard eCH-0264 «Landwirtschaftliche Kontrolldaten» (agricultural inspection data). It establishes the semantic and technical interoperability of inspection data between the federal administration, the cantons, inspection bodies and label organisations in Switzerland:
 
 - **Fachglossar Kontrollwesen** – a glossary of the Swiss agricultural inspection system as a SKOS concept scheme (`src/rdf/data/glossary.skos.ttl`). It is published as a linkable website in the style of the [design system of the Swiss federal administration](https://swiss.github.io/designsystem/) (`glossar/` on GitHub Pages).
-- **Logical data model** – the business objects of inspection data as an OWL ontology (`src/rdf/ontology/model.owl.ttl`) and SHACL shapes (`src/rdf/shapes/model.shacl.ttl`), linked to the glossary with `rdfs:isDefinedBy`.
-- **Code lists** – SKOS concept schemes for inspection domains, result values, inspection reasons and more (`src/rdf/data/codelists.ttl`).
-- **Documentation** – the eCH document written in Quarto (`docs/de/index.qmd`), including the use cases, the needs of the stakeholders and the resolution of conflicting needs.
+- **Documentation** – the eCH document written in Quarto (`docs/de/index.qmd`), including the use cases and the needs of the stakeholders.
+
+The logical data model and the code lists are developed step by step with the working group and will follow in a later version. A first draft is kept on the branch `feature/datenmodell`; the SHACL shapes will be added to `src/rdf/shapes/model.shacl.ttl`.
 
 The repository is based on the [semantic web template](https://github.com/blw-ofag-ufag/semantic-web-template) and follows the structure of [eCH-0265](https://github.com/blw-ofag-ufag/eCH-0265). It includes a full semantic web pipeline, including
 
 1. manual data curation (data files in `src/rdf/data`),
 2. data integration from a relational database (using python, specifically `src/python/pipeline/...`),
-3. OWL-based inferencing (using the ontology in `src/rdf/ontology/model.owl.ttl`),
+3. OWL-based inferencing (using ontologies in `src/rdf/ontology/`),
 4. SPARQL-based processing of the graph (using rules in `src/sparql/processing/...`)
 5. SHACL-based graph data validation (using `src/rdf/shapes/model.shacl.ttl`)
-6. a customizable Pytest test suite, including glossary integrity checks and the validation of the example in `docs/data/example.ttl`,
+6. a customizable Pytest test suite, including glossary integrity checks,
 7. uploading of the final graph to LINDAS
 8. a documentation building pipeline using Quarto, followed by the generation of the glossary website (`src/python/utils/generate_glossary_site.py`)
 

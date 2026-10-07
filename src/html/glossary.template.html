@@ -215,7 +215,6 @@
         <ul>
           <li><a href="{{DOC_URL}}">eCH-0264 Landwirtschaftliche Kontrolldaten</a></li>
           <li><a href="./" aria-current="page">Fachglossar</a></li>
-          <li><a href="{{DOC_URL}}#sec-data-model">Datenmodell</a></li>
           <li><a href="{{REPO_URL}}">GitHub</a></li>
         </ul>
       </div>
@@ -256,14 +255,6 @@
                   <select class="select" id="filter-collection">
                     <option value="all">Alle Themenbereiche</option>
                     {{COLLECTION_OPTIONS}}
-                  </select>
-                </div>
-                <div>
-                  <label class="form__label" for="filter-model">Datenmodell</label>
-                  <select class="select" id="filter-model">
-                    <option value="all">Alle Begriffe</option>
-                    <option value="yes">Nur Begriffe mit Geschäftsobjekt</option>
-                    <option value="no">Nur Begriffe ohne Geschäftsobjekt</option>
                   </select>
                 </div>
               </div>
@@ -345,7 +336,7 @@
   (function () {
     "use strict";
     var PAGE_SIZE = 30;
-    var state = { letter: "all", term: "", collection: "all", model: "all", sort: "a-z", limit: PAGE_SIZE };
+    var state = { letter: "all", term: "", collection: "all", sort: "a-z", limit: PAGE_SIZE };
 
     var list = document.getElementById("result-list");
     var groups = Array.prototype.slice.call(list.querySelectorAll(".glossar-result__group"));
@@ -388,7 +379,6 @@
     function matches(item) {
       if (state.letter !== "all" && item.dataset.letter !== state.letter) return false;
       if (state.collection !== "all" && item.dataset.collections.split(" ").indexOf(state.collection) < 0) return false;
-      if (state.model !== "all" && item.dataset.model !== state.model) return false;
       if (state.term && item.dataset.search.indexOf(fold(state.term)) < 0) return false;
       return true;
     }
@@ -445,7 +435,6 @@
       b.addEventListener("click", function () { if (b.disabled) return; state.letter = b.dataset.letter; reset(true); render(); });
     });
     document.getElementById("filter-collection").addEventListener("change", function (e) { state.collection = e.target.value; reset(true); render(); });
-    document.getElementById("filter-model").addEventListener("change", function (e) { state.model = e.target.value; reset(true); render(); });
     document.getElementById("sorting").addEventListener("change", function (e) { state.sort = e.target.value; render(); });
     loadMore.addEventListener("click", function () { state.limit += PAGE_SIZE; render(); });
 
@@ -486,10 +475,9 @@
       var target = id && document.getElementById(id);
       if (!target || !target.classList.contains("accordion__item")) return;
       if (!matches(target) || target.hidden) {
-        state = { letter: "all", term: "", collection: "all", model: "all", sort: state.sort, limit: items.length };
+        state = { letter: "all", term: "", collection: "all", sort: state.sort, limit: items.length };
         input.value = "";
         document.getElementById("filter-collection").value = "all";
-        document.getElementById("filter-model").value = "all";
         render();
       }
       items.forEach(function (i) { i.classList.remove("is-targeted"); });

@@ -61,7 +61,7 @@ GREY             := \033[0;90m
 BOLD             := \033[1;37m
 NC               := \033[0m
 
-.PHONY: all robot test docs clean check-python venv install-dependencies setup build delete publish generate-shacl-docs generate-glossary-docs generate-codelist-docs generate-glossary-site
+.PHONY: all robot test docs clean check-python venv install-dependencies setup build delete publish generate-shacl-docs generate-glossary-docs generate-glossary-site
 
 # Default target
 all: test docs
@@ -225,12 +225,6 @@ generate-glossary-docs: src/rdf/data/glossary.skos.ttl $(PREFIXES) src/python/ut
 	$(VENV_PYTHON) src/python/utils/generate_glossary_docs.py -i src/rdf/data/glossary.skos.ttl -d $(DOCS_DIR) -p $(PREFIXES) || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
-generate-codelist-docs: src/rdf/data/codelists.ttl $(PREFIXES) src/python/utils/generate_codelist_docs.py | $(VENV)/.requirements-installed.stamp
-	@printf "$(BOLD)[*] Generating code list documentation...$(NC)\n"
-	@printf "$(GREY)"; \
-	$(VENV_PYTHON) src/python/utils/generate_codelist_docs.py -i src/rdf/data/codelists.ttl -d $(DOCS_DIR) -p $(PREFIXES) || { printf "$(NC)"; exit 1; }; \
-	printf "$(NC)"
-
 # The glossary website is written into the Quarto output directory after
 # rendering, so that it is deployed together with the documentation.
 generate-glossary-site: src/rdf/data/glossary.skos.ttl $(ONTO) $(SHAPES) $(PREFIXES) $(GLOSSARY_TEMPLATE) src/python/utils/generate_glossary_site.py | $(VENV)/.requirements-installed.stamp
@@ -239,7 +233,7 @@ generate-glossary-site: src/rdf/data/glossary.skos.ttl $(ONTO) $(SHAPES) $(PREFI
 	$(VENV_PYTHON) src/python/utils/generate_glossary_site.py -i src/rdf/data/glossary.skos.ttl -m $(ONTO) $(SHAPES) -p $(PREFIXES) -t $(GLOSSARY_TEMPLATE) -a $(DOCS_DIR)/assets/bund -o $(GLOSSARY_SITE_DIR) || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
-docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs generate-codelist-docs $(DOCS_UML_PNG)
+docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs
 	@printf "$(BOLD)[*] Rendering documentation with Quarto...$(NC)\n"
 	@printf "$(GREY)"; \
 	quarto render docs > $(QUARTO_LOG) 2>&1 || { printf "$(NC)\n$(RED)ERROR: Quarto rendering failed. See log below:$(NC)\n$(GREY)"; cat $(QUARTO_LOG); printf "$(NC)\n"; exit 1; }; \
@@ -298,4 +292,4 @@ publish: test delete
 
 clean:
 	@printf "$(BOLD)[*] Cleaning build artifacts...$(NC)\n"
-	@rm -rf $(BUILD_DIR) $(VENV) .quarto docs/.quarto tests/__pycache__ docs/index_files docs/*/entities.md docs/*/glossary.md docs/*/codelists.md docs/*/namespaces.md
+	@rm -rf $(BUILD_DIR) $(VENV) .quarto docs/.quarto tests/__pycache__ docs/index_files docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md

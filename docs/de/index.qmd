@@ -3,10 +3,10 @@ title: Landwirtschaftliche Kontrolldaten
 author: eCH Fachgruppe AgriFood
 abstract: |
   Die Weiterverwendung von Daten aus landwirtschaftlichen Kontrollen ist heute limitiert, weil die Akteure des Kontrollwesens unterschiedliche Begriffe und Datenstrukturen verwenden.
-  Dieser Standard schafft dafür die Grundlagen der semantischen und technischen Interoperabilität: ein Fachglossar Kontrollwesen als *Single Source of Truth* für die Begriffe und ein logisches Datenmodell mit den Geschäftsobjekten und Codelisten für den Austausch von Kontrolldaten.
-  Die Bedürfnisse von Bund, Kantonen, Kontrollstellen und Label-Organisationen werden aus konkreten Anwendungsfällen abgeleitet; widersprüchliche Bedürfnisse werden zugunsten der Interoperabilität aufgelöst.
-  Das Datenmodell ist die Grundlage für die Nachfolgelösung von Acontrol und für den Bezug öffentlich-rechtlicher Kontrolldaten über agridata.ch.
-  Glossar, Datenmodell und Codelisten sind als maschinenlesbare *Linked Data* verfügbar.
+  Dieser Standard schafft dafür eine erste Grundlage der semantischen Interoperabilität: das Fachglossar Kontrollwesen als *Single Source of Truth* für die Begriffe.
+  Zudem beschreibt er die Bedürfnisse von Bund, Kantonen, Kontrollstellen und Label-Organisationen, abgeleitet aus konkreten Anwendungsfällen.
+  Darauf aufbauend erarbeitet die Arbeitsgruppe schrittweise ein logisches Datenmodell für den Austausch von Kontrolldaten, das in einer späteren Version dieses Standards folgt.
+  Das Glossar ist als maschinenlesbare *Linked Data* verfügbar.
 lang: de-CH
 keywords:
   - Landwirtschaft
@@ -62,13 +62,11 @@ Die Verhandlungen über konkrete Datenflüsse, die Koordination von Kontrollen u
 Dieser Standard umfasst:
 
 - das **Fachglossar Kontrollwesen** (@sec-glossary), das die Begriffe des landwirtschaftlichen Kontrollwesens definiert,
-- das **logische Datenmodell** (@sec-data-model) mit den Geschäftsobjekten, ihren Merkmalen und den Codelisten,
-- die **Anwendungsfälle und Bedürfnisse** (@sec-use-cases), aus denen das Datenmodell abgeleitet ist, sowie die Auflösung widersprüchlicher Bedürfnisse.
+- die **Anwendungsfälle und Bedürfnisse** (@sec-use-cases) der Akteure des Kontrollwesens.
 
-Das Datenmodell ist bewusst auf der logischen Ebene gehalten.
-Es legt fest, welche Objekte und Merkmale für den Austausch von Kontrolldaten benötigt werden und was sie bedeuten, aber nicht, wie einzelne Systeme wie Acontrol oder die kantonalen Agrarinformationssysteme ihre Daten intern speichern.
-Der Schwerpunkt liegt zunächst auf dem Bezug öffentlich-rechtlicher Kontrolldaten, da hierzu konkrete Anwendungsfälle vorliegen.
-Das Modell ist aber so aufgebaut, dass es privatrechtliche Kontrolldaten gleichwertig abbilden kann.
+Das logische Datenmodell mit den Geschäftsobjekten, ihren Merkmalen und den Codelisten ist nicht Teil dieser Version.
+Die Arbeitsgruppe erarbeitet es schrittweise auf der Grundlage des Glossars und der hier beschriebenen Bedürfnisse.
+Es soll festlegen, welche Objekte und Merkmale für den Austausch von Kontrolldaten benötigt werden und was sie bedeuten, aber nicht, wie einzelne Systeme wie Acontrol oder die kantonalen Agrarinformationssysteme ihre Daten intern speichern.
 
 ## Landwirtschaftliche Kontrollen {#sec-agricultural-inspections}
 
@@ -117,13 +115,13 @@ Insgesamt gibt es in der Schweiz mehrere tausend öffentlich-rechtliche und priv
 ## Kontrolldaten heute {#sec-inspection-data}
 
 Daten aus öffentlich-rechtlichen Kontrollen sind für alle Betriebe, deren Bewirtschafterinnen und Bewirtschafter der Weitergabe zustimmen, über agridata.ch verfügbar.
-Pro Kontrollbereich wird ein Datenprodukt angeboten; alle Datenprodukte haben dieselben Merkmale (@tbl-acontrol-mapping).
+Pro Kontrollbereich wird ein Datenprodukt angeboten; alle Datenprodukte haben dieselben Merkmale.
 Sie umfassen Kontrollen aus dem laufenden und den drei vorangehenden Kalenderjahren beziehungsweise seit dem letzten Bewirtschafterwechsel.
 Die tiefste Ebene ist der Kontrollpunkt mit dem Kontrollergebnis und gegebenenfalls der Mangelbeschreibung; Massnahmen sind nicht enthalten.
 
 ::: {.callout-important}
 Kontrolldaten enthalten keine Stammdaten von Betrieben und Personen, sondern nur Identifikatoren, die als Fremdschlüssel auf die Stammdaten im Agrarpolitischen Informationssystem (AGIS) verweisen.
-Dieser Grundsatz wird im Datenmodell beibehalten.
+Dieser Grundsatz soll im künftigen Datenmodell beibehalten werden.
 :::
 
 # Anwendungsfälle und Bedürfnisse {#sec-use-cases}
@@ -145,7 +143,7 @@ Dieser Grundsatz wird im Datenmodell beibehalten.
 
 Die Anwendungsfälle wurden von Mitgliedern der Arbeitsgruppe eingebracht oder in den Sitzungen der Arbeitsgruppe identifiziert.
 
-| ID | Anwendungsfall | Akteure | Benötigte Geschäftsobjekte |
+| ID | Anwendungsfall | Akteure | Betroffene Begriffe |
 |:--|:--|:--|:--|
 | UC-01 | Eine Label-Organisation bezieht mit Einwilligung der Bewirtschafterin oder des Bewirtschafters öffentlich-rechtliche Kontrolldaten, um auf eigene Kontrollen zu verzichten oder sie zu vereinfachen (zum Beispiel beef control für Mutterkuh Schweiz, IP-Suisse). | Label-Organisation, BLW, Bewirtschafter/in | Kontrolle, Kontrollumfang, Kontrollergebnis, Mangel, Programmteilnahme |
 | UC-02 | Eine Label-Organisation will wissen, ob ein öffentlich-rechtliches Programm (ÖLN, BTS, RAUS, GMF) erfüllt ist; ein Programm kann auch mit einzelnen Mängeln erfüllt sein. | Label-Organisation | Programmteilnahme mit Programmerfüllung, Zertifikat |
@@ -163,7 +161,7 @@ Die Anwendungsfälle wurden von Mitgliedern der Arbeitsgruppe eingebracht oder i
 
 Die Wiederverwendbarkeit öffentlich-rechtlicher Kontrolldaten entspricht nicht den Bedürfnissen der Akteure.
 Das liegt teils an der Form der Daten, die ihre Interpretation erschwert, teils am Umfang der erhobenen Daten.
-Während die Form der bereits erhobenen Daten durch ein neues Datenmodell verbessert werden kann, lässt sich die Datenerhebung selbst nur mit grossem Aufwand erweitern.
+Während die Form der bereits erhobenen Daten durch einheitliche Begriffe und ein künftiges Datenmodell verbessert werden kann, lässt sich die Datenerhebung selbst nur mit grossem Aufwand erweitern.
 
 **Fehlende einheitliche Definitionen.**
 Datenbezügerinnen und Datenbezüger haben Schwierigkeiten, Kontrolldaten zu interpretieren, weil die Begriffe in den Kontrollpunkten nicht einheitlich definiert sind.
@@ -199,62 +197,36 @@ Massnahmen, die Qualifikation der Kontrollperson, die Erhebungsmethode und Nachw
 ## Bedürfnisse {#sec-requirements}
 
 Aus den Anwendungsfällen und den Rückmeldungen der Arbeitsgruppe ergeben sich die folgenden Bedürfnisse an Kontrolldaten.
-Die letzte Spalte zeigt, wie das Datenmodell das Bedürfnis abdeckt.
+Sie bilden die Grundlage für die schrittweise Erarbeitung des Datenmodells.
 
-| ID | Bedürfnis | Quelle | Umsetzung im Datenmodell |
-|:--|:--|:--|:--|
-| B-01 | Gemeinsame, verbindliche Begriffsdefinitionen | Alle, Ziel 2 der AG | Fachglossar; jede Klasse und jedes zentrale Merkmal verweist mit `rdfs:isDefinedBy` auf einen Glossarbegriff |
-| B-02 | Erkennen, welche Kontrollpunkte tatsächlich kontrolliert wurden | BLW, Label-Organisationen | Ausdrückliches Ergebnis «Erfüllt»; ein Ergebnis pro Kontrollpunkt und Kontrollumfang |
-| B-03 | Kontrollpunkte eindeutig referenzieren, auch über Jahre | Label-Organisationen, KIP | Stabiler Identifikator und Fassungen mit Gültigkeitszeitraum |
-| B-04 | Unterjährige Anpassung privatrechtlicher Kontrollpunkte | IP-Suisse, Bio Suisse | Neue Fassung mit eigenem Gültigkeitszeitraum und Verweis auf die ersetzte Fassung |
-| B-05 | Wissen, was genau auf Stufe Kontrollpunkt geprüft wurde | KIP, Bio Suisse | Pflichtfeld Prüfinhalt, optionale Anforderungen, Entsprechungen zwischen Kontrollpunkten |
-| B-06 | Qualifikation der Kontrollperson kennen | KIP, Bio Suisse | Kontrollperson mit Qualifikationen, pseudonymer Identifikator |
-| B-07 | Wissen, wie ein Ergebnis entstanden ist | KIP, VSKT | Erhebungsmethode pro Kontrollergebnis |
-| B-08 | Fotos, Dokumente und Satellitenbilder als Beleg speichern | VSKT | Nachweis zu Kontrolle, Kontrollergebnis und Mangel |
-| B-09 | Kontrollergebnisse bei Bewirtschafterwechsel korrekt zuordnen | KIP | Verantwortliche Bewirtschafterin oder verantwortlicher Bewirtschafter als Pflichtangabe der Kontrolle |
-| B-10 | Eindeutige Identifikation von Betrieb, Produktionsstätte und Tierhaltung | KIP, Mutterkuh Schweiz, Bio Suisse | Getrennte Kontrollobjekte mit typisierten Identifikatoren; Tierhaltung immer mit Betrieb verknüpft |
-| B-11 | Gemeinsame Kontrolleinheit aus mehreren Objekten | Bio Suisse | Eine Kontrolle kann mehrere Kontrollobjekte umfassen |
-| B-12 | Erfüllung von Programmen trotz einzelner Mängel erkennen | Mutterkuh Schweiz | Programmteilnahme mit Programmerfüllung |
-| B-13 | Mängelmeldungen standardisiert und automatisiert übermitteln | bio.inspecta | Mangel mit möglichem Mangel, Behebungsfrist und Empfängern der Meldung |
-| B-14 | Sanktionen und Massnahmen öffentlich- und privatrechtlich abbilden | bio.inspecta, Bio Suisse | Massnahme mit Rechtsnatur, getrennt von den Kontrollergebnissen |
-| B-15 | Provisorische und aktuelle Ergebnisse früh beziehen | Mutterkuh Schweiz, UC-01 | Status der Kontrolle inklusive «Ergebnisse erfasst», Zeitpunkt der letzten Änderung für Delta-Abfragen |
-| B-16 | Zertifikate nicht mehr auf Papier vorlegen | Workshop BLW, Mutterkuh Schweiz | Zertifikat mit Gültigkeitszeitraum und Status |
-| B-17 | Kontrollstellen als einheitliche Stammdaten führen | AGIS, digiFLUX | Kontrollstelle mit Code, UID und Akkreditierung |
-| B-18 | Codelisten statt Freitext | Kontrollstellen, Ziel 4 der AG | Zehn Codelisten als SKOS-Konzeptschemata (@sec-codelists) |
-| B-19 | Unterschiedliche Zugriffsrechte für Kontrollstellen, Vollzug und Label-Organisationen | bio.inspecta | Trennung in Kontrollergebnisse, Mängel und Massnahmen als getrennt freigebbare Objekte (@sec-safety-consideration) |
-
-: Bedürfnisse an Kontrolldaten und ihre Umsetzung im Datenmodell {#tbl-requirements tbl-colwidths="[7,33,20,40]"}
-
-## Zielkonflikte und deren Auflösung {#sec-conflicts}
-
-Einige Bedürfnisse widersprechen sich.
-Die Arbeitsgruppe löst diese Widersprüche nach folgendem Grundsatz:
-
-::: {.callout-tip title="Grundsatz"}
-Wo Bedürfnisse im Widerspruch stehen, hat die **semantische und technische Interoperabilität der Kontrolldaten Vorrang**.
-Eine Lösung wird gewählt, wenn die ausgetauschten Daten danach ohne Rückfrage eindeutig interpretiert und maschinell verarbeitet werden können.
-Der Aufwand der Datenerhebung wird so gering wie möglich gehalten, indem Systeme die Erfassung unterstützen dürfen, solange die ausgetauschten Daten eindeutig bleiben.
-:::
-
-| ID | Zielkonflikt | Entscheid |
+| ID | Bedürfnis | Quelle |
 |:--|:--|:--|
-| Z-01 | **Erfassungsaufwand vs. Aussagekraft:** Kantone und Kontrollpersonen erfassen nur Mängel, um Aufwand zu sparen; Datenbezügerinnen und Datenbezüger müssen erkennen, was kontrolliert wurde. | Jedes Kontrollergebnis wird ausdrücklich übermittelt, auch «Erfüllt». Erfassungssysteme dürfen weiterhin Voreinstellungen anbieten (zum Beispiel «Rubrik ohne Mangel bestätigen»), aber das Ergebnis muss bewusst gesetzt und übermittelt werden. |
-| Z-02 | **Flexibilität vs. Stabilität von Kontrollpunkten:** Label-Organisationen wollen Kontrollpunkte unterjährig anpassen; für den Austausch sollen Kontrollpunkte ein Kalenderjahr konstant sein. | Kontrollpunkte haben einen stabilen Identifikator und liegen in Fassungen mit Gültigkeitszeitraum vor. Jede Änderung erzeugt eine neue Fassung; jedes Ergebnis verweist auf die geprüfte Fassung. Beide Bedürfnisse sind damit erfüllt. |
-| Z-03 | **Kompakte Checklisten vs. detaillierte Anforderungen:** Kontrollpersonen brauchen kurze Kontrollpunkte, und die Beschreibung aller Anforderungen wurde als zu aufwändig abgelehnt (Ziel 6); Label-Organisationen müssen wissen, was geprüft wurde. | Der Kontrollpunkt bleibt die Einheit des Austauschs. Pflicht ist ein Prüfinhalt, der die Begriffe des Glossars verwendet. Anforderungen und Entsprechungen zwischen Kontrollpunkten sind optional und können schrittweise ergänzt werden. |
-| Z-04 | **Sanktionen offenlegen vs. Datenschutz:** Bio-Kontrollstellen benötigen Angaben zu Sanktionen; Sanktionen können besonders schützenswerte Personendaten sein und Einwilligungen verringern. | Mängel und Massnahmen sind getrennte Objekte. Massnahmen werden nur mit eigener Einwilligung ausgetauscht. Für viele Anwendungsfälle genügt die Programmerfüllung, die ohne Details zu Massnahmen auskommt. Die Bewertung eines Mangels bleibt organisationsspezifisch. |
-| Z-05 | **Ausrichtung auf Acontrol vs. unabhängiger Austauschstandard:** Das Datenmodell soll die Nachfolgelösung von Acontrol vorbereiten; VSKT und KIP verlangen, den Austauschstandard von der internen Struktur zu trennen. | Das Modell ist ein logisches Austauschmodell ohne Vorgaben zur physischen Speicherung. Die Abbildung der heutigen Acontrol-Merkmale (@tbl-acontrol-mapping) zeigt die Anschlussfähigkeit, ohne das Modell daran zu binden. |
-| Z-06 | **Minimaler Umfang vs. umfassendes nationales Schema:** Die KIP warnt vor Überfrachtung; bio.inspecta fordert, von Beginn an umfassend zu denken. | Das Modell deckt alle gemeldeten Bedürfnisse ab, kennzeichnet aber nur die für den Austausch unverzichtbaren Merkmale als Pflicht. Erweiterungen wie Anforderungen, Nachweise oder Massnahmen sind optional. |
-| Z-07 | **Aggregierte vs. einzelne Merkmale:** Daten werden für den Vollzugszweck aggregiert erhoben (zum Beispiel Tierkategorien); Datenbezügerinnen und Datenbezüger wünschen einzelne Merkmale. | Der Standard erweitert die Datenerhebung nicht, verlangt aber, dass Werte über Codelisten mit IRI statt als Freitext übermittelt werden, damit sie zuverlässig abgebildet werden können. |
-| Z-08 | **Identifikatoren:** agridata.ch arbeitet mit UID und BUR-Nummer, einige Label-Organisationen nur mit der TVD-Nummer. | Betrieb, Produktionsstätte und Tierhaltung werden getrennt modelliert. Eine Tierhaltung ist immer mit ihrem Betrieb verknüpft, sodass beide Sichten möglich sind. Stammdaten bleiben in AGIS. |
-| Z-09 | **Kontrollart vs. Kontrollgrund:** Im Material werden Grundkontrolle und Nachkontrolle teils als Kontrollart, teils als Kontrollgrund bezeichnet. | «Kontrollgrund» bezeichnet den Anlass (Grundkontrolle, risikobasierte Kontrolle usw.), «Kontrollart» den Ort (vor Ort oder im Büro). Ob eine Kontrolle angemeldet war, ist ein eigenes Merkmal. |
-| Z-10 | **Datenbezug vs. Datenaustausch in beide Richtungen:** Die bisherigen Anwendungsfälle betreffen den Bezug öffentlich-rechtlicher Daten; IP-Suisse erwartet Gegenseitigkeit. | Alle Geschäftsobjekte tragen die Rechtsnatur und die Herausgeberin. Das Modell ist dadurch symmetrisch und kann später auch für privatrechtliche Daten genutzt werden, ohne es zu ändern. |
+| B-01 | Gemeinsame, verbindliche Begriffsdefinitionen | Alle, Ziel 2 der AG |
+| B-02 | Erkennen, welche Kontrollpunkte tatsächlich kontrolliert wurden | BLW, Label-Organisationen |
+| B-03 | Kontrollpunkte eindeutig referenzieren, auch über Jahre | Label-Organisationen, KIP |
+| B-04 | Unterjährige Anpassung privatrechtlicher Kontrollpunkte | IP-Suisse, Bio Suisse |
+| B-05 | Wissen, was genau auf Stufe Kontrollpunkt geprüft wurde | KIP, Bio Suisse |
+| B-06 | Qualifikation der Kontrollperson kennen | KIP, Bio Suisse |
+| B-07 | Wissen, wie ein Ergebnis entstanden ist | KIP, VSKT |
+| B-08 | Fotos, Dokumente und Satellitenbilder als Beleg speichern | VSKT |
+| B-09 | Kontrollergebnisse bei Bewirtschafterwechsel korrekt zuordnen | KIP |
+| B-10 | Eindeutige Identifikation von Betrieb, Produktionsstätte und Tierhaltung | KIP, Mutterkuh Schweiz, Bio Suisse |
+| B-11 | Gemeinsame Kontrolleinheit aus mehreren Objekten | Bio Suisse |
+| B-12 | Erfüllung von Programmen trotz einzelner Mängel erkennen | Mutterkuh Schweiz |
+| B-13 | Mängelmeldungen standardisiert und automatisiert übermitteln | bio.inspecta |
+| B-14 | Sanktionen und Massnahmen öffentlich- und privatrechtlich abbilden | bio.inspecta, Bio Suisse |
+| B-15 | Provisorische und aktuelle Ergebnisse früh beziehen | Mutterkuh Schweiz, UC-01 |
+| B-16 | Zertifikate nicht mehr auf Papier vorlegen | Workshop BLW, Mutterkuh Schweiz |
+| B-17 | Kontrollstellen als einheitliche Stammdaten führen | AGIS, digiFLUX |
+| B-18 | Codelisten statt Freitext | Kontrollstellen, Ziel 4 der AG |
+| B-19 | Unterschiedliche Zugriffsrechte für Kontrollstellen, Vollzug und Label-Organisationen | bio.inspecta |
 
-: Zielkonflikte und ihre Auflösung zugunsten der Interoperabilität {#tbl-conflicts tbl-colwidths="[7,43,50]"}
+: Bedürfnisse an Kontrolldaten {#tbl-requirements tbl-colwidths="[8,57,35]"}
 
 # Fachglossar Kontrollwesen {#sec-glossary}
 
 Das Fachglossar Kontrollwesen definiert die für das landwirtschaftliche Kontrollwesen relevanten Begriffe und ihre Beziehungen.
-Es dient als *Single Source of Truth* für Begriffsdefinitionen und ist die Grundlage der Geschäftsobjekte des Datenmodells.
+Es dient als *Single Source of Truth* für Begriffsdefinitionen und bildet die Grundlage für das künftige logische Datenmodell.
 Das Glossar wird vom BLW gepflegt und kann aufgrund der Bedürfnisse des Sektors erweitert und angepasst werden.
 
 Das Glossar ist als eigene, verlinkbare Webseite im Stil der Bundesverwaltung verfügbar: [Fachglossar Kontrollwesen](../glossar/index.html).
@@ -288,129 +260,10 @@ Die Definitionen folgen den Grundsätzen der Terminologiearbeit gemäss ISO 704 
 Wo im Material für denselben Sachverhalt unterschiedliche Begriffe verwendet werden, legt das Glossar eine Vorzugsbenennung fest und führt die übrigen als Synonyme, zum Beispiel «Mangel» mit den Synonymen «Beanstandung» und «Abweichung».
 Uneinheitlich verwendete Begriffe wie «Teilbetrieb» werden mit einer Anmerkung auf die rechtlich definierten Begriffe verwiesen.
 
-# Datenmodell {#sec-data-model}
-
-## Grundsätze {#sec-model-principles}
-
-Das Datenmodell «Landwirtschaftliche Kontrolldaten» beschreibt die Geschäftsobjekte, die für den Austausch und die Wiederverwendung von Kontrolldaten benötigt werden.
-Es beruht auf folgenden Grundsätzen:
-
-1. **Logisches Modell:** Das Modell legt Objekte, Merkmale, Kardinalitäten und Codelisten fest, aber nicht die physische Speicherung in einzelnen Systemen.
-2. **Begriffe aus dem Glossar:** Jede Klasse und jedes zentrale Merkmal verweist mit `rdfs:isDefinedBy` auf einen Begriff des Fachglossars.
-3. **Stammdaten und Bewegungsdaten:** Kontrollpunkte, Kontrollrubriken, Regelwerke, Programme und Kontrollstellen sind Stammdaten; Kontrollen, Kontrollergebnisse, Mängel und Massnahmen sind Bewegungsdaten, die auf Stammdaten verweisen.
-4. **Identifikatoren statt Stammdaten:** Betriebe und Personen werden nur über Identifikatoren referenziert; ihre Stammdaten bleiben in AGIS und den kantonalen Systemen.
-5. **Ausdrückliche Ergebnisse:** Es gibt keine stillschweigenden Standardwerte; jedes Kontrollergebnis wird mit seinem Wert übermittelt.
-6. **Fassungen:** Regelwerke und Kontrollpunkte werden in Fassungen mit Gültigkeitszeitraum geführt.
-7. **Trennung nach Schutzbedarf:** Kontrollergebnisse, Mängel und Massnahmen sind getrennte Objekte, damit sie unterschiedlich freigegeben werden können.
-8. **Symmetrie:** Öffentlich-rechtliche und privatrechtliche Daten werden mit denselben Objekten abgebildet und über die Rechtsnatur unterschieden.
-
-## Nutzung von Semantic-Web-Technologien {#sec-linked-data}
-
-Wie in eCH-0265 wird das Datenmodell durch eine RDFS/OWL-Ontologie abgebildet und mittels SHACL-Shapes validiert [@rdf;@owl2;@shacl].
-Die Codelisten und das Glossar sind SKOS-Konzeptschemata [@skos].
-Für weiterführende Informationen zur Publikation und Nutzung von vernetzten Daten wird auf @eCH-0205:1.0.0 verwiesen.
-
-![UML-Diagramm des Datenmodells von eCH-0264. Dieses Diagramm wurde automatisch mithilfe von SHACL PLAY! [@francart2020shacl] aus den SHACL-Spezifikationen generiert.](../assets/img/uml.png){#fig-uml width="100%" .lightbox}
-
-@tbl-business-objects gibt einen Überblick über die Geschäftsobjekte.
-Im Zentrum steht die Kontrolle (`eCH-0264:Inspection`): Sie bezieht sich auf ein oder mehrere Kontrollobjekte, wird von einer Kontrollstelle durchgeführt und enthält pro geprüfter Kontrollrubrik einen Kontrollumfang mit dem Kontrollgrund und den Kontrollergebnissen.
-Jedes Kontrollergebnis verweist auf die geprüfte Fassung eines Kontrollpunkts und bei einem Mangel auf den festgestellten Sachverhalt; Massnahmen verweisen ihrerseits auf Mängel.
-
-| Geschäftsobjekt | Klasse | Art | Zweck |
-|:--|:--|:--|:--|
-| Organisation | `eCH-0264:Organization` | Stammdaten | Herausgeberinnen, Auftraggeberinnen, Vollzugsbehörden, Label-Organisationen |
-| Kontrollstelle | `eCH-0264:InspectionBody` | Stammdaten | Durchführende Stelle mit Code, UID und Akkreditierung |
-| Regelwerk | `eCH-0264:Regulation` | Stammdaten | Fassung eines Erlasses oder einer Richtlinie |
-| Anforderung | `eCH-0264:Requirement` | Stammdaten | Einzelne Vorgabe eines Regelwerks |
-| Programm | `eCH-0264:Program` | Stammdaten | ÖLN, Direktzahlungs- oder Label-Programm |
-| Kontrollrubrik | `eCH-0264:InspectionRubric` | Stammdaten | Sammlung von Kontrollpunkten in einem Kontrollbereich |
-| Punktegruppe | `eCH-0264:PointGroup` | Stammdaten | Optionale Gliederung innerhalb einer Rubrik |
-| Kontrollpunkt | `eCH-0264:ControlPoint` | Stammdaten | Fassung eines Prüfgegenstands mit Prüfinhalt und Rechtsgrundlage |
-| Möglicher Mangel | `eCH-0264:PossibleDeficiency` | Stammdaten | Vordefinierte Abweichung zu einem Kontrollpunkt |
-| Qualifikation | `eCH-0264:Qualification` | Stammdaten | Befähigung einer Kontrollperson |
-| Betrieb, Produktionsstätte, Tierhaltung | `eCH-0264:Farm`, `eCH-0264:ProductionSite`, `eCH-0264:AnimalHolding` | Referenz | Kontrollobjekte, nur mit Identifikatoren |
-| Bewirtschafter/in | `eCH-0264:FarmManager` | Referenz | Verantwortliche Person, nur mit Identifikatoren |
-| Kontrollperson | `eCH-0264:Inspector` | Referenz | Durchführende Person mit Qualifikationen |
-| Kontrolle | `eCH-0264:Inspection` | Bewegungsdaten | Überprüfung an einem Datum |
-| Kontrollumfang | `eCH-0264:InspectionScope` | Bewegungsdaten | Geprüfte Rubrik mit Kontrollgrund |
-| Kontrollergebnis | `eCH-0264:ControlPointResult` | Bewegungsdaten | Ergebnis pro Kontrollpunkt |
-| Mangel | `eCH-0264:Deficiency` | Bewegungsdaten | Festgestellter Sachverhalt |
-| Massnahme | `eCH-0264:Measure` | Bewegungsdaten | Folge eines Mangels |
-| Nachweis | `eCH-0264:Evidence` | Bewegungsdaten | Foto, Dokument oder Satellitenbild |
-| Programmteilnahme | `eCH-0264:ProgramParticipation` | Bewegungsdaten | Teilnahme und Programmerfüllung |
-| Zertifikat | `eCH-0264:Certificate` | Bewegungsdaten | Bestätigung einer Zertifizierungsstelle |
-
-: Geschäftsobjekte des Datenmodells {#tbl-business-objects tbl-colwidths="[20,30,15,35]"}
-
-## Datenregeln {#sec-data-rules}
-
-Zusätzlich zu Kardinalitäten und Wertebereichen prüfen die SHACL-Shapes folgende fachlichen Regeln:
-
-- Ein Kontrollergebnis mit dem Wert «Mangel» muss mindestens einen Mangel referenzieren, und nur ein solches darf Mängel referenzieren.
-- Alle Kontrollergebnisse eines Kontrollumfangs betreffen Kontrollpunkte der geprüften Kontrollrubrik.
-- Ein Kontrollpunkt hat innerhalb eines Kontrollumfangs höchstens ein Kontrollergebnis.
-- Eine neue Fassung eines Kontrollpunkts hat denselben stabilen Identifikator wie die ersetzte Fassung.
-- Das Anfangsdatum eines Gültigkeitszeitraums liegt nicht nach dem Enddatum.
-
-## Abbildung der heutigen Acontrol-Merkmale {#sec-acontrol-mapping}
-
-@tbl-acontrol-mapping zeigt, wie die Merkmale der heutigen Acontrol-Datenprodukte auf agridata.ch im Datenmodell abgebildet werden.
-
-| Merkmal Acontrol | Abbildung im Datenmodell |
-|:--|:--|
-| BUR | `eCH-0264:burNumber` von Betrieb oder Produktionsstätte |
-| KT_ID_B | `eCH-0264:cantonalFarmId` des Betriebs |
-| UID | `eCH-0264:uid` des Betriebs |
-| KT_ID_P | `eCH-0264:cantonalPersonId` der verantwortlichen Bewirtschafterin oder des verantwortlichen Bewirtschafters |
-| TVD ID | `eCH-0264:tvdNumber` der Tierhaltung |
-| Kontrollart | `eCH-0264:inspectionModality` und `eCH-0264:announced` der Kontrolle (Abgleich der Werte ausstehend, siehe Z-09) |
-| Kontrollstelle | `eCH-0264:inspectionBody` der Kontrolle |
-| Kontrolldatum | `eCH-0264:inspectionDate` der Kontrolle |
-| Kontrollbereich | `eCH-0264:inspectionDomain` der Kontrollrubrik |
-| ID Rubrik, Rubrik Kurzname | `schema:identifier` und `schema:name` der Kontrollrubrik |
-| Ergebnis Rubrik | `eCH-0264:rubricResult` des Kontrollumfangs |
-| Kontrollgrund | `eCH-0264:inspectionReason` des Kontrollumfangs |
-| ID Punktegruppe, Punktegruppe Kurzname | `schema:identifier` und `schema:name` der Punktegruppe |
-| ID Kontrollpunkt, Kontrollpunkt Kurzname | `schema:identifier` und `schema:name` des Kontrollpunkts |
-| Kontrollergebnis | `eCH-0264:resultValue` des Kontrollergebnisses |
-| Mangelbeschreibung | `schema:description` des Mangels |
-
-: Abbildung der Merkmale der Acontrol-Datenprodukte {#tbl-acontrol-mapping tbl-colwidths="[35,65]"}
-
-Neu hinzu kommen unter anderem die ausdrückliche Angabe «Erfüllt», die Fassung und der Prüfinhalt des Kontrollpunkts, die Erhebungsmethode, die Qualifikation der Kontrollperson, Nachweise, Massnahmen, die Programmerfüllung und der Status der Kontrolle.
-
-## Beispiel {#sec-example}
-
-Das folgende fiktive Beispiel zeigt eine unangemeldete Grundkontrolle der Rubrik RAUS Milchkühe mit einem erfüllten Kontrollpunkt und einem Mangel.
-Eine Label-Organisation hat ihren eigenen Kontrollpunkt als gleichwertig (`skos:exactMatch`) mit dem öffentlich-rechtlichen Kontrollpunkt gekennzeichnet und kann sich deshalb auf das öffentlich-rechtliche Ergebnis stützen.
-Obwohl ein Mangel festgestellt wurde, gilt das Programm als erfüllt.
-Das Beispiel wird automatisch gegen die SHACL-Shapes validiert.
-
-``` turtle
-{{< include ../data/example.ttl >}}
-```
-
-## Namespaces {#sec-namespaces}
-
-@tbl-namespaces listet die Präfixe und Namespaces, die in diesem Dokument verwendet werden. Ein Präfix steht stellvertretend für eine Namespace-IRI, den gemeinsamen Anfang der IRIs eines Vokabulars.
-
-{{< include namespaces.md >}}
-
-# Klassen {#sec-classes}
-
-{{< include entities.md >}}
-
-# Codelisten {#sec-codelists}
-
-Alle Codelisten sind SKOS-Konzeptschemata; ihre Werte sind mit einer dauerhaften IRI referenzierbar.
-Codelisten, die als «Entwurf» gekennzeichnet sind, beruhen auf dem Material der Arbeitsgruppe und müssen noch mit dem Merkmalskatalog Acontrol abgeglichen werden.
-
-{{< include codelists.md >}}
-
 # Instruktionen zur Datenintegration {#sec-data-retrieval}
 
-Glossar, Datenmodell und Codelisten sind als _Linked Data_ modelliert und werden nach der Verabschiedung auf [LINDAS](https://lindas.admin.ch/), dem Linked-Data-Dienst der Bundesverwaltung, publiziert.
-Sie können dann mit der Abfragesprache SPARQL bezogen werden [@sparql_query_language].
+Das Glossar ist als _Linked Data_ modelliert und wird nach der Verabschiedung auf [LINDAS](https://lindas.admin.ch/), dem Linked-Data-Dienst der Bundesverwaltung, publiziert.
+Es kann dann mit der Abfragesprache SPARQL bezogen werden [@sparql_query_language].
 Die folgende Abfrage liefert zum Beispiel alle Begriffe des Fachglossars mit ihrer Definition:
 
 ``` rq
@@ -427,20 +280,20 @@ WHERE {
 ORDER BY ?name
 ```
 
-Bis zur Publikation können die Turtle-Dateien direkt aus dem Repository bezogen werden; das Glossar steht zudem auf der [Glossar-Webseite](../glossar/index.html) zum Download bereit.
+Bis zur Publikation kann die Turtle-Datei direkt aus dem Repository bezogen werden; sie steht zudem auf der [Glossar-Webseite](../glossar/index.html) zum Download bereit.
 
 # Governance {#sec-governance}
 
-Damit das Glossar und das Datenmodell verlässlich bleiben, schlägt die Arbeitsgruppe folgende Governance vor:
+Damit das Glossar verlässlich bleibt, schlägt die Arbeitsgruppe folgende Governance vor:
 
-- **Verantwortung:** Das BLW pflegt Glossar, Datenmodell und Codelisten im Rahmen der eCH-Fachgruppe AgriFood. Fachliche Entscheide werden in der Arbeitsgruppe Landwirtschaftliche Kontrolldaten vorbereitet.
-- **Änderungsprozess:** Änderungsanträge werden als GitHub-Issue oder über <agridata.ch@blw.admin.ch> eingereicht, in der Arbeitsgruppe besprochen und als Pull Request umgesetzt. Automatisierte Tests stellen sicher, dass Glossar und Modell konsistent bleiben.
-- **Versionierung:** Glossar und Datenmodell werden nach Semantic Versioning versioniert. Nur eine inkompatible Änderung erhöht die Hauptversion und damit den Namensraum (`https://agriculture.ld.admin.ch/eCH-0264/1/`).
-- **Jahreszyklus:** Änderungen an den Codelisten werden auf die jährliche Veröffentlichung der öffentlich-rechtlichen Kontrollpunkte im Herbst abgestimmt.
+- **Verantwortung:** Das BLW pflegt das Glossar im Rahmen der eCH-Fachgruppe AgriFood. Fachliche Entscheide werden in der Arbeitsgruppe Landwirtschaftliche Kontrolldaten vorbereitet.
+- **Änderungsprozess:** Änderungsanträge werden als GitHub-Issue oder über <agridata.ch@blw.admin.ch> eingereicht, in der Arbeitsgruppe besprochen und als Pull Request umgesetzt. Automatisierte Tests stellen sicher, dass das Glossar konsistent bleibt.
+- **Versionierung:** Das Glossar wird nach Semantic Versioning versioniert. Nur eine inkompatible Änderung erhöht die Hauptversion und damit den Namensraum (`https://agriculture.ld.admin.ch/eCH-0264/1/`).
+- **Jahreszyklus:** Änderungen am Glossar werden auf die jährliche Veröffentlichung der öffentlich-rechtlichen Kontrollpunkte im Herbst abgestimmt.
 
 # Offene Punkte {#sec-open-issues}
 
-- Abgleich der Codelisten «Kontrollgrund» und «Kontrollart» mit den Werten des Merkmalskatalogs Acontrol.
+- Schrittweise Erarbeitung des logischen Datenmodells und der Codelisten mit der Arbeitsgruppe, einschliesslich des Abgleichs mit dem Merkmalskatalog Acontrol.
 - Klärung, ob die Kontrollbereiche 04, 10 und 30 als Datenprodukte angeboten werden sollen.
 - Validierung der Definitionen mit der Arbeitsgruppe, insbesondere der Begriffe aus dem privatrechtlichen Bereich.
 - Abstimmung mit der Benutzergruppe Acontrol und den Workshops von BLW, BLV und Kantonen zur Nachfolgelösung von Acontrol.
@@ -452,11 +305,11 @@ Damit das Glossar und das Datenmodell verlässlich bleiben, schlägt die Arbeits
 Bei der Umsetzung dieses Standards sind die massgeblichen rechtlichen Grundlagen zu beachten, insbesondere das Bundesgesetz über den Datenschutz (DSG), das Informationssicherheitsgesetz (ISG) und die Verordnung über Informationssysteme im Bereich der Landwirtschaft [@islv].
 Kontrolldaten beziehen sich auf Bewirtschafterinnen und Bewirtschafter und sind damit Personendaten.
 Verfügungen mit Sanktionen können besonders schützenswerte Personendaten sein.
-Das Datenmodell unterstützt einen sparsamen Umgang mit diesen Daten:
+Das künftige Datenmodell soll einen sparsamen Umgang mit diesen Daten unterstützen:
 
 - Kontrolldaten enthalten nur Identifikatoren und keine Stammdaten von Personen.
 - Kontrollpersonen können pseudonym identifiziert werden.
-- Kontrollergebnisse, Mängel und Massnahmen sind getrennte Objekte, sodass sie mit unterschiedlichen Einwilligungen und Zugriffsrechten weitergegeben werden können.
+- Kontrollergebnisse, Mängel und Massnahmen werden getrennt abgebildet, sodass sie mit unterschiedlichen Einwilligungen und Zugriffsrechten weitergegeben werden können.
 - Nachweise werden nicht eingebettet, sondern über eine Adresse referenziert, deren Zugriff geschützt werden kann.
 
 Die Weitergabe von Kontrolldaten an Dritte setzt ein Einverständnis der Bewirtschafterin oder des Bewirtschafters voraus, das über agridata.ch oder im Vertrag mit einer Label-Organisation erteilt wird.
