@@ -139,24 +139,6 @@ Dieser Grundsatz soll im künftigen Datenmodell beibehalten werden.
 
 : Akteure des landwirtschaftlichen Kontrollwesens {#tbl-actors tbl-colwidths="[25,35,40]"}
 
-## Anwendungsfälle {#sec-use-case-list}
-
-Die Anwendungsfälle wurden von Mitgliedern der Arbeitsgruppe eingebracht oder in den Sitzungen der Arbeitsgruppe identifiziert.
-
-| ID | Anwendungsfall | Akteure | Betroffene Begriffe |
-|:--|:--|:--|:--|
-| UC-01 | Eine Label-Organisation bezieht mit Einwilligung der Bewirtschafterin oder des Bewirtschafters öffentlich-rechtliche Kontrolldaten, um auf eigene Kontrollen zu verzichten oder sie zu vereinfachen (zum Beispiel beef control für Mutterkuh Schweiz, IP-Suisse). | Label-Organisation, BLW, Bewirtschafter/in | Kontrolle, Kontrollumfang, Kontrollergebnis, Mangel, Programmteilnahme |
-| UC-02 | Eine Label-Organisation will wissen, ob ein öffentlich-rechtliches Programm (ÖLN, BTS, RAUS, GMF) erfüllt ist; ein Programm kann auch mit einzelnen Mängeln erfüllt sein. | Label-Organisation | Programmteilnahme mit Programmerfüllung, Zertifikat |
-| UC-03 | Eine Kontrollstelle meldet Mängel aus öffentlich-rechtlichen Kontrollen strukturiert an die zuständigen Kantone, statt per E-Mail. | Kontrollstelle, Kantone | Mangel, Massnahme, Organisation |
-| UC-04 | Eine Organisation prüft, welche ihrer Kontrollpunkte durch Kontrollpunkte einer anderen Herausgeberin bereits abgedeckt sind (zum Beispiel QM Schweizer Fleisch und Tierschutz, Demeter und Bio Suisse). | Label-Organisationen, Bund | Kontrollpunkt, Anforderung, Entsprechung von Kontrollpunkten |
-| UC-05 | Kontrollergebnisse werden bei einem Bewirtschafterwechsel der verantwortlichen Person zugeordnet, damit Nachfolgerinnen und Nachfolger nicht mit Mängeln konfrontiert werden. | Kantone, Label-Organisationen | Kontrolle, Bewirtschafter/in |
-| UC-06 | Kontrollergebnisse eines Betriebs mit Produktionsstätten in mehreren Kantonen werden der richtigen Produktionsstätte zugeordnet. | Kantone, Kontrollstellen | Betrieb, Produktionsstätte, Tierhaltung |
-| UC-07 | Das BLW plausibilisiert die jährlich gelieferten Kontrolldaten und erkennt, welche Kontrollpunkte tatsächlich kontrolliert wurden. | BLW, Kantone | Kontrollumfang, Kontrollergebnis |
-| UC-08 | Kontrollergebnisse werden durch Fotos, Dokumente oder Satellitenbilder belegt und automatisiert oder aufgrund von Selbstdeklarationen erzeugt. | Kontrollstellen, Kantone, BLV | Nachweis, Erhebungsmethode |
-| UC-09 | Bewirtschafterinnen und Bewirtschafter und Kontrollstellen sehen, welche Kontrollpunkte für einen Betrieb gelten. | Bewirtschafter/in, Kontrollstellen | Kontrollpunkt, Programmteilnahme |
-
-: Anwendungsfälle für Kontrolldaten {#tbl-use-cases tbl-colwidths="[8,52,18,22]"}
-
 ## Einschränkungen der heutigen Kontrolldaten {#sec-limitations}
 
 Die Wiederverwendbarkeit öffentlich-rechtlicher Kontrolldaten entspricht nicht den Bedürfnissen der Akteure.
@@ -193,35 +175,6 @@ Zudem stehen Ergebnisse oft erst nach der Plausibilisierung im Folgejahr zur Ver
 
 **Fehlende Angaben.**
 Massnahmen, die Qualifikation der Kontrollperson, die Erhebungsmethode und Nachweise wie Fotos sind in den heutigen Kontrolldaten nicht enthalten.
-
-## Bedürfnisse {#sec-requirements}
-
-Aus den Anwendungsfällen und den Rückmeldungen der Arbeitsgruppe ergeben sich die folgenden Bedürfnisse an Kontrolldaten.
-Sie bilden die Grundlage für die schrittweise Erarbeitung des Datenmodells.
-
-| ID | Bedürfnis | Quelle |
-|:--|:--|:--|
-| B-01 | Gemeinsame, verbindliche Begriffsdefinitionen | Alle, Ziel 2 der AG |
-| B-02 | Erkennen, welche Kontrollpunkte tatsächlich kontrolliert wurden | BLW, Label-Organisationen |
-| B-03 | Kontrollpunkte eindeutig referenzieren, auch über Jahre | Label-Organisationen, KIP |
-| B-04 | Unterjährige Anpassung privatrechtlicher Kontrollpunkte | IP-Suisse, Bio Suisse |
-| B-05 | Wissen, was genau auf Stufe Kontrollpunkt geprüft wurde | KIP, Bio Suisse |
-| B-06 | Qualifikation der Kontrollperson kennen | KIP, Bio Suisse |
-| B-07 | Wissen, wie ein Ergebnis entstanden ist | KIP, VSKT |
-| B-08 | Fotos, Dokumente und Satellitenbilder als Beleg speichern | VSKT |
-| B-09 | Kontrollergebnisse bei Bewirtschafterwechsel korrekt zuordnen | KIP |
-| B-10 | Eindeutige Identifikation von Betrieb, Produktionsstätte und Tierhaltung | KIP, Mutterkuh Schweiz, Bio Suisse |
-| B-11 | Gemeinsame Kontrolleinheit aus mehreren Objekten | Bio Suisse |
-| B-12 | Erfüllung von Programmen trotz einzelner Mängel erkennen | Mutterkuh Schweiz |
-| B-13 | Mängelmeldungen standardisiert und automatisiert übermitteln | bio.inspecta |
-| B-14 | Sanktionen und Massnahmen öffentlich- und privatrechtlich abbilden | bio.inspecta, Bio Suisse |
-| B-15 | Provisorische und aktuelle Ergebnisse früh beziehen | Mutterkuh Schweiz, UC-01 |
-| B-16 | Zertifikate nicht mehr auf Papier vorlegen | Workshop BLW, Mutterkuh Schweiz |
-| B-17 | Kontrollstellen als einheitliche Stammdaten führen | AGIS, digiFLUX |
-| B-18 | Codelisten statt Freitext | Kontrollstellen, Ziel 4 der AG |
-| B-19 | Unterschiedliche Zugriffsrechte für Kontrollstellen, Vollzug und Label-Organisationen | bio.inspecta |
-
-: Bedürfnisse an Kontrolldaten {#tbl-requirements tbl-colwidths="[8,57,35]"}
 
 # Fachglossar Kontrollwesen {#sec-glossary}
 
@@ -266,15 +219,6 @@ Damit das Glossar verlässlich bleibt, schlägt die Arbeitsgruppe folgende Gover
 - **Änderungsprozess:** Änderungsanträge werden als GitHub-Issue oder über <agridata.ch@blw.admin.ch> eingereicht, in der Arbeitsgruppe besprochen und als Pull Request umgesetzt. Automatisierte Tests stellen sicher, dass das Glossar konsistent bleibt.
 - **Versionierung:** Das Glossar wird nach Semantic Versioning versioniert. Nur eine inkompatible Änderung erhöht die Hauptversion und damit den Namensraum (`https://agriculture.ld.admin.ch/eCH-0264/1/`).
 - **Jahreszyklus:** Änderungen am Glossar werden auf die jährliche Veröffentlichung der öffentlich-rechtlichen Kontrollpunkte im Herbst abgestimmt.
-
-# Offene Punkte {#sec-open-issues}
-
-- Schrittweise Erarbeitung des logischen Datenmodells und der Codelisten mit der Arbeitsgruppe, einschliesslich des Abgleichs mit dem Merkmalskatalog Acontrol.
-- Klärung, ob die Kontrollbereiche 04, 10 und 30 als Datenprodukte angeboten werden sollen.
-- Validierung der Definitionen mit der Arbeitsgruppe, insbesondere der Begriffe aus dem privatrechtlichen Bereich.
-- Abstimmung mit der Benutzergruppe Acontrol und den Workshops von BLW, BLV und Kantonen zur Nachfolgelösung von Acontrol.
-- Klärung der rechtlichen Interoperabilität für den Austausch privatrechtlicher Kontrolldaten.
-- Übersetzung von Glossar und Dokumentation ins Französische und Italienische.
 
 # Haftungsausschluss {#sec-disclaimer}
 
