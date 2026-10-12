@@ -1,0 +1,287 @@
+references:
+- author:
+  - family: Berners-Lee
+    given: Tim
+  - family: Hendler
+    given: James
+  - family: Lassila
+    given: Ora
+  container-title: "Linking the world's information: essays on Tim
+    Berners-Lee's invention of the World Wide Web"
+  id: berners2023semantic
+  issued: 2023
+  page: 91-103
+  title: "The Semantic Web: A new form of Web content that is meaningful
+    to computers will unleash a revolution of new possibilities"
+  title-short: The Semantic Web
+  type: chapter
+- author:
+  - family: Jackson
+    given: Rebecca C
+  - family: Balhoff
+    given: James P
+  - family: Douglass
+    given: Eric
+  - family: Harris
+    given: Nomi L
+  - family: Mungall
+    given: Christopher J
+  - family: Overton
+    given: James A
+  container-title: BMC bioinformatics
+  id: jackson2019robot
+  issue: 1
+  issued: 2019
+  page: 407
+  publisher: Springer
+  title: "ROBOT: a tool for automating ontology workflows"
+  title-short: ROBOT
+  type: article-journal
+  volume: 20
+- author:
+  - family: Glimm
+    given: Birte
+  - family: Horrocks
+    given: Ian
+  - family: Motik
+    given: Boris
+  - family: Stoilos
+    given: Giorgos
+  - family: Wang
+    given: Zhe
+  container-title: Journal of automated reasoning
+  id: glimm2014hermit
+  issue: 3
+  issued: 2014
+  page: 245-269
+  publisher: Springer
+  title: "HermiT: an OWL 2 reasoner"
+  title-short: HermiT
+  type: article-journal
+  volume: 53
+- author:
+  - literal: Bundesamt für Landwirtschaft (BLW)
+  - literal: others
+  id: blw2025aktionsplan
+  citation-label: BLW25
+  issued: 2025-09
+  title: Aktionsplan Kontrollen auf Landwirtschaftsbetrieben
+  url: "https://www.blw.admin.ch/dam/de/sd-web/HtCH-BMgy5II/Aktionsplan%20Kontrollen%20Landwirtschaft%20-%20DE%20-%20von%20allen%20Teilnehmern%20unterzeichnet%2C%2004.09.25.pdf"
+- author:
+  - literal: Eidgenössische Finanzkontrolle (EFK)
+  id: efk2022digitale
+  citation-label: EFK22
+  issued: 2022-12
+  number: 21325
+  publisher: Eidgenössische Finanzkontrolle (EFK)
+  title: "Digitale Transformation: Prüfung der Direktzahlungskontrollen
+    in der Landwirtschaft"
+  title-short: Digitale Transformation
+  type: report
+  url: "https://www.efk.admin.ch/wp-content/uploads/publikationen/berichte/wirtschaft_und_verwaltung/wirtschaft_und_landwirtschaft/21325/21325be-endgueltige-fassung-v04.pdf"
+- author:
+  - literal: eCH-Fachgruppe Open Government Data
+  genre: eCH-Hilfsmittel
+  id: "eCH-0205:1.0.0"
+  citation-label: eCH-0205
+  issued: 2018-03
+  publisher: Verein eCH
+  title: eCH-0205 Linked Open Data
+  type: report
+  url: "https://www.ech.ch/sites/default/files/dosvers/hauptdokument/AUXI_e_DEF_2018-03-13_eCH-0205_V1.0_Linked%20Open%20Data.pdf"
+  version: 1.0.0
+- author:
+  - literal: eCH-Fachgruppe AgriFood
+  genre: eCH-Standard
+  id: "eCH-0265:1.0.0"
+  citation-label: eCH-0265
+  issued: 2024-04
+  publisher: Verein eCH
+  title: eCH-0205 Datenstandard Agrardaten -- Flächen und Kulturen
+  type: report
+  url: "https://ech.ch/sites/default/files/imce/eCH-Dossier/eCH-Dossier_PDF_Publikationen/Hauptdokument/STAN_d_DEF_2024-02_07_eCH-0265_V1.0.0_Datenstandard_Agrardaten_Fl%C3%A4chenKulturen.pdf"
+  version: 1.0.0
+- author:
+  - family: Knublauch
+    given: Holger
+  - family: Kontokostas
+    given: Dimitris
+  genre: W3C Recommendation
+  id: shacl
+  issued: 2017-07
+  publisher: World Wide Web Consortium (W3C)
+  title: Shapes Constraint Language (SHACL)
+  type: report
+  url: "https://www.w3.org/TR/shacl/"
+- author:
+  - family: Harris
+    given: Steve
+  - family: Seaborne
+    given: Andy
+  genre: W3C Recommendation
+  id: sparql_query_language
+  issued: 2013-03
+  publisher: World Wide Web Consortium (W3C)
+  title: SPARQL 1.1 Query Language
+  type: report
+  url: "https://www.w3.org/TR/sparql11-query/"
+- author:
+  - family: Cyganiak
+    given: Richard
+  - family: Wood
+    given: David
+  - family: Lanthaler
+    given: Markus
+  genre: W3C Recommendation
+  id: rdf
+  issued: 2014-02
+  publisher: World Wide Web Consortium (W3C)
+  title: RDF 1.1 Concepts and Abstract Syntax
+  type: report
+  url: "https://www.w3.org/TR/rdf11-concepts/"
+- author:
+  - literal: W3C OWL Working Group
+  genre: W3C Recommendation
+  id: owl2
+  citation-label: W3C12
+  issued: 2012-12
+  publisher: World Wide Web Consortium (W3C)
+  title: OWL 2 Web Ontology Language Document Overview (Second Edition)
+  type: report
+  url: "https://www.w3.org/TR/owl2-overview/"
+- accessed: 2026-07-29
+  author:
+  - family: Francart
+    given: Thomas
+  id: francart2020shacl
+  issued: 2020
+  publisher: Sparna
+  title: SHACL Play!
+  type: software
+  url: "https://shacl-play.sparna.fr/"
+- author:
+  - literal: eCH-Fachgruppe Terminologie
+  genre: eCH-Standard
+  id: "eCH-0128:1.1"
+  citation-label: eCH-0128
+  issued: 2016-06
+  publisher: Verein eCH
+  title: eCH-0128 Fachsprachliche Glossare in eCH-Dokumenten
+  type: report
+  url: "https://www.ech.ch/de/ech/ech-0128/1.1"
+  version: 1.1
+- author:
+  - family: Miles
+    given: Alistair
+  - family: Bechhofer
+    given: Sean
+  genre: W3C Recommendation
+  id: skos
+  issued: 2009-08
+  publisher: World Wide Web Consortium (W3C)
+  title: SKOS Simple Knowledge Organization System Reference
+  type: report
+  url: "https://www.w3.org/TR/skos-reference/"
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: vkkl
+  citation-label: VKKL
+  issued: 2018
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung vom 31. Oktober 2018 über die Koordination der
+    Kontrollen auf Landwirtschaftsbetrieben (VKKL; SR 910.15)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/2018/673/de"
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: lbv
+  citation-label: LBV
+  issued: 1998
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung vom 7. Dezember 1998 über landwirtschaftliche
+    Begriffe und die Anerkennung von Betriebsformen (Landwirtschaftliche
+    Begriffsverordnung, LBV; SR 910.91)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/1999/13/de"
+
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: islv
+  citation-label: ISLV
+  issued: 2013
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung vom 23. Oktober 2013 über Informationssysteme im
+    Bereich der Landwirtschaft (ISLV; SR 919.117.71)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/2013/733/de"
+
+- author:
+  - literal: Bundesamt für Landwirtschaft (BLW)
+  id: acontrol
+  citation-label: BLW26a
+  issued: 2026
+  title: Anwendung Acontrol
+  url: "https://www.blw.admin.ch/de/anwendung-acontrol"
+
+- author:
+  - literal: Bundesamt für Landwirtschaft (BLW)
+  id: agricheck
+  citation-label: BLW26b
+  issued: 2025
+  title: Agricheck -- Kontrollpunkte der Schweizer Landwirtschaft
+  url: "https://blw-ofag-ufag.github.io/agricheck/"
+
+- author:
+  - literal: Schweizerische Eidgenossenschaft
+  id: swissdesignsystem
+  citation-label: Bund26
+  issued: 2026
+  title: Designsystem der Schweizerischen Bundesverwaltung
+  url: "https://swiss.github.io/designsystem/"
+
+- author:
+  - literal: IP-Suisse
+  id: ipsuisse
+  citation-label: IPS26
+  issued: 2026
+  title: Integrierte Produktion IP-Suisse
+  url: "https://www.ipsuisse.ch/"
+
+- author:
+  - literal: Bio-Suisse
+  id: biosuisse
+  citation-label: BioS26
+  issued: 2026
+  title: Bio-Suisse
+  url: "https://www.bio-suisse.ch/de.html"
+
+- author:
+  - literal: Demeter
+  id: demeter
+  citation-label: Dem26
+  issued: 2026
+  title: Biologisch-dynamische Landwirtschaft Demeter
+  url: "https://demeter.ch/"
+
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: biov
+  citation-label: BIOV
+  issued: 1997
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung über die biologische Landwirtschaft 
+    und die Kennzeichnung biologisch produzierter Erzeugnisse und Lebensmittel 
+    (Bio-Verordnung, BIOV; SR 910.18)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/1997/2498_2498_2498/de"
+
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: dzv
+  citation-label: DZV
+  issued: 2013
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung vom 23. Oktober 2013 über die Direktzahlungen an die
+    Landwirtschaft (Direktzahlungsverordnung, DZV; SR 910.13)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/2013/765/de"

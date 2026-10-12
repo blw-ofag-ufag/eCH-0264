@@ -1,340 +1,44 @@
 # ==============================================================================
-# PREFIXES USED FOR THIS PROJECT
+# PREFIXES
 # ==============================================================================
 
 # Project-specific namespaces/qnames
-@prefix :                <http://example.org/> .
-@prefix address:         <http://example.org/address/> .
-@prefix album:           <http://example.org/album/> .
-@prefix artist:          <http://example.org/artist/> .
-@prefix customer:        <http://example.org/customer/> .
-@prefix employee:        <http://example.org/employee/> .
-@prefix genre:           <http://example.org/genre/> .
-@prefix invline:         <http://example.org/invoiceline/> .
-@prefix invoice:         <http://example.org/invoice/> .
-@prefix media:           <http://example.org/mediatype/> .
-@prefix playlist:        <http://example.org/playlist/> .
-@prefix track:           <http://example.org/tracks/> .
-@prefix person:          <http://example.org/person/> .
-
-# LINDAS-specific namespaces/qnames
-@prefix org:             <https://register.ld.admin.ch/opendataswiss/org/> .
-@prefix cube:            <https://cube.link/> .
-@prefix meta:            <https://cube.link/meta/> .
-@prefix status:          <https://ld.admin.ch/vocabulary/CreativeWorkStatus/> .
-@prefix theme:           <https://register.ld.admin.ch/opendataswiss/category/> .
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
 
 # Globally used namespaces/qnames
-@prefix adms:            <https://www.w3.org/ns/adms#> .
-@prefix dcat:            <http://www.w3.org/ns/dcat#> .
 @prefix dcterms:         <http://purl.org/dc/terms/> .
-@prefix doap:            <http://usefulinc.com/ns/doap#> .
-@prefix frequency:       <https://publications.europa.eu/resource/authority/frequency/> .
 @prefix owl:             <http://www.w3.org/2002/07/owl#> .
-@prefix qudt:            <http://qudt.org/schema/qudt/> .
 @prefix rdf:             <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:            <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema:          <http://schema.org/> .
 @prefix sh:              <http://www.w3.org/ns/shacl#> .
-@prefix unit:            <http://qudt.org/vocab/unit/> .
-@prefix vcard:           <http://www.w3.org/2006/vcard/ns#> .
-@prefix void:            <http://rdfs.org/ns/void#> .
-@prefix wikidata:        <http://www.wikidata.org/entity/> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
 
 # ==============================================================================
-# SHACL DATA MODEL METADATA
+# DOCUMENT METADATA
+# ------------------------------------------------------------------------------
+# The metadata of this document is described as it is required by SHACL PLAY!
+# Visit https://shacl-play.sparna.fr/play/doc for more on this.
 # ==============================================================================
 
-: a owl:Ontology ;
-    rdfs:label "Chinook Data Model"@en ;
-    rdfs:comment "This SHACL data model describes and validates the integrated Chinook dataset and custom person data."@en ;
+eCH-0264: a owl:Ontology ;
+    dcterms:creator "Marc Beringer, Damian Oswald, Lea Stauber, Christian Wilda" ;
+    dcterms:title "eCH-0264 Logisches Datenmodell Landwirtschaftliche Kontrolldaten"@de,
+        "eCH-0264 Logical Data Model Agricultural Inspection Data"@en ;
+    dcterms:created "2026-09-23"^^xsd:date ;
+    dcterms:modified "2026-09-23"^^xsd:date ;
     sh:declare [
-        sh:prefix "schema" ;
-        sh:namespace "http://schema.org/"^^xsd:anyURI ;
-    ],
-    [
-        sh:prefix "" ;
-        sh:namespace "http://example.org/"^^xsd:anyURI ;
+        sh:prefix "eCH-0264" ;
+        sh:namespace "https://agriculture.ld.admin.ch/eCH-0264/1/"^^xsd:anyURI ;
     ] .
 
-:PersonShape a sh:NodeShape ;
-    rdfs:label "Person"@en ;
-    rdfs:comment "Any person (employee, customer, or custom person) present in the dataset."@en ;
-    sh:targetClass schema:Person ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Given Name"@en ;
-        sh:path schema:givenName ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every person must have a given name." ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "Family Name"@en ;
-        sh:path schema:familyName ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every person must have a family name." ;
-    ],
-    [
-        sh:order 3 ;
-        sh:name "Email Address"@en ;
-        sh:path schema:email ;
-        sh:datatype xsd:string ;
-        sh:pattern "^.+@.+\\..+$" ;
-        sh:severity sh:Warning ;
-        sh:message "If an email is provided, it must follow a standard email format." ;
-    ],
-    [
-        sh:order 4 ;
-        sh:name "Birth date"@en ;
-        sh:path schema:birthDate ;
-        sh:datatype xsd:date ;
-        sh:severity sh:Warning ;
-        sh:message "A person should have a valid birth date." ;
-    ],
-    [
-        sh:order 5 ;
-        sh:path schema:address ;
-        sh:class schema:PostalAddress ;
-    ],
-    [
-        sh:order 6 ;
-        sh:path schema:worksFor ;
-        sh:or (
-            [ sh:class schema:Person ]
-            [ sh:class schema:Organization ]
-        ) ;
-        sh:message "An employee can report to another person." ;
-    ],
-    [
-        sh:name "Job title"@en ;
-        sh:order 7 ;
-        sh:path schema:jobTitle ;
-        sh:maxCount 1 ;
-    ],
-    [
-        sh:name "knows"@en ;
-        sh:order 8 ;
-        sh:path schema:knows ;
-        sh:class schema:Person ;
-    ] ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        dcterms:description "An employee cannot report to themselves."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:worksFor $this .
-            }
-        """
-    ] .
 
-:TrackShape a sh:NodeShape ;
-    rdfs:label "Music Recording"@en ;
-    sh:targetClass schema:MusicRecording ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
-        sh:path schema:name ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every track must have a name." ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "In Album"@en ;
-        sh:path schema:inAlbum ;
-        sh:class schema:MusicAlbum ;
-        sh:message "A track can only belong to a valid schema:MusicAlbum." ;
-    ],
-    [
-        sh:order 3 ;
-        sh:path schema:author ;
-    ],
-    [
-        sh:order 4 ;
-        sh:name "Genre"@en ;
-        sh:path schema:genre ;
-        sh:class :Genre ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ],
-    [
-        sh:order 5 ;
-        sh:name "Duration"@en ;
-        sh:path schema:duration ;
-        sh:class schema:QuantitativeValue ;
-        sh:message "Track duration must be expressed as a schema:QuantitativeValue." ;
-    ],
-    [
-        sh:order 6 ;
-        sh:path schema:contentSize ;
-        sh:class schema:QuantitativeValue ;
-    ] .
-
-:MusicAlbumShape a sh:NodeShape ;
-    rdfs:label "Music album"@en ;
-    sh:targetClass schema:MusicAlbum ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
-        sh:path schema:name ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every album must have a name." ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "Artist"@en ;
-        sh:description "Person or music group who created the album."@en ;
-        sh:path schema:byArtist ;
-        sh:or (
-            [ sh:class schema:Person ]
-            [ sh:class schema:MusicGroup ]
-        ) ;
-    ] .
-
-:OrganisationShape a sh:NodeShape ;
-    rdfs:label "Organisation"@en ;
-    sh:targetClass schema:Organisation ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
-        sh:path schema:name ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Every organisation must have a name." ;
-    ] .
-
-:InvoiceShape a sh:NodeShape ;
-    rdfs:label "Invoice"@en ;
-    sh:targetClass schema:Invoice ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Customer"@en ;
-        sh:path schema:customer ;
-        sh:class schema:Person ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "An invoice must be linked to exactly one customer." ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "Total Payment Due"@en ;
-        sh:path schema:totalPaymentDue ;
-        sh:class schema:QuantitativeValue ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "An invoice must define a total payment due as a schema:QuantitativeValue." ;
-    ],
-    [
-        sh:order 3 ;
-        sh:name "Has Part"@en ;
-        sh:path schema:hasPart ;
-        sh:class schema:OrderItem ;
-        sh:minCount 1 ;
-        sh:message "An invoice must have at least one line item (OrderItem)." ;
-    ],
-    [
-        sh:order 4 ;
-        sh:path schema:dateCreated ;
-        sh:datatype xsd:date ;
-    ] ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        dcterms:description "Invoice total payment due must exactly match the sum of its lines (within 0.05 tolerance)."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:totalPaymentDue/schema:value ?invoiceTotal .
-                {
-                    SELECT $this (SUM(?price * ?qty) AS ?calculatedTotal)
-                    WHERE {
-                        $this schema:hasPart ?line .
-                        ?line schema:price/schema:value ?price .
-                        ?line schema:orderQuantity/schema:value ?qty .
-                    }
-                    GROUP BY $this
-                }
-                FILTER(ABS(?invoiceTotal - ?calculatedTotal) > 0.05)
-            }
-        """
-    ],
-    [
-        a sh:SPARQLConstraint ;
-        dcterms:description "An invoice cannot be dated before the year 2000."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:dateCreated ?date .
-                FILTER(?date < "2000-01-01"^^xsd:date)
-            }
-        """
-    ] .
-
-:QuantitativeValueShape a sh:NodeShape ;
-    rdfs:label "Quantitative Value"@en ;
-    sh:targetClass schema:QuantitativeValue ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Value"@en ;
-        sh:path schema:value ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "A quantitative value must have exactly one numeric value." ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "Unit Code"@en ;
-        sh:path schema:unitCode ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "A quantitative value must specify its unit via a unitCode URI." ;
-    ] .
-
-:GenreShape a sh:NodeShape ;
-    rdfs:label "Genre"@en ;
-    sh:targetClass :Genre ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [
-        sh:order 1 ;
-        sh:name "Name"@en ;
-        sh:path schema:name ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ],
-    [
-        sh:order 2 ;
-        sh:name "Part of"@en ;
-        sh:path schema:partOf ;
-        sh:nodeKind sh:IRI ;
-        sh:class :Genre ;
-    ] ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        dcterms:description "A genre cannot be a part of itself, either directly or transitively."@en ;
-        sh:prefixes : ;
-        sh:select """
-            SELECT $this
-            WHERE {
-                $this schema:partOf+ $this .
-            }
-        """
-    ] .
+# ==============================================================================
+# DATENMODELL
+# ------------------------------------------------------------------------------
+# Das logische Datenmodell wird schrittweise mit der Arbeitsgruppe
+# Landwirtschaftliche Kontrolldaten erarbeitet. Die Shapes der Geschäftsobjekte
+# werden in dieser Datei ergänzt. Ein erster Entwurf liegt auf dem Branch
+# feature/datenmodell.
+# ==============================================================================

@@ -1,24 +1,25 @@
-[![CI](https://github.com/blw-ofag-ufag/eCH-0264/actions/workflows/ci.yml/badge.svg)](https://github.com/blw-ofag-ufag/eCH-0264/actions/workflows/ci.yml)
 [![GitHub last commit](https://img.shields.io/github/last-commit/blw-ofag-ufag/eCH-0264.svg)](https://github.com/blw-ofag-ufag/eCH-0264/commits)
 [![GitHub issues](https://img.shields.io/github/issues/blw-ofag-ufag/eCH-0264.svg)](https://github.com/blw-ofag-ufag/eCH-0264/issues)
 
 # eCH-0264 Agricultural Inspection Data (Working Draft v1.0)
 
-This eCH-Document describes the target state for the storage of swiss agricultural inspection data in the system Acontrol to improve re-useability of these data. The current state of how agricultural inspection data are stored is introduced to highlight existing issues with re-usability of these data and a target state is documented to guide the building of the next version of Acontrol.
+This repository contains the eCH standard eCH-0264 «Landwirtschaftliche Kontrolldaten» (agricultural inspection data). It establishes the semantic and technical interoperability of inspection data between the federal administration, the cantons, inspection bodies and label organisations in Switzerland:
 
-This repository includes a full semantic web pipeline, including
- 
+- **Fachglossar Kontrollwesen** – a glossary of the Swiss agricultural inspection system as a SKOS concept scheme (`src/rdf/data/glossary.skos.ttl`). It is included in the documentation (Anhang C).
+- **Documentation** – the eCH document written in Quarto (`docs/de/index.qmd`), including the use cases and the needs of the stakeholders.
+
+The logical data model and the code lists are developed step by step with the working group and will follow in a later version. A first draft is kept on the branch `feature/datenmodell`; the SHACL shapes will be added to `src/rdf/shapes/model.shacl.ttl`.
+
+The repository is based on the [semantic web template](https://github.com/blw-ofag-ufag/semantic-web-template) and follows the structure of [eCH-0265](https://github.com/blw-ofag-ufag/eCH-0265). It includes a full semantic web pipeline (`make help` lists all targets), including
+
 1. manual data curation (data files in `src/rdf/data`),
 2. data integration from a relational database (using python, specifically `src/python/pipeline/...`),
-3. OWL-based inferencing (using the ontology in `src/rdf/model.owl.ttl`),
+3. OWL-based inferencing (using ontologies in `src/rdf/ontology/`),
 4. SPARQL-based processing of the graph (using rules in `src/sparql/processing/...`)
 5. SHACL-based graph data validation (using `src/rdf/shapes/model.shacl.ttl`)
-6. a even more customizable Pytest test suite,
+6. a customizable Pytest test suite, including glossary integrity checks,
 7. uploading of the final graph to LINDAS
 8. a documentation building pipeline using Quarto
-
-> [!WARNING]
-> This repository contains turtle/sparql/python files for testing purposes, they will be replaced by the actual agricultural inspection data model. For now, this repository serves as a version control tool for the text draft of the eCH-0264 document.
 
 ## Development Tools
 

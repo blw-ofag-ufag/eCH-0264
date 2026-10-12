@@ -1,158 +1,333 @@
 ---
-title: eCH-0264 Landwirtschaftliche Kontrolldaten
-abstract: 
-    Die Weiterverwendung von Daten aus öffentlich-rechtlichen landwirtschaftlichen Kontrollen ist heutzutage limitiert. Bedarf an der Weiterverwendung dieser Kontrolldaten besteht insbesondere zum Zweck des Vollzuges im Kontrollwesen, der Unterstützung von privatrechtlichen Kontrollen und der Berichterstattung. Aktuell gibt es keine Anwendungsfälle die einen Austausch von öffentlich-rechtlichen und privatrechtlichen Kontrolldaten erfordern, weshalb der eCH-Standard “Landwirtschaftliche Kontrolldaten” die Optimierung des Bezugs von öffentlich-rechtlichen Kontrolldaten fokussiert. Die Form dieser Kontrolldaten im System Acontrol und deren Verfügbarkeit für Akteure im Schweizer Agrar- und Ernährungssektor entspricht nicht allen heutigen Bedürfnissen. Der eCH-Standard 0264 “Landwirtschaftliche Kontrolldaten” zeigt eine Analyse bestehender Lücken bei der Weiterverwendung von öffentlich-rechtlichen Kontrolldaten und Optionen für das Datenmodell einer Nachfolgelösung von Acontrol auf. Dieser eCH-Standard wird von der Arbeitsgruppe “Landwirtschaftliche Kontrolldaten” unter der Leitung des Bundesamtes für Landwirtschaft erarbeitet.
-date: last-modified
-date-format: long
-lang: de
+title: Landwirtschaftliche Kontrolldaten
+author: eCH Fachgruppe AgriFood
+abstract: |
+  Die Weiterverwendung von Daten aus öffentlich-rechtlichen landwirtschaftlichen Kontrollen ist heutzutage limitiert, weil die privatrechtliche und öffentlich-rechtliche Akteure des Kontrollwesens teilweise nicht standardisierte Begriffe, Datenstrukturen und Datenflüsse verwenden. Bedarf an der Weiterverwendung dieser Kontrolldaten besteht insbesondere zum Zweck des Vollzuges im Kontrollwesen, der Unterstützung der Planung und Koordination von Kontrollen, und der Berichterstattung. Zwar wird ein Teil der schweizweit erhobenen Kontrolldaten zentral im System Acontrol verwaltet, aber deren Umfang und Verfügbarkeit entspricht nicht den heutigen Bedürfnissen. Der eCH-Standard 0264 “Landwirtschaftliche Kontrolldaten” zeigt eine Analyse bestehender Lücken bei der Weiterverwendung von Kontrolldaten, das Fachglossar Kontrollwesen und ein Datenmodell an dem sich Systeme künftig orientieren können um die semantische und technische Interoperabilität der erhobenen Kontrolldaten zu gewährleisten. Dieser eCH-Standard wird von der Arbeitsgruppe “Landwirtschaftliche Kontrolldaten” unter der Leitung des Bundesamtes für Landwirtschaft erarbeitet.
+lang: de-CH
+keywords:
+  - Landwirtschaft
+  - Kontrollwesen
+  - Kontrolldaten
+  - Interoperabilität
+license: CC BY 4.0
+citation: true
 ---
 
-# Hinweis {.unnumbered}
+# Hinweis {#sec-note .unnumbered .unlisted}
 
-Im vorliegenden Dokument wird bei der Bezeichnung von Personen eine geschlechtsneutrale Formulierung verwendet. Basis bildet der Leitfaden der Bundeskanzlei. Je nach Situation kommen Paarformen (Bürgerinnen und Bürger), geschlechtsabstrakte Formen (versicherte Person), geschlechtsneutrale Formen (Versicherte) oder Umschreibungen ohne Personenbezug zum Einsatz. Das generische Maskulin (Bürger) ist nicht zulässig. Vollformen werden in fortlaufenden Texten verwendet, also in Texten, die aus ausformulierten Sätzen bestehen. In verknappten Textpassagen, namentlich in Tabellen, können Kurzformen verwendet werden. Dabei wird die Kurzform mit Schrägstrich, aber ohne Auslassungsstrich verwendet (Referent/in). Genderstern und ähnliche Schreibweisen werden nicht verwendet.
+Im vorliegenden Dokument wird bei der Bezeichnung von Personen eine geschlechtsneutrale Formulierung verwendet.
+Basis bildet der Leitfaden der Bundeskanzlei.
+Je nach Situation kommen Paarformen (Bürgerinnen und Bürger), geschlechtsabstrakte Formen (versicherte Person), geschlechtsneutrale Formen (Versicherte) oder Umschreibungen ohne Personenbezug zum Einsatz.
+Das generische Maskulin (Bürger) ist nicht zulässig.
+Vollformen werden in fortlaufenden Texten verwendet, also in Texten, die aus ausformulierten Sätzen bestehen.
+In verknappten Textpassagen, namentlich in Tabellen, können Kurzformen verwendet werden.
+Dabei wird die Kurzform mit Schrägstrich, aber ohne Auslassungsstrich verwendet (Referent/in).
+Genderstern und ähnliche Schreibweisen werden nicht verwendet.
 
-# Zielbild der Arbeitsgruppe Landwirtschaftliche Kontrolldaten
+# Einleitung {#sec-introduction}
 
-Der [Aktionsplan Kontrollen auf Landwirtschaftsbetrieben](https://www.blw.admin.ch/dam/de/sd-web/HtCH-BMgy5II/Aktionsplan%20Kontrollen%20Landwirtschaft%20-%20DE%20-%20von%20allen%20Teilnehmern%20unterzeichnet%2C%2004.09.25.pdf) hat ein klares übergeordnetes Ziel: Die administrative Belastung der Landwirtinnen und Landwirte durch Kontrollen soll sinken, konkret auf maximal eine Grund- oder Standardkontrolle pro Jahr und Betrieb. Dies ist ein sehr ambitioniertes Ziel und kann nur gelingen, wenn sämtliche Doppelspurigkeiten zwischen öffentlich-rechtlichen Kontrollen (Bund/Kantone) und privatrechtlichen Kontrollen (Labels wie Bio Suisse, IP-Suisse, SwissGAP) eliminiert werden.
+Die Weiterverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Ernährungssektors.
+Im landwirtschaftlichen Kontrollwesen werden Daten in Form von Resultaten und Eigenschaften von Kontrollen erhoben.
+Diese Daten dienen in erster Linie der Oberaufsicht über den rechtskonformen Vollzug in den Kantonen und der Festlegung risikobasierter Kontrollen.
+Zudem dienen sie der Berichterstattung, der Unterstützung privatrechtlicher Kontrollen und der Weiterentwicklung der Agrarpolitik.
 
-Damit eine Organisation auf eine eigene Kontrolle verzichten kann, muss sie die Kontrollergebnisse einer anderen Organisation anerkennen und nutzen können. Das funktioniert heute nicht reibungslos, weil die verschiedenen Akteure unterschiedliche «Sprachen» sprechen – sowohl fachlich (Begrifflichkeiten) als auch technisch (Datenstrukturen).
+## Status {#sec-status}
 
-Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten kümmert sich primär um die semantische und technische Interoperabilität von Daten im Kontext landwirtschaftlicher Kontrollen. Sie erarbeitet das Wörterbuch (Glossar), die Grammatik (Business-Objekte) konkrete Anwendungen (Use-Cases) sowie eine Struktur für die langfristige Pflege (Governance). Dadurch soll der Datenaustausch zwischen den Systemen von Bund, Kantonen und Labels künftig über [agridata.ch](agridata.ch) ermöglicht werden. Weiter soll für alle Akteure – insbesondere für Landwirtinnen und Landwirte – transparent sein, was Gegenstand bestimmter Kontrollen ist und was die Anforderungen verschiedener Gesetze, Programme oder Labels sind.​ 
+{{< ech status >}}
 
-Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten trägt Informationen zur Optimierung von Kontrolldaten zusammen und zeigt Optionen auf. Die Verhandlungen zur Umsetzung dieser Optionen sind nicht Aufgabe der Arbeitsgruppe Kontrolldaten.
+## Zielbild der Arbeitsgruppe {#sec-target-picture}
 
-# Einleitung
+Der Aktionsplan Kontrollen auf Landwirtschaftsbetrieben hat ein klares übergeordnetes Ziel: Die administrative Belastung der Landwirtinnen und Landwirte durch Kontrollen soll sinken, konkret auf höchstens eine Grund- oder Standardkontrolle pro Jahr und Betrieb [@blw2025aktionsplan].
+Dies kann nur gelingen, wenn Doppelspurigkeiten zwischen öffentlich-rechtlichen Kontrollen (Bund und Kantone) und privatrechtlichen Kontrollen (Labels wie Bio Suisse, IP-Suisse oder SwissGAP) vermieden werden.
 
-Die Weiterverwendung von Daten ist ein zentraler Bestandteil der digitalen Transformation des Schweizer Agrar- und Ernährungssektors (AES). Im landwirtschaftlichen Kontrollwesen werden Daten in Form von Resultaten und Eigenschaften von öffentlich-rechtlichen Kontrollen erhoben. Diese Daten dienen in erster Linie der Oberaufsicht über den rechtskonformen Vollzug in den Kantonen und werden für die Einschätzung von Bereichen für risikobasierte Kontrollen genutzt. Zudem dienen die Daten der Berichterstattung (Agrarbericht 2025 – Vollzug), der Unterstützung von privatrechtlichen Kontrollprozessen und der Weiterentwicklung der Schweizer Agrarpolitik.
+Damit eine Organisation auf eine eigene Kontrolle verzichten kann, muss sie die Kontrollergebnisse einer anderen Organisation anerkennen und nutzen können.
+Das funktioniert heute nicht reibungslos, weil die Akteure unterschiedliche «Sprachen» sprechen – fachlich (Begriffe) und technisch (Datenstrukturen).
 
-## Landwirtschaftliche Kontrollen
+Die eCH-Arbeitsgruppe Landwirtschaftliche Kontrolldaten kümmert sich deshalb um die semantische und technische Interoperabilität von Kontrolldaten.
+Sie erarbeitet das Wörterbuch (Fachglossar), die Grammatik (Geschäftsobjekte), konkrete Anwendungen (Anwendungsfälle), darauf basierend ein konzeptuelles und ein logisches Datenmodell und eine Struktur für die langfristige Pflege (Governance).
+Die Arbeitsgruppe hat sich am 4. März 2026 auf folgendes Hauptziel geeinigt:
 
-Landwirtschaftliche Betriebe, welche Direktzahlungen des Bundes beziehen, müssen die Anforderungen des Ökologischen Leistungsnachweises (ÖLN) erfüllen und können sich für Direktzahlungsprogramme anmelden. Zusätzlich können sich Betriebe von Label-Organisationen für privatrechtlich geregelte Produktionspraktiken, die über die öffentlich-rechtlichen Anforderungen hinaus gehen, zertifizieren lassen. Zu solchen Produktionspraktiken gehören beispielsweise die biologische Landwirtschaft zertifiziert durch Bio-Suisse, die integrierte Produktion zertifiziert durch IP-Suisse und die biologisch-dynamische Landwirtschaft Demeter.
+> Das Ziel ist, Kontrolldaten auszutauschen und als Folge dessen auf Kontrollen verzichten zu können.
+> Weiter soll für alle Beteiligten transparent sein, was genau kontrolliert wird und was die Anforderungen sind.
 
-Die Überprüfung der gesetzlichen Anforderungen (z.B. Tierschutz, Gewässerschutz), des ÖLN und der Direktzahlungsprogramme, erfolgt heute im Rahmen von Grundkontrollen (alle 8 Jahre pro Betrieb) und risikobasierten Kontrollen. Die Kontrollen umfassen Betriebsbegehungen, die Einsicht in betriebliche Aufzeichnungen sowie Gespräche mit den Bewirtschafterinnen und Bewirtschaftern. Falls Mängel festgestellt werden, sind je nach deren Schwere und Art Kürzungen von Direktzahlungen und weitere Massnahmen die Folge.
+## Landwirtschaftliche Kontrollen {#sec-agricultural-inspections}
 
-## Datenflüsse von Kontrolldaten
-Kontrolldaten die bei öffentlich-rechtlichen Kontrollen erhoben werden fliessen im System Acontrol zusammen, bei diesen Datenflüssen gibt es kantonale Unterschiede. Aktuell sind noch keine Datenflüsse etabliert, bei denen privatrechtliche Kontrolldaten an Acontrol übermittelt werden.
+Betriebe, die Direktzahlungen beziehen, müssen den ökologischen Leistungsnachweis (ÖLN) erfüllen und können sich zusätzlich für freiwillige Direktzahlungsprogramme anmelden [@dzv].
+Darüber hinaus können sich Betriebe bei privaten Label-Organisationen für Produktionsweisen zertifizieren lassen, die über die öffentlich-rechtlichen Anforderungen hinausgehen, zum Beispiel für die integrierte Produktion (IP-Suisse) oder die biologisch-dynamische Landwirtschaft (Demeter) [@ipsuisse; @demeter]. Anforderungen an die biologische Landwirtschaft werden sowohl öffentlich-rechtlich (Bio-Verordnung) als auch privatrechtlich vorgegeben (Bio Suisse) [@biov; @biosuisse].
 
-- Kontrolldaten werden über eine mobile Applikation auf einem Tablet während der Kontrolle erfasst und von dort in das KAIS des entsprechenden Kantons übermittelt. In einem nächsten Schritt werden die Kontrolldaten vom KAIS an Acontrol übermittelt.
+Die Einhaltung der gesetzlichen Anforderungen, des ÖLN und der Direktzahlungsprogramme wird im Rahmen von Grundkontrollen und risikobasierten Kontrollen überprüft [@vkkl].
+Ganzjahresbetriebe müssen innerhalb von acht Jahren mindestens zweimal vor Ort kontrolliert werden, Sömmerungsbetriebe mindestens einmal; für weitere Direktzahlungsbereiche gilt in der Regel eine Mindesthäufigkeit von einmal in acht Jahren [@vkkl].
+Zusätzlich werden risikobasierte Kontrollen durchgeführt, etwa bei Mängeln in früheren Kontrollen, bei begründetem Verdacht, bei wesentlichen betrieblichen Änderungen oder in jährlich festgelegten Bereichen mit höherem Risiko [@vkkl].
+Zentraler Bestandteil der Grundkontrollen ist ein Betriebsrundgang; hinzu kommen die Prüfung von Aufzeichnungen und Dokumenten sowie Gespräche mit den Bewirtschafterinnen und Bewirtschaftern [@vkkl].
+Werden Mängel festgestellt, können je nach Art und Schwere die Direktzahlungen gekürzt werden [@dzv].
 
-- Kontrolldaten werden von der mobilen Applikation direkt nach Acontrol übermittelt.
+## Datenflüsse von Kontrolldaten {#sec-data-flows}
 
-- Gibt es weitere Datenflüsse?
+Die Daten öffentlich-rechtlicher Kontrollen fliessen im System Acontrol zusammen, das vom Bundesamt für Landwirtschaft (BLW) und vom Bundesamt für Lebensmittelsicherheit und Veterinärwesen (BLV) gemeinsam genutzt wird [@acontrol]. Die Datenflüsse unterscheiden sich je nach Kanton:
 
-## Hierarchie und Entstehung von Kontrollpunkten
+- Kontrollpersonen erfassen die Resultate bei der Kontrolle auf dem Betrieb mit einer Tablet-Applikation, zum Beispiel ACmobile oder eControls. Je nach Kanton gehen die Daten zuerst in das kantonale Agrarinformationssystem (KAIS) und von dort an Acontrol. Sie können auch direkt von der Applikation an Acontrol gehen. Teilweise fehlen Schnittstellen, zum Beispiel im Wallis: eControls generiert für einen Teil der Kontrolldaten eine für Acontrol passende XML-Datei auf. Der Kanton lädt die Daten dann manuell herunter und importiert sie in Acontrol. Das kantonale System im Wallis speichert keine Kontrolldaten, nur die Beträge von Kürzungen. Der Kanton bezieht die Resultate für die Prüfung und die Bearbeitung von Mängeln aus Acontrol.
+- Kontrollstellen im Auftrag der Kantone übermitteln ihre Resultate an die Kantone. Mängel sind meldepflichtig. Ein Teil dieser Angaben geht per E-Mail an bis zu 18 Kantone, weil das Acontrol-Schema nicht alle nötigen Felder enthält. Auch Kantonschemiker und Gewässerschutzstellen ohne KAIS-Zugriff, zum Beispiel im Tessin, erhalten meldepflichtige Daten per E-Mail.
+- Bio-Kontrollstellen führen jährlich Kontrollen im privatrechtlichen und alle vier jahre im öffentlich-rechtlichen Auftrag durch. Die Kantone erhalten nur die öffentlich-rechtlichen und die meldepflichtigen Resultate. Einige Kontrollstellen, zum Beispiel Bio Test Agro, senden auch privatrechtliche Resultate an die Kantone. Im Wallis erfassen Bio-Kontrollstellen ihre Resultate direkt in Acontrol. Der Kanton wertet alle diese Resultate aus und bearbeitet so auch Mängel, die ausserhalb der kantonal beauftragten Kontrollen festgestellt wurden.
+- Datenbezügerinnen und Datenbezüger können seit September 2026 Acontrol-Daten mit Einverständnis der Bewirtschafterinnen und Bewirtschafter über agridata.ch (früher «Meine Agrardatenfreigabe», MAF) beziehen.
 
-Öffentlich-rechtliche Kontrollpunkte sind hierarchisch gegliedert.
+Privatrechtliche Kontrolldaten werden nicht an Acontrol übermittelt. Einige Kantone speichern sie trotzdem. Kontrollorganisationen müssen sie deshalb bei jedem Kanton einzeln abholen. Auch kantonale Kontrollpunkte der Landwirtschaftsämter, zum Beispiel zu Vernetzungs- und Landschaftsqualitätsprojekten, gehen nicht an Acontrol. Die Veterinärämter erfassen ihre Kontrollpunkte direkt in Acontrol.
 
-- Kontrollbereich (z.B. Lebensmittelsicherheit)
-    - Kontrollrubrik (z.B. Tierarzneimittel)
-        - Punktegruppe (optional und nicht in allen Kontrollrubriken enthalten; z.B. Schweinehaltung)
-            - Kontrollpunkt (z.B. Aufbewahrungs- und Lagerungsvorschriften eingehalten)
+## Hierarchie und Entstehung von Kontrollpunkten {#sec-control-point-hierarchy}
 
-Kontrollpunkte werden angepasst wenn Änderungen auf Verordnungsebene, Bereinigungen von Fehlern, Wünsche von Kontrollstellen, oder Umstrukturierungen von Kontrollrubriken anfallen. Das Bundesamt für Landwirtschaft (BLW) erstellt dabei Kontrollrubriken und -Punkte des Direktzahlungssystems, während das Bundesamt für Lebensmittelsicherheit und Veterinärwesen (BLV) diese zu den Bereichen Tierschutz, Tiergesundheit und Lebensmittelsicherheit erarbeitet. Zusätzlich führt das BLW seit 2020 eine Kontrollrubrik “Gewässerschutz” mit 13 Kontrollpunkten für das Bundesamt für Umwelt (BAFU) in Acontrol.
+Öffentlich-rechtliche Kontrollpunkte sind hierarchisch gegliedert:
 
-Das BLW sendet die Kontrollrubriken und -Punkte, gültig ab dem nächsten Jahr, den Kantonen und stellt sie der Öffentlichkeit (also auch den Label-Organisationen) über die Website des BLW zur Verfügung (siehe “Weiterführende Informationen” > “Dokumente” auf Acontrol). Jeweils im Herbst des aktuellen Jahres stehen die Rubriken und Punkte für das folgende Jahr zur Verfügung. 
+- Kontrollbereich (zum Beispiel Lebensmittelsicherheit)
+    - Kontrollrubrik (zum Beispiel Tierarzneimittel)
+        - Punktegruppe (optional, zum Beispiel Schweinehaltung)
+            - Kontrollpunkt (zum Beispiel «Aufbewahrungs- und Lagerungsvorschriften eingehalten»)
 
-Zusätzlich zu den Kontrollpunkten des Bundes, erstellen die kantonalen Veterinär- und Landwirtschaftsämter für sie relevante, spezifische Kontrollpunkte. Die Veterinärämter erstellen ihre Kontrollpunkte direkt in Acontrol und Ergebnisse aus deren Kontrolle sind Teil der Kontrolldaten in Acontrol. Die Kontrollpunkte der Landwirtschaftsämter für kantons-spezifische Kontrollpunkte zu Vernetzungs- und Landschaftsqualitätsprojekten werden hingegen nicht an Acontrol übermittelt und sind nicht Teil der Kontrolldaten aus Acontrol.
+Das BLW legt die Kontrollrubriken und Kontrollpunkte des Direktzahlungssystems fest, das BLV jene zu Tierschutz, Tiergesundheit und Lebensmittelsicherheit.
+Zusätzlich führt das BLW seit 2020 eine Kontrollrubrik «Gewässerschutz» für das Bundesamt für Umwelt (BAFU).
+Die Rubriken und Punkte werden jeweils im Herbst mit Gültigkeit ab dem 1. Januar des Folgejahres veröffentlicht. Kontrollpunkte können nicht zu Rubriken hinzugefügt, oder entfernt werden.
+Kantonale Veterinärämter erstellen zusätzliche kantonsspezifische Kontrollrubriken direkt in Acontrol; die kantonsspezifischen Kontrollrubriken der Landwirtschaftsämter werden nicht an Acontrol übermittelt.
+Label-Organisationen erstellen ihre Kontrollpunkte selbständig und passen Richtlinien und Ausnahmeregelungen bei Bedarf unterjährig an.
+Führt eine Kontrollstelle öffentlich-rechtliche und privatrechtliche Kontrollen gemeinsam durch, zum Beispiel bei Bio-Kontrollen, erhält sie die öffentlich-rechtlichen Kontrollpunkte vom Kanton und die privatrechtlichen von der Label-Organisation, zum Beispiel von Bio Suisse.
+Sie führt dann eine Kontrolle mit allen Kontrollpunkten durch.
+Bei der Kontrollplanung werden die Kontrollpunkte zusammengestellt und die möglichen Ergebnisse, Massnahmen und Sanktionen definiert.
 
-Privatrechtliche Label-Organisationen benötigen demgegenüber die Möglichkeit, Kontrollpunkte, Richtlinien und Ausnahmeregelungen unterjährig anzupassen. Im Bio-Bereich können insbesondere Lockerungen, befristete Ausnahmen oder die Aufhebung einzelner Anforderungen während des Kontrolljahres wirksam werden. Neue oder verschärfte Anforderungen werden aus Gründen der Rechtssicherheit und Planbarkeit grundsätzlich nicht unterjährig eingeführt.
+Damit bestehen vier Quellen von Kontrollpunkten: der Bund (BLW, BLV, BAFU), die kantonalen Veterinärämter, die kantonalen Landwirtschaftsämter und die Label-Organisationen.
+Die Anzahl der Kontrollpunkte je Programm ist sehr unterschiedlich: Der Beitrag für den Verzicht auf Pflanzenschutzmittel im Ackerbau umfasst einen Kontrollpunkt, RAUS für Milchkühe rund zehn.
+Insgesamt gibt es in der Schweiz mehrere tausend öffentlich-rechtliche und privatrechtliche Kontrollpunkte; die Webanwendung Agricheck macht sie für Bewirtschaftende zugänglich [@agricheck].
 
-Dadurch bestehen im landwirtschaftlichen Kontrollwesen vier Quellen von Kontrollpunkten:
+## Kontrolldaten heute {#sec-inspection-data}
 
-- Bund (öffentlich-rechtlich)
-    - BLW, BLV, BAFU
-- Kantonale Veterinärämter (öffentlich-rechtlich)
-- Kantonale Landwirtschaftsämter (öffentlich-rechtlich)
-- Label-Organisationen (privatrechtlich)
+Daten aus öffentlich-rechtlichen Kontrollen sind für alle Betriebe, deren Bewirtschafterinnen und Bewirtschafter der Weitergabe zustimmen, über agridata.ch verfügbar.
+Pro Kontrollbereich wird ein Datenprodukt angeboten; alle Datenprodukte haben dieselben Merkmale.
+Sie umfassen Kontrollen aus dem laufenden und den drei vorangehenden Kalenderjahren beziehungsweise seit dem letzten Bewirtschafterwechsel.
+Die tiefste Ebene ist der Kontrollpunkt mit dem Kontrollergebnis und gegebenenfalls der Mangelbeschreibung; Massnahmen sind nicht enthalten.
 
-## Kontrolldaten
+::: {.callout-important}
+Kontrolldaten enthalten keine Stammdaten von Betrieben und Personen, sondern nur Identifikatoren, die als Fremdschlüssel auf die Stammdaten im Agrarpolitischen Informationssystem (AGIS) verweisen.
+Dieser Grundsatz soll im künftigen Datenmodell (@sec-data-model) beibehalten werden.
+:::
 
-Daten aus öffentlich-rechtlichen Kontrollen sind von allen Betrieben, welche ihre Einwilligung zur Weitergabe der Daten geben, über agridata.ch verfügbar. Für jeden Kontrollbereich können unter anderem Elemente wie Identifikatoren des Betriebs, Datum und Gründe für die Kontrolle, kontrollierte Punkte und Beschreibung der Mängel bezogen werden. Der Inhalt dieser Datenpakete ist auf agridata.ch dokumentiert. Das aktuelle Datenmodell und dessen XSD-Schema sind unter https://www.blw.admin.ch/de/anwendung-acontrol (Abschnitt “Daten importieren”) dokumentiert.
+# Akteure und Anwendungsfälle {#sec-actors-use-cases}
 
-> **Wichtig**
-Öffentlich-rechtliche Kontrolldaten aus dem System Acontrol des Bundesamtes für Landwirtschaft (BLW) enthalten keine Stammdaten von Betrieben und Personen. Kontrolldaten enthalten lediglich Identifikatoren von Betriebsstandorten und Personen welche als Fremdschlüssel für Stammdaten aus dem Agrarpolitischen Informationssystem (AGIS) dienen.
+## Akteure {#sec-actors}
 
-## Weiterverwendung von Kontrolldaten
+| Akteur | Rolle im Kontrollwesen | Hauptinteresse an Kontrolldaten |
+|:--|:--|:--|
+| Bewirtschafterinnen und Bewirtschafter | Kontrollierte Personen, Datenproduzentinnen und Datenproduzenten | Weniger und besser koordinierte Kontrollen, Transparenz über die geltenden Anforderungen |
+| BLW, BLV, BAFU | Herausgeber öffentlich-rechtlicher Kontrollpunkte, Oberaufsicht, Betrieb von Acontrol | Vergleichbare, vollständige und plausible Kontrolldaten |
+| Kantonale Vollzugsbehörden und Kontrollkoordinationsstellen | Auftraggeber und Verwerter öffentlich-rechtlicher Kontrollen | Einheitliche Datenlieferungen, automatisierte Mängelmeldungen |
+| Kontrollstellen (zum Beispiel bio.inspecta, Agrosolution, KUT, KOL) | Durchführung öffentlich-rechtlicher und privatrechtlicher Kontrollen | Ein nationales Schema statt vieler kantonaler Lösungen, Zugriff auf Basisinformationen |
+| Label-Organisationen (zum Beispiel Bio Suisse, IP-Suisse, Mutterkuh Schweiz, QM Schweizer Fleisch) | Herausgeber privatrechtlicher Kontrollpunkte, Datenbezüger | Öffentlich-rechtliche Ergebnisse wiederverwenden und eigene Kontrollen reduzieren |
+| agridata.ch | Datenübertragungsdienst | Klar beschriebene Datenprodukte, rechtlich abgestützte Einwilligungen |
 
-Bereits heute werden Kontrolldaten aus öffentlich-rechtlichen Kontrollen für privatrechtliche Kontrollen genutzt um letztere zu vereinfachen. Die Auflagen von Label-Organisationen enthalten die Erfüllung von öffentlich-rechtlichen Auflagen (z.B. Erfüllung ÖLN) und zusätzliche Label-spezifische Kontrollpunkte.
+: Akteure des landwirtschaftlichen Kontrollwesens {#tbl-actors tbl-colwidths="[25,35,40]"}
 
-Die Weiterverwendung von Kontrolldaten für privatrechtliche Kontrollen benötigen die Zustimmung der Bewirtschafterinnen und Bewirtschafter. Diese Zustimmung wird üblicherweise bei der Anmeldung für ein Label eingeholt. Es gibt heute auch die Möglichkeit Daten aus Acontrol über [agridata.ch](agridata.ch) zu beziehen, wobei die Zustimmung bei den Landwirtinnen und Landwirten über diese Plattform eingeholt wird.
+## Anwendungsfälle {#sec-usecases}
 
-## Anwendungsfälle (Use-Cases) für Kontrolldaten
+| ID | Anwendungsfall | Akteure | Benötigte Geschäftsobjekte | Quelle |
+|:--|:--|:--|:--|:--|
+| UC-01 | Eine Label-Organisation bezieht mit Einwilligung der Bewirtschafterin oder des Bewirtschafters öffentlich-rechtliche Kontrolldaten, um auf eigene Kontrollen zu verzichten oder sie zu vereinfachen (zum Beispiel beef control für Mutterkuh Schweiz, IP-Suisse). | Label-Organisation, BLW, Bewirtschafter/in | Kontrolle, Kontrollumfang, Kontrollergebnis, Mangel, Programmteilnahme | Entwurf, Mutterkuh Schweiz, IP-Suisse |
+| UC-02 | Eine Label-Organisation will wissen, ob ein öffentlich-rechtliches Programm (ÖLN, BTS, RAUS, GMF) erfüllt ist; ein Programm kann auch mit einzelnen Mängeln erfüllt sein (der ÖLN gilt zum Beispiel erst ab 110 Sanktionspunkten als nicht erfüllt). | Label-Organisation | Programmteilnahme mit Programmerfüllung, Zertifikat, Sanktion | Entwurf, erweitert (Mutterkuh Schweiz) |
+| UC-03 | Eine Kontrollstelle meldet meldepflichtige Mängel strukturiert an die zuständigen Akteure (Landwirtschaftsamt, Kantonschemiker, Gewässerschutz) statt per E-Mail. Die Empfänger filtern die für sie relevanten Resultate. | Kontrollstelle, Kantone, Kantonschemiker, Gewässerschutz | Mangel, Massnahme, Organisation, Kontrollpunkt mit zu informierenden Akteuren | Entwurf, erweitert (Bio.Inspecta) |
+| UC-04 | Eine Organisation prüft, welche ihrer Kontrollpunkte durch Kontrollpunkte einer anderen Herausgeberin bereits abgedeckt sind (zum Beispiel QM Schweizer Fleisch und Tierschutz, Demeter und Bio Suisse). | Label-Organisationen, Bund | Kontrollpunkt, Anforderung, Entsprechung von Kontrollpunkten | Entwurf, QM-SF |
+| UC-05 | Kontrollergebnisse werden bei einem Bewirtschafterwechsel der verantwortlichen Person zugeordnet, damit Nachfolgerinnen und Nachfolger nicht mit Mängeln konfrontiert werden. | Kantone, Label-Organisationen | Kontrolle, Bewirtschafter/in | Entwurf, KIP |
+| UC-06 | Kontrollergebnisse eines Betriebs mit Produktionsstätten in mehreren Kantonen werden der richtigen Produktionsstätte zugeordnet. | Kantone, Kontrollstellen | Betrieb, Produktionsstätte, Tierhaltung | Entwurf, KIP |
+| UC-07 | Das BLW plausibilisiert die jährlich gelieferten Kontrolldaten und erkennt, welche Kontrollpunkte tatsächlich kontrolliert wurden. | BLW, Kantone | Kontrollumfang, Kontrollergebnis | Entwurf |
+| UC-08 | Kontrollergebnisse werden durch Fotos, Dokumente oder Satellitenbilder belegt und automatisiert oder aufgrund von Selbstdeklarationen erzeugt. | Kontrollstellen, Kantone, BLV | Nachweis, Erhebungsmethode | Entwurf |
+| UC-09 | Bewirtschafterinnen und Bewirtschafter und Kontrollstellen sehen, welche Kontrollpunkte für einen Betrieb gelten. | Bewirtschafter/in, Kontrollstellen | Kontrollpunkt, Programmteilnahme | Entwurf |
+| UC-10 | Kantonale Landwirtschafts- und Veterinärämter koordinieren ihre öffentlich-rechtlichen Kontrollen, damit ein Betrieb nicht mehrmals pro Jahr von verschiedenen Kontrollpersonen kontrolliert wird. | Kantone (Landwirtschaftsämter, Veterinärämter), Kontrollstellen | Kontrolle, Kontrollumfang, Betrieb | IP-Suisse |
+| UC-11 | Eine Label-Organisation bezieht Mängel, Tierzahlen und -kategorien sowie Tierwohlprogramme ohne Rückfrage beim Produzenten (setzt einen rechtlich erlaubten Austausch voraus). | Label-Organisation, Bewirtschafter/in | Mangel, Tierhaltung, Programmteilnahme | QM-SF |
+| UC-12 | Eine Label-Organisation bezieht die Ergebnisse kontrollierter Nährstoffbilanzen für die wenigen Betriebe, die sie benötigt, heute per Post oder E-Mail. | Label-Organisation, Kantone | Kontrolle, Kontrollergebnis, Nachweis | Mutterkuh Schweiz |
+| UC-13 | Eine Kontrollstelle führt öffentlich-rechtliche und privatrechtliche Kontrollpunkte in einer Kontrolle durch. Die Kantone erhalten nur die öffentlich-rechtlichen Resultate. | Kontrollstelle, Kantone, Label-Organisation | Kontrollpunkt, Kontrolle, Kontrollergebnis | Bio.Inspecta |
+| UC-14 | Auf demselben Kontrollpunkt entstehen mehrere Sanktionsarten (zum Beispiel nach Bio-Verordnung und nach Bio Suisse), die getrennt ausgewiesen werden. | Kontrollstellen, Kantone, Label-Organisationen | Kontrollpunkt, Mangel, Sanktion | Bio.Inspecta |
+| UC-15 | Kontrollorganisationen beziehen privatrechtliche Kontrolldaten, die Kantone speichern, zentral, standardisiert und tagesaktuell (agridata.ch) statt einzeln bei jedem Kanton. | Kontrollorganisationen, Kantone, BLW | Kontrolle, Kontrollergebnis, Mangel | Bio.Inspecta |
+| UC-16 | Alle Kontrollresultate eines Betriebs aus allen Kontrollen sind an einer Stelle verfügbar. | Kantone, Kontrollstellen, Label-Organisationen | Betrieb, Kontrolle, Kontrollergebnis | Bio.Inspecta |
+| UC-17 | Bei Feststellungen ausserhalb des Kontrollauftrags (zum Beispiel ungepflegte Klauen) ist erkennbar, ob die Kontrollperson dafür qualifiziert ist. So lässt sich beurteilen, ob eine Folgekontrolle (zum Beispiel durch Veterinärinnen und Veterinäre) nötig ist. | Kontrollstellen, Kantone | Kontrollperson mit Qualifikation, Kontrollergebnis | Bio.Inspecta |
+| UC-18 | Kontrollorganisationen planen Kontrollen anhand aktueller Anmeldedaten für die Direktzahlungsprogramme. | Kontrollorganisationen, Kantone, BLW | Programmteilnahme, Kontrollpunkt, Kontrollumfang | Bio.Inspecta |
+| UC-19 | Private Kontrollorganisationen melden Mängel zu Anforderungen der Direktzahlungsprogramme an Acontrol oder die Kantone, damit Kürzungen geprüft werden können (offen, ob und wie das heute geschieht). | Label-Organisationen, Kontrollstellen, Kantone | Mangel, Kontrollpunkt, Massnahme | Marie Zufferey |
+| UC-20 | Acontrol setzt Kontrollpunkte von Programmen, für die ein Betrieb nicht angemeldet ist, anhand der AGIS-Anmeldedaten beim Import automatisch auf «nicht zutreffend». | BLW, Kantone | Kontrollpunkt, Programmteilnahme, Kontrollergebnis | Marie Zufferey |
 
-### Kontrollstelle “beef control” des Labels “Mutterkuh Schweiz”
+: Anwendungsfälle des landwirtschaftlichen Kontrollwesens {#tbl-use-cases tbl-colwidths="[6,38,18,23,15]"}
 
-Die private Kontrollstelle “beef control” von Mutterkuh Schweiz stützt ihre Kontrollen auf die öffentlich-rechtlichen Kontrollen in den Bereichen ÖLN, Tierschutz, Tierwohl (BTS, RAUS, Weidebeitrag) und Graslandbasierte Milch- und Fleischwirtschaft (GMF) ab. Hierfür müssen die Bewirtschafterinnen und Bewirtschafter die letzten Kontrollberichte zu diesen Kontrollbereichen vorlegen (Papierform oder PDF). Alternativ geben sie die Kontrolldaten für Mutterkuh Schweiz aktuell via “Meine Agrardatenfreigabe” (MAF) (bzw. später [agridata.ch](agridata.ch)) frei. Relevant sind einerseits die Erfüllung der oben genannten Programme und andererseits sollen allfällige Mängel offengelegt werden. Für “Mutterkuh Schweiz” gibt es Toleranzbereiche bezüglich der Erfüllung von Programmen. Ein Programm gilt auch dann als erfüllt, wenn es Mängel gab. Der ÖLN ist beispielsweise erst nicht mehr erfüllt, wenn 110 Sanktionspunkte erreicht sind. Die Kontrollstelle “beef control” beurteilt zudem für das Label “Mutterkuh Schweiz” relevante Beanstandungen. Für eine geringe Anzahl von Betrieben werden zudem Resultate von kontrollierten Nährstoffbilanzen benötigt.
+## Einschränkungen der heutigen Kontrolldaten {#sec-limitations}
 
-## Einschränkungen bei der Wiederverwendbarkeit von Kontrolldaten
+Die Wiederverwendbarkeit öffentlich-rechtlicher Kontrolldaten entspricht nicht den Bedürfnissen der Akteure.
+Das liegt teils an der Form der Daten, die ihre Interpretation erschwert, teils am Umfang der erhobenen Daten.
+Während die Form der bereits erhobenen Daten durch einheitliche Begriffe und ein künftiges Datenmodell verbessert werden kann, lässt sich die Datenerhebung selbst nur mit grossem Aufwand erweitern.
 
-Die Wiederverwendbarkeit von öffentlich-rechtlichen Kontrolldaten entspricht nicht den aktuellen Bedürfnissen der Akteure im Schweizer Agrar- und Ernährungssektor. Dies liegt zum Teil an der Form der Daten, welche die Interpretation und somit den Informationsgehalt der Daten verringert, aber auch am Umfang der Daten die erhoben werden können. Während die Form der bereits erhobenen Daten durch ein neues Datenmodell optimierbar ist, kann die Datenerhebung selbst nur mit grossem Aufwand erweitert werden.
+**Fehlende einheitliche Definitionen.**
+Datenbezügerinnen und Datenbezüger haben Schwierigkeiten, Kontrolldaten zu interpretieren, weil die Begriffe in den Kontrollpunkten nicht einheitlich definiert sind.
+Semantische Interoperabilität setzt voraus, dass alle Akteure Begriffsdefinitionen aus demselben Glossar verwenden (@sec-glossary).
 
-### Fehlende einheitliche Definitionen von Begriffen
+**Begrenzter Informationsgehalt der Kontrollergebnisse.**
+In Acontrol können nur die Ergebnisse «Mangel», «nicht zutreffend» (NZ) und «nicht kontrolliert» (NK) erfasst werden; fehlt ein Ergebnis, gilt der Kontrollpunkt als «ohne Mangel».
+Bei Grundkontrollen müssen zudem nur die Fokuskontrollpunkte geprüft werden, und nicht geprüfte übrige Kontrollpunkte müssen nicht als «nicht kontrolliert» gekennzeichnet werden.
+Das senkt den Erfassungsaufwand, führt aber dazu, dass nicht erkennbar ist, welche Kontrollpunkte tatsächlich kontrolliert wurden. 
+In der Applikation eControls im Kanton Wallis wird für jeden Kontrollpunkt ein explizites Ergebnis («in Ordnung», «Mangel», «nicht kontrolliert» oder «nicht zutreffend») verlangtund setzen bei Fokuskontrollen nicht gezielt geprüfte Kontrollpunkte automatisch auf «nicht kontrolliert». Es gibt noch Fehlerquellen und teilweise werden Kontrollpunkte von Programmen, für die ein Betrieb nicht angemeldet ist, mit «in Ordnung» statt «nicht zutreffend» erfasst. Das betrifft insbesondere die Tierwohlprogramme: Die Tierbestandsdaten für die Berechnung der Direktzahlungen liegen ein Jahr zurück, und die Anmeldungen für Direktzahlungsprogramme werden nicht immer geprüft.
 
-Bezügerinnen und Bezüger von öffentlich-rechtliche Kontrolldaten haben Schwierigkeiten diese zu interpretieren, weil Begriffe in den Formulierungen der Kontrollpunkte nicht einheitlich definiert sind. Um die Weiterverwendung von Kontrolldaten zu verbessern muss semantische Interoperabilität gewährleistet sein. Das heisst, dass Datenanbietende und Datenbeziehende das gleiche Verständnis eines Begriffs haben können. Dies wird ermöglicht indem alle Akteure des Kontrollwesens Begriffsdefinitionen aus dem gleichen Glossar, also einer “Single Source of Truth”, nutzen. Begriffsdefinitionen aus diesem Glossar sind auch die Grundlage für die Geschäftsobjekte des überarbeiteten Datenmodells der Nachfolgelösung von Acontrol.
+::: {.callout-note title="Das Chüngeli-Problem"}
+Acontrol kennt die Kontrollrubriken nur als Ganzes.
+Planen Kantone Kontrollen mit einzelnen Kontrollpunkten und liefern nur diese, ergänzt Acontrol die übrigen Kontrollpunkte der Rubrik automatisch mit dem Ergebnis «ohne Mangel».
+So entstehen Ergebnisse zu Kontrollpunkten, die gar nicht kontrolliert wurden, zum Beispiel zur Haltung von Straussen auf Betrieben, die nur Hühner halten.
+:::
 
-### Historische Kontrolldaten nur limitiert verfügbar
+**Sammel-Kontrollpunkte.**
+Manche Kontrollpunkte fassen viele Anforderungen zusammen, zum Beispiel «BFF-Auflagen eingehalten».
+Label-Organisationen können dann nicht beurteilen, ob ihre spezifischen Anforderungen geprüft wurden.
 
-Kontrolldaten die über agridata.ch bezogen werden können, umfassen maximal die letzten vier Jahre vor dem Zeitpunkt des Bezugs. Bei einem Wechsel der Bewirtschafterin, oder des Bewirtschafters, stehen Kontrolldaten ab dem Zeitpunkt des Wechsels, oder maximal der letzten vier Jahre zur Verfügung. 
+**Identifikation der Kontrollobjekte.**
+Kontrollergebnisse beziehen sich je nach Bereich auf den Betrieb, die Produktionsstätte oder die Tierhaltung.
+Label-Organisationen identifizieren ihre Mitglieder teilweise nur über die TVD-Nummer, agridata.ch dagegen über UID und BUR-Nummer; nicht bei jeder Tierhaltung ist eine TVD-Nummer hinterlegt.
 
-### Begrenzter Informationsgehalt der Kontrollergebnisse 
+**Limitierte historische Daten und Aktualität.**
+Über agridata.ch sind höchstens die Kontrollen der letzten vier Kalenderjahre verfügbar, der Kontrollrhythmus beträgt aber bis zu acht Jahre.
+Vor 2020 sind die Daten lückenhaft.
+Zudem stehen Ergebnisse oft erst nach der Plausibilisierung im Folgejahr zur Verfügung – für die Planung privatrechtlicher Kontrollen häufig zu spät.
 
-In Acontrol können nur die Kontrollergebnisse “Mangel”, “nicht zutreffend” (NZ) und “nicht kontrolliert” (NK) erfasst werden. Wenn kein Ergebnis erfasst wurde, geht das System davon aus, dass “kein Mangel festgestellt” wurde. Das Ergebnis “kontrolliert und kein Mangel” wird also bei einer öffentlich-rechtlichen Kontrolle nicht erfasst. Damit soll der Aufwand bei Kontrollen vermindert werden. Vergisst eine Kontrollperson aber “NZ” oder “NK” zu setzen, entsteht das “Chüngeli-Problem”. In den Daten entsteht dann der Eindruck als wären mehr Kontrollen durchgeführt worden, als effektiv durchgeführt wurden. Die Auswertungen dieser Kontrollen sind dann unbrauchbar, da nicht mehr entschlüsselt werden kann, welche Punkte tatsächlich kontrolliert wurden.
+**Fehlende Angaben.**
+Fehlende Angaben in den heute verfügbaren Kontrolldaten umfassen Massnahmen und Sanktionen, die Qualifikation der Kontrollperson, die Erhebungsmethode und Nachweise wie Fotos. 
+Auf einem Kontrollpunkt können zudem verschiedene Massnahmen und Sanktionen zutreffen, insbesondere wenn der Kontrollpunkt gleichzeitig im Rahmen mehrerer Aufträge kontrolliert wurde (z.B. Bio-Verordnung und Bio-Suisse).
+Die Qualifikation der Kontrollperson ist nötig, um bei Feststellungen ausserhalb des Auftrags zu beurteilen, ob eine Folgekontrolle ausgelöst werden muss.
 
-> **Das Chüngeliproblem**
-> Aufgrund der aktuellen Logik der Datenverarbeitung von Acontrol werden auch irreführende Kontrollergebnisse von Betrieben gesammelt. Diese Problematik ist als “Chüngeli-Problem” bekannt. Acontrol kennt die Kontrollrubriken (Sammlung von Kontrollpunkten) nur als Ganzes. Kontrollpunkte können nicht unabhängig von der übergeordneten Kontrollrubrik von den Kantonen geliefert werden. Wenn die Kantone die Kontrollen mit einzelnen Kontrollpunkten planen und nur diese liefern, ergänzt Acontrol automatisch das Datenfeld “Ergebnis” für die anderen Kontrollpunkte in dieser Rubrik mit dem Eintrag “Ohne Mangel”. So führt die Datenbank Ergebnisse zu Kontrollpunkten, für welche die Betriebe nicht kontrolliert wurden (z.B. Ausbildung, Bewilligungen und Meldepflicht bei Straussen auf Betrieben welche nur Hühner führen).
+# Fachglossar Kontrollwesen {#sec-glossary}
 
-# Fachglossar Kontrollwesen
+Das Fachglossar Kontrollwesen definiert die für das landwirtschaftliche Kontrollwesen relevanten Begriffe und ihre Beziehungen.
+Es dient als *Single Source of Truth* für Begriffsdefinitionen und bildet die Grundlage für das künftige logische Datenmodell (@sec-data-model).
+Das Glossar wird vom BLW gepflegt und kann aufgrund der Bedürfnisse des Sektors erweitert und angepasst werden.
 
-Für das landwirtschaftliche Kontrollwesen relevante Begriffe und deren Definitionen sind im Fachglossar Kontrollwesen aufgeführt. Dieses Glossar dient als “Single Source of Truth” für Definitionen von Begriffen und deren Beziehungen zueinander. So soll die semantische Interoperabilität zwischen den Akteuren und Systemen des landwirtschaftlichen Kontrollwesens hergestellt und die Interpretation von Kontrolldaten optimiert werden. Das Fachglossar Kontrollwesen wird vom BLW gepflegt und kann basierend auf Bedürfnissen des Sektors erweitert und angepasst werden.
+Die vollständige Liste der Begriffe findet sich in [Anhang C](#sec-appendix-c).
 
-# Datenmodell “Landwirtschaftliche Kontrolldaten”
+## Aufbau des Glossars {#sec-glossary-structure}
 
-Das Datenmodell “Landwirtschaftliche Kontrolldaten” dient der Spezifikation von Kontrolldaten im Schweizer Agrar- und Ernährungssektor”. Es stellt die Nachfolgelösung des Datenmodells Acontrol dar und zeigt Optionen zur Organisation und Form von relevanten Daten des Kontrollwesens.
+Das Glossar ist wie in eCH-0265 als SKOS-Konzeptschema modelliert [@skos].
+Jeder Begriff ist ein `skos:Concept` mit einer dauerhaften IRI im Namensraum `https://agriculture.ld.admin.ch/eCH-0264/1/term/` und hat:
 
-# Technische Hinweise
+- eine Benennung (`schema:name`), wo verfügbar auch auf Französisch und Italienisch,
+- Synonyme und Abkürzungen (`schema:alternateName`),
+- eine Definition (`schema:description`),
+- Anmerkungen und Kontextinformationen (`skos:scopeNote`),
+- eine Quellenangabe (`schema:citation`), bei Rechtsbegriffen die Fundstelle auf fedlex.admin.ch,
+- Beziehungen zu Ober-, Unter- und verwandten Begriffen (`skos:broader`, `skos:related`).
 
-Wir verwenden die ROBOT CLI in unserem Projekt [@jackson2019robot], insbesondere wegen ihrer Fähigkeit, den HermiT Reasoner auszuführen [@glimm2014hermit].
+Die Begriffe sind in thematische Sammlungen (`skos:Collection`) gegliedert: Akteure und Rollen; Kontrollobjekte und Identifikatoren; Regelwerke, Programme und Anforderungen; Kontrollpunkte; Kontrolle und Kontrollergebnis; Mängel, Massnahmen und Zertifizierung; Datenaustausch und Systeme.
 
-# Datenmodell
+## Grundsätze der Terminologiearbeit {#sec-glossary-principles}
 
-{{< include entities.md >}}
+Die Definitionen folgen den Grundsätzen der Terminologiearbeit gemäss ISO 704 und eCH-0128 [@eCH-0128:1.1]:
 
-# Sicherheitsaspekte
+- Wo vertrauenswürdige Definitionen bestehen, insbesondere in der Landwirtschaftlichen Begriffsverordnung [@lbv] und der VKKL [@vkkl], werden diese sinngemäss übernommen und mit ihrer Fundstelle angegeben.
+- Definitionen nennen einen Oberbegriff und die abgrenzenden Merkmale; Aufzählungen von Unterarten sind abschliessend.
+- Zirkelbezüge und Negativdefinitionen werden vermieden.
+- Begriffe derselben Familie werden nach demselben Prinzip definiert.
+- Informationen, die für das Verständnis wichtig, aber nicht Teil der Definition sind, stehen in den Anmerkungen.
 
-Informationen zu den ausdrücklich massgeblichen rechtlichen Grundlagen oder ein Hinweis darauf, dass bei der Umsetzung die entsprechenden rechtlichen Grundlagen zu beachten sind.
+Wo im Material für denselben Sachverhalt unterschiedliche Begriffe verwendet werden, legt das Glossar eine Vorzugsbenennung fest und führt die übrigen als Synonyme, zum Beispiel «Mangel» mit den Synonymen «Beanstandung» und «Abweichung».
+Uneinheitlich verwendete Begriffe wie «Teilbetrieb» werden mit einer Anmerkung auf die rechtlich definierten Begriffe verwiesen.
 
-# Haftungsausschluss
+# Logisches Datenmodell {#sec-data-model}
 
-eCH-Standards, die der Verein eCH dem Anwender kostenlos zur Verfügung stellt oder die auf eCH verweisen, haben nur den Status von Empfehlungen. Der Verein eCH haftet in keinem Fall für Entscheidungen oder Massnahmen, die der Anwender auf der Grundlage dieser Dokumente trifft bzw. ergreift. Der Anwender ist dafür verantwortlich, die Dokumente vor ihrer Verwendung selbst zu überprüfen und gegebenenfalls fachlichen Rat einzuholen. eCH-Standards können und sollen die technische, organisatorische oder rechtliche Beratung im Einzelfall nicht ersetzen.
+::: {.callout-note title="In Erarbeitung"}
+Das logische Datenmodell ist nicht Teil dieser Version des Standards.
+Die Arbeitsgruppe erarbeitet es schrittweise; es wird in einer späteren Version ergänzt.
+:::
 
-Dokumente, Verfahren, Methoden, Produkte und Standards, auf die in eCH-Standards verwiesen wird, sind möglicherweise durch Marken-, Urheber- oder Patentrechte geschützt. Es liegt in der ausschliesslichen Verantwortung des Anwenders, die erforderlichen Lizenzen von den berechtigten Personen und/oder Organisationen einzuholen.
+Das logische Datenmodell beschreibt die Geschäftsobjekte des landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen sowie die zugehörigen Codelisten.
+Es baut auf den Begriffen des Fachglossars (@sec-glossary) auf und leitet sich aus den Anwendungsfällen und Bedürfnissen der Akteure ab (@sec-use-cases).
+Damit soll es insbesondere die heutigen Einschränkungen der Kontrolldaten (@sec-limitations) adressieren, etwa die fehlende Unterscheidung zwischen kontrollierten und nicht kontrollierten Kontrollpunkten.
 
-Obwohl der Verein eCH bei der Erstellung der eCH-Standards mit angemessener Sorgfalt vorgegangen ist, kann er keine Gewährleistung oder Garantie dafür übernehmen, dass die bereitgestellten Informationen und Dokumente aktuell, vollständig, richtig oder fehlerfrei sind. eCH behält sich das Recht vor, die Inhalte der eCH-Standards jederzeit und ohne vorherige Ankündigung zu ändern.
+Das Datenmodell legt fest, welche Objekte und Merkmale für den Austausch von Kontrolldaten benötigt werden und was sie bedeuten.
+Es schreibt nicht vor, wie einzelne Systeme ihre Daten intern speichern.
+Wie die heutigen Kontrolldaten soll es keine Stammdaten von Betrieben und Personen enthalten, sondern auf diese über Identifikatoren verweisen (@sec-inspection-data).
+
+# Governance {#sec-governance}
+
+Damit das Glossar verlässlich bleibt, schlägt die Arbeitsgruppe folgende Governance vor:
+
+- **Verantwortung:** Das BLW pflegt das Glossar im Rahmen der eCH-Fachgruppe AgriFood. Fachliche Entscheide werden in der Arbeitsgruppe Landwirtschaftliche Kontrolldaten vorbereitet.
+- **Änderungsprozess:** Änderungsanträge werden als GitHub-Issue oder über <agridata.ch@blw.admin.ch> eingereicht, in der Arbeitsgruppe besprochen und als Pull Request umgesetzt. Automatisierte Tests stellen sicher, dass das Glossar konsistent bleibt.
+- **Versionierung:** Das Glossar wird nach Semantic Versioning versioniert. Nur eine inkompatible Änderung erhöht die Hauptversion und damit den Namensraum (`https://agriculture.ld.admin.ch/eCH-0264/1/`).
+- **Jahreszyklus:** Änderungen am Glossar werden auf die jährliche Veröffentlichung der öffentlich-rechtlichen Kontrollpunkte im Herbst abgestimmt.
+
+# Haftungsausschluss {#sec-disclaimer}
+
+eCH-Standards, die der Verein eCH dem Anwender kostenlos zur Verfügung stellt oder die auf eCH verweisen, haben nur den Status von Empfehlungen.
+Der Verein eCH haftet in keinem Fall für Entscheidungen oder Massnahmen, die der Anwender auf der Grundlage dieser Dokumente trifft bzw. ergreift.
+Der Anwender ist dafür verantwortlich, die Dokumente vor ihrer Verwendung selbst zu überprüfen und gegebenenfalls fachlichen Rat einzuholen.
+eCH-Standards können und sollen die technische, organisatorische oder rechtliche Beratung im Einzelfall nicht ersetzen.
+
+Dokumente, Verfahren, Methoden, Produkte und Standards, auf die in eCH-Standards verwiesen wird, sind möglicherweise durch Marken-, Urheber- oder Patentrechte geschützt.
+Es liegt in der ausschliesslichen Verantwortung des Anwenders, die erforderlichen Lizenzen von den berechtigten Personen und/oder Organisationen einzuholen.
+
+Obwohl der Verein eCH bei der Erstellung der eCH-Standards mit angemessener Sorgfalt vorgegangen ist, kann er keine Gewährleistung oder Garantie dafür übernehmen, dass die bereitgestellten Informationen und Dokumente aktuell, vollständig, richtig oder fehlerfrei sind.
+eCH behält sich das Recht vor, die Inhalte der eCH-Standards jederzeit und ohne vorherige Ankündigung zu ändern.
 
 Jede Haftung für Schäden, die durch die Nutzung der eCH-Standards durch den Anwender entstehen, wird im gesetzlich zulässigen Rahmen ausgeschlossen.
 
-# Urheberrechte
+# Urheberrechte {#sec-copyrights}
 
-Personen, die eCH-Standards erarbeiten, bleiben Inhaber ihrer geistigen Eigentumsrechte. Diese Personen verpflichten sich jedoch, ihre geistigen Eigentumsrechte oder andere Rechte an geistigen Eigentumsrechten Dritter, soweit möglich, den jeweiligen Fachgruppen und dem Verein eCH kostenlos und zur uneingeschränkten Nutzung und Weiterentwicklung im Rahmen des Vereinszwecks zur Verfügung zu stellen.
+Personen, die eCH-Standards erarbeiten, bleiben Inhaber ihrer geistigen Eigentumsrechte.
+Diese Personen verpflichten sich jedoch, ihre geistigen Eigentumsrechte oder andere Rechte an geistigen Eigentumsrechten Dritter, soweit möglich, den jeweiligen Fachgruppen und dem Verein eCH kostenlos und zur uneingeschränkten Nutzung und Weiterentwicklung im Rahmen des Vereinszwecks zur Verfügung zu stellen.
 
 Die von den Fachgruppen erarbeiteten Standards dürfen unter Nennung des jeweiligen Autors von eCH kostenlos und in uneingeschränktem Umfang genutzt, verbreitet und weiterentwickelt werden.
 
-eCH-Standards sind vollständig dokumentiert und frei von lizenz- und/oder patentrechtlichen Einschränkungen. Die dazugehörige Dokumentation kann kostenlos angefordert werden.
-Diese Bestimmungen gelten jedoch nur für die von eCH erarbeiteten Standards, nicht aber für Standards oder Produkte Dritter, die auf eCH-Standards verweisen. Die Standards enthalten die entsprechenden Hinweise auf Rechte Dritter.
+eCH-Standards sind vollständig dokumentiert und frei von lizenz- und/oder patentrechtlichen Einschränkungen.
+Die dazugehörige Dokumentation kann kostenlos angefordert werden.
+Diese Bestimmungen gelten jedoch nur für die von eCH erarbeiteten Standards, nicht aber für Standards oder Produkte Dritter, die auf eCH-Standards verweisen.
+Die Standards enthalten die entsprechenden Hinweise auf Rechte Dritter.
 
-# Anhang A - Referenzen {.appendix}
+# Anhang A - Referenzen {#sec-appendix-a .appendix .unnumbered}
 
 ::: {#refs}
 :::
 
-# Anhang B - Mitwirkung & Prüfung {.appendix}
+# Anhang B - Mitwirkung und Prüfung {#sec-appendix-b .appendix .unnumbered}
 
-# Anhang C - Abkürzungen und Glossar {.appendix}
+Folgende Personen wirken in der Arbeitsgruppe Landwirtschaftliche Kontrolldaten der eCH-Fachgruppe AgriFood mit.
 
-# Anhang D - Änderungen gegenüber der Vorversion {.appendix}
+| Name | Organisation |
+|:--|:--|
+| Peter Althaus | IP-Suisse |
+| Matthias Baumann | Bundesamt für Landwirtschaft BLW |
+| Marc Beringer | Bundesamt für Landwirtschaft BLW |
+| Claudia Blumenstein | Bundesamt für Landwirtschaft BLW |
+| Daniel Bretscher | Agroscope |
+| Egon Brüstle | Modan AG |
+| Lorenz Escher | Koordinationsgruppe Integrierte Produktion KIP |
+| Jonas Eyer | Schweizer Bauernverband SBV |
+| Florian Frauchiger | Vereinigung der Schweizer Kantonstierärztinnen und Kantonstierärzte VSKT |
+| Marcel Friedli | Prométerre |
+| Sara Gomez | Bio Suisse |
+| Sabine Grob | Agriquali Schweizer Bauernverband |
+| Simon Hasler | Bundesamt für Landwirtschaft BLW |
+| Christoph Keller | Vereinigung der Schweizer Kantonstierärztinnen und Kantonstierärzte VSKT |
+| Daniel Meyer | Bundesamt für Landwirtschaft BLW |
+| Daniel Moos | bio.inspecta AG |
+| Damian Oswald | Bundesamt für Landwirtschaft BLW |
+| Sara Schärrer | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
+| Rahel Schelbert | Bundesamt für Landwirtschaft BLW |
+| Monika Schober | Agrosolution AG |
+| Lea Stauber | Bundesamt für Landwirtschaft BLW |
+| Roman Steiger | Kontrolldienst KUT |
+| Yuval Tempelman | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
+| Fiorella Tettamanti | Bundesamt für Lebensmittelsicherheit und Veterinärwesen BLV |
+| Christian Wilda | Bundesamt für Landwirtschaft BLW |
+| Meike Wollenberg Martínez | Mutterkuh Schweiz |
+| Marie Zufferey | Kanton Wallis |
 
-# Anhang E - Abbildungsverzeichnis {.appendix}
+: Mitglieder der Arbeitsgruppe Landwirtschaftliche Kontrolldaten {#tbl-authors tbl-colwidths="[40,60]"}
 
-# Anhang F - Tabellenverzeichnis {.appendix}
+# Anhang C - Abkürzungen und Glossar {#sec-appendix-c .appendix .unnumbered}
+
+{{< include glossary.md >}}
+
+# Anhang D - Änderungen gegenüber der Vorversion {#sec-appendix-d .appendix .unnumbered}
+
+Dies ist die erste Version des Standards.
+Der Standard ersetzt die frühere Kurzbeschreibung «Dieser Standard soll dabei helfen, Begriffe und Daten im öffentlich-rechtlichen und privatrechtlichen Bereich des landwirtschaftlichen Kontrollwesens zu harmonisieren, so dass Kontrolldaten besser ausgetauscht beziehungsweise wiederverwendet werden können.»
+
+# Anhang E - Abbildungsverzeichnis {#sec-appendix-e .appendix .unnumbered}
+
+{{< ech figures >}}
+
+# Anhang F - Tabellenverzeichnis {#sec-appendix-f .appendix .unnumbered}
+
+{{< ech tables >}}

@@ -61,15 +61,15 @@ Aligning with standard Semantic Web conventions, we enforce the following casing
 
 Ensure identifiers are meaningful to facilitate readability and improve [DX](https://en.wikipedia.org/wiki/Developer_experience).
 
-For individuals, use a sub-namespace based on the most important classes. For example, if the project namespace is `http://example.org/`, use `http://example.org/person/` for all people:
+For individuals, use a sub-namespace based on the most important classes. For example, if the project namespace is `https://agriculture.ld.admin.ch/eCH-1234/2/`, use `https://agriculture.ld.admin.ch/eCH-1234/2/person/` for all people:
 
 ``` ttl
-@prefix :       <https://agriculture.ld.admin.ch/eCH-1234/2/> .
-@prefix person: <https://agriculture.ld.admin.ch/eCH-1234/2/person/> .
+@prefix eCH-1234: <https://agriculture.ld.admin.ch/eCH-1234/2/> .
+@prefix person:   <https://agriculture.ld.admin.ch/eCH-1234/2/person/> .
 
-person:1 a :Person .
-person:2 a :Person .
-person:3 a :Person .
+person:1 a eCH-1234:Person .
+person:2 a eCH-1234:Person .
+person:3 a eCH-1234:Person .
 ```
 
 ## Alignment with eCH processes
@@ -83,4 +83,4 @@ For a comprehensive overview of the standardization phases, please refer to the 
 
 ## Contact
 
-Any questions? Don't hesitate to contact us via [agridata.ch@blw.admin.ch](mailto:agridata.ch@blw.admin.ch).
+Do you have questions? Please do not hesitate to contact us at [agridata.ch@blw.admin.ch](mailto:agridata.ch@blw.admin.ch), open an [issue in this repository](../../issues), or directly submit a [Request for Change (RFC) via the official eCH feedback form](https://ech.ch/de/ech-standards/standardisierungsprozess/request-change-rfc).
