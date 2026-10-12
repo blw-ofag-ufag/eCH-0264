@@ -63,12 +63,14 @@ references:
   - literal: Bundesamt für Landwirtschaft (BLW)
   - literal: others
   id: blw2025aktionsplan
+  citation-label: BLW25
   issued: 2025-09
   title: Aktionsplan Kontrollen auf Landwirtschaftsbetrieben
   url: "https://www.blw.admin.ch/dam/de/sd-web/HtCH-BMgy5II/Aktionsplan%20Kontrollen%20Landwirtschaft%20-%20DE%20-%20von%20allen%20Teilnehmern%20unterzeichnet%2C%2004.09.25.pdf"
 - author:
   - literal: Eidgenössische Finanzkontrolle (EFK)
   id: efk2022digitale
+  citation-label: EFK22
   issued: 2022-12
   number: 21325
   publisher: Eidgenössische Finanzkontrolle (EFK)
@@ -81,6 +83,7 @@ references:
   - literal: eCH-Fachgruppe Open Government Data
   genre: eCH-Hilfsmittel
   id: "eCH-0205:1.0.0"
+  citation-label: eCH-0205
   issued: 2018-03
   publisher: Verein eCH
   title: eCH-0205 Linked Open Data
@@ -91,6 +94,7 @@ references:
   - literal: eCH-Fachgruppe AgriFood
   genre: eCH-Standard
   id: "eCH-0265:1.0.0"
+  citation-label: eCH-0265
   issued: 2024-04
   publisher: Verein eCH
   title: eCH-0205 Datenstandard Agrardaten -- Flächen und Kulturen
@@ -139,6 +143,7 @@ references:
   - literal: W3C OWL Working Group
   genre: W3C Recommendation
   id: owl2
+  citation-label: W3C12
   issued: 2012-12
   publisher: World Wide Web Consortium (W3C)
   title: OWL 2 Web Ontology Language Document Overview (Second Edition)
@@ -158,6 +163,7 @@ references:
   - literal: eCH-Fachgruppe Terminologie
   genre: eCH-Standard
   id: "eCH-0128:1.1"
+  citation-label: eCH-0128
   issued: 2016-06
   publisher: Verein eCH
   title: eCH-0128 Fachsprachliche Glossare in eCH-Dokumenten
@@ -179,6 +185,7 @@ references:
 - author:
   - literal: Schweizerischer Bundesrat
   id: vkkl
+  citation-label: VKKL
   issued: 2018
   publisher: Schweizerische Eidgenossenschaft
   title: Verordnung vom 31. Oktober 2018 über die Koordination der
@@ -188,6 +195,7 @@ references:
 - author:
   - literal: Schweizerischer Bundesrat
   id: lbv
+  citation-label: LBV
   issued: 1998
   publisher: Schweizerische Eidgenossenschaft
   title: Verordnung vom 7. Dezember 1998 über landwirtschaftliche
@@ -195,31 +203,85 @@ references:
     Begriffsverordnung, LBV; SR 910.91)
   type: book
   url: "https://www.fedlex.admin.ch/eli/cc/1999/13/de"
+
 - author:
   - literal: Schweizerischer Bundesrat
   id: islv
+  citation-label: ISLV
   issued: 2013
   publisher: Schweizerische Eidgenossenschaft
   title: Verordnung vom 23. Oktober 2013 über Informationssysteme im
     Bereich der Landwirtschaft (ISLV; SR 919.117.71)
   type: book
   url: "https://www.fedlex.admin.ch/eli/cc/2013/733/de"
+
 - author:
   - literal: Bundesamt für Landwirtschaft (BLW)
   id: acontrol
+  citation-label: BLW26a
   issued: 2026
   title: Anwendung Acontrol
   url: "https://www.blw.admin.ch/de/anwendung-acontrol"
+
 - author:
   - literal: Bundesamt für Landwirtschaft (BLW)
   id: agricheck
+  citation-label: BLW26b
   issued: 2025
   title: Agricheck -- Kontrollpunkte der Schweizer Landwirtschaft
   url: "https://blw-ofag-ufag.github.io/agricheck/"
+
 - author:
   - literal: Schweizerische Eidgenossenschaft
   id: swissdesignsystem
+  citation-label: Bund26
   issued: 2026
   title: Designsystem der Schweizerischen Bundesverwaltung
   url: "https://swiss.github.io/designsystem/"
 
+- author:
+  - literal: IP-Suisse
+  id: ipsuisse
+  citation-label: IPS26
+  issued: 2026
+  title: Integrierte Produktion IP-Suisse
+  url: "https://www.ipsuisse.ch/"
+
+- author:
+  - literal: Bio-Suisse
+  id: biosuisse
+  citation-label: BioS26
+  issued: 2026
+  title: Bio-Suisse
+  url: "https://www.bio-suisse.ch/de.html"
+
+- author:
+  - literal: Demeter
+  id: demeter
+  citation-label: Dem26
+  issued: 2026
+  title: Biologisch-dynamische Landwirtschaft Demeter
+  url: "https://demeter.ch/"
+
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: biov
+  citation-label: BIOV
+  issued: 1997
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung über die biologische Landwirtschaft 
+    und die Kennzeichnung biologisch produzierter Erzeugnisse und Lebensmittel 
+    (Bio-Verordnung, BIOV; SR 910.18)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/1997/2498_2498_2498/de"
+
+- author:
+  - literal: Schweizerischer Bundesrat
+  id: dzv
+  citation-label: DZV
+  issued: 2013
+  publisher: Schweizerische Eidgenossenschaft
+  title: Verordnung vom 23. Oktober 2013 über die Direktzahlungen an die
+    Landwirtschaft (Direktzahlungsverordnung, DZV; SR 910.13)
+  type: book
+  url: "https://www.fedlex.admin.ch/eli/cc/2013/765/de"
