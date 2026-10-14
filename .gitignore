@@ -1,6 +1,33 @@
-/out
-.RHistory
-.DS_Store
-*.log
-/.quarto/
+# Virtual environment
+/venv/
+
+# Built files
+/build/
+
+# Environment variables
+.env
+
+# Pytest artifacts
+**/__pycache__/**
+.pytest_cache
+
+# R session artifacts
+.Rhistory
+.RData
+
+# Quarto execution artifacts
+*_files/
+*_cache/
+**/.quarto/
 **/*.quarto_ipynb
+entities.md
+namespaces.md
+glossary.md
+
+# Small tests and notes
+/test.*
+/notes.*
+
+# Varia
+.DS_Store
+/data_dump

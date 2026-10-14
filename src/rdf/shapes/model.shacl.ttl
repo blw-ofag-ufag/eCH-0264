@@ -1,0 +1,44 @@
+# ==============================================================================
+# PREFIXES
+# ==============================================================================
+
+# Project-specific namespaces/qnames
+@prefix eCH-0264:        <https://agriculture.ld.admin.ch/eCH-0264/1/> .
+
+# Globally used namespaces/qnames
+@prefix dcterms:         <http://purl.org/dc/terms/> .
+@prefix owl:             <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:             <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:            <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:          <http://schema.org/> .
+@prefix sh:              <http://www.w3.org/ns/shacl#> .
+@prefix skos:            <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
+
+# ==============================================================================
+# DOCUMENT METADATA
+# ------------------------------------------------------------------------------
+# The metadata of this document is described as it is required by SHACL PLAY!
+# Visit https://shacl-play.sparna.fr/play/doc for more on this.
+# ==============================================================================
+
+eCH-0264: a owl:Ontology ;
+    dcterms:creator "Marc Beringer, Damian Oswald, Lea Stauber, Christian Wilda" ;
+    dcterms:title "eCH-0264 Logisches Datenmodell Landwirtschaftliche Kontrolldaten"@de,
+        "eCH-0264 Logical Data Model Agricultural Inspection Data"@en ;
+    dcterms:created "2026-09-23"^^xsd:date ;
+    dcterms:modified "2026-09-23"^^xsd:date ;
+    sh:declare [
+        sh:prefix "eCH-0264" ;
+        sh:namespace "https://agriculture.ld.admin.ch/eCH-0264/1/"^^xsd:anyURI ;
+    ] .
+
+
+# ==============================================================================
+# DATENMODELL
+# ------------------------------------------------------------------------------
+# Das logische Datenmodell wird schrittweise mit der Arbeitsgruppe
+# Landwirtschaftliche Kontrolldaten erarbeitet. Die Shapes der Geschäftsobjekte
+# werden in dieser Datei ergänzt. Ein erster Entwurf liegt auf dem Branch
+# feature/datenmodell.
+# ==============================================================================
