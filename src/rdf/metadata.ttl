@@ -22,7 +22,7 @@
 @prefix tou:             <https://ld.admin.ch/vocabulary/TermsOfUse/> .
 @prefix frequency:       <https://publications.europa.eu/resource/authority/frequency/> .
 
-<https://lindas.admin.ch/foag/ogd> a void:Dataset,
+<https://lindas.admin.ch/foag/ech/0264/1> a void:Dataset,
         dcat:Dataset,
         schema:Dataset ;
     schema:name

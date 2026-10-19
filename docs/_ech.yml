@@ -23,4 +23,4 @@ ech:
     original: de
     translations: []
   group: AgriFood         # name of the Fachgruppe, the prefix is added per language
-  graph: https://lindas.admin.ch/foag/ogd   # named graph on LINDAS holding the published data
+  graph: https://lindas.admin.ch/foag/ech/0264/1   # named graph on LINDAS holding the published data
