@@ -121,7 +121,7 @@ Dieser Grundsatz soll im künftigen Datenmodell (@sec-data-model) beibehalten we
 
 : Akteure des landwirtschaftlichen Kontrollwesens {#tbl-actors tbl-colwidths="[25,35,40]"}
 
-## Anwendungsfälle {#sec-usecases}
+## Anwendungsfälle {#sec-use-cases}
 
 | ID | Anwendungsfall | Akteure | Benötigte Geschäftsobjekte | Quelle |
 |:--|:--|:--|:--|:--|
