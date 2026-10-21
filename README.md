@@ -1,7 +1,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/blw-ofag-ufag/eCH-0264.svg)](https://github.com/blw-ofag-ufag/eCH-0264/commits)
 [![GitHub issues](https://img.shields.io/github/issues/blw-ofag-ufag/eCH-0264.svg)](https://github.com/blw-ofag-ufag/eCH-0264/issues)
 
-# eCH-0264 Agricultural Inspection Data (Working Draft v1.0)
+# eCH-0264 Agricultural Inspection Data (Working Draft)
 
 This repository contains the eCH standard eCH-0264 «Landwirtschaftliche Kontrolldaten» (agricultural inspection data). It establishes the semantic and technical interoperability of inspection data between the federal administration, the cantons, inspection bodies and label organisations in Switzerland:
 
