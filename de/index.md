@@ -19,7 +19,7 @@ eCH Fachgruppe AgriFood
   Anwendungsfälle](#sec-actors-use-cases)
   - [<span class="toc-section-number">2.1</span> Akteure](#sec-actors)
   - [<span class="toc-section-number">2.2</span>
-    Anwendungsfälle](#sec-usecases)
+    Anwendungsfälle](#sec-use-cases)
   - [<span class="toc-section-number">2.3</span> Einschränkungen der
     heutigen Kontrolldaten](#sec-limitations)
 - [<span class="toc-section-number">3</span> Fachglossar
@@ -455,8 +455,8 @@ landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen sowie
 die zugehörigen Codelisten. Es baut auf den Begriffen des Fachglossars
 (<a href="#sec-glossary" class="quarto-xref">Kapitel 3</a>) auf und
 leitet sich aus den Anwendungsfällen und Bedürfnissen der Akteure ab
-(**?@sec-use-cases**). Damit soll es insbesondere die heutigen
-Einschränkungen der Kontrolldaten
+(<a href="#sec-use-cases" class="quarto-xref">Kapitel 2.2</a>). Damit
+soll es insbesondere die heutigen Einschränkungen der Kontrolldaten
 (<a href="#sec-limitations" class="quarto-xref">Kapitel 2.3</a>)
 adressieren, etwa die fehlende Unterscheidung zwischen kontrollierten
 und nicht kontrollierten Kontrollpunkten.
