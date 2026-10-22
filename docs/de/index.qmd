@@ -236,21 +236,8 @@ Damit das Glossar verlässlich bleibt, wird folgende Governance umgesetzt:
 
 Das Datenmodell beschreibt die Geschäftsobjekte des landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen.
 Es baut auf den Begriffen des Fachglossars (@sec-glossary) auf und leitet sich aus den Anwendungsfällen und Bedürfnissen der Akteure ab (@sec-use-cases).
-Damit soll es insbesondere die heutigen Einschränkungen der Kontrolldaten (@sec-limitations) adressieren, etwa die fehlende Unterscheidung zwischen kontrollierten und nicht kontrollierten Kontrollpunkten.
-
-Das Datenmodell legt fest, welche Objekte und Merkmale für den Austausch von Kontrolldaten benötigt werden und was sie bedeuten.
-Es schreibt nicht vor, wie einzelne Systeme ihre Daten intern speichern.
-Wie die heutigen Kontrolldaten soll es keine Stammdaten von Betrieben und Personen enthalten, sondern auf diese über Identifikatoren verweisen (@sec-inspection-data).
-
-Das Datenmodell wird in zwei Stufen erarbeitet.
-Das konzeptionelle Datenmodell zeigt die Geschäftsobjekte und ihre Beziehungen (@sec-conceptual-model).
-Das logische Datenmodell leitet sich daraus ab und legt zusätzlich Datentypen, Codelisten und die technische Umsetzung fest (@sec-logical-model).
 
 ## Konzeptionelles Datenmodell {#sec-conceptual-model}
-
-::: {.callout-note title="Entwurf"}
-Das konzeptionelle Datenmodell ist ein Entwurf, der in der Arbeitsgruppe Landwirtschaftliche Kontrolldaten weiterentwickelt wird.
-:::
 
 Das konzeptionelle Datenmodell (@fig-conceptual-model) unterscheidet zwei Arten von Daten:
 
@@ -270,9 +257,6 @@ Die Kontrolle verweist auf die örtliche Einheit mit der BUR-Nummer und auf die 
 
 ## Logisches Datenmodell {#sec-logical-model}
 
-::: {.callout-note title="In Erarbeitung"}
-Das logische Datenmodell ist noch in Erarbeitung, es wird in einer späteren Version ergänzt.
-:::
 
 # Haftungsausschluss {#sec-disclaimer}
 

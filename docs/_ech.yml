@@ -12,7 +12,7 @@ ech:
   category: standard      # standard | best-practice | auxiliary | white-paper | addendum
   maturity: experimental  # experimental | defined | established
   version: 1.0.0
-  status: in-progress     # in-progress | draft | proposal | approved | replaced | repealed | suspended
+  status: draft           # in-progress | draft | proposal | approved | replaced | repealed | suspended
   decision-date: null
   replaces:
     version: null
