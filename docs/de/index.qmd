@@ -232,19 +232,31 @@ Damit das Glossar verlässlich bleibt, wird folgende Governance umgesetzt:
 - **Versionierung:** Das Glossar wird nach Semantic Versioning versioniert. Nur eine inkompatible Änderung erhöht die Hauptversion und damit den Namensraum (`https://agriculture.ld.admin.ch/eCH-0264/1/`).
 - **Jahreszyklus:** Änderungen am Glossar werden auf die jährliche Veröffentlichung der öffentlich-rechtlichen Kontrollpunkte im Herbst abgestimmt.
 
-# Logisches Datenmodell {#sec-data-model}
+# Datenmodell {#sec-data-model}
 
-::: {.callout-note title="In Erarbeitung"}
-Das logische Datenmodell ist noch in Erarbeitung, es wird in einer späteren Version ergänzt.
-:::
-
-Das logische Datenmodell beschreibt die Geschäftsobjekte des landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen sowie die zugehörigen Codelisten.
+Das Datenmodell beschreibt die Geschäftsobjekte des landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen.
 Es baut auf den Begriffen des Fachglossars (@sec-glossary) auf und leitet sich aus den Anwendungsfällen und Bedürfnissen der Akteure ab (@sec-use-cases).
-Damit soll es insbesondere die heutigen Einschränkungen der Kontrolldaten (@sec-limitations) adressieren, etwa die fehlende Unterscheidung zwischen kontrollierten und nicht kontrollierten Kontrollpunkten.
 
-Das Datenmodell legt fest, welche Objekte und Merkmale für den Austausch von Kontrolldaten benötigt werden und was sie bedeuten.
-Es schreibt nicht vor, wie einzelne Systeme ihre Daten intern speichern.
-Wie die heutigen Kontrolldaten soll es keine Stammdaten von Betrieben und Personen enthalten, sondern auf diese über Identifikatoren verweisen (@sec-inspection-data).
+## Konzeptionelles Datenmodell {#sec-conceptual-model}
+
+Das konzeptionelle Datenmodell (@fig-conceptual-model) unterscheidet zwei Arten von Daten:
+
+- **Referenzdaten** legen fest, was kontrolliert wird.
+  Ein Kontrollbereich gliedert sich in Rubriken, eine Rubrik in Gruppen, die beliebig tief verschachtelt sein können.
+  Ein Kontrollpunkt liegt entweder in einer Gruppe oder direkt in einer Rubrik.
+  Zu einer Rubrik können Kontrollgründe angegeben werden.
+  Jeder Kontrollpunkt stützt sich auf Anforderungen und legt mindestens ein mögliches Ergebnis fest.
+- **Transaktionsdaten** entstehen bei einer Kontrolle und fliessen zwischen den Systemen.
+  Eine Kontrolle hält fest, wann sie stattgefunden hat, welche örtliche Einheit kontrolliert wurde und zu welcher rechtlichen Einheit diese gehört, sowie gegebenenfalls die Kontrollperson und die Kontrollstelle.
+  Für jeden kontrollierten Kontrollpunkt wird eine tatsächliche Beobachtung mit dem festgestellten Ergebnis erfasst, bei Bedarf ergänzt mit einem Bild und einer Beschreibung der Abweichung.
+
+Stammdaten werden nicht modelliert.
+Die Kontrolle verweist auf die örtliche Einheit mit der BUR-Nummer und auf die rechtliche Einheit mit der Unternehmens-Identifikationsnummer (UID).
+
+![Konzeptionelles Datenmodell](assets/img/conceptual_model.svg){#fig-conceptual-model width="80%"}
+
+## Logisches Datenmodell {#sec-logical-model}
+
 
 # Haftungsausschluss {#sec-disclaimer}
 

@@ -1044,7 +1044,7 @@ term:bg-lako a skos:Concept ;
     skos:broader term:aktionsplan-kontrollen ;
     schema:name "Begleitgruppe Landwirtschaftliche Kontrollen"@de ;
     schema:alternateName "BG LaKo"@de ;
-    schema:description "Von BLW und Schweizer Bauernverband gemeinsam geleitetes Gremium, das den Austausch zwischen den Akteuren des landwirtschaftlichen Kontrollwesens etabliert und die Umsetzung des Aktionsplans Kontrollen begleitet."@de ;
+    schema:description "Von BLW geleitetes Gremium, das den Austausch zwischen den Akteuren des landwirtschaftlichen Kontrollwesens etabliert und die Umsetzung des Aktionsplans Kontrollen begleitet."@de ;
     skos:scopeNote "Die BG LaKo befasst sich mit Kontrollfrequenz, Kontrollkoordination, Kontrollpunkten und Kontrollergebnissen; die AG Kontrolldaten mit Kontrolldaten und deren Austausch."@de .
 
 # ==============================================================================
