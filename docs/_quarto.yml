@@ -5,7 +5,7 @@ project:
     - de/index.qmd
 
 website:
-  title: eCH-0264 Version 0.0.3 (Working Draft)
+  title: eCH-0264 Version 1.0.0-3 (Working Draft)
   repo-url: https://github.com/blw-ofag-ufag/eCH-0264
   favicon: assets/favicon.svg
   navbar:
