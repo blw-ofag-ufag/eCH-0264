@@ -48,6 +48,8 @@ IMG_DIR          := $(BUILD_DIR)/img
 UML_PUML         := $(IMG_DIR)/uml.puml
 DOCS_IMG_DIR     := $(DOCS_DIR)/assets/img
 DOCS_UML_PNG     := $(DOCS_IMG_DIR)/uml.png
+PUML_SRC         := $(wildcard $(DOCS_DIR)/*/assets/puml/*.puml)
+PUML_SVG         := $(subst /puml/,/img/,$(PUML_SRC:.puml=.svg))
 
 # Logs
 LOG_DIR          := $(BUILD_DIR)/log
@@ -241,6 +243,18 @@ $(DOCS_UML_PNG): $(SHAPES) | $(IMG_DIR) $(LOG_DIR) $(SHACL_PLAY_JAR) $(PLANTUML_
 	cp $(IMG_DIR)/uml.png $(DOCS_UML_PNG); \
 	printf "$(NC)"
 
+# Hand-drawn PlantUML diagrams of the documentation, per language:
+# docs/<lang>/assets/puml/<name>.puml -> docs/<lang>/assets/img/<name>.svg
+define PUML_RULE
+$(subst /puml/,/img/,$(1:.puml=.svg)): $(1) | $(PLANTUML_JAR) $(JAVA17)
+	@printf "$(BOLD)[*] Rendering $(notdir $(1)) with PlantUML...$(NC)\n"
+	@mkdir -p $$(dir $$@)
+	@printf "$(GREY)"; \
+	$(JAVA17) -jar $(PLANTUML_JAR) -tsvg $$< -o $$(abspath $$(dir $$@)) || { printf "$(NC)"; exit 1; }; \
+	printf "$(NC)"
+endef
+$(foreach puml,$(PUML_SRC),$(eval $(call PUML_RULE,$(puml))))
+
 generate-shacl-docs: $(SHAPES) $(PREFIXES) $(PROCESSED_DATA) $(DOCS_DIR)/_ech.yml src/python/utils/generate_shacl_docs.py | $(VENV)/.requirements-installed.stamp ## Generate the data model pages from the SHACL shapes
 	@printf "$(BOLD)[*] Generating SHACL documentation...$(NC)\n"
 	@printf "$(GREY)"; \
@@ -253,7 +267,7 @@ generate-glossary-docs: src/rdf/data/glossary.skos.ttl $(PREFIXES) src/python/ut
 	$(VENV_PYTHON) src/python/utils/generate_glossary_docs.py -i src/rdf/data/glossary.skos.ttl -d $(DOCS_DIR) -p $(PREFIXES) || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
-docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(R_STAMP) ## Generate the glossary pages and render the documentation (website, PDF)
+docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(PUML_SVG) $(R_STAMP) ## Generate the glossary pages and render the documentation (website, PDF)
 	@printf "$(BOLD)[*] Rendering documentation with Quarto...$(NC)\n"
 	@printf "$(GREY)"; \
 	quarto render docs > $(QUARTO_LOG) 2>&1 || { printf "$(NC)\n$(RED)ERROR: Quarto rendering failed. See log below:$(NC)\n$(GREY)"; cat $(QUARTO_LOG); printf "$(NC)\n"; exit 1; }; \
@@ -318,5 +332,5 @@ publish: test stamp-metadata delete ## Test, then replace the graph on LINDAS wi
 
 clean: ## Remove all build artifacts, caches, the virtual environment and generated pages
 	@printf "$(BOLD)[*] Cleaning build artifacts...$(NC)\n"
-	@rm -rf $(BUILD_DIR) $(VENV) docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md
+	@rm -rf $(BUILD_DIR) $(VENV) docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md $(PUML_SVG)
 	@find . -path ./.git -prune -o \( -name __pycache__ -o -name .pytest_cache -o -name .quarto -o -name '*_files' -o -name '*_cache' -o -name '*.quarto_ipynb' -o -name .Rhistory -o -name .RData \) -prune -exec rm -rf {} +
