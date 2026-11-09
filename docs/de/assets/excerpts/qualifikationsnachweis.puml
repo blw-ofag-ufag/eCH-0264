@@ -20,9 +20,7 @@ skinparam legendFontSize 11
 hide circle
 hide empty members
 package "Referenzdaten" as REF {
-  class "Person" as PER {
-    schema:identifier : xsd:string
-  }
+  class "Kontrollperson" as PER
   class "Qualifikationsnachweis" as QN {
     schema:validFrom : xsd:date
     schema:validThrough : xsd:date [0..1]

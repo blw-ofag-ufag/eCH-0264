@@ -18,7 +18,7 @@ package "Referenzdaten" as REF {
   class "Regelwerk" as RW
   class "Kontrollpunkt" as KP
   class "Kontrollpunkt-\nkatalog" as KAT
-  class "Person" as PER
+  class "Kontrollperson" as PER
 }
 package "Transaktionsdaten" as TRX {
   class "Kontrolle" as KON

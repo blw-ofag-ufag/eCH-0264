@@ -17,7 +17,7 @@ package "Referenzdaten" as REF {
   class "Regelwerk" as RW
   class "Kontrollpunkt" as KP
   class "Qualifikation" as QUA
-  class "Person" as PER
+  class "Kontrollperson" as PER
 }
 KP --> QUA : erfordert
 QUA -up-> RW : festgelegt in

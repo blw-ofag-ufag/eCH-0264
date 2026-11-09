@@ -28,8 +28,9 @@ package "Referenzdaten" as REF {
     uid : xsd:string
     schema:name : rdf:langString [1..*]
   }
-  class "Person" as PER {
-    schema:identifier : xsd:string
+  class "Kontrollperson" as PER
+  class "Identifikator" as PID <<schema:PropertyValue>> {
+    schema:value : xsd:string
   }
   class "Qualifikation" as QUA {
     schema:name : rdf:langString [1..*]
@@ -119,10 +120,19 @@ package "Referenzdaten" as REF {
     derselben Rechtsnatur (SHACL-Regel).
   end note
 
-  ' Qualifikation: Kontrollpunkt erfordert Qualifikation, Person weist sie mit Gültigkeit nach
+  ' Qualifikation: Kontrollpunkt erfordert Qualifikation, Kontrollperson weist sie mit Gültigkeit nach
   KP "0..*" -right-> "0..*" QUA : erfordert
   QUA "0..*" -left-> "0..1" RW : festgelegt in
   PER "0..*" -up-> "1..*" ORG : gehört an
+
+  ' Identifikator: nur zusammen mit der vergebenden Organisation eindeutig
+  PER "1" *-- "1..*" PID : schema:identifier
+  PID "0..*" -up-> "1" ORG : schema:propertyID
+  note bottom of PID
+    schema:propertyID verweist auf die Organisation,
+    die den Identifikator vergibt. Der Wert ist
+    innerhalb dieser Organisation eindeutig (SHACL-Regel).
+  end note
   PER "1" *-- "0..*" QN : besitzt
   QN "0..*" --> "1" QUA : qualifikation
 

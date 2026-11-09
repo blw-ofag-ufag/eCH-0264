@@ -254,17 +254,17 @@ Das Datenmodell unterscheidet zwei Arten von Daten:
   Jede Herausgeberin veröffentlicht ihre gültigen Kontrollpunkte in einem Kontrollpunktkatalog, zum Beispiel das BLW jährlich in der Masterliste oder eine Label-Organisation bei jeder Änderung ihrer Richtlinien.
   Zu einem Katalog kann eine Auswahl der Fokuskontrollpunkte gehören.
   Ein neuer Kontrollpunkt kann einen oder mehrere frühere Kontrollpunkte derselben Herausgeberin ersetzen.
-  Ein Kontrollpunkt kann eine Qualifikation erfordern, die eine Person besitzen muss, um ihn abschliessend zu prüfen.
-  Personen gehören einer oder mehreren Organisationen an, zum Beispiel einer Kontrollstelle oder einem kantonalen Veterinäramt.
+  Ein Kontrollpunkt kann eine Qualifikation erfordern, die eine Kontrollperson besitzen muss, um ihn abschliessend zu prüfen.
+  Kontrollpersonen gehören einer oder mehreren Organisationen an, zum Beispiel einer Kontrollstelle oder einem kantonalen Veterinäramt.
 - **Transaktionsdaten** entstehen bei einer Kontrolle oder einer Anmeldung und fliessen zwischen den Systemen.
-  Eine Kontrolle hält fest, wann sie stattgefunden hat, welche örtliche Einheit kontrolliert wurde und zu welcher rechtlichen Einheit diese gehört, welche Personen sie durchgeführt haben und gegebenenfalls welche Organisation als Kontrollstelle beauftragt war.
+  Eine Kontrolle hält fest, wann sie stattgefunden hat, welche örtliche Einheit kontrolliert wurde und zu welcher rechtlichen Einheit diese gehört, welche Kontrollpersonen sie durchgeführt haben und gegebenenfalls welche Organisation als Kontrollstelle beauftragt war.
   Für jeden kontrollierten Kontrollpunkt wird eine tatsächliche Beobachtung erfasst.
   Sie verweist auf ein vordefiniertes mögliches Ergebnis oder beschreibt eine Abweichung frei, bei Bedarf ergänzt mit einer Menge, zum Beispiel der betroffenen Fläche, und einem Bild.
-  Jede Beobachtung hält fest, welche Person sie festgestellt hat.
+  Jede Beobachtung hält fest, welche Kontrollperson sie festgestellt hat.
   Eine Beobachtung kann eine falsch erfasste Beobachtung korrigieren oder auf eine frühere Beobachtung folgen, zum Beispiel bei einer Nachkontrolle.
   Eine Anmeldung hält fest, dass sich ein Betrieb für ein Beitragsjahr für ein Programm angemeldet hat und wann er dies getan hat.
 
-Stammdaten werden nicht modelliert, mit Ausnahme einer Klasse Kontrollperson ohne Namen, welche über einen Identifikator bei der übergeordneten Organisation identifizierbar ist (@sec-modelling-decisions).
+Stammdaten werden nicht modelliert, mit Ausnahme einer Klasse Kontrollperson ohne Namen, die über einen Identifikator identifizierbar ist, den eine Organisation vergibt (@sec-modelling-decisions).
 Kontrolle und Anmeldung verweisen auf die örtliche Einheit mit der Nummer des Betriebs- und Unternehmensregisters (BUR-Nummer) [@bur; @digiagrifood-stammdaten] und auf die rechtliche Einheit mit der Unternehmens-Identifikationsnummer (UID) [@uid-register].
 
 
@@ -404,7 +404,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 Organisationen werden über die Unternehmens-Identifikationsnummer (UID) identifiziert [@uid-register].
 Alle Organisationen im Kontrollwesen haben eine UID, auch Bundesämter, kantonale Ämter und Vereine.
 
-![](assets/excerpts/organisation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: die Beziehungen von Regelwerk, Kontrollpunkt, Kontrollpunktkatalog, Person und Kontrolle zur Organisation"}
+![](assets/excerpts/organisation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: die Beziehungen von Regelwerk, Kontrollpunkt, Kontrollpunktkatalog, Kontrollperson und Kontrolle zur Organisation"}
 :::
 
 #### Kontrollpunktkataloge der Herausgeberinnen {#sec-decision-catalogues}
@@ -475,7 +475,7 @@ Ein Kontrollpunkt ersetzt nur Kontrollpunkte derselben Herausgeberin.
 #### Erforderliche Qualifikation pro Kontrollpunkt {#sec-decision-qualification}
 
 ::: {.entscheid}
-Gewisse Kontrollpunkte dürfen nur Personen mit einer bestimmten Qualifikation abschliessend prüfen.
+Gewisse Kontrollpunkte dürfen nur Kontrollpersonen mit einer bestimmten Qualifikation abschliessend prüfen.
 Zwei Beispiele aus den Technischen Weisungen des BLV [@blv-tw-primaerproduktion]:
 
 - Kontrollen von Honigbienenhaltungen müssen durch amtliche Fachassistentinnen und Fachassistenten Bienen durchgeführt werden.
@@ -488,7 +488,7 @@ Eine Qualifikation kann in einem Regelwerk festgelegt sein, zum Beispiel in der 
 Wir haben uns aus folgenden Gründen dafür entschieden:
 
 - **Es ist erkennbar, ob ein Ergebnis abschliessend ist.**
-  Stellt eine Person ohne die erforderliche Qualifikation etwas fest, zum Beispiel ungepflegte Klauen bei einer Kontrolle ausserhalb des Auftrags, ist klar, dass eine qualifizierte Person nachprüfen muss (Anwendungsfall UC-17).
+  Stellt eine Kontrollperson ohne die erforderliche Qualifikation etwas fest, zum Beispiel ungepflegte Klauen bei einer Kontrolle ausserhalb des Auftrags, ist klar, dass eine qualifizierte Kontrollperson nachprüfen muss (Anwendungsfall UC-17).
 - **Qualifikationen sind ein überschaubarer Katalog.**
   Sie werden von wenigen Organisationen festgelegt und gehören deshalb wie Regelwerke und Programme zu den Referenzdaten.
 - **Die Anforderung steht beim Kontrollpunkt.**
@@ -498,27 +498,31 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 Qualifikationen haben vorerst keine Struktur.
 Dass zum Beispiel eine amtliche Tierärztin auch alles prüfen darf, was eine amtliche Fachassistentin prüfen darf, ist im Modell noch nicht abgebildet.
 
-![](assets/excerpts/qualifikation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt erfordert Qualifikation, Person besitzt Qualifikation, Qualifikation festgelegt in Regelwerk"}
+![](assets/excerpts/qualifikation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt erfordert Qualifikation, Kontrollperson besitzt Qualifikation, Qualifikation festgelegt in Regelwerk"}
 :::
 
-#### Personen als schlanker Verweis {#sec-decision-persons}
+#### Kontrollpersonen als schlanker Verweis {#sec-decision-control-persons}
 
 ::: {.entscheid}
-Damit ersichtlich ist, wer eine Kontrolle durchgeführt und eine Beobachtung festgestellt hat, kennt das Datenmodell eine Klasse Person.
-Eine Person gehört einer oder mehreren Organisationen an und besitzt Qualifikationen.
+Damit ersichtlich ist, wer eine Kontrolle durchgeführt und eine Beobachtung festgestellt hat, kennt das Datenmodell eine Klasse Kontrollperson.
+Die Bezeichnung entspricht dem Begriff des Fachglossars (@sec-glossary): eine natürliche Person, die im Auftrag einer Kontrollstelle Kontrollen durchführt.
+Eine Kontrollperson gehört einer oder mehreren Organisationen an und besitzt Qualifikationen.
 Sie wird nur über einen Identifikator erfasst, ohne Namen oder Adresse.
+Den Identifikator vergibt eine Organisation, die ihre Kontrollpersonen in einer eigenen Liste führt, zum Beispiel eine Kontrollstelle.
+Er ist nur zusammen mit dieser Organisation eindeutig.
+Gehört eine Kontrollperson mehreren Organisationen an, kann sie mehrere Identifikatoren haben.
 
 Wir haben uns aus folgenden Gründen dafür entschieden:
 
 - **Die Qualifikation lässt sich prüfen.**
-  Nur wenn bekannt ist, welche Person eine Beobachtung festgestellt hat und welche Qualifikationen sie zu diesem Zeitpunkt besass, lässt sich beurteilen, ob das Ergebnis abschliessend ist.
+  Nur wenn bekannt ist, welche Kontrollperson eine Beobachtung festgestellt hat und welche Qualifikationen sie zu diesem Zeitpunkt besass, lässt sich beurteilen, ob das Ergebnis abschliessend ist.
 - **Personendaten bleiben geschützt.**
   Für den Austausch von Kontrolldaten genügt ein Identifikator.
   Namen und Kontaktangaben bleiben in den Verzeichnissen, die heute zum Beispiel das BLV, SwissGAP oder Agrosolution führen.
-- **Personen sind Stammdaten.**
+- **Kontrollpersonen sind Stammdaten.**
   Das Modell bildet nur ab, was für Kontrolldaten nötig ist, und überlässt die übrigen Angaben den bestehenden Verzeichnissen.
 
-![](assets/excerpts/person.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Person mit Organisation und Qualifikation, Kontrolle und Beobachtung verweisen auf die Person"}
+![](assets/excerpts/kontrollperson.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollperson mit Organisation und Qualifikation, Kontrolle und Beobachtung verweisen auf die Kontrollperson"}
 :::
 
 #### Korrektur und Folgebeobachtung {#sec-decision-corrections}
@@ -542,7 +546,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
   Auch korrigierte Beobachtungen bleiben erhalten.
   So bleibt nachvollziehbar, was wann erfasst und geändert wurde.
 - **Abschliessende Beurteilungen lassen sich verfolgen.**
-  Stellt eine Person ohne die erforderliche Qualifikation etwas fest, verweist die Beurteilung der qualifizierten Person auf diese erste Beobachtung.
+  Stellt eine Kontrollperson ohne die erforderliche Qualifikation etwas fest, verweist die Beurteilung der qualifizierten Kontrollperson auf diese erste Beobachtung.
 
 ![](assets/excerpts/korrektur.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrolle enthält tatsächliche Beobachtungen, die einander korrigieren oder aufeinander folgen"}
 :::
@@ -601,7 +605,7 @@ Die Klassen und Beziehungen entsprechen dem konzeptionellen Datenmodell.
 Hinzu kommen die Attribute, ihre Kardinalitäten sowie die verwendeten Vokabulare und Datentypen:
 
 - **SKOS** [@skos] für die Gliederung, den Katalog und die Auswahl der Fokuskontrollpunkte,
-- **schema.org** [@schemaorg] für allgemeine Merkmale wie Name, Beschreibung und Gültigkeit,
+- **schema.org** [@schemaorg] für allgemeine Merkmale wie Name, Beschreibung, Gültigkeit und Identifikatoren,
 - **Dublin Core** [@dcterms] für die Ersetzung von Kontrollpunkten (`dcterms:replaces`),
 - **PROV-O** [@prov-o] für die Korrektur von Beobachtungen (`prov:wasRevisionOf`),
 - **XML-Schema-Datentypen** (`xsd:`) und mehrsprachige Texte (`rdf:langString`) für die Werte.
@@ -619,8 +623,9 @@ Merkmale ohne Präfix werden im Namensraum von eCH-0264 definiert.
 | Kontrollpunkt ersetzt Kontrollpunkt | `dcterms:replaces` |
 | Beobachtung korrigiert Beobachtung | `prov:wasRevisionOf` |
 | Beobachtung folgt auf Beobachtung | `folgtAuf` (Namensraum von eCH-0264) |
-| Person besitzt Qualifikation | Qualifikationsnachweis mit Gültigkeit (`schema:validFrom`, `schema:validThrough`) |
-| Organisation, Person, Qualifikation, Regelwerk, Programm, Anforderung, Kontrollpunkt, Mögliches Ergebnis, Kontrolle, Tatsächliche Beobachtung, Anmeldung | Klassen im Namensraum von eCH-0264 |
+| Identifikator der Kontrollperson | `schema:identifier` mit einem `schema:PropertyValue` (`schema:value`, `schema:propertyID`) |
+| Kontrollperson besitzt Qualifikation | Qualifikationsnachweis mit Gültigkeit (`schema:validFrom`, `schema:validThrough`) |
+| Organisation, Kontrollperson, Qualifikation, Regelwerk, Programm, Anforderung, Kontrollpunkt, Mögliches Ergebnis, Kontrolle, Tatsächliche Beobachtung, Anmeldung | Klassen im Namensraum von eCH-0264 |
 | übrige Beziehungen | Merkmale im Namensraum von eCH-0264 |
 
 : Abbildung des konzeptionellen auf das logische Datenmodell {#tbl-logical-mapping tbl-colwidths="[45,55]"}
@@ -658,6 +663,7 @@ Sie werden in der technischen Umsetzung als SHACL-Regeln [@shacl] geprüft:
 - Alle Anforderungen, die ein Kontrollpunkt prüft, stammen aus Regelwerken mit derselben Rechtsnatur.
 - Ein Kontrollpunkt ersetzt nur Kontrollpunkte derselben Herausgeberin.
 - Ist das Ergebnis einer Beobachtung «Mangel», ist ein vordefinierter Mangel oder eine freie Beschreibung der Abweichung angegeben.
+- Der Identifikator einer Kontrollperson ist innerhalb der Organisation, die ihn vergibt, eindeutig.
 
 Die Rechtsnatur wird nur beim Regelwerk erfasst und nicht beim Kontrollpunkt wiederholt, damit sich die Angaben nicht widersprechen können.
 
@@ -681,21 +687,49 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/versionen.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Kontrollpunkt mit der Beziehung dcterms:replaces"}
 :::
 
+#### Identifikator mit vergebender Organisation {#sec-decision-identifier}
+
+::: {.entscheid}
+Der Identifikator einer Kontrollperson wird als `schema:PropertyValue` erfasst.
+`schema:value` enthält den Identifikator, zum Beispiel eine Personalnummer.
+`schema:propertyID` verweist auf die Organisation, die ihn vergeben hat und ihre Kontrollpersonen in einer Liste führt.
+
+Wir haben uns aus folgenden Gründen dafür entschieden:
+
+- **Ein Identifikator ist nur innerhalb einer Organisation eindeutig.**
+  Zwei Organisationen können denselben Identifikator vergeben.
+  Erst zusammen mit der vergebenden Organisation ist er eindeutig.
+- **Eine Kontrollperson kann mehrere Identifikatoren haben.**
+  Gehört sie mehreren Organisationen an, kann sie von jeder einen eigenen erhalten.
+- **Die Liste bleibt bei der Organisation.**
+  Die Organisation führt ihre Kontrollpersonen mit Namen und Kontaktangaben in ihrem eigenen System.
+  Das Datenmodell übernimmt davon nur den Identifikator.
+  Eine Liste bei der Klasse Organisation würde dieselbe Angabe ein zweites Mal führen.
+- **schema.org kennt dieses Muster.**
+  Bei schema.org bezeichnet `schema:propertyID` das System, aus dem ein Identifikator stammt.
+  Im Datenmodell ist das die Organisation, die ihre Kontrollpersonen in einer Liste führt.
+
+Die vergebende Organisation muss nicht dieselbe sein, der die Kontrollperson angehört.
+Führt zum Beispiel ein Verband ein Verzeichnis der Kontrollpersonen, kann er den Identifikator vergeben.
+
+![](assets/excerpts/identifikator.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Kontrollperson mit Identifikatoren als schema:PropertyValue, die auf die vergebende Organisation verweisen"}
+:::
+
 #### Qualifikationsnachweis mit Gültigkeit {#sec-decision-qualification-proof}
 
 ::: {.entscheid}
-Dass eine Person eine Qualifikation besitzt, wird als eigener Qualifikationsnachweis mit Gültigkeitszeitraum erfasst.
+Dass eine Kontrollperson eine Qualifikation besitzt, wird als eigener Qualifikationsnachweis mit Gültigkeitszeitraum erfasst.
 
 Wir haben uns aus folgenden Gründen dafür entschieden:
 
 - **Qualifikationen können erlöschen.**
   Amtliche Fachassistentinnen und Fachassistenten müssen sich zum Beispiel regelmässig weiterbilden.
-  Mit dem Gültigkeitszeitraum lässt sich prüfen, ob eine Person die Qualifikation zum Zeitpunkt der Beobachtung besass.
+  Mit dem Gültigkeitszeitraum lässt sich prüfen, ob eine Kontrollperson die Qualifikation zum Zeitpunkt der Beobachtung besass.
 - **Eine Beziehung allein kann keine Gültigkeit tragen.**
-  In RDF hat eine einfache Beziehung zwischen Person und Qualifikation keine eigenen Merkmale.
+  In RDF hat eine einfache Beziehung zwischen Kontrollperson und Qualifikation keine eigenen Merkmale.
   Der Qualifikationsnachweis macht die Gültigkeit erfassbar.
 
-![](assets/excerpts/qualifikationsnachweis.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Person besitzt Qualifikationsnachweise mit Gültigkeit, die auf eine Qualifikation verweisen"}
+![](assets/excerpts/qualifikationsnachweis.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Kontrollperson besitzt Qualifikationsnachweise mit Gültigkeit, die auf eine Qualifikation verweisen"}
 :::
 
 #### PROV-O für Korrekturen, eigenes Merkmal für Folgebeobachtungen {#sec-decision-prov}

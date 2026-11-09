@@ -20,7 +20,7 @@ hide empty members
 
 package "Referenzdaten" as REF {
   class "Organisation" as ORG
-  class "Person" as PER
+  class "Kontrollperson" as PER
   class "Qualifikation" as QUA
   class "Regelwerk" as RW
   class "Anforderung" as ANF
