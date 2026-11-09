@@ -276,7 +276,7 @@ Kontrolle und Anmeldung verweisen auf die örtliche Einheit mit der Nummer des B
 Die folgenden Abschnitte begründen die wichtigsten Entscheide.
 Neben jedem Entscheid steht der Ausschnitt des Datenmodells, den er betrifft.
 
-#### Gliederung der Kontrollpunkte in einem Baum
+#### Gliederung der Kontrollpunkte in einem Baum {#sec-decision-hierarchy}
 
 ::: {.entscheid}
 Kontrollpunkte werden heute in Kontrollbereiche, Rubriken und Gruppen gegliedert.
@@ -300,7 +300,7 @@ Regeln, die nur für eine bestimmte Ebene gelten, werden erst in der technischen
 ![](assets/excerpts/gliederung.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt und Gliederungselement mit der Beziehung übergeordnet"}
 :::
 
-#### Herkunft der Anforderungen mit Regelwerk und Organisation
+#### Herkunft der Anforderungen mit Regelwerk und Organisation {#sec-decision-origin}
 
 ::: {.entscheid}
 Heute ist bei vielen Kontrollpunkten nicht klar erkennbar, welche Anforderungen sie prüfen und woher diese stammen.
@@ -332,7 +332,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/herkunft.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Organisation, Regelwerk, Anforderung und Kontrollpunkt"}
 :::
 
-#### Programme bündeln Anforderungen
+#### Programme bündeln Anforderungen {#sec-decision-programmes}
 
 ::: {.entscheid}
 Betriebe melden sich für Programme an, zum Beispiel für Direktzahlungsprogramme wie RAUS oder BTS oder für Label-Programme.
@@ -358,7 +358,7 @@ Programme haben vorerst keine innere Struktur, zum Beispiel keine Teilprogramme 
 ![](assets/excerpts/programm.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Regelwerk, Programm, Anforderung und Kontrollpunkt"}
 :::
 
-#### Anmeldungen als Transaktionsdaten
+#### Anmeldungen als Transaktionsdaten {#sec-decision-registrations}
 
 ::: {.entscheid}
 Betriebe melden sich jedes Jahr für Programme an.
@@ -382,7 +382,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/anmeldung.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Anmeldung für ein Programm, das Anforderungen umfasst"}
 :::
 
-#### Eine Klasse Organisation für alle Rollen
+#### Eine Klasse Organisation für alle Rollen {#sec-decision-organisation}
 
 ::: {.entscheid}
 Organisationen haben im Kontrollwesen verschiedene Rollen: Sie erlassen Regelwerke, geben Kontrollpunkte heraus oder führen als Kontrollstelle Kontrollen durch.
@@ -405,7 +405,7 @@ Alle Organisationen im Kontrollwesen haben eine UID, auch Bundesämter, kantonal
 ![](assets/excerpts/organisation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: die Beziehungen von Regelwerk, Kontrollpunkt, Kontrollpunktkatalog, Person und Kontrolle zur Organisation"}
 :::
 
-#### Kontrollpunktkataloge der Herausgeberinnen
+#### Kontrollpunktkataloge der Herausgeberinnen {#sec-decision-catalogues}
 
 ::: {.entscheid}
 Die Herausgeberinnen ändern ihre Kontrollpunkte in unterschiedlichem Rhythmus:
@@ -445,7 +445,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/katalog.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunktkatalog mit Auswahl der Fokuskontrollpunkte, Kontrollpunkt und Organisation"}
 :::
 
-#### Ersetzung von Kontrollpunkten
+#### Ersetzung von Kontrollpunkten {#sec-decision-replacement}
 
 ::: {.entscheid}
 Herausgeberinnen ändern ihre Kontrollpunkte regelmässig, der Bund jährlich, Label-Organisationen auch unterjährig.
@@ -470,7 +470,7 @@ Ein Kontrollpunkt ersetzt nur Kontrollpunkte derselben Herausgeberin.
 ![](assets/excerpts/ersetzung.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt mit der Beziehung ersetzt und seiner Herausgeberin"}
 :::
 
-#### Erforderliche Qualifikation pro Kontrollpunkt
+#### Erforderliche Qualifikation pro Kontrollpunkt {#sec-decision-qualification}
 
 ::: {.entscheid}
 Gewisse Kontrollpunkte dürfen nur Personen mit einer bestimmten Qualifikation abschliessend prüfen.
@@ -499,7 +499,7 @@ Dass zum Beispiel eine amtliche Tierärztin auch alles prüfen darf, was eine am
 ![](assets/excerpts/qualifikation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt erfordert Qualifikation, Person besitzt Qualifikation, Qualifikation festgelegt in Regelwerk"}
 :::
 
-#### Personen als schlanker Verweis
+#### Personen als schlanker Verweis {#sec-decision-persons}
 
 ::: {.entscheid}
 Damit ersichtlich ist, wer eine Kontrolle durchgeführt und eine Beobachtung festgestellt hat, kennt das Datenmodell eine Klasse Person.
@@ -519,7 +519,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/person.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Person mit Organisation und Qualifikation, Kontrolle und Beobachtung verweisen auf die Person"}
 :::
 
-#### Korrektur und Folgebeobachtung
+#### Korrektur und Folgebeobachtung {#sec-decision-corrections}
 
 ::: {.entscheid}
 Eine Beobachtung kann auf eine andere Beobachtung verweisen.
@@ -545,7 +545,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/korrektur.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrolle enthält tatsächliche Beobachtungen, die einander korrigieren oder aufeinander folgen"}
 :::
 
-#### Vordefinierte Mängel und flexible Abweichungen
+#### Vordefinierte Mängel und flexible Abweichungen {#sec-decision-defects}
 
 ::: {.entscheid}
 Die Masterliste führt heute zu vielen Kontrollpunkten mögliche Mängel, zum Beispiel «Ungenügende Rückverfolgbarkeit der Abgaben».
@@ -627,7 +627,7 @@ Merkmale ohne Präfix werden im Namensraum von eCH-0264 definiert.
 
 ### Modellierungsentscheide {#sec-logical-modelling-decisions}
 
-#### SKOS für Gliederung, Katalog und Fokuskontrollpunkte
+#### SKOS für Gliederung, Katalog und Fokuskontrollpunkte {#sec-decision-skos}
 
 ::: {.entscheid}
 Die Gliederungselemente werden als `skos:Concept` umgesetzt und über `skos:broader` verschachtelt.
@@ -647,7 +647,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/skos.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Kontrollpunkt, Gliederungselement als skos:Concept, Kontrollpunktkatalog als skos:ConceptScheme und Fokuskontrollpunkte als skos:Collection"}
 :::
 
-#### Prüfregeln mit SHACL
+#### Prüfregeln mit SHACL {#sec-decision-shacl}
 
 ::: {.entscheid}
 Einige Regeln lassen sich in einem Klassendiagramm nicht als Kardinalität ausdrücken.
@@ -662,7 +662,7 @@ Die Rechtsnatur wird nur beim Regelwerk erfasst und nicht beim Kontrollpunkt wie
 ![](assets/excerpts/pruefregeln.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Regelwerk mit Rechtsnatur, Anforderung, Kontrollpunkt und Organisation mit den Prüfregeln als Notizen"}
 :::
 
-#### Neue Kontrollpunkte statt Versionsnummern
+#### Neue Kontrollpunkte statt Versionsnummern {#sec-decision-no-versions}
 
 ::: {.entscheid}
 Ein Kontrollpunkt hat keine Versionsnummer.
@@ -679,7 +679,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/versionen.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Kontrollpunkt mit der Beziehung dcterms:replaces"}
 :::
 
-#### Qualifikationsnachweis mit Gültigkeit
+#### Qualifikationsnachweis mit Gültigkeit {#sec-decision-qualification-proof}
 
 ::: {.entscheid}
 Dass eine Person eine Qualifikation besitzt, wird als eigener Qualifikationsnachweis mit Gültigkeitszeitraum erfasst.
@@ -696,7 +696,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ![](assets/excerpts/qualifikationsnachweis.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Person besitzt Qualifikationsnachweise mit Gültigkeit, die auf eine Qualifikation verweisen"}
 :::
 
-#### PROV-O für Korrekturen, eigenes Merkmal für Folgebeobachtungen
+#### PROV-O für Korrekturen, eigenes Merkmal für Folgebeobachtungen {#sec-decision-prov}
 
 ::: {.entscheid}
 Eine Korrektur wird mit `prov:wasRevisionOf` aus PROV-O [@prov-o] erfasst.
