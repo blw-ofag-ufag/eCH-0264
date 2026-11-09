@@ -234,22 +234,20 @@ Damit das Glossar verlässlich bleibt, wird folgende Governance umgesetzt:
 
 # Datenmodell {#sec-data-model}
 
-Das Datenmodell beschreibt die Geschäftsobjekte des landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen.
+Das Datenmodell beschreibt die Geschäftsobjekte des landwirtschaftlichen Kontrollwesens, ihre Merkmale und Beziehungen. 
 Es baut auf den Begriffen des Fachglossars (@sec-glossary) auf und leitet sich aus den Anwendungsfällen und Bedürfnissen der Akteure ab (@sec-use-cases).
-
-## Konzeptionelles Datenmodell {#sec-conceptual-model}
-
 Das konzeptionelle Datenmodell (@fig-conceptual-model) beschreibt die Geschäftsobjekte unabhängig von einer Technologie.
-Es richtet sich an Fachpersonen, verwendet die Begriffe des Fachglossars und zeigt nur die Geschäftsobjekte und ihre Beziehungen.
-Attribute, Datentypen und Kardinalitäten beschreibt das logische Datenmodell (@sec-logical-model).
-Es unterscheidet zwei Arten von Daten:
+Es richtet sich an Fachpersonen, verwendet die Begriffe des Fachglossars und zeigt nur die Geschäftsobjekte und ihre Beziehungen. 
+Das logische Datenmodell beschreibt Attribute, Datentypen und Kardinalitäten (@sec-logical-model).
+
+Das Datenmodell unterscheidet zwei Arten von Daten:
 
 - **Referenzdaten** legen fest, was kontrolliert wird.
   Eine Organisation erlässt ein Regelwerk, zum Beispiel eine Verordnung oder eine Label-Richtlinie, in einer bestimmten Fassung.
   Ein Regelwerk ist öffentlich-rechtlich oder privatrechtlich und enthält Anforderungen.
   Ein Programm, zum Beispiel ein Direktzahlungsprogramm wie RAUS oder BTS, ist in einem Regelwerk festgelegt und umfasst die Anforderungen, zu deren Einhaltung sich ein Betrieb mit der Anmeldung verpflichtet.
   Ein Kontrollpunkt prüft eine oder mehrere Anforderungen und wird von einer Organisation herausgegeben.
-  Alle Anforderungen eines Kontrollpunkts stammen aus Regelwerken mit derselben Rechtsnatur.
+  Alle Anforderungen eines Kontrollpunkts stammen aus Regelwerken mit derselben Rechtsnatur (öffentlich-rechtlich, oder privatrechtlich).
   Der Kontrollpunkt legt mindestens ein mögliches Ergebnis fest, zum Beispiel einen vordefinierten Mangel.
   Jeder Kontrollpunkt ist einem Gliederungselement zugeordnet.
   Gliederungselemente können einem übergeordneten Gliederungselement angehören und so beliebig tief verschachtelt werden, zum Beispiel als Kontrollbereich, Rubrik und Gruppe.
@@ -266,8 +264,12 @@ Es unterscheidet zwei Arten von Daten:
   Eine Beobachtung kann eine falsch erfasste Beobachtung korrigieren oder auf eine frühere Beobachtung folgen, zum Beispiel bei einer Nachkontrolle.
   Eine Anmeldung hält fest, dass sich ein Betrieb für ein Beitragsjahr für ein Programm angemeldet hat und wann er dies getan hat.
 
-Stammdaten werden nicht modelliert, mit Ausnahme einer schlanken Person ohne Namen (@sec-modelling-decisions).
+Stammdaten werden nicht modelliert, mit Ausnahme einer Klasse Kontrollperson ohne Namen, welche über einen Identifikator bei der übergeordneten Organisation identifizierbar ist (@sec-modelling-decisions).
 Kontrolle und Anmeldung verweisen auf die örtliche Einheit mit der Nummer des Betriebs- und Unternehmensregisters (BUR-Nummer) [@bur; @digiagrifood-stammdaten] und auf die rechtliche Einheit mit der Unternehmens-Identifikationsnummer (UID) [@uid-register].
+
+
+## Konzeptionelles Datenmodell {#sec-conceptual-model}
+
 
 ![Konzeptionelles Datenmodell](assets/img/conceptual_model.svg){#fig-conceptual-model width="80%"}
 
