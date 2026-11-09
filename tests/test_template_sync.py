@@ -23,8 +23,8 @@ PATTERNS = [
     "LICENSE.md",
     ".gitattributes",
     "src/python/utils/*.py",
-    "src/r/utils/*.R",
     "src/rdf/shapes/glossary.shacl.ttl",
+    "src/rdf/shapes/codelist.shacl.ttl",
     ".github/workflows/ci.yml",
     ".github/CONTRIBUTING.md"
 ]
