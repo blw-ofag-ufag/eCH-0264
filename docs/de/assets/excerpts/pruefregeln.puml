@@ -52,15 +52,16 @@ RW -right-> RN
 ANF "1..*" -up-> "1" RW : stammt aus
 KP "0..*" -up-> "1..*" ANF : prüft
 KP "0..*" -up-> "1" ORG : herausgeberin
-KP "0..*" --> "0..*" KP : dcterms:replaces
+KP --> KP : dcterms:replaces [0..*]
+note left of ANF
+  Alle Anforderungen, die ein
+  Kontrollpunkt prüft, stammen aus
+  Regelwerken mit derselben
+  Rechtsnatur (SHACL-Regel).
+end note
 note right of KP
   Ersetzender und ersetzter
   Kontrollpunkt haben dieselbe
   Herausgeberin (SHACL-Regel).
-end note
-note right of ANF
-  Alle Anforderungen, die ein Kontrollpunkt
-  prüft, stammen aus Regelwerken mit
-  derselben Rechtsnatur (SHACL-Regel).
 end note
 @enduml

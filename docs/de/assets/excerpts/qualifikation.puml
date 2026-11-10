@@ -18,6 +18,6 @@ package "Referenzdaten" as REF {
   class "Kontrollpunkt" as KP
   class "Qualifikation" as QUA
 }
-KP --> QUA : erfordert
 QUA -up-> RW : festgelegt in
+KP -up-> QUA : erfordert
 @enduml

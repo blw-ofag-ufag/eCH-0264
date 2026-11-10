@@ -20,8 +20,8 @@ package "Referenzdaten" as REF {
   class "Kontrollpunkt" as KP
 }
 KP -up-> ORG : herausgegeben von
-KAT --> KP : enthält
 KAT -up-> ORG : herausgegeben von
-KAT *-- FKP
-FKP --> KP : umfasst
+KAT *-down- FKP
+KAT -down-> KP : enthält
+FKP -down-> KP : umfasst
 @enduml

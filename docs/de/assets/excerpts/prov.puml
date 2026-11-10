@@ -27,6 +27,6 @@ package "Transaktionsdaten" as TRX {
     menge : xsd:decimal [0..1]
   }
 }
-BEO "0..1" --> "0..1" BEO : prov:wasRevisionOf
-BEO "0..*" --> "0..1" BEO : folgtAuf
+BEO --> BEO : prov:wasRevisionOf [0..1]
+BEO --> BEO : folgtAuf [0..1]
 @enduml

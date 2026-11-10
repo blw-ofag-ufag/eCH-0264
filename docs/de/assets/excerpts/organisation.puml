@@ -24,9 +24,9 @@ package "Transaktionsdaten" as TRX {
   class "Kontrolle" as KON
 }
 RW -up-> ORG : erlassen von
+PER -up-> ORG : gehört an
 KP -up-> ORG : herausgegeben von
 KAT -up-> ORG : herausgegeben von
-PER -up-> ORG : gehört an
 KON -up-> ORG : durchgeführt von\n(Kontrollstelle)
 KON -up-> PER : durchgeführt von
 @enduml

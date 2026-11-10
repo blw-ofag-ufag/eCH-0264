@@ -29,5 +29,5 @@ package "Referenzdaten" as REF {
     schema:validThrough : xsd:date [0..1]
   }
 }
-KP "0..*" --> "0..*" KP : dcterms:replaces
+KP --> KP : dcterms:replaces [0..*]
 @enduml

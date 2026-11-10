@@ -17,6 +17,6 @@ package "Referenzdaten" as REF {
   class "Kontrollpunkt" as KP
   class "Gliederungselement" as GE
 }
-KP --> GE : zugeordnet
+KP -down-> GE : zugeordnet
 GE --> GE : übergeordnet
 @enduml

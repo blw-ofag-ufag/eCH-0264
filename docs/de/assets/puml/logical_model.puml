@@ -1,6 +1,11 @@
 ' Logisches Datenmodell von eCH-0264 (Umsetzung in RDF) (handgezeichnet, wird via Makefile nach docs/de/assets/img/ gerendert (SVG))
 ' Pakete: Referenzdaten und Transaktionsdaten (Kontrolldaten, die zwischen den Systemen fliessen).
 ' Stammdaten werden nicht modelliert; die Kontrolle verweist mit Identifikatoren (BUR-Nummer, UID) auf sie.
+'
+' Anordnung: Die Pfeile zeigen von unten nach oben (vom Konkreten zum Allgemeinen), sodass die
+' Organisation oben, der Kontrollpunkt in der Mitte und die Transaktionsdaten unten stehen.
+' Die unsichtbaren Verbindungen am Ende und die Reihenfolge der Klassen sind so gewählt, dass sich
+' möglichst wenige Beschriftungen überlagern; nach Änderungen das Ergebnis prüfen.
 @startuml
 !pragma layout smetana
 skinparam shadowing false
@@ -28,13 +33,6 @@ package "Referenzdaten" as REF {
     uid : xsd:string
     schema:name : rdf:langString [1..*]
   }
-  class "Kontrollperson" as PER
-  class "Identifikator" as PID <<schema:PropertyValue>> {
-    schema:value : xsd:string
-  }
-  class "Qualifikation" as QUA {
-    schema:name : rdf:langString [1..*]
-  }
   class "Regelwerk" as RW {
     schema:name : rdf:langString [1..*]
     fassung : xsd:date
@@ -45,6 +43,12 @@ package "Referenzdaten" as REF {
     öffentlich-rechtlich
     privatrechtlich
   }
+  class "Kontrollperson" as PER {
+    schema:identifier : schema:PropertyValue [1..*]
+    .. schema:PropertyValue ..
+    schema:value : xsd:string
+    schema:propertyID : Organisation
+  }
   class "Anforderung" as ANF {
     schema:description : rdf:langString [1..*]
     fundstelle : xsd:string [0..1]
@@ -53,14 +57,9 @@ package "Referenzdaten" as REF {
     schema:name : rdf:langString [1..*]
     schema:identifier : xsd:string [0..1]
   }
-  class "Kontrollpunktkatalog" as KAT <<skos:ConceptScheme>> {
+  class "Qualifikation" as QUA {
     schema:name : rdf:langString [1..*]
-    schema:datePublished : xsd:date
-    schema:validFrom : xsd:date
-    schema:validThrough : xsd:date [0..1]
   }
-  class "Fokuskontrollpunkte" as FKP <<skos:Collection>>
-  class "Gliederungselement" as KZ <<skos:Concept>>
   class "Kontrollpunkt" as KP {
     schema:identifier : xsd:string
     skos:notation : xsd:string [0..1]
@@ -69,6 +68,7 @@ package "Referenzdaten" as REF {
     schema:validFrom : xsd:date [0..1]
     schema:validThrough : xsd:date [0..1]
   }
+  class "Gliederungselement" as KZ <<skos:Concept>>
   class "Mögliches Ergebnis" as ERG {
     wert : Ergebniswert
     schema:description : rdf:langString [0..*]
@@ -77,61 +77,68 @@ package "Referenzdaten" as REF {
   enum "Ergebniswert" as ERGW <<enumeration>> {
     ...
   }
+  class "Kontrollpunktkatalog" as KAT <<skos:ConceptScheme>> {
+    schema:name : rdf:langString [1..*]
+    schema:datePublished : xsd:date
+    schema:validFrom : xsd:date
+    schema:validThrough : xsd:date [0..1]
+  }
+  class "Fokuskontrollpunkte" as FKP <<skos:Collection>>
 
   ' Herkunft: Organisation erlässt Regelwerk, Regelwerk enthält Anforderungen
   RW "0..*" -up-> "1" ORG : erlassen von
   RW -right-> RN
   ANF "1..*" -up-> "1" RW : stammt aus
+  note left of ANF
+    Alle Anforderungen, die ein
+    Kontrollpunkt prüft, stammen aus
+    Regelwerken mit derselben
+    Rechtsnatur (SHACL-Regel).
+  end note
 
   ' Programm: bündelt Anforderungen, zu deren Einhaltung sich ein Betrieb verpflichtet (Anmeldedaten in AGIS)
   PRG "0..*" -up-> "1" RW : festgelegt in
-  PRG "0..*" --> "1..*" ANF : umfasst
+  PRG "0..*" -down-> "1..*" ANF : umfasst
+
+  ' Kontrollperson: nur Identifikatoren, eindeutig zusammen mit der vergebenden Organisation
+  PER "0..*" -up-> "1..*" ORG : gehört an
+  note right of PER
+    schema:propertyID verweist auf die
+    Organisation, die den Identifikator
+    vergibt. Der Wert ist innerhalb dieser
+    Organisation eindeutig (SHACL-Regel).
+  end note
+
+  ' Qualifikation: Kontrollpunkt erfordert Qualifikation
+  QUA "0..*" -up-> "0..1" RW : festgelegt in
 
   ' Kontrollpunkt prüft Anforderungen und wird von einer Organisation herausgegeben
   KP "0..*" -up-> "1..*" ANF : prüft
   KP "0..*" -up-> "1" ORG : herausgeberin
+  KP "0..*" -up-> "0..*" QUA : erfordert
 
-  ' Jährliche Ausgabe: Katalog mit gültigen Kontrollpunkten und Auswahl der Fokuskontrollpunkte
-  KAT "0..*" --> "1" ORG : herausgeberin
-  KP "1..*" --> "1..*" KAT : skos:inScheme
-  KAT "1" *-- "0..1" FKP
-  FKP "0..*" --> "1..*" KP : skos:member
-
-  ' Gliederung: Gliederungselemente sind über skos:broader beliebig tief verschachtelt
-  ' (z. B. Kontrollbereich > Rubrik > Gruppe)
-  KZ "0..*" --> "0..1" KZ : skos:broader
-  KP "0..*" --> "1" KZ : zugeordnet
+  ' Katalog mit gültigen Kontrollpunkten und Auswahl der Fokuskontrollpunkte
+  KAT "0..*" -up-> "1" ORG : herausgeberin
+  KAT "1" *-down- "0..1" FKP
+  KP "1..*" -up-> "1..*" KAT : skos:inScheme
+  FKP "0..*" -down-> "1..*" KP : skos:member
 
   ' Ersetzung: ein neuer Kontrollpunkt ersetzt einen oder mehrere frühere Kontrollpunkte
-  KP "0..*" --> "0..*" KP : dcterms:replaces
+  KP --> KP : dcterms:replaces [0..*]
   note right of KP
     Ersetzender und ersetzter
     Kontrollpunkt haben dieselbe
     Herausgeberin (SHACL-Regel).
   end note
 
-  note right of ANF
-    Alle Anforderungen, die ein Kontrollpunkt
-    prüft, stammen aus Regelwerken mit
-    derselben Rechtsnatur (SHACL-Regel).
-  end note
+  ' Gliederung: Gliederungselemente sind über skos:broader beliebig tief verschachtelt
+  ' (z. B. Kontrollbereich > Rubrik > Gruppe)
+  KP "0..*" -down-> "1" KZ : zugeordnet
+  KZ --> KZ : skos:broader [0..1]
 
-  ' Qualifikation: Kontrollpunkt erfordert Qualifikation; die Kontrolle hält fest, mit welcher sie durchgeführt wurde
-  KP "0..*" -right-> "0..*" QUA : erfordert
-  QUA "0..*" -left-> "0..1" RW : festgelegt in
-  PER "0..*" -up-> "1..*" ORG : gehört an
-
-  ' Identifikator: nur zusammen mit der vergebenden Organisation eindeutig
-  PER "1" *-- "1..*" PID : schema:identifier
-  PID "0..*" -up-> "1" ORG : schema:propertyID
-  note bottom of PID
-    schema:propertyID verweist auf die Organisation,
-    die den Identifikator vergibt. Der Wert ist
-    innerhalb dieser Organisation eindeutig (SHACL-Regel).
-  end note
-
-  KP -left-> "1..*" ERG : möglich
-  ERG -left-> ERGW
+  ' Mögliche Ergebnisse eines Kontrollpunkts
+  KP "1" -down-> "1..*" ERG : möglich
+  ERG -right-> ERGW
 }
 
 package "Transaktionsdaten" as TRX {
@@ -149,12 +156,15 @@ package "Transaktionsdaten" as TRX {
   }
   KON "1" *-down- "0..*" BEO : enthält
   ' Korrektur: berichtigt eine falsch erfasste Beobachtung, die nicht mehr gilt
-  BEO "0..1" --> "0..1" BEO : prov:wasRevisionOf
+  BEO --> BEO : prov:wasRevisionOf [0..1]
   ' Folgebeobachtung: z. B. Nachkontrolle oder abschliessende Beurteilung; die frühere bleibt gültig
-  BEO "0..*" --> "0..1" BEO : folgtAuf
+  BEO --> BEO : folgtAuf [0..1]
 }
 
-BEO -up-> KP
+KON "0..*" -up-> "0..1" ORG : kontrollstelle
+KON "0..*" -up-> "1" PER : durchgeführt von
+KON "0..*" -up-> "0..*" QUA : qualifikation
+BEO "0..*" -up-> "1" KP : betrifft
 BEO "0..*" -up-> "0..1" ERG : festgestelltes Ergebnis
 note bottom of BEO
   Ist der Wert «Mangel», ist ein vordefinierter
@@ -163,10 +173,7 @@ note bottom of BEO
   weitere Korrekturen bilden eine Kette, es gilt die letzte
   Beobachtung der Kette (SHACL-Regel).
 end note
-KON "0..*" -up-> "0..1" ORG : kontrollstelle
-KON "0..*" -up-> "1" PER : durchgeführt von
-KON "0..*" -up-> "0..*" QUA : qualifikation
-REF -[hidden]down- TRX
+QUA -[hidden]down- KON
 
 legend bottom right
   <b>Kardinalitäten</b>
@@ -176,7 +183,8 @@ legend bottom right
   | 0..* | keins, eins oder beliebig viele |
   | 1..* | mindestens eins |
   Bei Attributen in eckigen Klammern, z. B. <i>bild : xsd:anyURI [0..1]</i>;
-  ohne Angabe gilt 1.
+  ohne Angabe gilt 1. Bei Beziehungen einer Klasse auf sich selbst steht
+  die Kardinalität des Ziels in eckigen Klammern, z. B. <i>folgtAuf [0..1]</i>.
   Merkmale ohne Präfix werden im Namensraum von eCH-0264 definiert.
 endlegend
 @enduml

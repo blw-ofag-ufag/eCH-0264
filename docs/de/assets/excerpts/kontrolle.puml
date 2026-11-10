@@ -22,10 +22,10 @@ package "Transaktionsdaten" as TRX {
   class "Kontrolle" as KON
   class "Tatsächliche\nBeobachtung" as BEO
 }
-KP --> QUA : erfordert
+KP -up-> QUA : erfordert
 KON *-down- BEO : enthält
 BEO --> BEO : folgt auf
-BEO -up-> KP : betrifft
 KON -up-> PER : durchgeführt von
 KON -up-> QUA : mit Qualifikation
+BEO -up-> KP : betrifft
 @enduml

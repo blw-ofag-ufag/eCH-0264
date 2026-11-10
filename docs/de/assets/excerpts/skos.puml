@@ -37,9 +37,9 @@ package "Referenzdaten" as REF {
   }
   class "Fokuskontrollpunkte" as FKP <<skos:Collection>>
 }
-KP "1..*" --> "1..*" KAT : skos:inScheme
-KAT "1" *-- "0..1" FKP
-FKP "0..*" --> "1..*" KP : skos:member
-KZ "0..*" --> "0..1" KZ : skos:broader
-KP "0..*" --> "1" KZ : zugeordnet
+KAT "1" *-down- "0..1" FKP
+KP "1..*" -up-> "1..*" KAT : skos:inScheme
+FKP "0..*" -down-> "1..*" KP : skos:member
+KP "0..*" -down-> "1" KZ : zugeordnet
+KZ --> KZ : skos:broader [0..1]
 @enduml

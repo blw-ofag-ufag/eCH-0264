@@ -21,6 +21,6 @@ package "Referenzdaten" as REF {
 }
 ANF -up-> RW : stammt aus
 PRG -up-> RW : festgelegt in
-PRG --> ANF : umfasst
+PRG -down-> ANF : umfasst
 KP -up-> ANF : prüft
 @enduml

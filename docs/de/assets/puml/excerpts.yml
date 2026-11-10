@@ -54,7 +54,7 @@ skos:
   source: logical_model.puml
   classes: [KP, KZ, KAT, FKP]
   notes: false
-  skip: ["dcterms:replaces"]
+  skip: ["dcterms:replaces [0..*]"]
 pruefregeln:
   source: logical_model.puml
   classes: [RW, RN, ANF, KP, ORG]
@@ -64,7 +64,7 @@ versionen:
   notes: false
 identifikator:
   source: logical_model.puml
-  classes: [ORG, PER, PID]
+  classes: [ORG, PER]
 prov:
   source: logical_model.puml
   classes: [BEO]
