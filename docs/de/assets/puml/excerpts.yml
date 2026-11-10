@@ -19,9 +19,6 @@ programm:
   source: conceptual_model.puml
   classes: [RW, PRG, ANF, KP]
   skip: [ersetzt]
-anmeldung:
-  source: conceptual_model.puml
-  classes: [PRG, ANF, ANM]
 organisation:
   source: conceptual_model.puml
   classes: [ORG, RW, KP, KAT, PER, KON]

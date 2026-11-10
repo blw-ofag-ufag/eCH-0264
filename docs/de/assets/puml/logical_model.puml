@@ -83,7 +83,7 @@ package "Referenzdaten" as REF {
   RW -right-> RN
   ANF "1..*" -up-> "1" RW : stammt aus
 
-  ' Programm: bündelt Anforderungen, zu deren Einhaltung sich ein Betrieb mit der Anmeldung verpflichtet
+  ' Programm: bündelt Anforderungen, zu deren Einhaltung sich ein Betrieb verpflichtet (Anmeldedaten in AGIS)
   PRG "0..*" -up-> "1" RW : festgelegt in
   PRG "0..*" --> "1..*" ANF : umfasst
 
@@ -136,12 +136,6 @@ package "Referenzdaten" as REF {
 
 package "Transaktionsdaten" as TRX {
   ' Verweise auf Stammdaten über Identifikatoren
-  class "Anmeldung" as ANM {
-    oertlicheEinheit : xsd:string
-    rechtlicheEinheit : xsd:string
-    beitragsjahr : xsd:gYear
-    angemeldetAm : xsd:date
-  }
   class "Kontrolle" as KON {
     datum : xsd:date
     oertlicheEinheit : xsd:string
@@ -154,7 +148,6 @@ package "Transaktionsdaten" as TRX {
     menge : xsd:decimal [0..1]
   }
   KON "1" *-down- "0..*" BEO : enthält
-  ANM "0..*" -up-> "1" PRG : für
   ' Korrektur: berichtigt eine falsch erfasste Beobachtung, die nicht mehr gilt
   BEO "0..1" --> "0..1" BEO : prov:wasRevisionOf
   ' Folgebeobachtung: z. B. Nachkontrolle oder abschliessende Beurteilung; die frühere bleibt gültig

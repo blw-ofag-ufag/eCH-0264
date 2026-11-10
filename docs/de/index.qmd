@@ -256,15 +256,14 @@ Das Datenmodell unterscheidet zwei Arten von Daten:
   Ein neuer Kontrollpunkt kann einen oder mehrere frühere Kontrollpunkte derselben Herausgeberin ersetzen.
   Ein Kontrollpunkt kann eine Qualifikation erfordern, die eine Kontrollperson besitzen muss, um ihn abschliessend zu prüfen.
   Kontrollpersonen gehören einer oder mehreren Organisationen an, zum Beispiel einer Kontrollstelle oder einem kantonalen Veterinäramt.
-- **Transaktionsdaten** entstehen bei einer Kontrolle oder einer Anmeldung und fliessen zwischen den Systemen.
+- **Transaktionsdaten** entstehen bei einer Kontrolle und fliessen zwischen den Systemen.
   Eine Kontrolle hält fest, wann sie stattgefunden hat, welche örtliche Einheit kontrolliert wurde und zu welcher rechtlichen Einheit diese gehört, welche Kontrollperson sie durchgeführt hat, mit welchen Qualifikationen und gegebenenfalls welche Organisation als Kontrollstelle beauftragt war.
   Für jeden kontrollierten Kontrollpunkt wird eine tatsächliche Beobachtung erfasst.
   Sie verweist auf ein vordefiniertes mögliches Ergebnis oder beschreibt eine Abweichung frei, bei Bedarf ergänzt mit einer Menge, zum Beispiel der betroffenen Fläche, und einem Bild.
   Eine Beobachtung kann eine falsch erfasste Beobachtung korrigieren oder auf eine frühere Beobachtung folgen, zum Beispiel bei einer Nachkontrolle.
-  Eine Anmeldung hält fest, dass sich ein Betrieb für ein Beitragsjahr für ein Programm angemeldet hat und wann er dies getan hat.
 
 Stammdaten werden nicht modelliert, mit Ausnahme einer Klasse Kontrollperson ohne Namen, die über einen Identifikator identifizierbar ist, den eine Organisation vergibt (@sec-modelling-decisions).
-Kontrolle und Anmeldung verweisen auf die örtliche Einheit mit der Nummer des Betriebs- und Unternehmensregisters (BUR-Nummer) [@bur; @digiagrifood-stammdaten] und auf die rechtliche Einheit mit der Unternehmens-Identifikationsnummer (UID) [@uid-register].
+Die Kontrolle verweist auf die örtliche Einheit mit der Nummer des Betriebs- und Unternehmensregisters (BUR-Nummer) [@bur; @digiagrifood-stammdaten] und auf die rechtliche Einheit mit der Unternehmens-Identifikationsnummer (UID) [@uid-register].
 
 
 ## Konzeptionelles Datenmodell {#sec-conceptual-model}
@@ -358,30 +357,6 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
   Welche Kontrollpunkte zu einem Programm gehören, ergibt sich über die Anforderungen, die sie prüfen.
 
 Programme haben vorerst keine innere Struktur, zum Beispiel keine Teilprogramme pro Tierkategorie.
-:::
-
-#### Anmeldungen als Transaktionsdaten {#sec-decision-registrations}
-
-::: {.entscheid}
-![](assets/excerpts/anmeldung.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Anmeldung für ein Programm, das Anforderungen umfasst"}
-
-Betriebe melden sich jedes Jahr für Programme an.
-Diese Anmeldedaten werden heute im kantonalen Agrarinformationssystem erfasst und in AGIS zusammengeführt.
-Das Datenmodell bildet die Anmeldung als eigenes Geschäftsobjekt der Transaktionsdaten ab.
-Eine Anmeldung verweist auf den Betrieb, das Programm und das Beitragsjahr und hält fest, wann sie erfolgt ist.
-
-Wir haben uns aus folgenden Gründen dafür entschieden:
-
-- **Eine Anmeldung ist ein Vorgang, kein Merkmal des Betriebs.**
-  Sie erfolgt zu einem bestimmten Zeitpunkt, gilt für ein Beitragsjahr und wiederholt sich jedes Jahr.
-  Wie eine Kontrolle verbindet sie einen Betrieb mit Referenzdaten, hier mit einem Programm.
-  Dass AGIS die Anmeldedaten zusammen mit Stammdaten führt, ändert daran nichts.
-- **Die Anmeldung bestimmt, was kontrolliert werden muss.**
-  Welche Kontrollpunkte für einen Betrieb gelten, hängt von seinen Anmeldungen ab.
-  Kontrollstellen wollen Kontrollen anhand aktueller Anmeldedaten planen (UC-18), und Acontrol setzt Kontrollpunkte von Programmen ohne Anmeldung auf «nicht zutreffend» (UC-20).
-- **Verzögerungen werden sichtbar.**
-  Anmeldedaten liegen in AGIS nicht immer rechtzeitig vor.
-  Weil die Anmeldung ihr Datum trägt, lässt sich nachvollziehen, welcher Stand bei der Planung einer Kontrolle bekannt war.
 :::
 
 #### Eine Klasse Organisation für alle Rollen {#sec-decision-organisation}
@@ -616,7 +591,7 @@ Ist das Ergebnis einer Beobachtung «Mangel», muss mindestens ein vordefinierte
 Die Kontrollpunkte sollen künftig neu formuliert werden.
 Das Datenmodell verwendet heute die bestehenden Kontrollpunkte.
 Eine Anforderung muss dabei nur einmal erfasst werden, auch wenn mehrere Kontrollpunkte sie prüfen.
-Für die Neuformulierung und für die Massnahmen sind folgende Fragen noch offen:
+Für die Neuformulierung, die Massnahmen und die Anmeldedaten sind folgende Fragen noch offen:
 
 - **Geltungsbereich:** Viele Kontrollpunkte werden heute wiederholt, weil sie für verschiedene Tierkategorien, Kulturen oder Betriebsarten gelten.
   Soll ein Kontrollpunkt künftig einen Geltungsbereich als Merkmal haben, und gehört dieser zur Anforderung, zum Kontrollpunkt oder zu beiden?
@@ -626,6 +601,9 @@ Für die Neuformulierung und für die Massnahmen sind folgende Fragen noch offen
   Wie werden solche Ausnahmen erfasst, auch wenn sie nur befristet gelten?
 - **Massnahmen:** Massnahmen und Sanktionen sind noch nicht modelliert.
   Zu klären ist, wie vorgeschlagene Massnahmen, zum Beispiel die Sanktionen in der Masterliste, und tatsächlich angeordnete Massnahmen abgebildet werden, welche Arten es braucht, zum Beispiel Sanktionspunkte oder Kürzungen in CHF, und ob angeordnete Massnahmen als besonders schützenswerte Daten überhaupt ausgetauscht werden dürfen.
+- **Anmeldedaten:** Für welche Programme ein Betrieb angemeldet ist, wird im kantonalen Agrarinformationssystem erfasst und in AGIS zusammengeführt.
+  Das Datenmodell bildet die Anmeldung deshalb vorerst nicht ab.
+  Zu bestätigen ist, dass die kantonalen Kontrollkoordinationsstellen Zugriff auf diese Daten in AGIS haben und dass sich die Programme der Referenzdaten eindeutig den Programmen in AGIS zuordnen lassen, zum Beispiel über einen gemeinsamen Identifikator.
 
 ## Logisches Datenmodell {#sec-logical-model}
 
@@ -654,7 +632,7 @@ Merkmale ohne Präfix werden im Namensraum von eCH-0264 definiert.
 | Beobachtung korrigiert Beobachtung | `prov:wasRevisionOf` |
 | Beobachtung folgt auf Beobachtung | `folgtAuf` (Namensraum von eCH-0264) |
 | Identifikator der Kontrollperson | `schema:identifier` mit einem `schema:PropertyValue` (`schema:value`, `schema:propertyID`) |
-| Organisation, Kontrollperson, Qualifikation, Regelwerk, Programm, Anforderung, Kontrollpunkt, Mögliches Ergebnis, Kontrolle, Tatsächliche Beobachtung, Anmeldung | Klassen im Namensraum von eCH-0264 |
+| Organisation, Kontrollperson, Qualifikation, Regelwerk, Programm, Anforderung, Kontrollpunkt, Mögliches Ergebnis, Kontrolle, Tatsächliche Beobachtung | Klassen im Namensraum von eCH-0264 |
 | übrige Beziehungen | Merkmale im Namensraum von eCH-0264 |
 
 : Abbildung des konzeptionellen auf das logische Datenmodell {#tbl-logical-mapping tbl-colwidths="[45,55]"}
