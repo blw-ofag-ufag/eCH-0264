@@ -1,0 +1,72 @@
+' Konzeptionelles Datenmodell von eCH-0264 (technologieneutral, wird via Makefile nach docs/de/assets/img/ gerendert (SVG))
+' Zeigt nur Klassen und benannte Beziehungen, analog zu eCH-0265; Attribute, Datentypen und Kardinalitäten
+' stehen im logischen Datenmodell (logical_model.puml).
+' Stammdaten werden nicht modelliert; die Kontrolle verweist mit Identifikatoren (BUR-Nummer, UID) auf sie.
+'
+' Anordnung wie im logischen Datenmodell: Die Pfeile zeigen von unten nach oben (vom Konkreten zum
+' Allgemeinen), sodass die Organisation oben, der Kontrollpunkt in der Mitte und die Transaktionsdaten
+' unten stehen. Die unsichtbare Verbindung am Ende ist so gewählt, dass sich möglichst wenige
+' Beschriftungen überlagern; nach Änderungen das Ergebnis prüfen.
+@startuml
+!pragma layout smetana
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam packageStyle rectangle
+skinparam defaultFontSize 12
+skinparam Padding 3
+skinparam ArrowColor #444444
+skinparam ArrowThickness 1.2
+skinparam classBorderColor #444444
+skinparam classBackgroundColor #FFFFFF
+skinparam packageBorderColor #999999
+skinparam packageBackgroundColor #F4F4F4
+hide circle
+hide empty members
+
+package "Referenzdaten" as REF {
+  class "Organisation" as ORG
+  class "Kontrollpunkt-\nkatalog" as KAT
+  class "Auswahl Fokus-\nkontrollpunkte" as FKP
+  class "Regelwerk" as RW
+  class "Kontrollperson" as PER
+  class "Anforderung" as ANF
+  class "Programm" as PRG
+  class "Qualifikation" as QUA
+  class "Kontrollpunkt" as KP
+  class "Gliederungselement" as GE
+  class "Mögliches Ergebnis" as ERG
+
+  RW -up-> ORG : erlassen von
+  ANF -up-> RW : stammt aus
+  PRG -up-> RW : festgelegt in
+  PRG -down-> ANF : umfasst
+  PER -up-> ORG : gehört an
+  QUA -up-> RW : festgelegt in
+  KP -up-> ANF : prüft
+  KP -up-> ORG : herausgegeben von
+  KP -up-> QUA : erfordert
+  KAT -up-> ORG : herausgegeben von
+  KAT *-down- FKP
+  KAT -down-> KP : enthält
+  FKP -down-> KP : umfasst
+  KP --> KP : ersetzt
+  KP -down-> GE : zugeordnet
+  GE --> GE : übergeordnet
+  KP -down-> ERG : legt fest
+}
+
+package "Transaktionsdaten" as TRX {
+  class "Kontrolle" as KON
+  class "Tatsächliche\nBeobachtung" as BEO
+  KON *-down- BEO : enthält
+  BEO --> BEO : korrigiert
+  BEO --> BEO : folgt auf
+}
+
+KON -up-> ORG : durchgeführt von\n(Kontrollstelle)
+KON -up-> PER : durchgeführt von
+KON -up-> QUA : mit Qualifikation
+BEO -up-> KP : betrifft
+BEO -up-> ERG : festgestelltes Ergebnis
+QUA -[hidden]down- KON
+@enduml

@@ -1,0 +1,12 @@
+/* Modellierungsentscheide mit einem Ausschnitt des Datenmodells über dem Text
+   (siehe entscheid.lua). Der Ausschnitt behält seine natürliche Grösse, ist
+   aber höchstens so breit wie der Text. */
+.entscheid {
+  margin-bottom: 1.5rem;
+}
+.entscheid img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}

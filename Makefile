@@ -19,8 +19,8 @@ PYSHACL          := $(VENV_BIN)/pyshacl
 PYTEST           := $(VENV_BIN)/pytest -p no:cacheprovider # suppress cache
 ROBOT            := java -jar $(VENV_BIN)/robot.jar
 RSCRIPT          ?= Rscript
-R_REQUIREMENTS   := $(wildcard $(R_DIR)/requirements.txt)
-R_STAMP          := $(if $(R_REQUIREMENTS),$(VENV)/.r-packages-installed.stamp)
+R_DESCRIPTION    := $(wildcard $(R_DIR)/DESCRIPTION)
+R_STAMP          := $(if $(R_DESCRIPTION),$(VENV)/.r-packages-installed.stamp)
 SHACL_PLAY_VERSION := 0.12.2
 SHACL_PLAY_JAR     := $(VENV_BIN)/shacl-play-app.jar
 PLANTUML_VERSION   := 1.2024.3
@@ -48,6 +48,8 @@ IMG_DIR          := $(BUILD_DIR)/img
 UML_PUML         := $(IMG_DIR)/uml.puml
 DOCS_IMG_DIR     := $(DOCS_DIR)/assets/img
 DOCS_UML_PNG     := $(DOCS_IMG_DIR)/uml.png
+PUML_SRC         := $(wildcard $(DOCS_DIR)/*/assets/puml/*.puml)
+PUML_SVG         := $(subst /puml/,/img/,$(PUML_SRC:.puml=.svg))
 
 # Logs
 LOG_DIR          := $(BUILD_DIR)/log
@@ -107,11 +109,13 @@ $(VENV)/.requirements-installed.stamp: $(PYTHON_DIR)/requirements.txt | $(VENV_P
 
 install-dependencies: $(VENV)/.requirements-installed.stamp
 
-# Install R packages (the stamp is only defined if src/r/requirements.txt exists)
-$(VENV)/.r-packages-installed.stamp: $(R_REQUIREMENTS) $(R_DIR)/utils/install_packages.R | $(VENV_PYTHON)
+# Install the R packages of src/r/DESCRIPTION and the system libraries they need
+# with pak (the stamp is only defined if the DESCRIPTION file exists)
+$(VENV)/.r-packages-installed.stamp: $(R_DESCRIPTION) | $(VENV_PYTHON)
 	@command -v $(RSCRIPT) >/dev/null 2>&1 || \
 		(printf "$(RED)ERROR: R not found (Rscript). Install R or delete $(R_DIR)/ if the documentation does not use R.$(NC)\n"; exit 1)
-	@printf "$(GREY)"; $(RSCRIPT) $(R_DIR)/utils/install_packages.R $(R_REQUIREMENTS) || { printf "$(NC)"; exit 1; }; printf "$(NC)"
+	@printf "$(BOLD)[*] Installing R packages...$(NC)\n"
+	@printf "$(GREY)"; $(RSCRIPT) -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::local_install_deps("$(R_DIR)")' || { printf "$(NC)"; exit 1; }; printf "$(NC)"
 	@touch $@
 
 install-r-packages: $(R_STAMP)
@@ -241,7 +245,19 @@ $(DOCS_UML_PNG): $(SHAPES) | $(IMG_DIR) $(LOG_DIR) $(SHACL_PLAY_JAR) $(PLANTUML_
 	cp $(IMG_DIR)/uml.png $(DOCS_UML_PNG); \
 	printf "$(NC)"
 
-generate-shacl-docs: $(SHAPES) $(PREFIXES) $(PROCESSED_DATA) $(DOCS_DIR)/_ech.yml src/python/utils/generate_shacl_docs.py | $(VENV)/.requirements-installed.stamp ## Generate the data model pages from the SHACL shapes
+# Hand-drawn PlantUML diagrams of the documentation, per language:
+# docs/<lang>/assets/puml/<name>.puml -> docs/<lang>/assets/img/<name>.svg
+define PUML_RULE
+$(subst /puml/,/img/,$(1:.puml=.svg)): $(1) | $(PLANTUML_JAR) $(JAVA17)
+	@printf "$(BOLD)[*] Rendering $(notdir $(1)) with PlantUML...$(NC)\n"
+	@mkdir -p $$(dir $$@)
+	@printf "$(GREY)"; \
+	$(JAVA17) -jar $(PLANTUML_JAR) -tsvg $$< -o $$(abspath $$(dir $$@)) || { printf "$(NC)"; exit 1; }; \
+	printf "$(NC)"
+endef
+$(foreach puml,$(PUML_SRC),$(eval $(call PUML_RULE,$(puml))))
+
+generate-shacl-docs: $(SHAPES) $(PREFIXES) $(PROCESSED_DATA) $(DOCS_DIR)/_ech.yml src/python/utils/generate_shacl_docs.py | $(VENV)/.requirements-installed.stamp ## Generate the data model and code list pages from the SHACL shapes and the graph
 	@printf "$(BOLD)[*] Generating SHACL documentation...$(NC)\n"
 	@printf "$(GREY)"; \
 	$(VENV_PYTHON) src/python/utils/generate_shacl_docs.py -i $(SHAPES) -d $(DOCS_DIR) -p $(PREFIXES) -g $(PROCESSED_DATA) -c $(DOCS_DIR)/_ech.yml || { printf "$(NC)"; exit 1; }; \
@@ -253,7 +269,7 @@ generate-glossary-docs: src/rdf/data/glossary.skos.ttl $(PREFIXES) src/python/ut
 	$(VENV_PYTHON) src/python/utils/generate_glossary_docs.py -i src/rdf/data/glossary.skos.ttl -d $(DOCS_DIR) -p $(PREFIXES) || { printf "$(NC)"; exit 1; }; \
 	printf "$(NC)"
 
-docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(R_STAMP) ## Generate the glossary pages and render the documentation (website, PDF)
+docs: $(SHACL_REPORT) generate-shacl-docs generate-glossary-docs $(PUML_SVG) $(R_STAMP) ## Generate the glossary pages and render the documentation (website, PDF)
 	@printf "$(BOLD)[*] Rendering documentation with Quarto...$(NC)\n"
 	@printf "$(GREY)"; \
 	quarto render docs > $(QUARTO_LOG) 2>&1 || { printf "$(NC)\n$(RED)ERROR: Quarto rendering failed. See log below:$(NC)\n$(GREY)"; cat $(QUARTO_LOG); printf "$(NC)\n"; exit 1; }; \
@@ -318,5 +334,5 @@ publish: test stamp-metadata delete ## Test, then replace the graph on LINDAS wi
 
 clean: ## Remove all build artifacts, caches, the virtual environment and generated pages
 	@printf "$(BOLD)[*] Cleaning build artifacts...$(NC)\n"
-	@rm -rf $(BUILD_DIR) $(VENV) docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md
+	@rm -rf $(BUILD_DIR) $(VENV) docs/*/codelists.md docs/*/entities.md docs/*/glossary.md docs/*/namespaces.md $(PUML_SVG)
 	@find . -path ./.git -prune -o \( -name __pycache__ -o -name .pytest_cache -o -name .quarto -o -name '*_files' -o -name '*_cache' -o -name '*.quarto_ipynb' -o -name .Rhistory -o -name .RData \) -prune -exec rm -rf {} +

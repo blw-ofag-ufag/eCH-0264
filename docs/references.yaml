@@ -285,3 +285,72 @@ references:
     Landwirtschaft (Direktzahlungsverordnung, DZV; SR 910.13)
   type: book
   url: "https://www.fedlex.admin.ch/eli/cc/2013/765/de"
+
+- author:
+  - literal: Bundesamt für Statistik (BFS)
+  id: bur
+  citation-label: BFS26a
+  issued: 2026
+  title: Betriebs- und Unternehmensregister (BUR)
+  url: "https://www.bfs.admin.ch/de/unternehmensregister-bur"
+
+- author:
+  - literal: Bundesamt für Statistik (BFS)
+  id: uid-register
+  citation-label: BFS26b
+  issued: 2026
+  title: UID-Register
+  url: "https://www.uid.admin.ch/"
+
+- author:
+  - literal: DigiAgriFoodCH
+  id: digiagrifood-stammdaten
+  citation-label: DAF26
+  issued: 2026
+  title: Stammdaten -- Digitalisierung des Schweizer Agrar- und Ernährungssektors
+  url: "https://digiagrifood.ch/digiknowhow/stammdaten/"
+
+- author:
+  - literal: Schema.org
+  id: schemaorg
+  citation-label: Sch26
+  issued: 2026
+  title: Schema.org Vocabulary
+  url: "https://schema.org/"
+
+- author:
+  - literal: DCMI Usage Board
+  id: dcterms
+  citation-label: DCMI20
+  issued: 2020-01
+  publisher: Dublin Core Metadata Initiative (DCMI)
+  title: DCMI Metadata Terms
+  type: report
+  url: "https://www.dublincore.org/specifications/dublin-core/dcmi-terms/"
+
+- author:
+  - literal: Bundesamt für Lebensmittelsicherheit und Veterinärwesen (BLV)
+  id: blv-tw-primaerproduktion
+  citation-label: BLV25
+  issued: 2025-11
+  publisher: Bundesamt für Lebensmittelsicherheit und Veterinärwesen (BLV)
+  title: Technische Weisungen über die amtlichen Kontrollen in der
+    Primärproduktion in Tierhaltungen (redaktionell überarbeitet am
+    25. November 2025)
+  type: report
+  url: "https://www.blv.admin.ch/dam/de/sd-web/6fbncfjomwNJ/tw-amtliche-kontrollen-primaerproduktion-2026-de.pdf"
+
+- author:
+  - family: Lebo
+    given: Timothy
+  - family: Sahoo
+    given: Satya
+  - family: McGuinness
+    given: Deborah
+  genre: W3C Recommendation
+  id: prov-o
+  issued: 2013-04
+  publisher: World Wide Web Consortium (W3C)
+  title: "PROV-O: The PROV Ontology"
+  type: report
+  url: "https://www.w3.org/TR/prov-o/"

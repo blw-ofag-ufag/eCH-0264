@@ -2,3 +2,4 @@
 **/*.quarto_ipynb
 /assets/img/uml.*
 codelists.md
+/*/assets/img/

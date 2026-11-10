@@ -1,0 +1,41 @@
+@startuml
+!pragma layout smetana
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam packageStyle rectangle
+skinparam defaultFontSize 12
+skinparam Padding 3
+skinparam ArrowColor #444444
+skinparam ArrowThickness 1.2
+skinparam classBorderColor #444444
+skinparam classBackgroundColor #FFFFFF
+skinparam packageBorderColor #999999
+skinparam packageBackgroundColor #F4F4F4
+skinparam noteBorderColor #999999
+skinparam noteBackgroundColor #FFFFFF
+skinparam classAttributeIconSize 0
+skinparam legendBorderColor #999999
+skinparam legendBackgroundColor #FFFFFF
+skinparam legendFontSize 11
+hide circle
+hide empty members
+package "Referenzdaten" as REF {
+  class "Organisation" as ORG {
+    uid : xsd:string
+    schema:name : rdf:langString [1..*]
+  }
+  class "Kontrollperson" as PER {
+    schema:identifier : schema:PropertyValue [1..*]
+    .. schema:PropertyValue ..
+    schema:value : xsd:string
+    schema:propertyID : Organisation
+  }
+}
+PER "0..*" -up-> "1..*" ORG : gehört an
+note right of PER
+  schema:propertyID verweist auf die
+  Organisation, die den Identifikator
+  vergibt. Der Wert ist innerhalb dieser
+  Organisation eindeutig (SHACL-Regel).
+end note
+@enduml
