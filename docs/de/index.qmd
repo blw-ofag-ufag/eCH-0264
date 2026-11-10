@@ -276,7 +276,8 @@ Kontrolle und Anmeldung verweisen auf die örtliche Einheit mit der Nummer des B
 ### Modellierungsentscheide {#sec-modelling-decisions}
 
 Die folgenden Abschnitte begründen die wichtigsten Entscheide.
-Neben jedem Entscheid steht der Ausschnitt des Datenmodells, den er betrifft.
+Über jedem Entscheid steht der Ausschnitt des Datenmodells, den er betrifft.
+Die Ausschnitte zeigen nur die Beziehungen zum jeweiligen Modellierungsentscheid und das vollständige Modell wird in @fig-conceptual-model gezeigt.
 
 #### Gliederung der Kontrollpunkte in einem Baum {#sec-decision-hierarchy}
 
