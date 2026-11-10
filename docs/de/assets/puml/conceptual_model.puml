@@ -48,7 +48,6 @@ package "Referenzdaten" as REF {
   KP --> QUA : erfordert
   QUA -up-> RW : festgelegt in
   PER -up-> ORG : gehört an
-  PER --> QUA : besitzt
 }
 
 package "Transaktionsdaten" as TRX {
@@ -65,6 +64,6 @@ BEO -up-> KP : betrifft
 BEO -up-> ERG : festgestelltes Ergebnis
 KON -up-> ORG : durchgeführt von\n(Kontrollstelle)
 KON -up-> PER : durchgeführt von
-BEO -up-> PER : festgestellt von
+KON -up-> QUA : mit Qualifikation
 REF -[hidden]down- TRX
 @enduml

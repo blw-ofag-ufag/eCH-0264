@@ -35,10 +35,6 @@ package "Referenzdaten" as REF {
   class "Qualifikation" as QUA {
     schema:name : rdf:langString [1..*]
   }
-  class "Qualifikationsnachweis" as QN {
-    schema:validFrom : xsd:date
-    schema:validThrough : xsd:date [0..1]
-  }
   class "Regelwerk" as RW {
     schema:name : rdf:langString [1..*]
     fassung : xsd:date
@@ -120,7 +116,7 @@ package "Referenzdaten" as REF {
     derselben Rechtsnatur (SHACL-Regel).
   end note
 
-  ' Qualifikation: Kontrollpunkt erfordert Qualifikation, Kontrollperson weist sie mit Gültigkeit nach
+  ' Qualifikation: Kontrollpunkt erfordert Qualifikation; die Kontrolle hält fest, mit welcher sie durchgeführt wurde
   KP "0..*" -right-> "0..*" QUA : erfordert
   QUA "0..*" -left-> "0..1" RW : festgelegt in
   PER "0..*" -up-> "1..*" ORG : gehört an
@@ -133,8 +129,6 @@ package "Referenzdaten" as REF {
     die den Identifikator vergibt. Der Wert ist
     innerhalb dieser Organisation eindeutig (SHACL-Regel).
   end note
-  PER "1" *-- "0..*" QN : besitzt
-  QN "0..*" --> "1" QUA : qualifikation
 
   KP -left-> "1..*" ERG : möglich
   ERG -left-> ERGW
@@ -174,8 +168,8 @@ note bottom of BEO
   Mangel oder eine Abweichung angegeben (SHACL-Regel).
 end note
 KON "0..*" -up-> "0..1" ORG : kontrollstelle
-KON "0..*" -up-> "1..*" PER : durchgeführt von
-BEO "0..*" -up-> "1" PER : festgestellt von
+KON "0..*" -up-> "1" PER : durchgeführt von
+KON "0..*" -up-> "0..*" QUA : qualifikation
 REF -[hidden]down- TRX
 
 legend bottom right

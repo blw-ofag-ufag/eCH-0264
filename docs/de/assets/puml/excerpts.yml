@@ -35,12 +35,15 @@ ersetzung:
   classes: [ORG, KP]
 qualifikation:
   source: conceptual_model.puml
-  classes: [RW, KP, QUA, PER]
+  classes: [RW, KP, QUA]
   skip: [ersetzt]
 kontrollperson:
   source: conceptual_model.puml
-  classes: [ORG, PER, QUA, KON, BEO]
-  skip: [korrigiert, folgt auf]
+  classes: [ORG, PER, KON]
+kontrolle:
+  source: conceptual_model.puml
+  classes: [KP, QUA, PER, KON, BEO]
+  skip: [ersetzt, korrigiert]
 korrektur:
   source: conceptual_model.puml
   classes: [KON, BEO]
@@ -65,9 +68,6 @@ versionen:
 identifikator:
   source: logical_model.puml
   classes: [ORG, PER, PID]
-qualifikationsnachweis:
-  source: logical_model.puml
-  classes: [PER, QN, QUA]
 prov:
   source: logical_model.puml
   classes: [BEO]

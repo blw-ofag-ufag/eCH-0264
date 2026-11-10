@@ -16,16 +16,11 @@ hide empty members
 package "Referenzdaten" as REF {
   class "Organisation" as ORG
   class "Kontrollperson" as PER
-  class "Qualifikation" as QUA
 }
 package "Transaktionsdaten" as TRX {
   class "Kontrolle" as KON
-  class "Tatsächliche\nBeobachtung" as BEO
 }
 PER -up-> ORG : gehört an
-PER --> QUA : besitzt
-KON *-down- BEO : enthält
 KON -up-> ORG : durchgeführt von\n(Kontrollstelle)
 KON -up-> PER : durchgeführt von
-BEO -up-> PER : festgestellt von
 @enduml

@@ -257,10 +257,9 @@ Das Datenmodell unterscheidet zwei Arten von Daten:
   Ein Kontrollpunkt kann eine Qualifikation erfordern, die eine Kontrollperson besitzen muss, um ihn abschliessend zu prüfen.
   Kontrollpersonen gehören einer oder mehreren Organisationen an, zum Beispiel einer Kontrollstelle oder einem kantonalen Veterinäramt.
 - **Transaktionsdaten** entstehen bei einer Kontrolle oder einer Anmeldung und fliessen zwischen den Systemen.
-  Eine Kontrolle hält fest, wann sie stattgefunden hat, welche örtliche Einheit kontrolliert wurde und zu welcher rechtlichen Einheit diese gehört, welche Kontrollpersonen sie durchgeführt haben und gegebenenfalls welche Organisation als Kontrollstelle beauftragt war.
+  Eine Kontrolle hält fest, wann sie stattgefunden hat, welche örtliche Einheit kontrolliert wurde und zu welcher rechtlichen Einheit diese gehört, welche Kontrollperson sie durchgeführt hat, mit welchen Qualifikationen und gegebenenfalls welche Organisation als Kontrollstelle beauftragt war.
   Für jeden kontrollierten Kontrollpunkt wird eine tatsächliche Beobachtung erfasst.
   Sie verweist auf ein vordefiniertes mögliches Ergebnis oder beschreibt eine Abweichung frei, bei Bedarf ergänzt mit einer Menge, zum Beispiel der betroffenen Fläche, und einem Bild.
-  Jede Beobachtung hält fest, welche Kontrollperson sie festgestellt hat.
   Eine Beobachtung kann eine falsch erfasste Beobachtung korrigieren oder auf eine frühere Beobachtung folgen, zum Beispiel bei einer Nachkontrolle.
   Eine Anmeldung hält fest, dass sich ein Betrieb für ein Beitragsjahr für ein Programm angemeldet hat und wann er dies getan hat.
 
@@ -476,7 +475,7 @@ Ein Kontrollpunkt ersetzt nur Kontrollpunkte derselben Herausgeberin.
 #### Erforderliche Qualifikation pro Kontrollpunkt {#sec-decision-qualification}
 
 ::: {.entscheid}
-![](assets/excerpts/qualifikation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt erfordert Qualifikation, Kontrollperson besitzt Qualifikation, Qualifikation festgelegt in Regelwerk"}
+![](assets/excerpts/qualifikation.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollpunkt erfordert Qualifikation, Qualifikation festgelegt in Regelwerk"}
 
 Gewisse Kontrollpunkte dürfen nur Kontrollpersonen mit einer bestimmten Qualifikation abschliessend prüfen.
 Zwei Beispiele aus den Technischen Weisungen des BLV [@blv-tw-primaerproduktion]:
@@ -492,6 +491,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 
 - **Es ist erkennbar, ob ein Ergebnis abschliessend ist.**
   Stellt eine Kontrollperson ohne die erforderliche Qualifikation etwas fest, zum Beispiel ungepflegte Klauen bei einer Kontrolle ausserhalb des Auftrags, ist klar, dass eine qualifizierte Kontrollperson nachprüfen muss (Anwendungsfall UC-17).
+  Dazu hält die Kontrolle fest, mit welchen Qualifikationen sie durchgeführt wurde (@sec-decision-one-control-person).
 - **Qualifikationen sind ein überschaubarer Katalog.**
   Sie werden von wenigen Organisationen festgelegt und gehören deshalb wie Regelwerke und Programme zu den Referenzdaten.
 - **Die Anforderung steht beim Kontrollpunkt.**
@@ -505,11 +505,11 @@ Dass zum Beispiel eine amtliche Tierärztin auch alles prüfen darf, was eine am
 #### Kontrollpersonen als schlanker Verweis {#sec-decision-control-persons}
 
 ::: {.entscheid}
-![](assets/excerpts/kontrollperson.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollperson mit Organisation und Qualifikation, Kontrolle und Beobachtung verweisen auf die Kontrollperson"}
+![](assets/excerpts/kontrollperson.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrollperson gehört einer Organisation an, die Kontrolle verweist auf die Kontrollperson"}
 
-Damit ersichtlich ist, wer eine Kontrolle durchgeführt und eine Beobachtung festgestellt hat, kennt das Datenmodell eine Klasse Kontrollperson.
+Damit ersichtlich ist, wer eine Kontrolle durchgeführt hat, kennt das Datenmodell eine Klasse Kontrollperson.
 Die Bezeichnung entspricht dem Begriff des Fachglossars (@sec-glossary): eine natürliche Person, die im Auftrag einer Kontrollstelle Kontrollen durchführt.
-Eine Kontrollperson gehört einer oder mehreren Organisationen an und besitzt Qualifikationen.
+Eine Kontrollperson gehört einer oder mehreren Organisationen an.
 Sie wird nur über einen Identifikator erfasst, ohne Namen oder Adresse.
 Den Identifikator vergibt eine Organisation, die ihre Kontrollpersonen in einer eigenen Liste führt, zum Beispiel eine Kontrollstelle.
 Er ist nur zusammen mit dieser Organisation eindeutig.
@@ -517,13 +517,39 @@ Gehört eine Kontrollperson mehreren Organisationen an, kann sie mehrere Identif
 
 Wir haben uns aus folgenden Gründen dafür entschieden:
 
-- **Die Qualifikation lässt sich prüfen.**
-  Nur wenn bekannt ist, welche Kontrollperson eine Beobachtung festgestellt hat und welche Qualifikationen sie zu diesem Zeitpunkt besass, lässt sich beurteilen, ob das Ergebnis abschliessend ist.
 - **Personendaten bleiben geschützt.**
   Für den Austausch von Kontrolldaten genügt ein Identifikator.
   Namen und Kontaktangaben bleiben in den Verzeichnissen, die heute zum Beispiel das BLV, SwissGAP oder Agrosolution führen.
 - **Kontrollpersonen sind Stammdaten.**
   Das Modell bildet nur ab, was für Kontrolldaten nötig ist, und überlässt die übrigen Angaben den bestehenden Verzeichnissen.
+  Auch welche Qualifikationen eine Kontrollperson besitzt und wie lange sie gelten, verwalten die Organisationen.
+:::
+
+#### Eine Kontrollperson pro Kontrolle {#sec-decision-one-control-person}
+
+::: {.entscheid}
+![](assets/excerpts/kontrolle.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Kontrolle durchgeführt von einer Kontrollperson mit Qualifikation, Kontrolle enthält Beobachtungen zu Kontrollpunkten, die eine Qualifikation erfordern"}
+
+Eine Kontrolle wird von genau einer Kontrollperson durchgeführt.
+Die Kontrolle hält fest, mit welchen Qualifikationen die Kontrollperson sie durchgeführt hat.
+Die Beobachtungen verweisen nicht selbst auf eine Kontrollperson.
+Wer sie festgestellt hat, ergibt sich aus der Kontrolle, zu der sie gehören.
+
+Wir haben uns aus folgenden Gründen dafür entschieden:
+
+- **Eine Kontrolle wird von einer Person durchgeführt.**
+  Das Datenmodell bildet ab, wie Kontrollen heute durchgeführt werden.
+- **Die Qualifikation steht nur einmal.**
+  Sie wird pro Kontrolle erfasst und nicht bei jeder Beobachtung wiederholt.
+- **Es ist erkennbar, ob ein Ergebnis abschliessend ist.**
+  Erfordert ein Kontrollpunkt eine Qualifikation, ist eine Beobachtung abschliessend, wenn die Kontrolle mit einer dieser Qualifikationen durchgeführt wurde.
+  Erfordert er keine, ist sie immer abschliessend.
+- **Es gilt der Stand zum Zeitpunkt der Kontrolle.**
+  Verliert eine Kontrollperson eine Qualifikation später, bleibt die Kontrolle unverändert.
+  Wie lange eine Qualifikation gilt, muss das Datenmodell deshalb nicht abbilden.
+- **Eine abschliessende Beurteilung ist eine eigene Kontrolle.**
+  Beurteilt zum Beispiel eine Tierärztin ungepflegte Klauen, die ein Kontrolleur festgestellt hat, geschieht das in einer eigenen Kontrolle.
+  Ihre Beobachtung folgt auf die Beobachtung des Kontrolleurs (@sec-decision-corrections).
 :::
 
 #### Korrektur und Folgebeobachtung {#sec-decision-corrections}
@@ -549,7 +575,8 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
   Auch korrigierte Beobachtungen bleiben erhalten.
   So bleibt nachvollziehbar, was wann erfasst und geändert wurde.
 - **Abschliessende Beurteilungen lassen sich verfolgen.**
-  Stellt eine Kontrollperson ohne die erforderliche Qualifikation etwas fest, verweist die Beurteilung der qualifizierten Kontrollperson auf diese erste Beobachtung.
+  Stellt eine Kontrollperson ohne die erforderliche Qualifikation etwas fest, beurteilt eine qualifizierte Kontrollperson den Befund in einer eigenen Kontrolle.
+  Ihre Beobachtung verweist auf die erste Beobachtung.
 :::
 
 #### Vordefinierte Mängel und flexible Abweichungen {#sec-decision-defects}
@@ -625,7 +652,6 @@ Merkmale ohne Präfix werden im Namensraum von eCH-0264 definiert.
 | Beobachtung korrigiert Beobachtung | `prov:wasRevisionOf` |
 | Beobachtung folgt auf Beobachtung | `folgtAuf` (Namensraum von eCH-0264) |
 | Identifikator der Kontrollperson | `schema:identifier` mit einem `schema:PropertyValue` (`schema:value`, `schema:propertyID`) |
-| Kontrollperson besitzt Qualifikation | Qualifikationsnachweis mit Gültigkeit (`schema:validFrom`, `schema:validThrough`) |
 | Organisation, Kontrollperson, Qualifikation, Regelwerk, Programm, Anforderung, Kontrollpunkt, Mögliches Ergebnis, Kontrolle, Tatsächliche Beobachtung, Anmeldung | Klassen im Namensraum von eCH-0264 |
 | übrige Beziehungen | Merkmale im Namensraum von eCH-0264 |
 
@@ -714,23 +740,6 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 
 Die vergebende Organisation muss nicht dieselbe sein, der die Kontrollperson angehört.
 Führt zum Beispiel ein Verband ein Verzeichnis der Kontrollpersonen, kann er den Identifikator vergeben.
-:::
-
-#### Qualifikationsnachweis mit Gültigkeit {#sec-decision-qualification-proof}
-
-::: {.entscheid}
-![](assets/excerpts/qualifikationsnachweis.svg){fig-alt="Ausschnitt aus dem logischen Datenmodell: Kontrollperson besitzt Qualifikationsnachweise mit Gültigkeit, die auf eine Qualifikation verweisen"}
-
-Dass eine Kontrollperson eine Qualifikation besitzt, wird als eigener Qualifikationsnachweis mit Gültigkeitszeitraum erfasst.
-
-Wir haben uns aus folgenden Gründen dafür entschieden:
-
-- **Qualifikationen können erlöschen.**
-  Amtliche Fachassistentinnen und Fachassistenten müssen sich zum Beispiel regelmässig weiterbilden.
-  Mit dem Gültigkeitszeitraum lässt sich prüfen, ob eine Kontrollperson die Qualifikation zum Zeitpunkt der Beobachtung besass.
-- **Eine Beziehung allein kann keine Gültigkeit tragen.**
-  In RDF hat eine einfache Beziehung zwischen Kontrollperson und Qualifikation keine eigenen Merkmale.
-  Der Qualifikationsnachweis macht die Gültigkeit erfassbar.
 :::
 
 #### PROV-O für Korrekturen, eigenes Merkmal für Folgebeobachtungen {#sec-decision-prov}
