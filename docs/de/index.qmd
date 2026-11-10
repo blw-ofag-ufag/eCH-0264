@@ -339,21 +339,21 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 ::: {.entscheid}
 ![](assets/excerpts/programm.svg){fig-alt="Ausschnitt aus dem konzeptionellen Datenmodell: Regelwerk, Programm, Anforderung und Kontrollpunkt"}
 
-Betriebe melden sich für Programme an, zum Beispiel für Direktzahlungsprogramme wie RAUS oder BTS oder für Label-Programme.
+Betriebe melden sich für Programme an, zum Beispiel für Direktzahlungsprogramme wie RAUS oder BTS oder für Label-Programme (Bio, Demeter etc.).
 Mit der Anmeldung verpflichten sie sich, die Anforderungen des Programms zu erfüllen.
 Das Datenmodell bildet ein Programm deshalb als eigenes Geschäftsobjekt ab, das in einem Regelwerk festgelegt ist und Anforderungen umfasst.
 
 Wir haben uns aus folgenden Gründen dafür entschieden:
 
 - **Eine Anforderung kann zu mehreren Programmen gehören.**
-  In der Masterliste übernimmt zum Beispiel der Weidebeitrag Anforderungen von RAUS: Mehrere Kontrollpunkte des Weidebeitrags verlangen Auslauf «gemäss RAUS», und einzelne Kontrollpunkte kommen in beiden Programmen wortgleich vor.
+  In der Masterliste  übernimmt zum Beispiel der Weidebeitrag Anforderungen von RAUS: Mehrere Kontrollpunkte des Weidebeitrags verlangen Auslauf «gemäss RAUS», und einzelne Kontrollpunkte kommen in beiden Programmen wortgleich vor.
   Mit einer eigenen Klasse Programm wird eine solche Anforderung nur einmal erfasst und beiden Programmen zugeordnet.
 - **Die Zugehörigkeit steht nicht nur im Text.**
   Welche Anforderungen zu einem Programm gehören, ist ausdrücklich erfasst und nicht nur aus der Fundstelle im Regelwerk ablesbar.
   So lassen sich Kontrollergebnisse auch pro Programm auswerten.
 - **Programm und Gliederung bleiben getrennt.**
   Wie eine Herausgeberin ihren Katalog gliedert, ist etwas anderes als die Frage, wozu sich ein Betrieb verpflichtet.
-  Die Masterliste teilt zum Beispiel RAUS in mehrere Rubriken pro Tierkategorie auf, das Programm ist aber eines.
+  Die Masterliste des BLW teilt zum Beispiel RAUS in mehrere Rubriken pro Tierkategorie auf, das Programm ist aber eines.
 - **Kontrollpunkte bleiben unverändert.**
   Welche Kontrollpunkte zu einem Programm gehören, ergibt sich über die Anforderungen, die sie prüfen.
 
@@ -572,7 +572,7 @@ Wir haben uns aus folgenden Gründen dafür entschieden:
 
 - **Kataloge decken nie alle Fälle ab.**
   Die Masterliste 2027 enthält deshalb bei 604 von 610 Kontrollpunkten mit vordefinierten Mängeln zusätzlich den allgemeinen Eintrag «Anderer Mangel».
-  Die Arbeitsgruppe hat verlangt, dass Abweichungen von den vordefinierten Mängeln flexibel erfasst werden können.
+  Abweichungen zu den vordefinierten Mängeln sollen flexibel erfasst werden können.
 - **Vordefinierte Mängel bleiben auswertbar.**
   Wo ein vordefinierter Mangel passt, wird er verwendet und lässt sich über alle Kontrollen hinweg zählen.
 - **Mengen zeigen das Ausmass eines Mangels.**
