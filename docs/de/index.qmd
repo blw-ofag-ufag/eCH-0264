@@ -563,6 +563,8 @@ Das Datenmodell unterscheidet dabei zwei Fälle:
 - **Korrektur:** Eine Beobachtung war falsch erfasst und wird berichtigt.
   Die neue Beobachtung korrigiert die alte.
   Die alte bleibt erhalten, gilt aber nicht mehr.
+  Eine Beobachtung wird höchstens einmal direkt korrigiert.
+  Ist auch die Korrektur falsch, wird sie ihrerseits korrigiert, und es gilt die letzte Beobachtung dieser Kette.
 - **Folgebeobachtung:** Eine spätere Beobachtung baut auf einer früheren auf, zum Beispiel eine Nachkontrolle, ob ein Mangel behoben wurde, oder die abschliessende Beurteilung durch eine Tierärztin nach der Feststellung einer Fachassistentin.
   Die frühere Beobachtung bleibt gültig.
 
@@ -693,6 +695,7 @@ Sie werden in der technischen Umsetzung als SHACL-Regeln [@shacl] geprüft:
 - Ein Kontrollpunkt ersetzt nur Kontrollpunkte derselben Herausgeberin.
 - Ist das Ergebnis einer Beobachtung «Mangel», ist ein vordefinierter Mangel oder eine freie Beschreibung der Abweichung angegeben.
 - Der Identifikator einer Kontrollperson ist innerhalb der Organisation, die ihn vergibt, eindeutig.
+- Eine Beobachtung wird höchstens einmal direkt korrigiert, damit klar ist, welche Korrektur gilt.
 
 Die Rechtsnatur wird nur beim Regelwerk erfasst und nicht beim Kontrollpunkt wiederholt, damit sich die Angaben nicht widersprechen können.
 :::

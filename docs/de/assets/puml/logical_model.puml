@@ -166,6 +166,9 @@ BEO "0..*" -up-> "0..1" ERG : festgestelltes Ergebnis
 note bottom of BEO
   Ist der Wert «Mangel», ist ein vordefinierter
   Mangel oder eine Abweichung angegeben (SHACL-Regel).
+  Eine Beobachtung wird höchstens einmal direkt korrigiert;
+  weitere Korrekturen bilden eine Kette, es gilt die letzte
+  Beobachtung der Kette (SHACL-Regel).
 end note
 KON "0..*" -up-> "0..1" ORG : kontrollstelle
 KON "0..*" -up-> "1" PER : durchgeführt von
